@@ -1,0 +1,22 @@
+div.jumbotron
+  div.container
+    h1 Scoreboard
+    table.table
+      thead
+        tr
+          th Place
+          th Team
+          th School
+          th Points
+          th Time
+      tbody
+        | {{#each users}}
+        tr
+          td {{increment @index}}
+          td {{this.username}}
+          td {{this.school}}
+          td {{this.points}}
+          td {{date this.lastSolved}}
+          
+        | {{/each}}
+div#particles-js

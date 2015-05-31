@@ -1,0 +1,98 @@
+| {{#if user}}
+div.jumbotron
+  div.container
+    h1 Hi, {{user.username}}
+    h2 CTF Challenges #[span.pull-right {{user.points}} points]
+    br
+  div.container
+    div.challenge-nav
+      | {{#each challenges}}
+      | {{#unless this.hidden}}
+      | {{#isSolved @root.user this}}
+      a.btn.btn-success(href='./play#challenge-{{this.id}}') <!-- {{increment @index}}. -->{{this.name}} (Solved)
+      | {{else}}
+      a.btn.btn-danger(href='./play#challenge-{{this.id}}') <!-- {{increment @index}}. -->{{this.name }}
+      | {{/isSolved}}
+      | {{/unless}}
+      | {{/each}}
+    br
+    br
+    | {{#each challenges}}
+    | {{#unless this.hidden}}
+    a.challenge-anchor(id='challenge-{{this.id}}')
+    | {{#isSolved @root.user this}}
+    div.panel.panel-success.challenge-panel
+      div.panel-heading
+        h3.panel-title <!-- {{increment @index}} - -->#[strong {{this.name}}] #[span.pull-right {{this.points}} Points]
+      div.panel-body
+        | {{#equal @root.challenge this.id}}
+        div.alert.alert-success
+          p Awesome job!  +{{this.points}} Points
+        | {{/equal}}
+        span {{{this.description}}}&nbsp;&nbsp;
+        #[button.btn.btn-default.btn-xs(data-toggle='collapse', data-target='#hint-{{this.id}}') View Hint]
+        br
+        br
+        div.form-group.has-success.has-feedback
+          input.form-control(type='text', name='answer', placeholder='Solved', required, disabled)
+          span.glyphicon.glyphicon-ok.form-control-feedback
+        br
+        div.collapse(id='hint-{{this.id}}')
+          div.well
+            | {{#if this.hint}}
+            span {{this.hint}}
+            | {{else}}
+            span No hints available for this challenge.
+            | {{/if}}
+    | {{else}}
+    div.panel.panel-default.challenge-panel
+      div.panel-heading
+        h3.panel-title <!-- {{increment @index}} - -->#[strong {{this.name}}] #[span.pull-right {{this.points}} Points]
+      div.panel-body
+        | {{#equal @root.challenge this.id}}
+        div.alert.alert-danger
+          p Oops! Try again.
+        | {{/equal}}
+        span {{{this.description}}}&nbsp;&nbsp;
+        #[button.btn.btn-default.btn-xs(data-toggle='collapse', data-target='#hint-{{this.id}}') View Hint]
+        br
+        br
+        form(action='./play', method='post')
+          div.input-group
+            input.form-control(type='text', name='answer', placeholder='Your answer', required)
+            span.input-group-btn
+              button.btn.btn-success(type='submit') Submit
+          input(name='id', type='hidden', value='{{this.id}}')
+        br
+        div.collapse(id='hint-{{this.id}}')
+          div.well
+            | {{#if this.hint}}
+            span {{this.hint}}
+            | {{else}}
+            span No hints available for this challenge.
+            | {{/if}}
+    | {{/isSolved}}
+    | {{/unless}}
+    | {{/each}}
+script.
+  var challengeTop = $('.challenge-nav').offset().top - $('.challenge-nav').height();
+  $(window).scroll(function() {
+    if ($(window).scrollTop() >= challengeTop) {
+      if (!$('.challenge-nav').hasClass('scrolled')) {
+        $('.challenge-nav').addClass('scrolled');
+      }
+    } else {
+      if ($('.challenge-nav').hasClass('scrolled')) {
+        $('.challenge-nav').removeClass('scrolled');
+      }
+    }
+  });
+| {{else}}
+div.jumbotron
+  div.container
+    h1 Access Denied
+    br
+    br
+    a.btn.btn-primary(href='./') Go Home
+| {{/if}}
+div#particles-js

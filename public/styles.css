@@ -1,0 +1,101 @@
+html,
+body {
+  min-height: 100vh;
+  font-family: 'Raleway';
+}
+body {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  overflow-x: hidden;
+}
+.flex-container {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+h1,
+h2,
+h3,
+h4,
+p {
+  font-family: 'Raleway';
+}
+.jumbotron {
+  background-color: transparent;
+  margin-bottom: 0;
+  padding-top: 45px;
+  color: #eee;
+}
+.jumbotron > .container {
+  z-index: 99;
+  position: relative;
+}
+#particles-js {
+  z-index: 98;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: url("http://i.imgur.com/YkORGvf.jpg");
+  background-size: cover;
+  background-position: center 75%;
+}
+#particles-js > .particles-js-canvas-el {
+  min-height: 100vh;
+}
+.modal {
+  overflow-y: scroll;
+}
+.navbar-default {
+  background: #000;
+  border-bottom: 1px solid rgba(255,255,255,0.3);
+}
+footer {
+  z-index: 99;
+  width: 100%;
+  min-height: 5vh;
+  padding-top: 12px;
+  background: #000;
+  border-top: 1px solid rgba(255,255,255,0.3);
+  color: #eee;
+}
+footer p,
+footer a {
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 21px;
+  color: #eee;
+}
+footer a:hover {
+  color: #fff;
+  text-decoration: none;
+}
+.panel {
+  color: #333;
+}
+textarea {
+  resize: vertical;
+}
+.challenge-nav {
+  position: relative;
+  z-index: 99;
+  padding: 5px;
+}
+.challenge-nav.scrolled {
+  position: fixed;
+  top: 45px;
+  background: rgba(255,255,255,0.8);
+  border: 1px solid rgba(0,0,0,0.3);
+}
+.challenge-anchor {
+  position: relative;
+  top: -150px;
+}

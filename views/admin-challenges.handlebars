@@ -1,0 +1,91 @@
+{{#isAdmin user}}
+<div class="jumbotron">
+  <div class="container">
+    <h1>Hi, {{user.username}}</h1>
+    <h2>CTF Challenges <a data-toggle="modal" data-target="#add-challenge-modal" class="btn btn-success pull-right"><span class="glyphicon glyphicon-plus"></span></a></h2><br/>{{#equal @root.challenge 'new'}}
+    <div class="alert alert-success">
+      <p>Challenge added.</p>
+    </div>{{/equal}}
+    {{#each challenges}}
+    <div id="challenge-{{this.id}}" class="panel panel-default">
+      <form action="./admin-challenges" method="post">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <div style="float:none; display: inline-block; padding: 0;" class="col-md-1">
+              <input type="text" name="index" value="{{this.index}}" placeholder="Index" required="required" class="form-control"/>
+            </div>
+            <div style="float:none; display: inline-block; padding: 0;" class="col-md-9">
+              <input type="text" name="name" value="{{this.name}}" placeholder="Challenge Name" required="required" class="form-control"/>
+            </div>
+            <div style="float:right; display: inline-block; padding: 0;" class="col-md-1">
+              <input type="text" name="points" value="{{this.points}}" placeholder="Point Value" required="required" class="form-control"/>
+            </div>
+          </h3>
+        </div>
+        <div class="panel-body">{{#equal @root.challenge this.id}}
+          <div class="alert alert-success">
+            <p>Challenge updated.</p>
+          </div>{{/equal}}
+          <textarea id="description" name="description" rows="5" required="required" class="form-control">{{this.description}}</textarea><br/><br/>
+          <input type="text" name="answer" value="{{this.answer}}" required="required" class="form-control"/>
+          <input name="action" type="hidden" value="edit"/>
+          <input name="id" type="hidden" value="{{this.id}}"/><br/>
+          <div>
+            <div class="well">{{#if this.hint}}
+              <textarea name="hint" rows="3" class="form-control">{{this.hint}}</textarea>{{else}}
+              <textarea name="hint" rows="3" placeholder="No hints available for this challenge." class="form-control"></textarea>{{/if}}
+            </div>
+          </div>
+          <div class="pull-right">
+            <div class="checkbox">
+              <label>{{#if this.hidden}}
+                <input type="checkbox" name="hidden" value="1" checked="checked"/>{{else}}
+                <input type="checkbox" name="hidden" value="1"/>{{/if}}
+                Hidden
+              </label>
+            </div>
+            <button type="submit" class="btn btn-success">Save Changes</button>
+          </div>
+        </div>
+      </form>
+      <form action="./admin-challenges" method="post" style="position: relative; top: -54px; left: 15px;" onsubmit="return confirm('Do you really want to delete challenge &quot;{{this.name}}&quot;?');">
+        <!-- 39px height of button + 15px padding of panel-->
+        <input name="action" type="hidden" value="delete"/>
+        <input name="id" type="hidden" value="{{this.id}}"/>
+        <div class="pull-left">
+          <button type="submit" class="btn btn-danger">Delete Challenge</button>
+        </div>
+      </form>
+    </div><br/>{{/each}}
+  </div>
+</div>
+<div id="add-challenge-modal" tabindex="-1" role="dialog" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" data-dismiss="modal" class="close"><span>&times;</span></button>
+        <h4 id="add-challenge-modal-label" class="modal-title">Add Challenge</h4>
+        <form action="./admin-challenges" method="post">
+          <div class="modal-body">
+            <input type="text" name="index" value="{{this.index}}" placeholder="Index" required="required" class="form-control"/><br/>
+            <input type="text" name="name" value="{{this.name}}" placeholder="Challenge Name" required="required" class="form-control"/><br/>
+            <input type="text" name="points" value="{{this.points}}" placeholder="Point Value" required="required" class="form-control"/><br/>
+            <textarea id="description" name="description" rows="5" placeholder="Description" required="required" class="form-control"></textarea><br/>
+            <input type="text" name="answer" placeholder="Answer" required="required" class="form-control"/><br/>
+            <textarea name="hint" rows="3" placeholder="Hint" class="form-control"></textarea>
+          </div>
+          <div class="modal-footer">
+            <input name="action" type="hidden" value="add"/>
+            <button type="submit" class="btn btn-success">Add Challenge</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>{{else}}
+<div class="jumbotron">
+  <div class="container">
+    <h1>Access Denied</h1><br/><br/><a href="./" class="btn btn-primary">Go Home</a>
+  </div>
+</div>{{/isAdmin}}
+<div id="particles-js"></div>

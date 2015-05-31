@@ -1,0 +1,25 @@
+div.jumbotron
+  div.container
+    div.row
+      div.col-md-6.col-md-offset-3
+        h2 Register
+        | {{#if signupMessage}}
+        div.alert.alert-danger
+          p  {{signupMessage}}
+        | {{/if}}
+        form#local-reg(action='/register', method='post')
+          div.form-group
+            label(for='email') Email
+            input.form-control#email(type='email', name='email', placeholder='Enter email', required)
+          div.form-group
+            label(for='school') School
+            input.form-control#school(type='text', name='school', placeholder='Enter school name', required)
+          div.form-group
+            label(for='username') Team Name
+            input.form-control#username(type='text', name='username', placeholder='Enter username', required)
+          div.form-group
+            label(for='password') Password
+            input.form-control#password(type='password', name='password', placeholder='Enter password', required)
+          div.form-group.text-right
+            button.btn.btn-primary(type='submit') Register &raquo;
+div#particles-js

@@ -1,0 +1,16 @@
+{{#isAdmin user}}
+<div class="jumbotron">
+  <div class="container">
+    <h1>Admin Dashboard</h1>
+    <h2>Some stats</h2><br/>
+    <div class="col-md-4">
+      <div class="btn-group btn-group-justified"><a href="./admin-users" class="btn btn-default">User Control</a><a href="./admin-challenges" class="btn btn-primary">Challenges Control</a></div>
+    </div>
+  </div>
+</div>{{else}}
+<div class="jumbotron">
+  <div class="container">
+    <h1>Access Denied</h1><br/><br/><a href="./" class="btn btn-primary">Go Home</a>
+  </div>
+</div>{{/isAdmin}}
+<div id="particles-js"></div>

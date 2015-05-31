@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="user auth">
+    <title>CTF</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.4/yeti/bootstrap.min.css" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link href="/styles.css" rel="stylesheet">
+    <!-- so I can use jQuery in other files-->
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  </head>
+  <body>
+    <nav role="navigation" class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" data-toggle="collapse" data-target="#navbar-content" class="navbar-toggle"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="./" class="navbar-brand">CTF</a>
+        </div>
+        <div id="navbar-content" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="./">Home</a></li>{{#if user}}
+            <li><a href="./play">Play</a></li>{{/if}}
+            <li><a href="./scoreboard">Scoreboard</a></li>
+            <li><a href="./faq">FAQ</a></li>{{#isAdmin user}}
+            <li class="dropdown"><a data-toggle="dropdown" role="button" href="#" class="dropdown-toggle">Admin <span class="caret"></span></a>
+              <ul role="menu" class="dropdown-menu">
+                <li><a href="./admin">Admin Dashboard</a></li>
+                <li><a href="./admin-users">User Control</a></li>
+                <li><a href="./admin-challenges">Challenges Control</a></li>
+              </ul>
+            </li>{{/isAdmin}}
+          </ul>
+          <ul class="nav navbar-nav navbar-right">{{#if user}}
+            <li class="dropdown"><a data-toggle="dropdown" role="button" href="#" class="dropdown-toggle">{{user.username}} <span class="caret"></span></a>
+              <ul role="menu" class="dropdown-menu">
+                <li><a href="./account">Account</a></li>
+                <li><a href="./logout">Log Out</a></li>
+              </ul>
+            </li>{{else}}
+            <li><a href="./login">Log In</a></li>
+            <li><a href="./register">Register</a></li>{{/if}}
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <main class="flex-container">{{{body}}}</main>
+    <footer>
+      <div class="container">
+        <p class="pull-left">&copy;2015 CTF</p>
+        <p class="pull-right"><a href="http://twitter.com">Follow us on Twitter for Updates</a></p>
+      </div>
+    </footer>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="/scripts.js"></script>
+  </body>
+</html>

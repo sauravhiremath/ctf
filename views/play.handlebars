@@ -1,0 +1,77 @@
+{{#if user}}
+<div class="jumbotron">
+  <div class="container">
+    <h1>Hi, {{user.username}}</h1>
+    <h2>CTF Challenges <span class="pull-right">{{user.points}} points</span></h2><br/>
+  </div>
+  <div class="container">
+    <div class="challenge-nav">
+      {{#each challenges}}
+      {{#unless this.hidden}}
+      {{#isSolved @root.user this}}<a href="./play#challenge-{{this.id}}" class="btn btn-success"><!-- {{increment @index}}. -->{{this.name}} (Solved)</a>{{else}}<a href="./play#challenge-{{this.id}}" class="btn btn-danger"><!-- {{increment @index}}. -->{{this.name }}</a>{{/isSolved}}
+      {{/unless}}
+      {{/each}}
+    </div><br/><br/>{{#each challenges}}
+    {{#unless this.hidden}}<a id="challenge-{{this.id}}" class="challenge-anchor"></a>{{#isSolved @root.user this}}
+    <div class="panel panel-success challenge-panel">
+      <div class="panel-heading">
+        <h3 class="panel-title"><!-- {{increment @index}} - --><strong>{{this.name}}</strong> <span class="pull-right">{{this.points}} Points</span></h3>
+      </div>
+      <div class="panel-body">{{#equal @root.challenge this.id}}
+        <div class="alert alert-success">
+          <p>Awesome job!  +{{this.points}} Points</p>
+        </div>{{/equal}}<span>{{{this.description}}}&nbsp;&nbsp;</span>
+        <button data-toggle="collapse" data-target="#hint-{{this.id}}" class="btn btn-default btn-xs">View Hint</button><br/><br/>
+        <div class="form-group has-success has-feedback">
+          <input type="text" name="answer" placeholder="Solved" required="required" disabled="disabled" class="form-control"/><span class="glyphicon glyphicon-ok form-control-feedback"></span>
+        </div><br/>
+        <div id="hint-{{this.id}}" class="collapse">
+          <div class="well">{{#if this.hint}}<span>{{this.hint}}</span>{{else}}<span>No hints available for this challenge.</span>{{/if}}</div>
+        </div>
+      </div>
+    </div>{{else}}
+    <div class="panel panel-default challenge-panel">
+      <div class="panel-heading">
+        <h3 class="panel-title"><!-- {{increment @index}} - --><strong>{{this.name}}</strong> <span class="pull-right">{{this.points}} Points</span></h3>
+      </div>
+      <div class="panel-body">{{#equal @root.challenge this.id}}
+        <div class="alert alert-danger">
+          <p>Oops! Try again.</p>
+        </div>{{/equal}}<span>{{{this.description}}}&nbsp;&nbsp;</span>
+        <button data-toggle="collapse" data-target="#hint-{{this.id}}" class="btn btn-default btn-xs">View Hint</button><br/><br/>
+        <form action="./play" method="post">
+          <div class="input-group">
+            <input type="text" name="answer" placeholder="Your answer" required="required" class="form-control"/><span class="input-group-btn">
+              <button type="submit" class="btn btn-success">Submit</button></span>
+          </div>
+          <input name="id" type="hidden" value="{{this.id}}"/>
+        </form><br/>
+        <div id="hint-{{this.id}}" class="collapse">
+          <div class="well">{{#if this.hint}}<span>{{this.hint}}</span>{{else}}<span>No hints available for this challenge.</span>{{/if}}</div>
+        </div>
+      </div>
+    </div>{{/isSolved}}
+    {{/unless}}
+    {{/each}}
+  </div>
+</div>
+<script>
+  var challengeTop = $('.challenge-nav').offset().top - $('.challenge-nav').height();
+  $(window).scroll(function() {
+    if ($(window).scrollTop() >= challengeTop) {
+      if (!$('.challenge-nav').hasClass('scrolled')) {
+        $('.challenge-nav').addClass('scrolled');
+      }
+    } else {
+      if ($('.challenge-nav').hasClass('scrolled')) {
+        $('.challenge-nav').removeClass('scrolled');
+      }
+    }
+  });
+</script>{{else}}
+<div class="jumbotron">
+  <div class="container">
+    <h1>Access Denied</h1><br/><br/><a href="./" class="btn btn-primary">Go Home</a>
+  </div>
+</div>{{/if}}
+<div id="particles-js"></div>

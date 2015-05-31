@@ -1,0 +1,20 @@
+| {{#isAdmin user}}
+div.jumbotron
+  div.container
+    h1 Admin Dashboard
+    h2 Some stats
+    br
+    div.col-md-4
+      div.btn-group.btn-group-justified
+        a.btn.btn-default(href='./admin-users') User Control
+        a.btn.btn-primary(href='./admin-challenges') Challenges Control
+
+| {{else}}
+div.jumbotron
+  div.container
+    h1 Access Denied
+    br
+    br
+    a.btn.btn-primary(href='./') Go Home
+| {{/isAdmin}}
+div#particles-js

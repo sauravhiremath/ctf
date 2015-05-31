@@ -1,0 +1,73 @@
+{{#isAdmin user}}
+<div class="jumbotron">
+  <div class="container">
+    <h1>Hi, {{user.username}}</h1>
+    <h2>User Control</h2><br/>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Place</th>
+          <th>Team</th>
+          <th>Email</th>
+          <th>School</th>
+          <th>Points</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>{{#each users}}
+        <tr>
+          <td>{{increment @index}}</td>
+          <td>{{this.username}}</td>
+          <td>{{this.email}}</td>
+          <td>{{this.school}}</td>
+          <td>{{this.points}}</td>
+          <td><a data-toggle="modal" data-target="#edit-user-modal" data-uid="{{this.id}}" data-username="{{this.username}}" data-email="{{this.email}}" data-school="{{this.school}}" class="btn btn-info btn-xs"><i class="glyphicon glyphicon-edit"></i></a></td>
+          <td>
+            <form action="./admin-users" method="post" onsubmit="return confirm('Do you really want to delete user {{this.username}}?');">
+              <input name="action" type="hidden" value="delete"/>
+              <input id="id-input" name="id" type="hidden" value="{{this.id}}"/>
+              <button type="submit" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+            </form>
+          </td>
+        </tr>{{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>
+<div id="edit-user-modal" tabindex="-1" role="dialog" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" data-dismiss="modal" class="close"><span>&times;</span></button>
+        <h4 id="add-challenge-modal-label" class="modal-title">Edit User</h4>
+        <form action="./admin-users" method="post">
+          <div class="modal-body">
+            <input id="username" type="text" name="username" placeholder="Team" required="required" class="form-control"/><br/>
+            <input id="email" type="text" name="email" placeholder="Email" required="required" class="form-control"/><br/>
+            <input id="school" type="text" name="school" placeholder="School" required="required" class="form-control"/>
+          </div>
+          <div class="modal-footer">
+            <input name="action" type="hidden" value="edit"/>
+            <input id="id-input" name="id" type="hidden" value=""/>
+            <button type="submit" class="btn btn-success">Save Changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $('#edit-user-modal').on('shown.bs.modal', function (event) {
+    $('#username').val($(event.relatedTarget).context.dataset.username);
+    $('#email').val($(event.relatedTarget).context.dataset.email);
+    $('#school').val($(event.relatedTarget).context.dataset.school);
+    $('#id-input').val($(event.relatedTarget).context.dataset.uid);
+  });
+</script>{{else}}
+<div class="jumbotron">
+  <div class="container">
+    <h1>Access Denied</h1><br/><br/><a href="./" class="btn btn-primary">Go Home</a>
+  </div>
+</div>{{/isAdmin}}
+<div id="particles-js"></div>

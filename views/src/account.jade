@@ -1,0 +1,71 @@
+| {{#if user}}
+div.jumbotron
+  div.container
+    h1 Hi, {{user.username}}
+    div.col-md-3
+      h2 Profile Information
+      table.table
+        tr
+          th Team Name
+          td {{user.username}}
+        tr
+          th Email
+          td {{user.email}}
+        tr
+          th School
+          th {{user.school}}
+    div.col-md-5
+      h2 Edit Profile
+      | {{#if flashMessages.accountError}}
+      div.alert.alert-danger
+        p  {{flashMessages.accountError}}
+      | {{/if}}
+      | {{#if flashMessages.accountSuccess}}
+      div.alert.alert-success
+        p  {{flashMessages.accountSuccess}}
+      | {{/if}}
+      form(action='./account', method='post')
+        div.form-group
+          label(for='email') Email
+          input.form-control#email(type='text', value='{{user.email}}', name='email', placeholder='Enter Email', required)
+        div.form-group
+          label(for='school') School
+          input.form-control#school(type='text', value='{{user.school}}', name='school', placeholder='Enter School', required)
+        div.form-group
+          label(for='password') Current Password
+          input.form-control#password(type='password', name='password', placeholder='Enter Current Password', required)
+        input(name='action', type='hidden', value='update-profile')
+        input#id-input(name='id', type='hidden', value='{{user.id}}')
+        button.btn.btn-success(type='submit') Update Account Info
+    div.col-md-4
+      h2 Change Password
+      | {{#if flashMessages.passwordError}}
+      div.alert.alert-danger
+        p  {{flashMessages.passwordError}}
+      | {{/if}}
+      | {{#if flashMessages.passwordSuccess}}
+      div.alert.alert-success
+        p  {{flashMessages.passwordSuccess}}
+      | {{/if}}
+      form(action='./account', method='post')
+        div.form-group
+          label(for='current-password') Current Password
+          input.form-control#currrent-password(type='password', name='currentPassword', placeholder='Enter Current Password', required)
+        div.form-group
+          label(for='new-password') New Password
+          input.form-control#new-password(type='password', name='newPassword', placeholder='Enter New Password', required)
+        div.form-group
+          label(for='new-password-confirm') Confirm New Password
+          input.form-control#new-password-confirm(type='password', name='newPasswordConfirm', placeholder='Enter New Password', required)
+        input(name='action', type='hidden', value='update-password')
+        input(name='id', type='hidden', value='{{user.id}}')
+        button.btn.btn-success(type='submit') Update Password
+| {{else}}
+div.jumbotron
+  div.container
+    h1 Access Denied
+    br
+    br
+    a.btn.btn-primary(href='./') Go Home
+| {{/if}}
+div#particles-js

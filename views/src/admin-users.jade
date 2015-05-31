@@ -1,0 +1,65 @@
+| {{#isAdmin user}}
+div.jumbotron
+  div.container
+    h1 Hi, {{user.username}}
+    h2 User Control
+    br
+    table.table
+      thead
+        tr
+          th Place
+          th Team
+          th Email
+          th School
+          th Points
+          th Edit
+          th Delete
+      tbody
+        | {{#each users}}
+        tr
+          td {{increment @index}}
+          td {{this.username}}
+          td {{this.email}}
+          td {{this.school}}
+          td {{this.points}}
+          td #[a.btn.btn-info.btn-xs(data-toggle='modal', data-target='#edit-user-modal', data-uid='{{this.id}}', data-username='{{this.username}}', data-email='{{this.email}}', data-school='{{this.school}}') #[i.glyphicon.glyphicon-edit]]
+          td
+            form(action='./admin-users', method='post', onsubmit="return confirm('Do you really want to delete user {{this.username}}?');")
+                input(name='action', type='hidden', value='delete')
+                input#id-input(name='id', type='hidden', value='{{this.id}}')
+                button.btn.btn-danger.btn-xs(type='submit') #[i.glyphicon.glyphicon-remove]
+          
+        | {{/each}}
+div.modal.fade#edit-user-modal(tabindex='-1', role='dialog')
+  div.modal-dialog
+    div.modal-content
+      div.modal-header
+        button.close(type='button', data-dismiss='modal') #[span &times;]
+        h4.modal-title#add-challenge-modal-label Edit User
+        form(action='./admin-users', method='post')
+          div.modal-body
+            input.form-control#username(type='text', name='username', placeholder='Team', required)
+            br
+            input.form-control#email(type='text', name='email', placeholder='Email', required)
+            br
+            input.form-control#school(type='text', name='school', placeholder='School', required)
+          div.modal-footer
+            input(name='action', type='hidden', value='edit')
+            input#id-input(name='id', type='hidden', value='')
+            button.btn.btn-success(type='submit') Save Changes
+script.
+  $('#edit-user-modal').on('shown.bs.modal', function (event) {
+    $('#username').val($(event.relatedTarget).context.dataset.username);
+    $('#email').val($(event.relatedTarget).context.dataset.email);
+    $('#school').val($(event.relatedTarget).context.dataset.school);
+    $('#id-input').val($(event.relatedTarget).context.dataset.uid);
+  });
+| {{else}}
+div.jumbotron
+  div.container
+    h1 Access Denied
+    br
+    br
+    a.btn.btn-primary(href='./') Go Home
+| {{/isAdmin}}
+div#particles-js
