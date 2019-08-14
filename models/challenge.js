@@ -5,9 +5,9 @@ var challengeSchema = new Schema({
 	index: Number,
 	name: String,
 	description: String,
-	hint: String,
+	hint: {type: String, default: null},
 	answer: String,
-	points: Number,
+	startPoints: Number,
 	solved: Array,
 	hidden: Boolean
 }, {

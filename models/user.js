@@ -2,12 +2,16 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var userSchema = new Schema({
-	username: String,
+	user: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'leaderboard'
+	},
+	name: {type: String, required: true},
+	regNo: {type: String, required: true},
 	password: String,
 	email: String,
-	school: String,
+	phoneNo: {type: Number, required: true},
 	solved: Array,
-	lastSolved: Number,
 	points: { type: Number, default: 0 },
 	role: { type: String, default: 'participant' }
 }, {

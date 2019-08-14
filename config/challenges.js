@@ -1,5 +1,5 @@
-var Challenge = require('../models/challenge'),
-    User = require('../models/user');
+var Challenge = require('../models/challenge');
+var User = require('../models/user');
 
 module.exports = {
   get: function(next) {
