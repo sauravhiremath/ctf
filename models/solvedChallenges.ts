@@ -1,7 +1,7 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+import mongoose from 'mongoose';
+const Schema = mongoose.Schema;
 
-var solvedChallengeSchema = new Schema({
+const solvedChallengeSchema = new Schema({
 	questionId: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Challenge'
@@ -16,4 +16,5 @@ var solvedChallengeSchema = new Schema({
 	collection: 'challenges'
 });
 
-module.exports = mongoose.model('solvedChallenges', solvedChallengeSchema);
+export const solvedChallenges = mongoose.model('solvedChallenges', solvedChallengeSchema);
+export default solvedChallenges;

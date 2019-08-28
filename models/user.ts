@@ -1,7 +1,7 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+import mongoose from 'mongoose';
+const Schema = mongoose.Schema;
 
-var userSchema = new Schema({
+const userSchema = new Schema({
 	user: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'leaderboard'
@@ -18,4 +18,6 @@ var userSchema = new Schema({
 	collection: 'users'
 });
 
-module.exports = mongoose.model('User', userSchema);
+
+export const User = mongoose.model('User', userSchema);
+export default User;
