@@ -5,9 +5,9 @@ type data = {
     pointsScored: number;
 };
 
-export let handleLeaderboard = function (userid, pointsScored) {
+export let handleLeaderboard = function (data:data) {
     return function getUserpoints() {
-        io.sockets.emit("userPoints", { userid, pointsScored }); //data = {userid, pointsScored}
+        io.sockets.emit("userPoints", data); //data = {userid, pointsScored}
     };
 };
 

@@ -38,7 +38,7 @@ io.on('connection', (socket) => {
     // socket.on('register', handleRegister)
     // socket.on('login', handleLogin)
     // socket.on('submission', handleSubmission)
-    socket.on('leaderboard', handleLeaderbaord('test',50));
+    socket.on('leaderboard', handleLeaderbaord(this.data));
     // socket.on('help', handleHelper)
     
 })
