@@ -1,16 +1,15 @@
 import {io as io} from '../server';
 
-// type data = {
-//     userid ? : string;
-//     pointsScored ? : number;
-// }
-
-export function handleLeaderboard({userid ='test', pointsScored =50}: {userid ?: string, pointsScored ?: number}={}){
-    // let {userid = 'test', pointsScored = 50} = params;
-
-    function getUserpoints(){
-        io.sockets.emit('userPoints', {userid, pointsScored});     //data = {userid, pointsScored}
-    }
+type data = {
+    userid: string;
+    pointsScored: number;
 }
+
+export let handleLeaderboard: (userid: string, pointsScored: number) => any = 
+    function(userid, pointsScored){
+        function getUserpoints(){
+            io.sockets.emit('userPoints', {userid, pointsScored});     //data = {userid, pointsScored}
+        }
+    }
 
 // module.exports = handleLeaderboard;
