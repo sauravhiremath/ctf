@@ -3,17 +3,21 @@ import * as logger from 'morgan';
 import * as bodyParser from 'body-parser';
 import * as mongoose from 'mongoose';
 import * as session from 'express-session';
-import * as socketio from 'socket.io';  
+import * as socketio from 'socket.io';
+import * as http from 'http';
+
 import passport from 'passport';
 import {handleLeaderboard as handleLeaderbaord} from  './routes/handleLeaderboard';
 
 const app = express();
+
 const port = process.env.PORT || 4000;
-const server = app.listen(port, function(){
-    console.log('localhost:' + port + ' - be there');
-});
-// const server = app.listen(4000);
+const server = new http.Server(app);
+
 export const io = socketio(server);
+server.listen(port);
+
+// const server = app.listen(4000);
 
 
 app.use(logger('dev'));
