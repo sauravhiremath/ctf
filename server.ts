@@ -18,7 +18,7 @@ server.listen(port);
 
 // const server = app.listen(4000);
 export const mongo_uri = "mongodb://localhost:27017/ctf"
-export const connect = mongoose.connect(mongo_uri, { useMongoClient: true});
+export const connect = mongoose.connect(mongo_uri, { useMongoClient: true });
 
 app.use(logger("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -33,8 +33,6 @@ app.use(
   })
 );
 
-let data;
-
 io.on("connection", socket => {
 
   console.log("Made connection to socketID and ipAddress ", [
@@ -44,7 +42,7 @@ io.on("connection", socket => {
 
   // socket.on('register', handleRegister)
   // socket.on('login', handleLogin)
-  socket.on("userSubmission", handleSubmission(data));
+  socket.on("userSubmission", handleSubmission);
   // socket.on('userPoints', handleLeaderbaord(this.data));
   // socket.on('help', handleHelper)
 
