@@ -12,9 +12,6 @@ const challengeSchema = new Schema(
     solved: Array,
     hidden: Boolean
   },
-  {
-    collection: "ctfnew"
-  }
 );
 
 export const Challenge = mongoose.model("Challenge", challengeSchema);

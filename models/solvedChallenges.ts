@@ -17,14 +17,11 @@ const solvedChallengeSchema = new Schema(
     },
     pointsOnSubmission: Number
   },
-
-  {
-    collection: "ctfnew"
-  }
 );
 
 export const solvedChallenges = mongoose.model(
   "solvedChallenges",
   solvedChallengeSchema
 );
+
 export default solvedChallenges;

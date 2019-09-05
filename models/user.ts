@@ -16,9 +16,6 @@ const userSchema = new Schema(
     points: { type: Number, default: 0 },
     role: { type: String, default: "participant" }
   },
-  {
-    collection: "ctfnew"
-  }
 );
 
 export const User = mongoose.model("User", userSchema);
