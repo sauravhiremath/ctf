@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import * as mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const challengeSchema = new Schema(
@@ -13,7 +13,7 @@ const challengeSchema = new Schema(
     hidden: Boolean
   },
   {
-    collection: "challenges"
+    collection: "ctfnew"
   }
 );
 

@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import * as mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema(
@@ -17,7 +17,7 @@ const userSchema = new Schema(
     role: { type: String, default: "participant" }
   },
   {
-    collection: "users"
+    collection: "ctfnew"
   }
 );
 

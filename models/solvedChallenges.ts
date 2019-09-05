@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import * as mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const solvedChallengeSchema = new Schema(
@@ -11,12 +11,15 @@ const solvedChallengeSchema = new Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User"
     },
-    timeSubmitted: { type: Date, default: Date.now },
+    timeSubmitted: {
+      type: Date,
+      default: Date.now
+    },
     pointsOnSubmission: Number
   },
 
   {
-    collection: "challenges"
+    collection: "ctfnew"
   }
 );
 
