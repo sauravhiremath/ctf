@@ -42,7 +42,7 @@ router.get("/register", async (req, res) => {
     const newUser = new User({
         name: req.body.name,
         regNo: req.body.regNo,
-        password: await hash(req.body.password, 10),
+        password: await hash(req.body.password, process.env.SALT_ROUNDS),
         email: req.body.email,
         phoneNo: req.body.phoneNo,
         solved: []
