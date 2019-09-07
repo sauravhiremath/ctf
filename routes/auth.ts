@@ -7,6 +7,7 @@ import {
     validatePhoneNo,
     validateRegNo
 } from "../models/user";
+import { hash } from 'bcrypt';
 
 const router = Router();
 
@@ -41,7 +42,7 @@ router.get("/register", async (req, res) => {
     const newUser = new User({
         name: req.body.name,
         regNo: req.body.regNo,
-        password: req.body.password,
+        password: await hash(req.body.password, 10),
         email: req.body.email,
         phoneNo: req.body.phoneNo,
         solved: []
