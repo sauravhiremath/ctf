@@ -5,15 +5,17 @@ import {
     validateName,
     validatePassword,
     validatePhoneNo,
-    validateRegNo
+    validateRegNo,
+    validateUsername
 } from "../models/user";
 import { hash } from 'bcrypt';
 
 const router = Router();
 
-router.get("/register", async (req, res) => {
+router.post("/register", async (req, res) => {
     if (
         !req.body.name ||
+        !req.body.username ||
         !req.body.regNo ||
         !req.body.password ||
         !req.body.email ||
@@ -27,6 +29,7 @@ router.get("/register", async (req, res) => {
 
     if (
         !validateEmail(req.body.email) ||
+        !validateUsername(req.body.username) ||
         !validateName(req.body.name) ||
         !validatePassword(req.body.password) ||
         !validatePhoneNo(req.body.phoneNo) ||
@@ -40,9 +43,10 @@ router.get("/register", async (req, res) => {
     }
 
     const newUser = new User({
+        username: req.body.username,
         name: req.body.name,
         regNo: req.body.regNo,
-        password: await hash(req.body.password, process.env.SALT_ROUNDS),
+        password: await hash(req.body.password, parseInt(process.env.SALT_ROUNDS)),
         email: req.body.email,
         phoneNo: req.body.phoneNo,
         solved: []

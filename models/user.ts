@@ -3,10 +3,7 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema(
   {
-    user: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "leaderboard"
-    },
+    username: { type: String, required: true, unique: true },
     name: { type: String, required: true },
     regNo: { type: String, required: true, unique: true },
     password: { type: String, required: true },
@@ -19,6 +16,10 @@ const userSchema = new Schema(
 );
 
 export function validateName(name: string) {
+  return true;
+}
+
+export function validateUsername(username: string) {
   return true;
 }
 
