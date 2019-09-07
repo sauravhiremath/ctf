@@ -15,7 +15,9 @@ const port = process.env.PORT || 4000;
 const server = new http.Server(app);
 
 const io = socketio(server);
-server.listen(port);
+server.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});
 
 // const server = app.listen(4000);
 export const mongo_uri = "mongodb://localhost:27017/ctf"
