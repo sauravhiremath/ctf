@@ -7,6 +7,7 @@ import * as socketio from "socket.io";
 import * as http from "http";
 import { submissionData, submissionResponse } from './models/socketInterfaces';
 import { handleSubmission  as handleSubmission } from './routes/handleSubmission';
+import authRoutes from './routes/auth';
 
 const app = express();
 
@@ -32,6 +33,8 @@ app.use(
     resave: true
   })
 );
+
+app.use('/auth', authRoutes);
 
 io.on("connection", socket => {
 

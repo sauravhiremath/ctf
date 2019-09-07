@@ -18,5 +18,25 @@ const userSchema = new Schema(
   },
 );
 
+export function validateName(name: string) {
+  return true;
+}
+
+export function validateRegNo(regno: string) {
+  return true;
+}
+
+export function validatePassword(password: string) {
+  return true;
+}
+
+export function validateEmail(email: string) {
+  return true;
+}
+
+export function validatePhoneNo(phoneno: string) {
+  return true;
+}
+
 export const User = mongoose.model("User", userSchema);
 export default User;
