@@ -8,7 +8,9 @@ import {
     validateRegNo,
     validateUsername
 } from "../models/user";
-import { hash } from 'bcrypt';
+import { hash } from "bcrypt";
+import { checkUserExists } from "../db/user";
+import * as sgMail from "@sendgrid/mail";
 
 const router = Router();
 
@@ -37,19 +39,30 @@ router.post("/register", async (req, res) => {
     ) {
         res.status(400).json({
             success: false,
-            message: "Invalid data field"
+            message: "invalidDetails"
         });
         return;
     }
 
+    if (await checkUserExists(req.body.username, req.body.email, req.body.regNo)) {
+        res.status(400).json({
+            success: false,
+            message: "duplicateUser"
+        });
+        return;
+    }
     const newUser = new User({
         username: req.body.username,
         name: req.body.name,
         regNo: req.body.regNo,
-        password: await hash(req.body.password, parseInt(process.env.SALT_ROUNDS)),
+        password: await hash(
+            req.body.password,
+            parseInt(process.env.SALT_ROUNDS)
+        ),
         email: req.body.email,
         phoneNo: req.body.phoneNo,
-        solved: []
+        solved: [],
+        verifiedStatus: false
     });
 
     await newUser.save();
@@ -59,14 +72,19 @@ router.post("/register", async (req, res) => {
     });
 
     sendInviteEmail(req.body.email);
-
 });
 
-
 function sendInviteEmail(email: string) {
-    // To be implemented
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+    const msg = {
+        to: email,
+        from: "ctf@csivit.com",
+        subject: "Sending with Twilio SendGrid is Fun",
+        text: "and easy to do anywhere, even with Node.js",
+        html: "<strong>and easy to do anywhere, even with Node.js</strong>"
+    };
+    sgMail.send(msg);
     return;
 }
-
 
 export default router;
