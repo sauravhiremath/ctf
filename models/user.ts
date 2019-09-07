@@ -8,7 +8,7 @@ const userSchema = new Schema(
     regNo: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     email: { type: String, required: true, unique: true },
-    phoneNo: { type: Number, required: true, unique: true },
+    phoneNo: { type: Number, required: true },
     solved: Array,
     points: { type: Number, default: 0 },
     role: { type: String, default: "participant" }
