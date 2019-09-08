@@ -8,11 +8,44 @@ html, body {
     height:64px;
     border-radius: 5px;
     border: 2px solid white;
+    cursor: pointer;
 }
 
-.user-name {
+.bar {
+    height: 12.5vh;
+}
+.accent {
+    margin: 0px;
+    border: 0px;
+    height: 3px;
+}
+.white-accent {
+    background: linear-gradient(to right, rgba(0,51,153,1) 0%, rgba(255,255,255,1) 23%, rgba(0,51,153,1) 100%);
+}
+
+.orange-accent {
+    background: linear-gradient(to right, rgba(0,51,153,1) 0%, rgba(249,145,0,1) 23%, rgba(0,51,153,1) 100%);
+}
+.shutdown-icon {
+    widows: 32px;
+    height: 32px;
+    cursor: pointer;
+}
+
+.xp-text {
     color: white;
     font-size: 1.5rem;
+}
+
+.logo-text {
+    font-size: 1.2rem;
+    letter-spacing: 1.2px;
+}
+
+.bottom-text {
+    width: 30%;
+    line-height: 15px;
+    font-size:1rem;
 }
 
 .container-fluid {
@@ -22,8 +55,12 @@ html, body {
     background-color: #003399;
 }
 
+.ctfLogo {
+    width: 300px;
+}
+
 .left-section {
-    border-right: 2px solid white;
+    border-right: 2px solid rgba(255,255,255, 0.5);
 }
 
 .main-content {
