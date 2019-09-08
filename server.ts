@@ -1,4 +1,5 @@
 import express from "express";
+import * as hbs from 'express-handlebars';
 import logger from "morgan";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
@@ -10,7 +11,10 @@ import { handleSubmission  as handleSubmission } from './routes/handleSubmission
 import authRoutes from './routes/auth';
 
 const app = express();
+// const hbs = require('express-handlebars');
 
+
+app.use('/static', express.static(path.join(__dirname,'static')));
 const port = process.env.PORT || 4000;
 const server = new http.Server(app);
 
