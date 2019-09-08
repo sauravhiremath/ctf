@@ -26,6 +26,7 @@ server.listen(port, () => {
 export const mongo_uri = "mongodb://localhost:27017/ctf"
 export const connect = mongoose.connect(mongo_uri, { useMongoClient: true });
 
+app.use('/static', express.static('static'));
 // Use `.hbs` for extensions and find partials in `views/partials`.
 app.engine('hbs', hbs({
   partialsDir: __dirname + '/views/partials'
