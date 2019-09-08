@@ -23,6 +23,16 @@ function verifiedSubmission(): boolean {
 function refreshLeaderboard(data: submissionData){
   let submissionPoints = () => {
     //Changes in the challenge Model        --> change currentPoints and solvedBy
+    Challenge.collection.update(
+      {
+        _id: data.qid
+      },
+      {
+        $set: {
+          
+        }
+      }
+    )
     //               solvedChallenges Model --> Add new row with all new values
     //               user Model             --> changed solved and points
 
