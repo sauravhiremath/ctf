@@ -45,6 +45,9 @@ html, body {
     letter-spacing: 1.2px;
 }
 
+.shutdown-text {
+    font-size: 1rem;
+}
 
 .container-fluid {
     padding: 0 !important;
