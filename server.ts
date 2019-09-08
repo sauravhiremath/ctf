@@ -1,5 +1,5 @@
 import express from "express";
-import * as hbs from 'express-handlebars';
+import hbs from 'express-handlebars';
 import logger from "morgan";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
@@ -14,7 +14,6 @@ const app = express();
 // const hbs = require('express-handlebars');
 
 
-app.use('/static', express.static(path.join(__dirname,'static')));
 const port = process.env.PORT || 4000;
 const server = new http.Server(app);
 
@@ -26,6 +25,13 @@ server.listen(port, () => {
 // const server = app.listen(4000);
 export const mongo_uri = "mongodb://localhost:27017/ctf"
 export const connect = mongoose.connect(mongo_uri, { useMongoClient: true });
+
+// Use `.hbs` for extensions and find partials in `views/partials`.
+app.engine('hbs', hbs({
+  partialsDir: __dirname + '/views/partials'
+}));
+app.set('view engine', 'hbs');
+app.set('views', __dirname + '/views');
 
 app.use(logger("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -41,6 +47,9 @@ app.use(
 );
 
 app.use('/auth', authRoutes);
+app.use('/', (req, res) => {
+  res.redirect("/auth/register");
+});
 
 io.on("connection", socket => {
 
