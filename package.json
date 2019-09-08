@@ -18,7 +18,7 @@
   },
   "scripts": {
     "start": "nodemon server.ts",
-    "build": "cp -r ./views ./dist/ && tsc -p tsconfig.json"
+    "build": "cp -r ./static ./dist/ && cp -r ./views ./dist/ && tsc -p tsconfig.json"
   },
   "dependencies": {
     "@sendgrid/mail": "^6.4.0",
