@@ -62,5 +62,5 @@ html, body {
 }
 
 .main-content {
-    background-color: #597EDC;
+    background-image: radial-gradient(closest-corner at 7% 15%, rgb(171, 185, 214),#597EDC);;
 }
