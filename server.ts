@@ -45,7 +45,6 @@ io.on("connection", socket => {
     socket.request.connection._peername.address
   ]);
 
-  // socket.on('register', handleRegister)
   // socket.on('login', handleLogin)
   socket.on("userSubmission", handleSubmission);
   // socket.on('userPoints', handleLeaderbaord(this.data));
