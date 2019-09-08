@@ -16,7 +16,8 @@
     "tslint": "^5.19.0"
   },
   "scripts": {
-    "start": "nodemon server.ts"
+    "start": "nodemon server.ts",
+    "build":"tsc -p tsconfig.json"
   },
   "dependencies": {
     "@sendgrid/mail": "^6.4.0",
