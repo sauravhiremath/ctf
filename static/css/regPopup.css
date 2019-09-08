@@ -1,31 +1,70 @@
 .popupContainer {
-    border: 2px solid rgb(71, 4, 204);
+    border: 4px solid rgb(71, 4, 204);
     border-radius: 10px 10px 0 0;
 }
 
 .topBar {
     border-radius: 10px 10px 0 0;
-    background-color: rgb(64, 64, 223);
-    height: 5vh;
+
+    background-image: linear-gradient(to bottom, white, #1A6FE3 7%, #1A6FE3 60%, #167BF9 94%, rgb(11, 11, 88));
+
     font-size: 1.3rem;
     color: white;
 }
 
+.topBar > img {
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+}
+
 .logoContainer {
-    height: 30vh;
     text-align: center;
-    padding: 10%;
     background: radial-gradient(closest-corner at 70% 50%, rgb(197, 194, 255), #597EDC);
 }
 
 .logoContainer > img {
     max-height: 100%;
+    max-width: 75%;
+}
+
+.orange-accent-popup {
+    background: linear-gradient(to right, rgb(71, 4, 204, 40%) 0%, rgba(249,145,0,1) 40%, rgb(71, 4, 204, 40%) 100%);
+}
+
+.accent-popup {
+    margin: 0px;
+    border: 0px;
+    height: 10px;
 }
 
 .formContainer {
     background-color: #EAEDDA;
+    font-size: 1.2rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: black;
 }
 
 .formContainer > form {
     margin-bottom: 0px !important;
+}
+
+.tags {
+    width: 120px;
+}
+
+.formContainer input {
+    height: 25px;
+    border: 1px solid rgb(26, 26, 197);
+    width: 60%;
+    padding: 4px;
+}
+
+.formContainer button {
+    width: 130px;
+    height: 32px;
+    border: 1px solid rgb(26, 26, 197);
+    border-radius: 4px;
+
+    background-image: linear-gradient(to bottom, #EAEDDA, white 15%, white, #EAEDDA 90%, #EAEDDA);
 }

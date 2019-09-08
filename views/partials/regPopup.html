@@ -1,38 +1,47 @@
 <head>
 
-<link rel="stylesheet" href="../../static/css/regPopup.css">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../static/css/regPopup.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 </head>
 <div class="popupContainer m-auto w-50">
-    <div class="topBar px-2">
-        Sign Up for CTF
+
+    <div class="topBar p-2 d-flex justify-content-between">
+        <div><strong>Sign Up for CTF</strong></div>
+        <div></div>
+        <img src="../../static/images/closeIcon.png">
     </div>
-    <div class="logoContainer">
+
+    <div class="logoContainer p-5">
         <img src="../../static/images/logo.png">
     </div>
-    <div class="formContainer p-2">
+
+    <div><hr class="accent-popup orange-accent-popup"></div>
+
+    <div class="formContainer pl-3 py-4">
         <form>
-            <div>
-                Name* : <input type="text" name="name">
+            <div class="align-items-center">
+                <div class="tags d-inline-block">Name: *</div> <input type="text" name="name" class="m-2">
             </div>
-            <div>
-                Username* : <input type="text" name="username">
+            <div class="align-items-center">
+                <div class="tags d-inline-block">Username: *</div> <input type="text" name="username" class="m-2">
             </div>
-            <div>
-                Password* : <input type="password" name="password">
+            <div class="align-items-center">
+                <div class="tags d-inline-block">Password: *</div> <input type="password" name="password" class="m-2">
             </div>
-            <div>
-                Reg. No: <input type="text" name="regNo">
+            <div class="align-items-center">
+                <div class="tags d-inline-block">Reg. No:</div> <input type="text" name="regNo" class="m-2">
             </div>
-            <div>
-               Email* : <input type="text" name="email">
+            <div class="align-items-center">
+                <div class="tags d-inline-block">Email: *</div> <input type="text" name="email" class="m-2">
             </div>
-            <div>
-                Phone* : <input type="text" name="phoneNo">
+            <div class="align-items-center">
+                <div class="tags d-inline-block">Phone: *</div> <input type="text" name="phoneNo" class="m-2">
             </div>
-            <div>
-                <input type="submit" value="Ok">
+            <div class="d-flex justify-content-end px-4 mt-4">
+                <button type="submit" class="ml-3">Submit</button>
+                <button class="ml-3">Cancel</button>
             </div>
         </form>
     </div>
