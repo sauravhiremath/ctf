@@ -11,8 +11,6 @@ import { handleSubmission  as handleSubmission } from './routes/handleSubmission
 import authRoutes from './routes/auth';
 
 const app = express();
-// const hbs = require('express-handlebars');
-
 
 const port = process.env.PORT || 4000;
 const server = new http.Server(app);
