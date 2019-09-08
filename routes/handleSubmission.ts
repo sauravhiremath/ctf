@@ -29,7 +29,7 @@ function refreshLeaderboard(data: submissionData){
       },
       {
         $set: {
-          
+
         }
       }
     )

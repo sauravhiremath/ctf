@@ -1,0 +1,30 @@
+.popupContainer {
+    border: 2px solid #003399;
+    border-radius: 10px 10px 0 0;
+}
+
+.topBar {
+    border-radius: 10px 10px 0 0;
+    background-color: #003399;
+    height: 5vh;
+    font-size: 1.3rem;
+    color: white;
+}
+
+.logoContainer {
+    height: 30vh;
+    text-align: center;
+    background: radial-gradient(closest-corner at 70% 50%, rgb(197, 194, 255), #597EDC);
+}
+
+.logoContainer > img {
+    max-height: 100%;
+}
+
+.formContainer {
+    background-color: #EAEDDA;
+}
+
+.formContainer > form {
+    margin-bottom: 0px !important;
+}
