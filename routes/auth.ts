@@ -14,6 +14,9 @@ import * as sgMail from "@sendgrid/mail";
 
 const router = Router();
 
+router.get("/register", async (req, res) => {
+    res.render("register.hbs");
+});
 
 router.post("/register", async (req, res) => {
     if (
