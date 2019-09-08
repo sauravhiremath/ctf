@@ -1,10 +1,10 @@
-import * as express from "express";
-import * as logger from "morgan";
-import * as bodyParser from "body-parser";
-import * as mongoose from "mongoose";
-import * as session from "express-session";
-import * as socketio from "socket.io";
-import * as http from "http";
+import express from "express";
+import logger from "morgan";
+import bodyParser from "body-parser";
+import mongoose from "mongoose";
+import session from "express-session";
+import socketio from "socket.io";
+import http from "http";
 import { submissionData, submissionResponse } from './models/socketInterfaces';
 import { handleSubmission  as handleSubmission } from './routes/handleSubmission';
 import authRoutes from './routes/auth';
