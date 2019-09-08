@@ -1,11 +1,11 @@
 .popupContainer {
-    border: 2px solid #003399;
+    border: 2px solid rgb(71, 4, 204);
     border-radius: 10px 10px 0 0;
 }
 
 .topBar {
     border-radius: 10px 10px 0 0;
-    background-color: #003399;
+    background-color: rgb(64, 64, 223);
     height: 5vh;
     font-size: 1.3rem;
     color: white;
@@ -14,6 +14,7 @@
 .logoContainer {
     height: 30vh;
     text-align: center;
+    padding: 10%;
     background: radial-gradient(closest-corner at 70% 50%, rgb(197, 194, 255), #597EDC);
 }
 
