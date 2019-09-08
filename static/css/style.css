@@ -67,3 +67,9 @@ html, body {
 .main-content {
     background-image: radial-gradient(closest-corner at 7% 15%, rgb(171, 185, 214),#597EDC);;
 }
+
+@media only screen and (max-width: 768px) {
+    .main-content {
+        background-image: radial-gradient(closest-corner at 15% 10%, rgb(171, 185, 214),#597EDC);;
+    }
+}
