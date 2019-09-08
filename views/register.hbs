@@ -35,7 +35,7 @@
                                 <img src="/static/images/logo.png" class="ctfLogo d-md-none d-lg-none mr-2" alt="" srcset="">
                             </div>
                             <div class="users ml-3">
-                                <div class="windows-user row align-items-top py-2 px-2 w-auto">
+                                <div class="windows-user row align-items-top py-2 px-2 w-auto" data-toggle="modal" data-target="#registerPopup">
                                     <img src="/static/images/chess.jpg" alt="" class="user-profile-pic">
                                     <strong class="ml-3 xp-text">Sign Up</strong>
                                 </div>
@@ -63,8 +63,8 @@
                 </div>
             </div>
         </div>
-        {{> regPopup }}
     </div>
+    {{> regPopup }}
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>

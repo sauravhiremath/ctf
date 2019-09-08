@@ -1,5 +1,10 @@
+#registerPopup {
+     margin-top:10px;
+}
+
 .popupContainer {
     border: 4px solid rgb(71, 4, 204);
+    border-top: 0px;
     border-radius: 10px 10px 0 0;
 }
 
@@ -25,7 +30,7 @@
 
 .logoContainer > img {
     max-height: 100%;
-    max-width: 75%;
+    max-width: 50%;
 }
 
 .orange-accent-popup {
