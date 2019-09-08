@@ -32,6 +32,9 @@ html, body {
     cursor: pointer;
 }
 
+.csi-logo {
+    width:150px;
+}
 .xp-text {
     color: white;
     font-size: 1.5rem;
@@ -42,11 +45,6 @@ html, body {
     letter-spacing: 1.2px;
 }
 
-.bottom-text {
-    width: 30%;
-    line-height: 15px;
-    font-size:1rem;
-}
 
 .container-fluid {
     padding: 0 !important;
