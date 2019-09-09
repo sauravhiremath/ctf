@@ -98,7 +98,7 @@ router.post("/register", async (req, res) => {
 });
 
 router.get("/verify", async (req, res) => {
-    const token = req.query.token;
+    const token = req.params.token;
 
     if (!token) {
         res.status(400).json({
