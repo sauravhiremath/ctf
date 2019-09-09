@@ -13,14 +13,19 @@
 
     <link rel='shortcut icon' href='/static/images/logo.png' type='image/x-icon' />
 
+    <style>
+        .content-hidden {
+            visibility: hidden;
+        }
+    </style>
+
     <script>
-        $(window).on('load', () => {
+        //$(window).on('load', () => {
             setTimeout(() => {
                 $(".loader").hide();
-                $(".content").fadeIn();
-                $(".content").show();
-            }, 500);
-        });
+                $(".content").removeClass("content-hidden");
+            }, 1000);
+        //});
 
     </script>
 </head>
@@ -31,7 +36,7 @@
     </div>
 
 
-    <div class="content" style="visibility: hidden !important;">
+    <div class="content content-hidden">
         <div class="g-recaptcha" data-sitekey="6LdiUrcUAAAAAKLTyvgt-ewN1EVInC5L9Tj7xCqP" data-callback="onSubmit"
             data-size="invisible">
         </div>
