@@ -102,14 +102,26 @@ router.post("/register", async (req, res) => {
     sendInviteEmail(req.body.email);
 });
 
+router.get("verify", async (req, res) => {
+    const token = req.query.token;
+
+    const user = await User.findOne({ token });
+
+    user["verifiedStatus"] = true;
+
+    await user.save();
+    res.render("verified", {email: user["email"]});
+});
+
 async function sendInviteEmail(email: string) {
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+    const link = `https://ctf.csivit.com/auth/verify?token=${randomToken}`
     const msg = {
         to: email,
         from: "ctf@csivit.com",
         subject: "Verify your CSI-CTF Account",
-        text: "Verification Link: https://ctf.csivit.com/auth/register?${randomToken}",
-        html: await hbs.render("verificationMail.html", {name: fullName, randomToken: randomToken})
+        text: `Verification Link: ${link}`,
+        html: await hbs.render("verificationMail.html", {name: fullName, vLink: link})
     };
     sgMail.send(msg);
     return;
