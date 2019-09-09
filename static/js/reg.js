@@ -12,7 +12,7 @@ function onSubmit() {
     const regNo = encodeURIComponent(regNoInput.val());
     const email = encodeURIComponent(emailInput.val());
     const phoneNo = encodeURIComponent(phoneNoInput.val());
-    
+
     const formData = `name=${name}&username=${username}&password=${password}&regNo=${regNo}&email=${email}&phoneNo=${phoneNo}`;
     $.ajax({
         type: "POST",
@@ -25,13 +25,13 @@ function onSubmit() {
                 alert(data["message"]);
             }
         },
-      });
+    });
 }
 
 
 $(() => {
     $("#registerForm").submit((e) => {
         grecaptcha.execute();
-        e.preventDefault(); 
+        e.preventDefault();
     });
 });
