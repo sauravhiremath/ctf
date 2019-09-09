@@ -1,5 +1,3 @@
-import { Timestamp } from 'bson';
-
 export interface submissionData {
   userid: string,
   qid: string,
@@ -11,7 +9,7 @@ export interface submissionResponse extends submissionData {
   status: boolean,
   points ?: number,
   updatedPoints ?: number,
-  TimestampServer: Timestamp,
+  TimestampServer: string,
 }
 
 export interface loginData {
