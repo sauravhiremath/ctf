@@ -62,10 +62,11 @@
 </head>
 
 <body>
+    <audio id="shutdownSound" src="/static/audio/shutdown-sound.mp3" class="d-none"></audio>
     <div class="loader">
         <img src="/static/images/loadingBar.gif" class="loader-image">
     </div>
-
+    <div class="shutdownScreen h-100 w-100"></div>
     <div class="content content-hidden">
         <iframe src="/static/audio/startup-sound.mp3" allow="autoplay" id="audio" style="display:none"></iframe>
         <div class="g-recaptcha" data-sitekey="6LdiUrcUAAAAAKLTyvgt-ewN1EVInC5L9Tj7xCqP" data-callback="onSubmit"
