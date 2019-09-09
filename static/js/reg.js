@@ -25,6 +25,9 @@ function onSubmit() {
                 alert(data["message"]);
             }
         },
+        error:(data) => {
+            alert(data["message"]);
+        },
     });
 
     grecaptcha.reset();
