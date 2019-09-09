@@ -3,6 +3,7 @@ import * as mongoose from "mongoose";
 import { Challenge } from "../models/challenge";
 import { attemptedChallenges } from "../models/solvedChallenges";
 import User from "../models/user";
+import Leaderboard from "../models/leaderboard";
 
 var solved: boolean;
 
@@ -13,8 +14,8 @@ export async function handleSubmission(data: submissionData) {
   if (data.ctfFlag == question.id["answer"] && verifiedSubmission()) {
     //TO-DO: Make sure updateLog is executed before refreshLeaderboard
     solved = true;
-    updateLog(data, question, solved);
-    refreshData(data, question);
+    await updateLog(data, question, solved);
+    await refreshData(data, question);
     return "Correct Flag";
   } else {
     solved = false;
@@ -32,7 +33,7 @@ async function refreshData(data: submissionData, question) {
     var newPoints = Math.floor(question.id["currentPoints"] * (9 / 11));
 
     //Changes in the challenge Model--> change currentPoints and solvedBy
-    Challenge.updateOne(
+    await Challenge.updateOne(
       { _id: data.qid },
       {
         $set: {
@@ -43,7 +44,7 @@ async function refreshData(data: submissionData, question) {
     );
 
     //Changes in the user Model--> changed solved and points
-    User.updateOne(
+    await User.updateOne(
       { _id: data.qid },
       {
         $set: {
@@ -55,13 +56,12 @@ async function refreshData(data: submissionData, question) {
   };
 }
 
-function UpdateLeaderboardModel() {
+async function UpdateLeaderboardModel(data: submissionData, newPoints: number) {
   //Changes in leaderboard Model          --> change username and points
-  //Decide a final way to re-Sort Leaderboard, do (on client side) or (on server Side using redis)
+  await Leaderboard.updateOne({username: data.userid},{ $set: { $inc: {points: newPoints} } })
 }
 
 async function updateLog(data, question, solved) {
-	return new Promise(())
   //Add log of attempted Question
   const pointsOnAttempt = solved ? question.currentPoints : 0;
 
@@ -71,5 +71,6 @@ async function updateLog(data, question, solved) {
     timeSubmitted: Date(),
     pointsOnSubmission: pointsOnAttempt
   });
+
   await newAttempt.save();
 }
