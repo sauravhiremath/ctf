@@ -3,16 +3,6 @@ body {
 	width: 100vw;
 	height: 100vh;
 	font-family: Arial, Helvetica, sans-serif !important;
-	overflow: hidden;
-}
-
-body {
-    width: 100vw;
-	height: 100vh;
-    position: fixed;
-	/* prevent overscroll bounce*/
-	overflow-y: hidden;
-	-webkit-overflow-scrolling: touch;
 }
 
 .windows-user {
