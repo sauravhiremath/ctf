@@ -1,6 +1,6 @@
 
 .popupContainer {
-    border: 4px solid rgb(71, 4, 204);
+    border: 4px solid #1B70E5;
     border-top: 0px;
     border-radius: 10px 10px 0 0;
     width: 50%;
@@ -90,7 +90,41 @@
 	display: none;
 }
 
+.closeIcon {
+    box-shadow: rgb(218, 70, 0) 0px -1px 2px 1px inset;
+    background-image: radial-gradient(circle at 90% 90%, rgb(204, 70, 0) 0%, rgb(220, 101, 39) 55%, rgb(205, 117, 70) 70%, rgb(255, 204, 178) 90%, white 100%);
+    margin-right: 1px;
+    position: relative;
+    width: 22px;
+    height: 22px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(255, 255, 255);
+    border-image: initial;
+    border-radius: 3px;
+}
 
+.closeIcon::before {
+    content: "";
+    position: absolute;
+    left: 9px;
+    top: 2px;
+    transform: rotate(45deg);
+    height: 16px;
+    width: 2px;
+    background-color: white;
+}
+
+.closeIcon::after {
+    content: "";
+    position: absolute;
+    left: 9px;
+    top: 2px;
+    transform: rotate(-45deg);
+    height: 16px;
+    width: 2px;
+    background-color: white;
+}
 @media only screen and (max-width: 768px) {
     .popupContainer {
         width: 90% !important;

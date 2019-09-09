@@ -12,7 +12,6 @@ export async function handleSubmission(data: submissionData) {
   const question = await Challenge.findOne({ _id: data.qid });
 
   if (data.ctfFlag == question.id["answer"] && verifiedSubmission()) {
-    //TO-DO: Make sure updateLog is executed before refreshLeaderboard
     solved = true;
     await updateLog(data, question, solved);
     await refreshData(data, question);
