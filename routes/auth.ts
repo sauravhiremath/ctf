@@ -13,9 +13,9 @@ import * as crypto from "crypto";
 import { checkUserExists } from "../db/user";
 import request from "request-promise";
 import sgMail from "@sendgrid/mail";
-import hbsexp from 'express-handlebars';
+import hbs from 'express-handlebars';
 
-const hbs = hbsexp.create();
+
 const router = Router();
 
 router.get("/register", async (req, res) => {
@@ -128,7 +128,7 @@ async function sendInviteEmail(name: string, email: string, randomToken: string)
         from: "ctf@csivit.com",
         subject: "Verify your CSI-CTF Account",
         text: `Verification Link: ${vLink}`,
-        html: await hbs.render("views/verificationMail.hbs", {name, vLink})
+        html: "ttest"
     };
     sgMail.send(msg);
     return;

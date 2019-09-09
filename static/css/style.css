@@ -60,6 +60,10 @@ html, body {
     font-size: 1rem;
 }
 
+.shutdownScreen {
+    display: none;
+    background-color: black;
+}
 .container-fluid {
     padding: 0 !important;
 }
