@@ -12,74 +12,122 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <link rel='shortcut icon' href='/static/images/logo.png' type='image/x-icon' />
+
+    <style>
+        .content-hidden {
+            visibility: hidden;
+        }
+
+        .content {
+            height: 100vh;
+            width: 100vw;
+        }
+
+        .loader {
+            height: 100vh;
+            width: 100vw;
+            background-color: black;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            line-height: 100vh;
+        }
+
+        .loader-image {
+            width: 20vw;
+            position: relative;
+            left: 40vw;
+        }
+    </style>
+
+    <script>
+        window.onload = function () {
+            setTimeout(() => {
+                $(".loader").fadeOut();
+                $(".content").removeClass("content-hidden");
+            }, 500);
+        }
+
+    </script>
 </head>
 
 <body>
-    <div class="g-recaptcha"
-          data-sitekey="6LdiUrcUAAAAAKLTyvgt-ewN1EVInC5L9Tj7xCqP"
-          data-callback="onSubmit"
-          data-size="invisible">
+    <div class="loader">
+        <img src="/static/images/loadingBar.gif" class="loader-image">
     </div>
-    <div class="container-fluid w-100 h-100">
-        <div class="d-flex flex-column h-100">
-            <div class="bar"></div>
-            <div>
-                <hr class="accent white-accent">
-            </div>
-            <div class="h-75 main-content d-flex justify-content-center align-items-center flex-column">
-                <div class="h-75 w-75 d-flex">
-                    <div class="left-section w-50 py-5 pr-5 mr-5 d-none d-md-block d-lg-block">
-                        <div class="d-flex align-items-end justify-content-center flex-column h-100">
-                            <div class="main-logo">
-                                <img src="/static/images/logo.png" class="ctfLogo" alt="" srcset="">
-                            </div>
-                            <strong class="xp-text logo-text mt-3">To begin, click signup</strong>
-                        </div>
-                    </div>
-                    <div class="right-section w-50 flex-grow-1">
-                        <div class="d-flex align-items-start justify-content-between flex-column h-100">
-                            <div class="main-logo mt-5 mb-5">
-                                <img src="/static/images/logo.png" class="ctfLogo d-md-none d-lg-none mr-2" alt="" srcset="">
-                            </div>
-                            <div class="users ml-3">
-                                <div class="windows-user row align-items-top py-2 px-2 w-auto" data-toggle="modal" data-target="#registerPopup">
-                                    <img src="/static/images/chess.jpg" alt="" class="user-profile-pic">
-                                    <strong class="ml-3 xp-text">Sign Up</strong>
+
+
+    <div class="content content-hidden">
+        <div class="g-recaptcha" data-sitekey="6LdiUrcUAAAAAKLTyvgt-ewN1EVInC5L9Tj7xCqP" data-callback="onSubmit"
+            data-size="invisible">
+        </div>
+        <div class="container-fluid w-100 h-100">
+            <div class="d-flex flex-column h-100">
+                <div class="bar"></div>
+                <div>
+                    <hr class="accent white-accent">
+                </div>
+                <div class="h-75 main-content d-flex justify-content-center align-items-center flex-column">
+                    <div class="h-75 w-75 d-flex">
+                        <div class="left-section w-50 py-5 pr-5 mr-5 d-none d-md-block d-lg-block">
+                            <div class="d-flex align-items-end justify-content-center flex-column h-100">
+                                <div class="main-logo">
+                                    <img src="/static/images/logo.png" class="ctfLogo" alt="" srcset="">
                                 </div>
+                                <strong class="xp-text logo-text mt-3">To begin, click signup</strong>
                             </div>
-                            <div></div>
+                        </div>
+                        <div class="right-section w-50 flex-grow-1">
+                            <div class="d-flex align-items-start justify-content-between flex-column h-100">
+                                <div class="main-logo mt-5 mb-5">
+                                    <img src="/static/images/logo.png" class="ctfLogo d-md-none d-lg-none mr-2" alt=""
+                                        srcset="">
+                                </div>
+                                <div class="users ml-3">
+                                    <div class="windows-user row align-items-top py-2 px-2 w-auto" data-toggle="modal"
+                                        data-target="#registerPopup">
+                                        <img src="/static/images/chess.jpg" alt="" class="user-profile-pic">
+                                        <strong class="ml-3 xp-text">Sign Up</strong>
+                                    </div>
+                                </div>
+                                <div></div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div>
-                <hr class="accent orange-accent">
-            </div>
-            <div class="bar py-2 px-4">
-                <div class="d-flex justify-content-between align-items-center h-100">
-                    <div class="shutdown-container align-items-center">
-                        <img src="/static/images/shutdownIcon.png" alt="" class="shutdown-icon">
-                        <strong class="ml-1 xp-text shutdown-text">Turn off</strong>
-                    </div>
-                    <div></div>
-                    <div class="xp-text bottom-text">
-                        <a href="http://csivit.com">
-                        <img src="https://csivit.com/demo-images/CSI_logo_Light.png" class="csi-logo" alt="" srcset="">
-                        </a>
+                <div>
+                    <hr class="accent orange-accent">
+                </div>
+                <div class="bar py-2 px-4">
+                    <div class="d-flex justify-content-between align-items-center h-100">
+                        <div class="shutdown-container align-items-center">
+                            <img src="/static/images/shutdownIcon.png" alt="" class="shutdown-icon">
+                            <strong class="ml-1 xp-text shutdown-text">Turn off</strong>
+                        </div>
+                        <div></div>
+                        <div class="xp-text bottom-text">
+                            <a href="http://csivit.com">
+                                <img src="https://csivit.com/demo-images/CSI_logo_Light.png" class="csi-logo" alt=""
+                                    srcset="">
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        {{> regPopup }}
     </div>
-    {{> regPopup }}
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
-        crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+        </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+        </script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script src="/static/js/reg.js"></script>
 </body>
