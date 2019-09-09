@@ -52,20 +52,22 @@
 
     <script>
         window.onload = function () {
-                setTimeout(() => {
-                            $(".loader").fadeOut();
-                            $(".content").removeClass("content-hidden");
-                        }
+            setTimeout(() => {
+                $(".loader").fadeOut();
+                $(".content").removeClass("content-hidden");
+            }, 500);
+        }
     </script>
 
 </head>
 
 <body>
     <div class="loader">
-        <img src="/static/images/loadingBar.gif" class="loader-image">
+        <iframe src="/static/audio/startup-sound.mp3" allow="autoplay" id="audio" style="display:none"></iframe>
+
     </div>
 
-    <iframe src="/static/audio/startup-sound.mp3" allow="autoplay" id="audio" style="display:none"></iframe>
+    <audio class="d-none" id="loginSound" src="/static/audio/startup-sound.mp3"></audio>
     <div class="content content-hidden">
         <div class="g-recaptcha" data-sitekey="6LdiUrcUAAAAAKLTyvgt-ewN1EVInC5L9Tj7xCqP" data-callback="onSubmit"
             data-size="invisible">
