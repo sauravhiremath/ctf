@@ -117,7 +117,7 @@ router.get("/verify", async (req, res) => {
     user["verifiedStatus"] = true;
 
     await user.save();
-    res.send(`Your email has been verified: ${user["email"]}`);
+    res.render(`success.hbs`);
 });
 
 async function sendInviteEmail(name: string, email: string, randomToken: string) {
