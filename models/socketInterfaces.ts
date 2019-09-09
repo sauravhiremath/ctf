@@ -4,14 +4,6 @@ export interface submissionData {
   ctfFlag: string,
   timeStampUser: string,
 }
-
-export interface submissionResponse extends submissionData {
-  status: boolean,
-  points ?: number,
-  updatedPoints ?: number,
-  TimestampServer: string,
-}
-
 export interface loginData {
   username: string,
   password: string //Hashed form, from client side

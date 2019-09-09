@@ -6,8 +6,8 @@ import mongoose from "mongoose";
 import session from "express-session";
 import socketio from "socket.io";
 import http from "http";
-import { submissionData, submissionResponse } from './models/socketInterfaces';
-import { handleSubmission  as handleSubmission } from './routes/handleSubmission';
+import { submissionData } from './models/socketInterfaces';
+import { handleSubmission } from './routes/handleSubmission';
 import authRoutes from './routes/auth';
 
 const app = express();

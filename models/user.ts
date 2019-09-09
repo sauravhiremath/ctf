@@ -12,6 +12,7 @@ const userSchema = new Schema(
     solved: Array,
     points: { type: Number, default: 0, required: true },
     role: { type: String, default: "VITparticipant" },
+    token: {type: String },
     verifiedStatus: {type: Boolean, required: true} 
   },
 );

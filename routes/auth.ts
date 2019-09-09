@@ -9,11 +9,16 @@ import {
     validateUsername
 } from "../models/user";
 import { hash } from "bcrypt";
+import * as crypto from "crypto";
 import { checkUserExists } from "../db/user";
 import request from "request-promise";
 import * as sgMail from "@sendgrid/mail";
+import hbsexp from 'express-handlebars';
 
+const hbs = hbsexp.create();
 const router = Router();
+const randomToken = crypto.randomBytes(64).toString('hex');
+var fullName: string;
 
 router.get("/register", async (req, res) => {
     res.render("register.hbs");
@@ -92,17 +97,19 @@ router.post("/register", async (req, res) => {
         success: true
     });
 
+    fullName = req.body.name;
+
     sendInviteEmail(req.body.email);
 });
 
-function sendInviteEmail(email: string) {
+async function sendInviteEmail(email: string) {
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
     const msg = {
         to: email,
         from: "ctf@csivit.com",
-        subject: "Sending with Twilio SendGrid is Fun",
-        text: "and easy to do anywhere, even with Node.js",
-        html: "<strong>and easy to do anywhere, even with Node.js</strong>"
+        subject: "Verify your CSI-CTF Account",
+        text: "Verification Link: https://ctf.csivit.com/auth/register?${randomToken}",
+        html: await hbs.render("verificationMail.html", {name: fullName, randomToken: randomToken})
     };
     sgMail.send(msg);
     return;
