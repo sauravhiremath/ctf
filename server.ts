@@ -28,7 +28,6 @@ app.use('/static', express.static('static'));
 // Use `.hbs` for extensions and find partials in `views/partials`.
 app.engine('hbs', hbs({
   extname: 'hbs',
-  defaultLayout: "register",
   layoutsDir: __dirname + '/views',
   partialsDir: __dirname + '/views/partials'
 }));
