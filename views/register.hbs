@@ -55,6 +55,7 @@
             setTimeout(() => {
                 $(".loader").fadeOut();
                 $(".content").removeClass("content-hidden");
+                $("#loginSound").play();
             }, 500);
         }
 
@@ -66,7 +67,7 @@
         <img src="/static/images/loadingBar.gif" class="loader-image">
     </div>
 
-
+    <audio class="d-none" src="/static/audio/startup-sound.mp3"></audio>
     <div class="content content-hidden">
         <div class="g-recaptcha" data-sitekey="6LdiUrcUAAAAAKLTyvgt-ewN1EVInC5L9Tj7xCqP" data-callback="onSubmit"
             data-size="invisible">
