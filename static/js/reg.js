@@ -19,7 +19,11 @@ function onSubmit() {
         url: "/auth/register",
         data: formData,
         success: (data) => {
-            console.log(data);
+            if (data["success"] == true) {
+                alert("Succesfully Registered");
+            } else {
+                alert(data["message"]);
+            }
         },
       });
 }
