@@ -1,8 +1,4 @@
 
-#registerPopup {
-
-}
-
 .popupContainer {
     border: 4px solid rgb(71, 4, 204);
     border-top: 0px;
@@ -77,16 +73,21 @@
     background-image: linear-gradient(to bottom, #EAEDDA, white 15%, white, #EAEDDA 90%, #EAEDDA);
 }
 
+.post-form-content {
+    display: none;
+}
+
 .grecaptcha-badge {
     visibility: hidden !important;
 }
 
 .emsg{
-    color: red;
+	color: red;
+	display: inline-block;
 }
 
 .hidden {
-     visibility:hidden;
+	display: none;
 }
 
 .closeIcon {

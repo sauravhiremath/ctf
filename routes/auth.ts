@@ -16,6 +16,8 @@ import sgMail from "@sendgrid/mail";
 import hbsexp from 'express-handlebars';
 
 const hbs = hbsexp.create();
+
+
 const router = Router();
 
 router.get("/register", async (req, res) => {
@@ -117,7 +119,7 @@ router.get("/verify", async (req, res) => {
     user["verifiedStatus"] = true;
 
     await user.save();
-    res.send(`Your email has been verified: ${user["email"]}`);
+    res.render(`success.hbs`);
 });
 
 async function sendInviteEmail(name: string, email: string, randomToken: string) {

@@ -1,0 +1,25 @@
+body {
+    background-image: url("../images/desktop.jpeg");
+    background-repeat: no-repeat;
+    background-size: 100% 800px;
+}
+
+.popupContainer {
+    position: absolute;
+    
+    top: 50vh;
+    left: 25vw;
+    transform: translateY(-50%);
+}
+
+.success-message {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.topBar {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+}
+.success-message {
+    background-color: #EAEDDA;
+}
+
