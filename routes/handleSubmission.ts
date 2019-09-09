@@ -4,7 +4,7 @@ import { Challenge } from "../models/challenge";
 import { attemptedChallenges } from "../models/solvedChallenges";
 import User from "../models/user";
 
-var solved;
+var solved: boolean;
 
 export async function handleSubmission(data: submissionData) {
   console.log(data);
@@ -21,8 +21,6 @@ export async function handleSubmission(data: submissionData) {
     updateLog(data, question, solved);
     return "Incorrect Flag";
   }
-
-  console.log(question);
 }
 
 function verifiedSubmission(): boolean {
@@ -62,7 +60,7 @@ function UpdateLeaderboardModel() {
   //Decide a final way to re-Sort Leaderboard, do (on client side) or (on server Side using redis)
 }
 
-function updateLog(data, question, solved) {
+async function updateLog(data, question, solved) {
   //Add log of attempted Question
   const pointsOnAttempt = solved ? question.currentPoints : 0;
 
@@ -72,5 +70,5 @@ function updateLog(data, question, solved) {
     timeSubmitted: Date(),
     pointsOnSubmission: pointsOnAttempt
   });
-  newAttempt.save();
+  await newAttempt.save();
 }
