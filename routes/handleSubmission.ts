@@ -61,7 +61,6 @@ function UpdateLeaderboardModel() {
 }
 
 async function updateLog(data, question, solved) {
-	return new Promise(())
   //Add log of attempted Question
   const pointsOnAttempt = solved ? question.currentPoints : 0;
 
