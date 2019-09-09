@@ -8,7 +8,7 @@ const phoneNoInput = $("input[name='phoneNo']");
 const regexname = /^[a-zA-Z`!@#$%^&* ]{3,20}$/;
 const usernameregex = /^[a-zA-Z0-9_`!@#$%^&*]{3,20}$/;
 const emailregex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-const phoneregex = /^[2-9]{2}[0-9]{8}$/;
+const phoneregex = /^[0-9]{9,10}$/;
 const regregex = /^1\d[a-zA-Z]{3}\d{4}$/;
 const passregex = /^[a-zA-Z0-9_!@#$%^&*]{5,15}$/;
 
@@ -29,7 +29,8 @@ function onSubmit() {
 		data: formData,
 		success: data => {
 			if (data["success"] == true) {
-				alert("Succesfully Registered");
+				$("#registerForm").hide();
+				$(".post-form-content").show();
 			} else {
 				alert(data["message"]);
 			}
@@ -50,18 +51,24 @@ function onSubmit() {
 }
 
 $(() => {
-	$("#registerForm").submit(e => {
-		grecaptcha.execute();
-		e.preventDefault();
-	});
+  $("#registerForm").submit(e => {
+	e.preventDefault();
+	grecaptcha.execute();
+  });
 
-	$(".shutdown-container").click(() => {
-		if (confirm("Do you want to shutdown?")) {
-			$(".shutdownScreen").fadeIn();
-			$("body").css({ "overflow": "hidden" });
-			document.getElementById("shutdownSound").play();
-		}
-	})
+  $(".signUpText").click(() => {
+	$(".post-form-content").hide();
+	$("#registerForm").show();
+	$("#registerPopup").show();
+  })
+
+  $(".shutdown-container").click(() => {
+    if (confirm("Do you want to shutdown?")) {
+      $(".shutdownScreen").fadeIn();
+      $("body").css({"overflow": "hidden"});
+      document.getElementById("shutdownSound").play();
+    }
+  })
 });
 
 
@@ -158,4 +165,4 @@ usernameInput.on('keyup', function () {
 		$('#usernameError.emsg').addClass('hidden');
 		$('#registerSubmitBtn').prop('disabled', false);
 	}
-}); 
+});
