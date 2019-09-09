@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
-const solvedChallengeSchema = new Schema(
+const attemptedChallengeSchema = new Schema(
   {
     questionId: {
       type: mongoose.Schema.Types.ObjectId,
@@ -12,16 +12,16 @@ const solvedChallengeSchema = new Schema(
       ref: "User"
     },
     timeSubmitted: {
-      type: Date,
-      default: Date.now
+      type: String,
+      default: Date(),
     },
     pointsOnSubmission: Number
   },
 );
 
-export const solvedChallenges = mongoose.model(
-  "solvedChallenges",
-  solvedChallengeSchema
+export const attemptedChallenges = mongoose.model(
+  "attemptedChallenges",
+  attemptedChallengeSchema
 );
 
-export default solvedChallenges;
+export default attemptedChallenges;
