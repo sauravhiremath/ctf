@@ -33,7 +33,7 @@ export function validateRegNo(regno: string) {
 }
 
 export function validatePassword(password: string) {
-  const passRegex = /(?=.{8,})/;
+  const passRegex = /^[a-zA-Z0-9_!@#$%^&*]{5,15}$/;
   return passRegex.test(password);
 }
 
