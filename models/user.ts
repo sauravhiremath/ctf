@@ -43,7 +43,7 @@ export function validateEmail(email: string) {
 }
 
 export function validatePhoneNo(phoneno: string) {
-  const phoneRegex = /^[2-9]{2}[0-9]{8}$/;
+  const phoneRegex = /^[0-9]{10}$/;
   return phoneRegex.test(phoneno);
 }
 
