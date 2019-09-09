@@ -11,7 +11,7 @@ body {
 	height: 100vh;
     position: fixed;
 	/* prevent overscroll bounce*/
-	overflow-y: scroll;
+	overflow-y: hidden;
 	-webkit-overflow-scrolling: touch;
 }
 
