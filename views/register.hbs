@@ -52,23 +52,10 @@
 
     <script>
         window.onload = function () {
-            setTimeout(() => {
-                $(".loader").fadeOut();
-                $(".content").removeClass("content-hidden");
-                var promise = document.getElementById("loginSound").play();
-
-                if (promise !== undefined) {
-                    promise.then(_ => {
-                        // Autoplay started!
-
-                    }).catch(error => {
-                        // Autoplay was prevented.
-                        document.getElementById("loginSound").play();
-                    });
-                }
-
-            }, 500);
-        }
+                setTimeout(() => {
+                            $(".loader").fadeOut();
+                            $(".content").removeClass("content-hidden");
+                        }
     </script>
 
 </head>
@@ -78,7 +65,7 @@
         <img src="/static/images/loadingBar.gif" class="loader-image">
     </div>
 
-    <audio class="d-none" id="loginSound" src="/static/audio/startup-sound.mp3"></audio>
+    <iframe src="/static/audio/startup-sound.mp3" allow="autoplay" id="audio" style="display:none"></iframe>
     <div class="content content-hidden">
         <div class="g-recaptcha" data-sitekey="6LdiUrcUAAAAAKLTyvgt-ewN1EVInC5L9Tj7xCqP" data-callback="onSubmit"
             data-size="invisible">
