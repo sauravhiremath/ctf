@@ -97,11 +97,20 @@ router.post("/register", async (req, res) => {
     sendInviteEmail(req.body.name, req.body.email);
 });
 
-router.get("verify", async (req, res) => {
+router.get("/verify", async (req, res) => {
     const token = req.query.token;
 
+    if (!token) {
+        res.status(400).json({
+            success: false
+        });
+    }
     const user = await User.findOne({ token });
 
+    if (!user) {
+        res.send("Invalid token, user not found");
+        return;
+    }
     user["verifiedStatus"] = true;
 
     await user.save();
