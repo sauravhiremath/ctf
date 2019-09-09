@@ -51,7 +51,9 @@ function onSubmit() {
 }
 
 $(() => {
-  window.scrollTo(0,1);
+  window.scrollTo(0, 0);
+  document.addEventListener("touchmove", function(e) { e.preventDefault() });
+  
 	$("#registerForm").submit(e => {
 		e.preventDefault();
 		grecaptcha.execute();
