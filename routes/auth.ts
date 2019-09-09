@@ -17,8 +17,6 @@ import hbsexp from 'express-handlebars';
 
 const hbs = hbsexp.create();
 const router = Router();
-const randomToken = crypto.randomBytes(64).toString('hex');
-var fullName: string;
 
 router.get("/register", async (req, res) => {
     res.render("register.hbs");
@@ -96,32 +94,39 @@ router.post("/register", async (req, res) => {
     res.json({
         success: true
     });
-
-    fullName = req.body.name;
-
-    sendInviteEmail(req.body.email);
+    sendInviteEmail(req.body.name, req.body.email);
 });
 
-router.get("verify", async (req, res) => {
-    const token = req.query.token;
+router.get("/verify", async (req, res) => {
+    const token = req.params.token;
 
+    if (!token) {
+        res.status(400).json({
+            success: false
+        });
+    }
     const user = await User.findOne({ token });
 
+    if (!user) {
+        res.send("Invalid token, user not found");
+        return;
+    }
     user["verifiedStatus"] = true;
 
     await user.save();
     res.render("verified", {email: user["email"]});
 });
 
-async function sendInviteEmail(email: string) {
+async function sendInviteEmail(name: string, email: string) {
+    const randomToken = crypto.randomBytes(64).toString('hex');
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-    const link = `https://ctf.csivit.com/auth/verify?token=${randomToken}`
+    const vLink = `https://ctf.csivit.com/auth/verify?token=${randomToken}`
     const msg = {
         to: email,
         from: "ctf@csivit.com",
         subject: "Verify your CSI-CTF Account",
-        text: `Verification Link: ${link}`,
-        html: await hbs.render("verificationMail.html", {name: fullName, vLink: link})
+        text: `Verification Link: ${vLink}`,
+        html: await hbs.render("views/verificationMail.hbs", {name, vLink})
     };
     sgMail.send(msg);
     return;
