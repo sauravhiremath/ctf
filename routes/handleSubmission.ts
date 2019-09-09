@@ -1,22 +1,24 @@
-import { submissionData, submissionResponse } from "../models/socketInterfaces";
+import { submissionData } from "../models/socketInterfaces";
 import * as mongoose from "mongoose";
 import { Challenge } from "../models/challenge";
 import { attemptedChallenges } from "../models/solvedChallenges";
 import User from "../models/user";
+
+var solved;
 
 export async function handleSubmission(data: submissionData) {
   console.log(data);
   const question = await Challenge.findOne({ _id: data.qid });
 
   if (data.ctfFlag == question.id["answer"] && verifiedSubmission()) {
-	//TO-DO: Make sure updateLog is executed before refreshLeaderboard
-	const solved = true;
+    //TO-DO: Make sure updateLog is executed before refreshLeaderboard
+    solved = true;
     updateLog(data, question, solved);
     refreshData(data, question);
     return "Correct Flag";
   } else {
-	const solved = false;
-	updateLog(data, question, solved);
+    solved = false;
+    updateLog(data, question, solved);
     return "Incorrect Flag";
   }
 
@@ -29,9 +31,8 @@ function verifiedSubmission(): boolean {
 
 async function refreshData(data: submissionData, question) {
   return async () => {
+    var newPoints = Math.floor(question.id["currentPoints"] * (9 / 11));
 
-	var newPoints = question.id["currentPoints"] * (9 / 11);
-	
     //Changes in the challenge Model--> change currentPoints and solvedBy
     Challenge.updateOne(
       { _id: data.qid },
@@ -41,36 +42,35 @@ async function refreshData(data: submissionData, question) {
           $push: { solvedBy: data.userid }
         }
       }
-	);
-	
+    );
+
     //Changes in the user Model--> changed solved and points
-	User.updateOne(
-		{ _id: data.qid },
-		{
-		  $set: {
-			$inc:{ points: newPoints },
-			$push: { solved: data.userid }
-		  }
-		}
-	  );
+    User.updateOne(
+      { _id: data.qid },
+      {
+        $set: {
+          $inc: { points: newPoints },
+          $push: { solved: data.userid }
+        }
+      }
+    );
   };
 }
 
 function UpdateLeaderboardModel() {
-    //Changes in leaderboard Model          --> change username and points
-    //Decide a final way to re-Sort Leaderboard, do (on client side) or (on server Side using redis)
-  }
+  //Changes in leaderboard Model          --> change username and points
+  //Decide a final way to re-Sort Leaderboard, do (on client side) or (on server Side using redis)
+}
 
-function updateLog(data, question, solved){
-	//Add log of attempted Question
-	const pointsOnAttempt = (solved) ? question.currentPoints : 0;
+function updateLog(data, question, solved) {
+  //Add log of attempted Question
+  const pointsOnAttempt = solved ? question.currentPoints : 0;
 
-	const newAttempt = new attemptedChallenges({
-		questionId: data.qid,
-		participant: data.userid,
-		timeSubmitted: Date(),
-		pointsOnSubmission: pointsOnAttempt
-	}
-	);
-	newAttempt.save();
-  }
+  const newAttempt = new attemptedChallenges({
+    questionId: data.qid,
+    participant: data.userid,
+    timeSubmitted: Date(),
+    pointsOnSubmission: pointsOnAttempt
+  });
+  newAttempt.save();
+}
