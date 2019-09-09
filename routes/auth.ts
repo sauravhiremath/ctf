@@ -10,6 +10,7 @@ import {
 } from "../models/user";
 import { hash } from "bcrypt";
 import { checkUserExists } from "../db/user";
+import request from "request-promise";
 import * as sgMail from "@sendgrid/mail";
 
 const router = Router();
@@ -19,6 +20,22 @@ router.get("/register", async (req, res) => {
 });
 
 router.post("/register", async (req, res) => {
+    const captcha = req.body['g-recaptcha-response'];
+    const verificationURL = "https://www.google.com/recaptcha/api/siteverify";
+    const gRes = await request.post(verificationURL, {
+        form: {
+            "secret":process.env.GOOGLE_RECAPTCHA_SECRET,
+            "response": captcha
+        }
+    });
+
+    if (gRes.success === false) {
+        res.json({
+            success: false,
+            message: "recaptchaFailed"
+        });
+        return;
+    }
     if (
         !req.body.name ||
         !req.body.username ||

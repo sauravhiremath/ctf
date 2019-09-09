@@ -11,6 +11,7 @@
     "@types/express-session": "^1.15.14",
     "@types/mongoose": "^5.5.15",
     "@types/morgan": "^1.7.37",
+    "@types/request-promise": "^4.1.44",
     "@types/socket.io": "^2.1.2",
     "nodemon": "^1.19.1",
     "ts-node": "^8.3.0",
@@ -38,6 +39,7 @@
     "passport": "^0.2.1",
     "passport-local": "^1.0.0",
     "q": "^1.0.1",
+    "request-promise": "^4.2.4",
     "socket.io": "^2.2.0",
     "typescript": "^3.5.3"
   }
