@@ -77,12 +77,14 @@
 }
 
 .emsg{
-    color: red;
+	color: red;
+	display: inline-block;
 }
 
 .hidden {
-     visibility: hidden;
+	display: none;
 }
+
 
 @media only screen and (max-width: 768px) {
     .popupContainer {
