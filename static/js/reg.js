@@ -50,10 +50,18 @@ function onSubmit() {
 }
 
 $(() => {
-	$("#registerForm").submit(e => {
-		grecaptcha.execute();
-		e.preventDefault();
-	});
+  $("#registerForm").submit(e => {
+    grecaptcha.execute();
+    e.preventDefault();
+  });
+
+  $(".shutdown-container").click(() => {
+    if (confirm("Do you want to shutdown?")) {
+      $(".shutdownScreen").fadeIn();
+      $("body").css({"overflow": "hidden"});
+      document.getElementById("shutdownSound").play();
+    }
+  })
 });
 
 

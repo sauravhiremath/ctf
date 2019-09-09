@@ -13,6 +13,7 @@
 
     font-size: 1.3rem;
     color: white;
+    font-family: "Trebuchet MS", "Arial";
 }
 
 .topBar > img {
@@ -32,7 +33,7 @@
 }
 
 .orange-accent-popup {
-    background: linear-gradient(to right, rgb(71, 4, 204, 40%) 0%, rgba(249,145,0,1) 40%, rgb(71, 4, 204, 40%) 100%);
+    background: linear-gradient(to right, rgb(71, 4, 204, 1) 0%, rgba(249,145,0,1) 40%, rgb(71, 4, 204, 1) 100%);
 }
 
 .accent-popup {
@@ -89,5 +90,9 @@
 @media only screen and (max-width: 768px) {
     .popupContainer {
         width: 90% !important;
+    }
+
+    .formContainer input {
+        height: 35px;
     }
 }
