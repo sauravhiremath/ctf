@@ -6,6 +6,7 @@
     border: 4px solid rgb(71, 4, 204);
     border-top: 0px;
     border-radius: 10px 10px 0 0;
+    width: 50%;
 }
 
 .topBar {
@@ -72,4 +73,10 @@
     border-radius: 4px;
 
     background-image: linear-gradient(to bottom, #EAEDDA, white 15%, white, #EAEDDA 90%, #EAEDDA);
+}
+
+@media only screen and (max-width: 768px) {
+    .popupContainer {
+        width: 90% !important;
+    }
 }

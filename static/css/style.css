@@ -3,6 +3,9 @@ html, body {
     height:100vh;
 }
 
+.windows-user {
+    height: 200px;
+}
 .user-profile-pic {
     width:64px;
     height:64px;

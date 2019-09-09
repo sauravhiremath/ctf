@@ -17,7 +17,7 @@ const userSchema = new Schema(
 );
 
 export function validateName(name: string) {
-  const nameRegex = /^[a-zA-Z`!@#$%^&*]{3,20}$/;
+  const nameRegex = /^[a-zA-Z`!@#$%^&* ]{3,20}$/;
   return nameRegex.test(name)
 }
 
