@@ -68,71 +68,84 @@ $(() => {
 nameInput.on('keyup', function () {
 	if (!$(this).val().match(regexname)) {
 		// there is a mismatch, hence show the error message
-		$('#nameError.emsg').removeClass('hidden');
+    $('#nameError.emsg').removeClass('hidden');
+    $('#registerSubmitBtn').prop('disabled', true);    
 		$('#nameError.emsg').show();
 	}
 	else {
 		// else, do not display message
-		$('#nameError.emsg').addClass('hidden');
+    $('#nameError.emsg').addClass('hidden');
+    $('#registerSubmitBtn').prop('disabled', false);
+    
 	}
 });
 
 regNoInput.on('keyup', function () {
 	if (!$(this).val().match(regregex)) {
 		// there is a mismatch, hence show the error message
-		$('#regnoError.emsg').removeClass('hidden');
+    $('#regnoError.emsg').removeClass('hidden');
+    $('#registerSubmitBtn').prop('disabled', true);    
 		$('#regnoError.emsg').show();
 	}
 	else {
 		// else, do not display message
-		$('#regnoError.emsg').addClass('hidden');
+    $('#regnoError.emsg').addClass('hidden');
+    $('#registerSubmitBtn').prop('disabled', false);
 	}
 });
 
 passwordInput.on('keyup', function () {
 	if (!$(this).val().match(passregex)) {
 		// there is a mismatch, hence show the error message
-		$('#passwordError.emsg').removeClass('hidden');
+    $('#passwordError.emsg').removeClass('hidden');
+    $('#registerSubmitBtn').prop('disabled', true);    
 		$('#passwordError.emsg').show();
 	}
 	else {
 		// else, do not display message
-		$('#passwordError.emsg').addClass('hidden');
+    $('#passwordError.emsg').addClass('hidden');
+    $('#registerSubmitBtn').prop('disabled', false);
 	}
 });
 
 phoneNoInput.on('keypress keydown keyup', function () {
 	if (!$(this).val().match(phoneregex)) {
 		// there is a mismatch, hence show the error message
-		$('#phoneError.emsg').removeClass('hidden');
+    $('#phoneError.emsg').removeClass('hidden');
+    $('#registerSubmitBtn').prop('disabled', true);    
 		$('#phoneError.emsg').show();
 	}
 	else {
 		// else, do not display message
-		$('#phoneError.emsg').addClass('hidden');
+    $('#phoneError.emsg').addClass('hidden');
+    $('#registerSubmitBtn').prop('disabled', false);
 	}
 });
 
 emailInput.on('keypress keydown keyup', function () {
 	if (!$(this).val().match(emailregex)) {
 		// there is a mismatch, hence show the error message
-		$('#emailError.emsg').removeClass('hidden');
+    $('#emailError.emsg').removeClass('hidden');
+    $('#registerSubmitBtn').prop('disabled', true);    
 		$('#emailError.emsg').show();
 	}
 	else {
 		// else, do not display message
-		$('#emailError.emsg').addClass('hidden');
+    $('#emailError.emsg').addClass('hidden');
+    $('#registerSubmitBtn').prop('disabled', false);
 	}
 });
 
 usernameInput.on('keypress keydown keyup', function () {
 	if (!$(this).val().match(usernameregex)) {
 		// there is a mismatch, hence show the error message
-		$('#usernameError.emsg').removeClass('hidden');
+    $('#usernameError.emsg').removeClass('hidden');
+    $('#registerSubmitBtn').prop('disabled', true);    
 		$('#usernameError.emsg').show();
 	}
 	else {
 		// else, do not display message
-		$('#usernameError.emsg').addClass('hidden');
+    $('#usernameError.emsg').addClass('hidden');
+    $('#registerSubmitBtn').prop('disabled', false);
 	}
 }); 
