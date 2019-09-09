@@ -33,8 +33,8 @@ export function validateRegNo(regno: string) {
 }
 
 export function validatePassword(password: string) {
-  //Loll, gimme strong password. I saw ur password :)))))
-  return true;
+  const passRegex = /(?=.{8,})/;
+  return passRegex.test(password);
 }
 
 export function validateEmail(email: string) {
