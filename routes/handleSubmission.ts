@@ -72,6 +72,5 @@ async function updateLog(data, question, solved) {
     timeSubmitted: Date(),
     pointsOnSubmission: pointsOnAttempt
   });
-
   await newAttempt.save();
 }

@@ -1,6 +1,7 @@
 html, body {
     width:100vw;
     height:100vh;
+    font-family: Arial, Helvetica, sans-serif !important;
 }
 
 .windows-user {
@@ -12,6 +13,7 @@ html, body {
     border-radius: 5px;
     border: 2px solid white;
     cursor: pointer;
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.7)
 }
 
 .bar {
@@ -48,10 +50,20 @@ html, body {
     letter-spacing: 1.2px;
 }
 
+.signUpText {
+    text-decoration: underline;
+    font-style: italic;
+    cursor: pointer;
+}
+
 .shutdown-text {
     font-size: 1rem;
 }
 
+.shutdownScreen {
+    display: none;
+    background-color: black;
+}
 .container-fluid {
     padding: 0 !important;
 }
@@ -64,15 +76,25 @@ html, body {
 }
 
 .left-section {
+    border-image: linear-gradient( to bottom, #5A7EDC, #6E90E2, #5A7EDC ) 1 100%;
     border-right: 2px solid rgba(255,255,255, 0.5);
+    width:60%;
+}
+
+.right-section {
+    width: 40%;
 }
 
 .main-content {
-    background-image: radial-gradient(closest-corner at 7% 15%, rgb(171, 185, 214),#597EDC);;
+    background-image: radial-gradient(13em circle at 0% 0%, rgb(171, 185, 214),#597EDC);
 }
 
 @media only screen and (max-width: 768px) {
     .main-content {
-        background-image: radial-gradient(closest-corner at 15% 10%, rgb(171, 185, 214),#597EDC);;
+        background-image: radial-gradient(13em circle at 0% 0%, rgb(171, 185, 214),#597EDC);
+    }
+
+    .ctfLogo {
+        width: 250px;
     }
 }
