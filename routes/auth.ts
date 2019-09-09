@@ -75,6 +75,7 @@ router.post("/register", async (req, res) => {
         });
         return;
     }
+    const randomToken = crypto.randomBytes(64).toString('hex');
     const newUser = new User({
         username: req.body.username,
         name: req.body.name,
@@ -86,6 +87,7 @@ router.post("/register", async (req, res) => {
         email: req.body.email,
         phoneNo: req.body.phoneNo,
         solved: [],
+        token: randomToken,
         verifiedStatus: false
     });
 
@@ -94,11 +96,11 @@ router.post("/register", async (req, res) => {
     res.json({
         success: true
     });
-    sendInviteEmail(req.body.name, req.body.email);
+    sendInviteEmail(req.body.name, req.body.email, randomToken);
 });
 
 router.get("/verify", async (req, res) => {
-    const token = req.params.token;
+    const token = req.query.token;
 
     if (!token) {
         res.status(400).json({
@@ -117,8 +119,7 @@ router.get("/verify", async (req, res) => {
     res.render("verified", {email: user["email"]});
 });
 
-async function sendInviteEmail(name: string, email: string) {
-    const randomToken = crypto.randomBytes(64).toString('hex');
+async function sendInviteEmail(name: string, email: string, randomToken: string) {
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
     const vLink = `https://ctf.csivit.com/auth/verify?token=${randomToken}`
     const msg = {
