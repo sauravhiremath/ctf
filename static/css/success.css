@@ -1,12 +1,14 @@
 body {
     background-image: url("../images/desktop.jpeg");
     background-repeat: no-repeat;
-    background-size: 100% 800px;
+    background-size: 100% 100%;
+    width: 100vw;
+    height: 100vh;
 }
 
 .popupContainer {
     position: absolute;
-    
+
     top: 50vh;
     left: 25vw;
     transform: translateY(-50%);
@@ -22,4 +24,3 @@ body {
 .success-message {
     background-color: #EAEDDA;
 }
-
