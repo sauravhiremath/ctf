@@ -121,7 +121,7 @@ async function sendInviteEmail(email: string) {
         from: "ctf@csivit.com",
         subject: "Verify your CSI-CTF Account",
         text: `Verification Link: ${link}`,
-        html: await hbs.render("verificationMail.html", {name: fullName, vLink: link})
+        html: await hbs.render("views/verificationMail.hbs", {name: fullName, vLink: link})
     };
     sgMail.send(msg);
     return;
