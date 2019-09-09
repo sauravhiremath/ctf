@@ -80,6 +80,13 @@
     visibility: hidden !important;
 }
 
+.emsg{
+    color: red;
+}
+
+.hidden {
+     visibility:hidden;
+}
 
 @media only screen and (max-width: 768px) {
     .popupContainer {
