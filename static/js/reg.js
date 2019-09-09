@@ -29,7 +29,8 @@ function onSubmit() {
 		data: formData,
 		success: data => {
 			if (data["success"] == true) {
-				alert("Succesfully Registered");
+				$("#registerForm").hide();
+				$(".post-form-content").show();
 			} else {
 				alert(data["message"]);
 			}
@@ -51,9 +52,15 @@ function onSubmit() {
 
 $(() => {
   $("#registerForm").submit(e => {
-    grecaptcha.execute();
-    e.preventDefault();
+	e.preventDefault();
+	grecaptcha.execute();
   });
+
+  $(".signUpText").click(() => {
+	$(".post-form-content").hide();
+	$("#registerForm").show();
+	$("#registerPopup").show();
+  })
 
   $(".shutdown-container").click(() => {
     if (confirm("Do you want to shutdown?")) {
@@ -135,4 +142,4 @@ usernameInput.on('keypress keydown keyup', function () {
 		// else, do not display message
 		$('#usernameError.emsg').addClass('hidden');
 	}
-}); 
+});

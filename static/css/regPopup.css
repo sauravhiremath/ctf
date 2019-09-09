@@ -73,6 +73,10 @@
     background-image: linear-gradient(to bottom, #EAEDDA, white 15%, white, #EAEDDA 90%, #EAEDDA);
 }
 
+.post-form-content {
+    display: none;
+}
+
 .grecaptcha-badge {
     visibility: hidden !important;
 }
