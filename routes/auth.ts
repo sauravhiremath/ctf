@@ -12,7 +12,7 @@ import { hash } from "bcrypt";
 import * as crypto from "crypto";
 import { checkUserExists } from "../db/user";
 import request from "request-promise";
-import * as sgMail from "@sendgrid/mail";
+import sgMail from "@sendgrid/mail";
 import hbsexp from 'express-handlebars';
 
 const hbs = hbsexp.create();
