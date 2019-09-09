@@ -20,10 +20,6 @@ const hbs = hbsexp.create();
 
 const router = Router();
 
-router.get("/success", async (req, res) => {
-    res.render("success.hbs");
-});
-
 router.get("/register", async (req, res) => {
     res.render("register.hbs");
 });
