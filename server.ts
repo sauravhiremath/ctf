@@ -60,12 +60,12 @@ io.on("connection", socket => {
     socket.request.connection._peername.address
   ]);
 
-  // socket.on('login', handleLogin)
   socket.on("userSubmission", handleSubmission);
   // socket.on('userPoints', handleLeaderbaord(this.data));
   // socket.on('help', handleHelper)
 
   socket.on('disconnect', () => {
+    
     console.log("Removing user lock with socketid ", socket.id);
     //Remove the user Lock with the socketid here
   })
