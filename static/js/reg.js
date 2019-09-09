@@ -8,7 +8,7 @@ const phoneNoInput = $("input[name='phoneNo']");
 const regexname = /^[a-zA-Z`!@#$%^&* ]{3,20}$/;
 const usernameregex = /^[a-zA-Z0-9_`!@#$%^&*]{3,20}$/;
 const emailregex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-const phoneregex = /^[2-9]{2}[0-9]{8}$/;
+const phoneregex = /^[0-9]{9,10}$/;
 const regregex = /^1\d[a-zA-Z]{3}\d{4}$/;
 const passregex = /^[a-zA-Z0-9_!@#$%^&*]{5,15}$/;
 
