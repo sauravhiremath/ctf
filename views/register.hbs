@@ -41,7 +41,7 @@
         }
 
         .loader-image {
-            width: 20vw;
+            width: 40vw;
             position: relative;
             display: block;
             padding: 1rem;
@@ -49,7 +49,7 @@
 
         @media (max-width: 768px) {
             .loader-image {
-                width: 60vw;
+                width: 80vw;
             }
         }
     </style>
@@ -68,7 +68,6 @@
 <body>
     <audio id="shutdownSound" src="/static/audio/shutdown-sound.mp3" class="d-none"></audio>
     <div class="loader">
-        <img src="/static/images/logo.png" class="loader-image" alt="" srcset="">
         <img src="/static/images/loadingBar.gif" class="loader-image">
     </div>
     <div class="shutdownScreen h-100 w-100"></div>
@@ -83,7 +82,7 @@
                 <div>
                     <hr class="accent white-accent">
                 </div>
-                <div class="h-75 main-content d-flex justify-content-center align-items-center flex-column">
+                <div class="main-content d-flex justify-content-center align-items-center flex-column">
                     <div class="h-75 w-75 d-flex">
                         <div class="left-section py-5 pr-5 mr-5 d-none d-md-block d-lg-block">
                             <div class="d-flex align-items-end justify-content-center flex-column h-100">
