@@ -29,6 +29,8 @@ function onSubmit() {
       const error = JSON.parse(xhr.responseText);
       if (error["message"] == "duplicateUser") {
         alert("User with same email/username/regNo has already signed up");
+      } else if (error["message"] == "invalidDetails") {
+        alert("One or more fields are invalid")
       } else {
         alert(error["message"]);
       }

@@ -106,17 +106,18 @@ router.get("/verify", async (req, res) => {
         res.status(400).json({
             success: false
         });
+        return;
     }
     const user = await User.findOne({ token });
 
     if (!user) {
-        res.send("Invalid token, user not found");
+        res.status(404).send("Invalid token, user not found");
         return;
     }
     user["verifiedStatus"] = true;
 
     await user.save();
-    res.render("verified", {email: user["email"]});
+    res.send(`Your email has been verified: ${user["email"]}`);
 });
 
 async function sendInviteEmail(name: string, email: string, randomToken: string) {
