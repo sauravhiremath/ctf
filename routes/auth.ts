@@ -41,10 +41,13 @@ router.post("/register", async (req, res) => {
         });
         return;
     }
+    console.log(req.body.regNo);
+    const regNoUser: string = req.body.regNo != "" ? req.body.regNo : "NULL";
+
     if (
         !req.body.name ||
         !req.body.username ||
-        !req.body.regNo ||
+        !regNoUser ||
         !req.body.password ||
         !req.body.email ||
         !req.body.phoneNo
@@ -61,7 +64,7 @@ router.post("/register", async (req, res) => {
         !validateName(req.body.name) ||
         !validatePassword(req.body.password) ||
         !validatePhoneNo(req.body.phoneNo) ||
-        !validateRegNo(req.body.regNo)
+        !validateRegNo(regNoUser)
     ) {
         res.status(400).json({
             success: false,
@@ -70,18 +73,20 @@ router.post("/register", async (req, res) => {
         return;
     }
 
-    if (await checkUserExists(req.body.username, req.body.email, req.body.regNo)) {
+    if (await checkUserExists(req.body.username, req.body.email)) {
         res.status(400).json({
             success: false,
             message: "duplicateUser"
         });
         return;
     }
+
     const randomToken = crypto.randomBytes(64).toString('hex');
+
     const newUser = new User({
         username: req.body.username,
         name: req.body.name,
-        regNo: req.body.regNo,
+        regNo: regNoUser,
         password: await hash(
             req.body.password,
             parseInt(process.env.SALT_ROUNDS)
@@ -98,6 +103,7 @@ router.post("/register", async (req, res) => {
     res.json({
         success: true
     });
+    
     sendInviteEmail(req.body.name, req.body.email, randomToken);
 });
 

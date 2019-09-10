@@ -77,11 +77,7 @@ nameInput.on("keyup", function () {
 	$(this).val(function (i, val) {
 		return val.trim();
 	});
-	if (
-		!$(this)
-			.val()
-			.match(regexname)
-	) {
+	if (!$(this).val().match(regexname)) {
 		// there is a mismatch, hence show the error message
 		$("#nameError.emsg").removeClass("hidden");
 		$("#registerSubmitBtn").prop("disabled", true);
@@ -97,11 +93,7 @@ regNoInput.on("keyup", function () {
 	$(this).val(function (i, val) {
 		return val.toUpperCase().trim();
 	});
-	if (
-		!$(this)
-			.val()
-			.match(regregex)
-	) {
+	if (!$(this).val().match(regregex) && (!$(this).val() == '' || !$(this).val() == null)) {
 		// there is a mismatch, hence show the error message
 		$("#regnoError.emsg").removeClass("hidden");
 		$("#registerSubmitBtn").prop("disabled", true);

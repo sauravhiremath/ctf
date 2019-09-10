@@ -5,7 +5,7 @@ const userSchema = new Schema(
   {
     username: { type: String, required: true, unique: true },
     name: { type: String, required: true },
-    regNo: { type: String, unique: true },
+    regNo: { type: String, unique: false, default: "NULL" },
     password: { type: String, unique: true},
     email: { type: String, required: true, unique: true },
     phoneNo: { type: Number, required: true },
@@ -28,6 +28,7 @@ export function validateUsername(username: string) {
 }
 
 export function validateRegNo(regno: string) {
+  if(regno == "NULL") return true;
   const regNumRegex = /^1\d[a-zA-Z]{3}\d{4}$/;
   return regNumRegex.test(regno);
 }
