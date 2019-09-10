@@ -9,7 +9,7 @@ const challengeSchema = new Schema({
     answer: String,
     startPoints: Number,
     currentPoints: Number,
-    solvedBy: Array,
+    solvedBy: {type: JSON},
     hidden: { type: Boolean, required: false }
 });
 
