@@ -1,9 +1,9 @@
-const nameInput = $("input[name='name']");
-const usernameInput = $("input[name='username']");
-const passwordInput = $("input[name='password']");
-const regNoInput = $("input[name='regNo']");
-const emailInput = $("input[name='email']");
-const phoneNoInput = $("input[name='phoneNo']");
+const nameInput = $("input[name='name']").trim();
+const usernameInput = $("input[name='username']").trim();
+const passwordInput = $("input[name='password']").trim();
+const regNoInput = $("input[name='regNo']").trim();
+const emailInput = $("input[name='email']").trim();
+const phoneNoInput = $("input[name='phoneNo']").trim();
 
 const regexname = /^[a-zA-Z`!@#$%^&* ]{3,20}$/;
 const usernameregex = /^[a-zA-Z0-9_`!@#$%^&*]{3,20}$/;
@@ -74,9 +74,6 @@ $(() => {
 });
 
 nameInput.on("keyup", function () {
-	$(this).val(function (i, val) {
-		return val.trim();
-	});
 	if (!$(this).val().match(regexname)) {
 		// there is a mismatch, hence show the error message
 		$("#nameError.emsg").removeClass("hidden");
@@ -91,7 +88,7 @@ nameInput.on("keyup", function () {
 
 regNoInput.on("keyup", function () {
 	$(this).val(function (i, val) {
-		return val.toUpperCase().trim();
+		return val.toUpperCase();
 	});
 	if (!$(this).val().match(regregex) && (!$(this).val() == '' || !$(this).val() == null)) {
 		// there is a mismatch, hence show the error message
@@ -123,9 +120,6 @@ passwordInput.on("keyup", function () {
 });
 
 phoneNoInput.on("keyup", function () {
-	$(this).val(function (i, val) {
-		return val.trim();
-	});
 	if (
 		!$(this)
 			.val()
@@ -144,7 +138,7 @@ phoneNoInput.on("keyup", function () {
 
 emailInput.on("keyup", function () {
 	$(this).val(function (i, val) {
-		return val.toLowerCase().trim();
+		return val.toLowerCase();
 	});
 	if (
 		!$(this)
