@@ -1,16 +1,16 @@
-const nameInput = $("input[name='name']").trim();
-const usernameInput = $("input[name='username']").trim();
-const passwordInput = $("input[name='password']").trim();
-const regNoInput = $("input[name='regNo']").trim();
-const emailInput = $("input[name='email']").trim();
-const phoneNoInput = $("input[name='phoneNo']").trim();
+const nameInput = $("input[name='name']");
+const usernameInput = $("input[name='username']");
+const passwordInput = $("input[name='password']");
+const regNoInput = $("input[name='regNo']");
+const emailInput = $("input[name='email']");
+const phoneNoInput = $("input[name='phoneNo']");
 
 const regexname = /^[a-zA-Z`!@#$%^&* ]{3,20}$/;
 const usernameregex = /^[a-zA-Z0-9_`!@#$%^&*]{3,20}$/;
 const emailregex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const phoneregex = /^[0-9]{9,10}$/;
 const regregex = /^1\d[a-zA-Z]{3}\d{4}$/;
-const passregex = /^[a-zA-Z0-9_!@#$%^&*]{5,15}$/;
+const passregex = /^[a-zA-Z0-9_!@#$%^&* ]{5,15}$/;
 
 function onSubmit() {
 	const name = encodeURIComponent(nameInput.val());
