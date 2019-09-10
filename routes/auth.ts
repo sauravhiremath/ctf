@@ -47,13 +47,13 @@ router.post("/register", async (req, res) => {
     if (
         !req.body.name ||
         !req.body.username ||
-        !regNoUser ||
         !req.body.password ||
         !req.body.email ||
         !req.body.phoneNo
     ) {
         res.status(400).json({
-            success: false
+            success: false,
+            message: "missingField",
         });
         return;
     }
@@ -103,7 +103,7 @@ router.post("/register", async (req, res) => {
     res.json({
         success: true
     });
-    
+
     sendInviteEmail(req.body.name, req.body.email, randomToken);
 });
 
