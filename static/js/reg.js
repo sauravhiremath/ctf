@@ -51,8 +51,8 @@ function onSubmit() {
 }
 
 $(() => {
-  document.addEventListener("touchmove", function(e) { e.preventDefault() });
-  
+	document.addEventListener("touchmove", function (e) { e.preventDefault() });
+
 	$("#registerForm").submit(e => {
 		e.preventDefault();
 		grecaptcha.execute();
@@ -73,7 +73,10 @@ $(() => {
 	});
 });
 
-nameInput.on("keyup", function() {
+nameInput.on("keyup", function () {
+	$(this).val(function (i, val) {
+		return val.trim();
+	});
 	if (
 		!$(this)
 			.val()
@@ -90,11 +93,10 @@ nameInput.on("keyup", function() {
 	}
 });
 
-regNoInput.on("keyup", function() {
-	$(this).val(function(i, val) {
-		return val.toUpperCase();
+regNoInput.on("keyup", function () {
+	$(this).val(function (i, val) {
+		return val.toUpperCase().trim();
 	});
-	$(this).val = $(this).val.toUpperCase();
 	if (
 		!$(this)
 			.val()
@@ -111,7 +113,7 @@ regNoInput.on("keyup", function() {
 	}
 });
 
-passwordInput.on("keyup", function() {
+passwordInput.on("keyup", function () {
 	if (
 		!$(this)
 			.val()
@@ -128,7 +130,10 @@ passwordInput.on("keyup", function() {
 	}
 });
 
-phoneNoInput.on("keyup", function() {
+phoneNoInput.on("keyup", function () {
+	$(this).val(function (i, val) {
+		return val.trim();
+	});
 	if (
 		!$(this)
 			.val()
@@ -145,9 +150,9 @@ phoneNoInput.on("keyup", function() {
 	}
 });
 
-emailInput.on("keyup", function() {
-	$(this).val(function(i, val) {
-		return val.toLowerCase();
+emailInput.on("keyup", function () {
+	$(this).val(function (i, val) {
+		return val.toLowerCase().trim();
 	});
 	if (
 		!$(this)
@@ -165,9 +170,9 @@ emailInput.on("keyup", function() {
 	}
 });
 
-usernameInput.on("keyup", function() {
-	$(this).val(function(i, val) {
-		return val.toLowerCase();
+usernameInput.on("keyup", function () {
+	$(this).val(function (i, val) {
+		return val.toLowerCase().trim();
 	});
 	if (
 		!$(this)
