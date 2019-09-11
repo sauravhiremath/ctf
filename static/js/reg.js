@@ -13,7 +13,6 @@ const regregex = /^1\d[a-zA-Z]{3}\d{4}$/;
 const passregex = /^[a-zA-Z0-9_!@#$%^&* ]{5,15}$/;
 
 function onSubmit(token) {
-	console.log(token);
 	const name = encodeURIComponent(nameInput.val());
 	const username = encodeURIComponent(usernameInput.val());
 	const password = encodeURIComponent(passwordInput.val());

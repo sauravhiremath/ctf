@@ -53,7 +53,6 @@ router.post("/register", async (req, res) => {
     });
 
     const recaptchaStatus = JSON.parse(gRes);
-    console.log(recaptchaStatus);
     if (recaptchaStatus.success === false) {
         res.json({
             success: false,
