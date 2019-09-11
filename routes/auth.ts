@@ -69,7 +69,8 @@ router.post("/register", async (req, res) => {
         !req.body.phoneNo
     ) {
         res.status(400).json({
-            success: false
+            success: false,
+            message: "missingField",
         });
         return;
     }

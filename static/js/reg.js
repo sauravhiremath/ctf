@@ -41,6 +41,8 @@ function onSubmit(token) {
 				);
 			} else if (error["message"] == "invalidDetails") {
 				alert("One or more fields are invalid");
+			} else if (error["message"] == "missingField") {
+				alert("Fields marked with * cannot be blank.");
 			} else {
 				alert(error["message"]);
 			}
