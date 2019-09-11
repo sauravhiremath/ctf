@@ -28,13 +28,13 @@ export function validateUsername(username: string) {
 }
 
 export function validateRegNo(regno: string) {
-  if(regno == "NULL") return true;
+  if(regno == null || regno == undefined || regno == "") return true;
   const regNumRegex = /^1\d[a-zA-Z]{3}\d{4}$/;
   return regNumRegex.test(regno);
 }
 
 export function validatePassword(password: string) {
-  const passRegex = /^[a-zA-Z0-9_!@#$%^&*]{5,15}$/;
+  const passRegex = /^[a-zA-Z0-9_!@#$%^&* ]{5,15}$/;
   return passRegex.test(password);
 }
 

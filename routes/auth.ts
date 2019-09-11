@@ -41,8 +41,6 @@ router.post("/register", async (req, res) => {
         });
         return;
     }
-    console.log(req.body.regNo);
-    const regNoUser: string = req.body.regNo != "" ? req.body.regNo : "NULL";
 
     if (
         !req.body.name ||
@@ -64,7 +62,7 @@ router.post("/register", async (req, res) => {
         !validateName(req.body.name) ||
         !validatePassword(req.body.password) ||
         !validatePhoneNo(req.body.phoneNo) ||
-        !validateRegNo(regNoUser)
+        !validateRegNo(req.body.regNo)
     ) {
         res.status(400).json({
             success: false,
@@ -86,7 +84,7 @@ router.post("/register", async (req, res) => {
     const newUser = new User({
         username: req.body.username,
         name: req.body.name,
-        regNo: regNoUser,
+        regNo: req.body.regNo,
         password: await hash(
             req.body.password,
             parseInt(process.env.SALT_ROUNDS)
