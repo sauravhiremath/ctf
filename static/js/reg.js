@@ -10,9 +10,9 @@ const usernameregex = /^[a-zA-Z0-9_`!@#$%^&*]{3,20}$/;
 const emailregex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const phoneregex = /^[0-9]{9,10}$/;
 const regregex = /^1\d[a-zA-Z]{3}\d{4}$/;
-const passregex = /^[a-zA-Z0-9_!@#$%^&*]{5,15}$/;
+const passregex = /^[a-zA-Z0-9_!@#$%^&* ]{5,15}$/;
 
-function onSubmit() {
+function onSubmit(token) {
 	const name = encodeURIComponent(nameInput.val());
 	const username = encodeURIComponent(usernameInput.val());
 	const password = encodeURIComponent(passwordInput.val());
@@ -20,7 +20,7 @@ function onSubmit() {
 	const email = encodeURIComponent(emailInput.val());
 	const phoneNo = encodeURIComponent(phoneNoInput.val());
 
-	const formData = `name=${name}&username=${username}&password=${password}&regNo=${regNo}&email=${email}&phoneNo=${phoneNo}`;
+	const formData = `g-recaptcha-response=${token}&name=${name}&username=${username}&password=${password}&regNo=${regNo}&email=${email}&phoneNo=${phoneNo}`;
 	$.ajax({
 		type: "POST",
 		url: "/auth/register",
@@ -74,9 +74,6 @@ $(() => {
 });
 
 nameInput.on("keyup", function () {
-	$(this).val(function (i, val) {
-		return val.trim();
-	});
 	if (!$(this).val().match(regexname)) {
 		// there is a mismatch, hence show the error message
 		$("#nameError.emsg").removeClass("hidden");
@@ -91,7 +88,7 @@ nameInput.on("keyup", function () {
 
 regNoInput.on("keyup", function () {
 	$(this).val(function (i, val) {
-		return val.toUpperCase().trim();
+		return val.toUpperCase();
 	});
 	if (!$(this).val().match(regregex) && (!$(this).val() == '' || !$(this).val() == null)) {
 		// there is a mismatch, hence show the error message
@@ -123,9 +120,6 @@ passwordInput.on("keyup", function () {
 });
 
 phoneNoInput.on("keyup", function () {
-	$(this).val(function (i, val) {
-		return val.trim();
-	});
 	if (
 		!$(this)
 			.val()
@@ -144,7 +138,7 @@ phoneNoInput.on("keyup", function () {
 
 emailInput.on("keyup", function () {
 	$(this).val(function (i, val) {
-		return val.toLowerCase().trim();
+		return val.toLowerCase();
 	});
 	if (
 		!$(this)

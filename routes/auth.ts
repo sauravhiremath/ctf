@@ -24,6 +24,24 @@ router.get("/register", async (req, res) => {
     res.render("register.hbs");
 });
 
+function adminCheck(req, res, next) {
+    if (req.session.admin) {
+        next();
+    } else {
+        res.redirect("/auth/adminLogin");
+    }
+}
+
+// router.get("/admin", async(req,res, next) =>{
+//     if (req.session.admin) {
+//         next();
+//     } else {
+//         res.redirect("/adminLogin");
+//     }
+// })
+
+// router.use(adminCheck);
+
 router.post("/register", async (req, res) => {
     const captcha = req.body['g-recaptcha-response'];
     const verificationURL = "https://www.google.com/recaptcha/api/siteverify";
@@ -34,7 +52,8 @@ router.post("/register", async (req, res) => {
         }
     });
 
-    if (gRes.success === false) {
+    const recaptchaStatus = JSON.parse(gRes);
+    if (recaptchaStatus.success === false) {
         res.json({
             success: false,
             message: "recaptchaFailed"
