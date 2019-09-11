@@ -12,7 +12,8 @@ const phoneregex = /^[0-9]{9,10}$/;
 const regregex = /^1\d[a-zA-Z]{3}\d{4}$/;
 const passregex = /^[a-zA-Z0-9_!@#$%^&* ]{5,15}$/;
 
-function onSubmit() {
+function onSubmit(token) {
+	console.log(token);
 	const name = encodeURIComponent(nameInput.val());
 	const username = encodeURIComponent(usernameInput.val());
 	const password = encodeURIComponent(passwordInput.val());
@@ -20,7 +21,7 @@ function onSubmit() {
 	const email = encodeURIComponent(emailInput.val());
 	const phoneNo = encodeURIComponent(phoneNoInput.val());
 
-	const formData = `name=${name}&username=${username}&password=${password}&regNo=${regNo}&email=${email}&phoneNo=${phoneNo}`;
+	const formData = `g-recaptcha-response=${token}&name=${name}&username=${username}&password=${password}&regNo=${regNo}&email=${email}&phoneNo=${phoneNo}`;
 	$.ajax({
 		type: "POST",
 		url: "/auth/register",
