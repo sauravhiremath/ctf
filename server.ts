@@ -52,6 +52,8 @@ app.use(
 );
 
 app.use("/auth", authRoutes);
+app.use("/admin", authRoutes);
+
 app.use("/", (req, res) => {
 	res.redirect("/auth/register");
 });

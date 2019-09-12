@@ -17,30 +17,12 @@ import hbsexp from 'express-handlebars';
 
 const hbs = hbsexp.create();
 
-
 const router = Router();
+export default router;
 
 router.get("/register", async (req, res) => {
     res.render("register.hbs");
 });
-
-function adminCheck(req, res, next) {
-    if (req.session.admin) {
-        next();
-    } else {
-        res.redirect("/auth/adminLogin");
-    }
-}
-
-// router.get("/admin", async(req,res, next) =>{
-//     if (req.session.admin) {
-//         next();
-//     } else {
-//         res.redirect("/adminLogin");
-//     }
-// })
-
-// router.use(adminCheck);
 
 router.post("/register", async (req, res) => {
     const captcha = req.body['g-recaptcha-response'];
@@ -115,7 +97,9 @@ router.post("/register", async (req, res) => {
         verifiedStatus: false
     });
 
-    await newUser.save();
+    await newUser.save(() => {
+        return res.redirect("/");
+    });
 
     res.json({
         success: true
@@ -158,5 +142,3 @@ async function sendInviteEmail(name: string, email: string, randomToken: string)
     sgMail.send(msg);
     return;
 }
-
-export default router;
