@@ -150,10 +150,17 @@ async function sendInviteEmail(name: string, email: string, randomToken: string)
     const vLink = `https://ctf.csivit.com/auth/verify?token=${randomToken}`
     const msg = {
         to: email,
-        from: "ctf@csivit.com",
+        from: {
+            name: "CSI-CTF",
+            email: 'ctf@csivit.com'
+        },
         subject: "Verify your CSI-CTF Account",
         text: `Verification Link: ${vLink}`,
-        html: await hbs.render("views/verificationMail.hbs", {name, vLink})
+        html: await hbs.render("views/verificationMail.hbs", {name, vLink}),
+        replyTo:{
+            email: 'askcsivit@gmail.com',
+            name: "CSI-VIT"
+        }
     };
     sgMail.send(msg);
     return;
