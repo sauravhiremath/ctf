@@ -12,6 +12,7 @@ import { hash } from "bcrypt";
 import * as crypto from "crypto";
 import { checkUserExists } from "../db/user";
 import request from "request-promise";
+import axios from "axios";
 import sgMail from "@sendgrid/mail";
 import hbsexp from 'express-handlebars';
 
@@ -80,6 +81,19 @@ router.post("/register", async (req, res) => {
         return;
     }
 
+    const response = await axios.get(`https://disposable.debounce.io/?email=${req.body.email}`);
+    console.log(response.data);
+    console.log(response.data.disposable);
+    
+    if(await response.data.disposable == 'true'){
+        // console.log(response.data);
+        res.status(400).json({
+            success: false,
+            message: "Disposable Mail Used. Use normal mail instead."
+        });
+        return;
+    };
+
     const randomToken = crypto.randomBytes(64).toString('hex');
 
     const newUser = new User({
@@ -134,10 +148,17 @@ async function sendInviteEmail(name: string, email: string, randomToken: string)
     const vLink = `https://ctf.csivit.com/auth/verify?token=${randomToken}`
     const msg = {
         to: email,
-        from: "ctf@csivit.com",
+        from: {
+            name: "CSI-CTF",
+            email: 'ctf@csivit.com'
+        },
         subject: "Verify your CSI-CTF Account",
         text: `Verification Link: ${vLink}`,
-        html: await hbs.render("views/verificationMail.hbs", {name, vLink})
+        html: await hbs.render("views/verificationMail.hbs", {name, vLink}),
+        replyTo:{
+            email: 'askcsivit@gmail.com',
+            name: "CSI-VIT"
+        }
     };
     sgMail.send(msg);
     return;
