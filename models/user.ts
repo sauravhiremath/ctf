@@ -1,5 +1,18 @@
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
+export interface userInterface extends mongoose.Document {
+  username: string,
+  name: string,
+  regNo: string,
+  password: string,
+  email: string,
+  phoneNo: number,
+  solved: number[],
+  points: number,
+  role: string,
+  token: string,
+  verifiedStatus: boolean
+}
 
 const userSchema = new Schema(
   {
@@ -48,5 +61,5 @@ export function validatePhoneNo(phoneno: string) {
   return phoneRegex.test(phoneno);
 }
 
-export const User = mongoose.model("User", userSchema);
+export const User = mongoose.model<userInterface>("User", userSchema);
 export default User;

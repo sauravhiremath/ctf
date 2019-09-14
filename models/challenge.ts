@@ -13,5 +13,15 @@ const challengeSchema = new Schema({
     hidden: { type: Boolean, required: false }
 });
 
-export const Challenge = mongoose.model("Challenge", challengeSchema);
+interface challengeInterface extends mongoose.Document {
+    name: string,
+    description: string,
+    hint: string
+    answer: string,
+    startPoints: number,
+    currentPoints: number,
+    solvedBy: [],
+    hidden: boolean
+}
+export const Challenge = mongoose.model<challengeInterface>("Challenge", challengeSchema);
 export default Challenge;

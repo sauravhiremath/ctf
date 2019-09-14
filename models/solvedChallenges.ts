@@ -1,6 +1,13 @@
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
+interface attemptedChallengesInterface extends mongoose.Document {
+  questionId: string,
+  participant: string,
+  timeSubmitted: string,
+  pointsOnSubmission: number
+}
+
 const attemptedChallengeSchema = new Schema(
   {
     questionId: {
@@ -19,7 +26,7 @@ const attemptedChallengeSchema = new Schema(
   },
 );
 
-export const attemptedChallenges = mongoose.model(
+export const attemptedChallenges = mongoose.model<attemptedChallengesInterface>(
   "attemptedChallenges",
   attemptedChallengeSchema
 );
