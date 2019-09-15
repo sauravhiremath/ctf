@@ -4,6 +4,7 @@ import { Challenge } from "../models/challenge";
 import { attemptedChallenges } from "../models/solvedChallenges";
 import User from "../models/user";
 import Leaderboard from "../models/leaderboard";
+import { Socket } from "dgram";
 
 export async function handleSubmission(data: submissionData) {
 	console.log(data);
@@ -52,7 +53,7 @@ async function refreshData(data: submissionData, question) {
 }
 
 async function UpdateLeaderboardModel(data: submissionData, newPoints: number) {
-	//Changes in leaderboard Model          --> change username and points
+	//Changes in leaderboard Model--> change username and points
 	await Leaderboard.updateOne(
 		{ username: data.username },
 		{ $set: { $inc: { points: newPoints } } }
@@ -70,9 +71,4 @@ async function updateLog(data, question, solved) {
 		pointsOnSubmission: pointsOnAttempt
 	});
 	await newAttempt.save();
-}
-
-export function getQuestions(qname: string){
-
-	return;
 }
