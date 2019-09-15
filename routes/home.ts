@@ -12,6 +12,10 @@ router.get("/", (req, res) => {
 	res.render("home.hbs");
 });
 
+router.get("/allQuestions", (req, res) => {
+
+});
+
 router.get("/question", async (req, res) => {
 	const qname = req.body.qname;
 
