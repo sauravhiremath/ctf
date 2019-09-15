@@ -13,7 +13,6 @@ import bcrypt from "bcrypt";
 import * as crypto from "crypto";
 import { checkUserExists } from "../db/user";
 import request from "request-promise";
-import axios from "axios";
 import sgMail from "@sendgrid/mail";
 import hbsexp from "express-handlebars";
 
@@ -68,14 +67,10 @@ router.post("/login", async (req, res, next) => {
 							message: "Account Not verified"
 						});
 					} else {
-                        console.log(doc1.password);
-                        console.log(password);
 						const chkPass = bcrypt.compareSync(
                             password,
                             doc1.password
                         );
-
-                        console.log(chkPass);
                         
 						if (chkPass == true) {
 							req.session.user = username;

@@ -8,8 +8,9 @@ import socketio from "socket.io";
 import http from "http";
 import { submissionData } from "./models/socketInterfaces";
 import { handleSubmission } from "./routes/handleSubmission";
-import { getQuestion } from "./routes/getQuestions";
+import homeRoutes from "./routes/home";
 import authRoutes from "./routes/auth";
+import Leaderboard from "./models/leaderboard";
 
 const app = express();
 
@@ -64,8 +65,11 @@ io.on("connection", socket => {
 		socket.request.connection._peername.address
 	]);
 
-	socket.on("userSubmission", handleSubmission);  
-	socket.on("getQuestion", getQuestion); //Client -> Onclick(){socket.emit(qname)}
+	const changeStream = Leaderboard.watch({ fullDocument: 'updateLookup'});
+	changeStream.on('change', (change) => {
+		io.emit(change);
+	})
+	// socket.on("userSubmission", handleSubmission);
 	// socket.on('help', handleHelper)
 
 	socket.on("disconnect", () => {

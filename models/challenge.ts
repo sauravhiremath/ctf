@@ -13,7 +13,7 @@ const challengeSchema = new Schema({
     hidden: { type: Boolean, required: false }
 });
 
-interface challengeInterface extends mongoose.Document {
+export interface challengeInterface extends mongoose.Document {
     name: string,
     description: string,
     hint: string

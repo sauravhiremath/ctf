@@ -4,13 +4,13 @@ import io from "socket.io-client";
 for(var i=0; i<10; i++){
 
   let question = new Challenge({
-    index: i,
     name: `Test${i}`,
     description: `Something00${i}`,
     hint: `Lol its Test ${i}`,
     answer: `aaa${i}`,
     startPoints: 100 + i,
-    solved: [],
+    currentPoints: 55,
+    solved: ['abc', 'xyz'],
     hidden: false
   });
 
@@ -21,21 +21,21 @@ for(var i=0; i<10; i++){
 
 }
 
-const socket = io.connect('http://localhost:8080', {reconnect: true});
+// const socket = io.connect('http://localhost:8080', {reconnect: true});
 
-// Add a connect listener
-socket.on('connect', function (socket) {
-    console.log('Connected!');
-});
+// // Add a connect listener
+// socket.on('connect', function (socket) {
+//     console.log('Connected!');
+// });
 
-// const mess = {
-//   userid: "saurav",
-//   qid: string,
-//   ctfFlag: string,
-//   timeStampUser: string
-// };
+// // const mess = {
+// //   userid: "saurav",
+// //   qid: string,
+// //   ctfFlag: string,
+// //   timeStampUser: string
+// // };
 
-socket.emit("userSubmission", );
+// socket.emit("userSubmission", );
 
 
 
