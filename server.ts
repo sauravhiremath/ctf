@@ -7,7 +7,8 @@ import session from "express-session";
 import socketio from "socket.io";
 import http from "http";
 import { submissionData } from "./models/socketInterfaces";
-import { handleSubmission, getQuestions } from "./routes/handleSubmission";
+import { handleSubmission } from "./routes/handleSubmission";
+import { getQuestion } from "./routes/getQuestions";
 import authRoutes from "./routes/auth";
 
 const app = express();
@@ -52,8 +53,7 @@ app.use(
 );
 
 app.use("/auth", authRoutes);
-app.use("/admin", authRoutes);
-
+app.use("/home", homeRoutes);
 app.use("/", (req, res) => {
 	res.redirect("/auth/register");
 });
@@ -64,8 +64,8 @@ io.on("connection", socket => {
 		socket.request.connection._peername.address
 	]);
 
-	socket.on("userSubmission", handleSubmission);
-	socket.emit("getQuestion", getQuestions);
+	socket.on("userSubmission", handleSubmission);  
+	socket.on("getQuestion", getQuestion); //Client -> Onclick(){socket.emit(qname)}
 	// socket.on('help', handleHelper)
 
 	socket.on("disconnect", () => {
