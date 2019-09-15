@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="static/css/home.css">
+<link rel="stylesheet" href="static/css/popup.css">
+<script src="static/js/win.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container-fluid h-100 w-100">
+    <img src="./static/images/windows.jpg" alt="background" class="bg">
+        <div class="d-inline-flex flex-column">
+            <div class="p-5 d-flex flex-column icon">
+                <div>
+                    <button type="button" class="btn questionPopup" data-toggle="modal">
+                        <img src="static/images/my_documents.png" alt="">
+                    </button>
+                </div>
+                <div class="d-sm-inline-flex ">
+                    <span style="font-size: 12px">Question</span>
+                </div>
+            </div>
+
+        </div>
+        
+        <footer class="bottom position-fixed p-0">
+                <div class="dropup">
+                    <button data-toggle="dropdown" class="start_button" style="margin-left: -6px">
+                        <img src="/static/images/start.png" class="footer_start h-100 position-relative">
+                        <span class="caret"></span>
+                    </button>
+                    <div class="dropdown-menu footer_start_menu" style="margin-left: -6px">
+                        <div class="abc">
+                            <header class="d-felx align-self-center w-100">
+                                <img src="/static/images/chess.jpg" class="header_img" alt="Chess">
+                                <span class="header-text">User</span>
+                            </header>
+                            <section class="menu d-flex flex-row position-relative">
+    
+                                <div class="menu_left d-flex flex-column align">
+                                    <div class="participant p-1 winner">Hello</div>
+                                    <div class="participant p-1 winner">CSI CTF</div>
+                                    <div class="participant p-1 winner">CSI CTF</div>
+                                    <div class="menu_seperator "></div>
+                                    <div class="participant p-1">CSI CTF</div>
+                                    <div class="participant p-1">CSI CTF</div>
+                                    <div class="participant p-1">CSI CTF</div>
+                                    <div class="participant p-1">CSI CTF</div>
+                                    <div class="participant p-1">CSI CTF</div>
+                                    <div class="participant p-1">CSI CTF</div>
+                                    <div class="participant p-1">CSI CTF</div>
+                                    <div class="menu_seperator "></div>
+
+                                    <div class="dropright"><button class="btn participant all_programs">All programs<img src="/static/images/allprograms.ico" alt=""></button>
+                                        
+                                    </div>
+                                </div>
+                                <div class="menu_right d-flex flex-column">
+                                    <div class="csi_info winner">CSI</div>
+                                    <div class="csi_info winner">Computer Society of India</div>
+                                    <div class="menu_seperator "></div>
+                                    <div class="csi_info winner">Events</div>
+                                    <div class="csi_info"><a href="https://clickbait.csivit.com" style="text-decoration: none">Clickbait</a></div>
+                                    <div class="csi_info"><a href="https://lasertag.csivit.com" style="text-decoration: none">Lasertag</a></div>
+                                    <div class="menu_seperator "></div>    
+                                </div>
+                            </section>
+                            <footer class="d-flex flex-row">
+                                <div class="ml-auto p-1 power_buttons"><a href="/index.html" style="color: white;"><img src="/static/images/logoff.png" class="p-1" style="width:30px; height:30px" alt="">Log off</a></div>
+                                <div class="p-1 power_buttons"><a href="https://google.com" style="color: white;"><img src="/static/images/poweroff.png" class="p-1" style="width:30px; height:30px" alt="">Turn off computer</a></div>
+                            </footer>
+                        </div>
+                    </div>
+                </div>
+                <img src="/static/images/taskbar_resize.png" alt="">
+            </footer>
+    </div>
+
+
+        
+
+
+    <!-- document popup-->
+    <div id="questionPopupModal" class="modal" role="dialog" aria-hidden="true" tabindex="-1">
+            <div class="m-auto popupContainer">        
+                <header class="d-flex flex-row app_header" style="height: 25px">
+                    <div class="justify-content-start"><img src="/static/images/my_documents.png" class="header_icon" alt=""></div>
+                    <div><strong>Questions</strong></div>
+                    <div class="d-flex ml-auto"><button class="closeIcon"></button></div>
+                </header>
+                    <div class="d-flex flex-row toolbar" style="height: 24px">
+                        <div class="nav">
+                            <div class="nav-item p-1 toolbar-1"><a href="#">File</a> </div>
+                            <div class="nav-item p-1 toolbar-1"><a href="#">Edit</a> </div>
+                            <div class="nav-item p-1 toolbar-1"><a href="#">View</a> </div>
+                            <div class="nav-item p-1 toolbar-1"><a href="#">Favorites</a> </div>
+                            <div class="nav-item p-1 toolbar-1"><a href="#">Tools</a> </div>
+                            <div class="nav-item p-1 toolbar-1"><a href="#">Help</a> </div>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-row toolbar" style="height: 36px">
+                        <div class="function-bar">
+                            <img src="/static/images/back.png" alt="">
+                            <span class="pt-3">Back</span>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-row toolbar" style="height: 20px"></div>
+        
+                    <!-- Main content -->
+                    <div class="d-flex flex-row">
+                        <div class="w-25 left_panel">
+                            <div class="d-flex flex-column p-3">
+                                <div></div>
+                            </div>
+                        </div>
+                        <div class="w-75 right_panel">
+                            <div class="d-flex flex-row p-3">
+                                <div>
+                                    <button class="btn singlePopup"><img src="/static/images/recycle_bin.png" alt="">question1.exe</button>
+                                    <button class="btn singlePopup"><img src="/static/images/recycle_bin.png" alt="">question2.exe</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+
+
+
+        <!-- questionPopup-->
+        <div id="singlePopupModal" class="modal" role="dialog" aria-hidden="true" tabindex="-1">
+                <div class="m-auto popupContainer" style="background-color: #eaedda; width: 600px;">
+                    <header class="d-flex flex-row app_header" style="height: 25px">
+                            <div class="justify-content-start"><img src="/static/images/my_documents.png" class="header_icon" alt=""></div>
+                            <div><strong>Questions</strong></div>
+                            <div class="d-flex ml-auto"><button class="closeQuestion"></button></div>
+                    </header>
+                    <div class="d-flex flex-column p-2">
+                        <p>Here is the question:</p>
+                        <nav class="nav nav-tabs">
+                            <li class="nav-item border border-dark">
+                                <a class="nav-link p-0 pl-1 pr-3 active" id="question_text" href="#">Question</a>
+                            </li>
+                            <li class="nav-item border border-dark">
+                                <a class="nav-link p-0 pl-1 pr-3" id="trend" href="#" tabindex="-1">Trend</a>
+                            </li>
+                            <li class="nav-item border border-dark">
+                                    <a class="nav-link p-0 pl-1 pr-3" id="no_of_people" href="#" tabindex="-1">No of people Solved</a>
+                            </li>
+                        </nav>
+                            <div class="border border-light p-2" style="height: 200px">
+                                <div class="p-2" id="nav_content">
+                                    
+                                </div>
+                            </div>
+                                <div class="d-flex flex-row pt-2 w-100 no-gutters">
+                                    <div class="col-10"><input type="text" class="w-100"></div>
+                                    
+                                    <div class=" pl-3 w-50"><button class="pl-3 pr-3">submit</button></div>
+                                </div>
+            
+                                <div class="d-flex justify-content-center p-2"><button class="closebtn pl-4 pr-4" data-dismiss="modal">Close</button></div>
+                    </div>
+                </div>
+            </div>
+</body>
+</html> 

@@ -1,0 +1,265 @@
+.topBar {
+	border-radius: 10px 10px 0 0;
+
+	background-image: linear-gradient(
+		to bottom,
+		white,
+		#1a6fe3 7%,
+		#1a6fe3 60%,
+		#167bf9 94%,
+		rgb(11, 11, 88)
+	);
+
+	font-size: 1.3rem;
+	color: white;
+	font-family: "Trebuchet MS", "Arial";
+}
+#questionPopupModal{
+	position: relative;
+	width: 800px;
+	left: 300px;
+	border: 4px solid #1b70e5;
+	border-top: 0px;
+	border-radius: 10px 10px 0 0;
+}
+
+#singlePopupModal{
+	position: relative;
+	width: 604px;
+	left: 450px;
+	top: -300px;
+	border: 4px solid #1b70e5;
+	border-top: 0px;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-size: 13px;
+}
+
+
+.app_header{
+	background: linear-gradient(
+		rgb(0, 88, 238) 0%,
+		rgb(53, 147, 255) 4%, 
+		rgb(40, 142, 255) 6%,
+		rgb(18, 125, 255) 8%,
+		rgb(3, 111, 252) 10%,
+		rgb(2, 98, 238) 14%,
+		rgb(0, 87, 229) 20%,
+		rgb(0, 84, 227) 24%,
+		rgb(0, 85, 235) 56%,
+		rgb(0, 91, 245) 66%,
+		rgb(2, 106, 254) 76%,
+		rgb(0, 98, 239) 86%,
+		rgb(0, 82, 214) 92%,
+		rgb(0, 64, 171) 94%,
+		rgb(0, 48, 146) 100%);
+}
+
+.topBar > img {
+	width: 32px;
+	height: 32px;
+	cursor: pointer;
+}
+
+.logoContainer {
+	text-align: center;
+	background: radial-gradient(
+		closest-corner at 70% 50%,
+		rgb(197, 194, 255),
+		#597edc
+	);
+}
+
+.logoContainer > img {
+	max-height: 100%;
+	max-width: 50%;
+}
+
+.orange-accent-popup {
+	background: linear-gradient(
+		to right,
+		rgb(71, 4, 204, 1) 0%,
+		rgba(249, 145, 0, 1) 40%,
+		rgb(71, 4, 204, 1) 100%
+	);
+}
+
+.accent-popup {
+	margin: 0px;
+	border: 0px;
+	height: 10px;
+}
+
+.formContainer {
+	background-color: #eaedda;
+	font-size: 1.2rem;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	color: black;
+}
+
+.formContainer > form {
+	margin-bottom: 0px !important;
+}
+
+.tags {
+	width: 150px;
+}
+
+.formContainer input {
+	height: 25px;
+	border: 1px solid rgb(26, 26, 197);
+	width: 60%;
+	padding: 4px;
+}
+
+.formContainer button {
+	width: 130px;
+	height: 32px;
+	border: 1px solid rgb(26, 26, 197);
+	border-radius: 4px;
+
+	background-image: linear-gradient(
+		to bottom,
+		#eaedda,
+		white 15%,
+		white,
+		#eaedda 90%,
+		#eaedda
+	);
+}
+
+.post-form-content {
+	display: none;
+}
+
+.grecaptcha-badge {
+	visibility: hidden !important;
+}
+
+.emsg {
+	color: red;
+	display: inline-block;
+}
+
+.hidden {
+	display: none;
+}
+
+.closeIcon {
+	box-shadow: rgb(218, 70, 0) 0px -1px 2px 1px inset;
+	background-image: radial-gradient(
+		circle at 90% 90%,
+		rgb(204, 70, 0) 0%,
+		rgb(220, 101, 39) 55%,
+		rgb(205, 117, 70) 70%,
+		rgb(255, 204, 178) 90%,
+		white 100%
+	);
+	margin-right: 1px;
+	position: relative;
+	width: 22px;
+	height: 22px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: rgb(255, 255, 255);
+	border-image: initial;
+	border-radius: 3px;
+}
+
+.closeIcon::before {
+	content: "";
+	position: absolute;
+	left: 9px;
+	top: 2px;
+	transform: rotate(45deg);
+	height: 16px;
+	width: 2px;
+	background-color: white;
+}
+
+.closeIcon::after {
+	content: "";
+	position: absolute;
+	left: 9px;
+	top: 2px;
+	transform: rotate(-45deg);
+	height: 16px;
+	width: 2px;
+	background-color: white;
+}
+
+.closeQuestion {
+	box-shadow: rgb(218, 70, 0) 0px -1px 2px 1px inset;
+	background-image: radial-gradient(
+		circle at 90% 90%,
+		rgb(204, 70, 0) 0%,
+		rgb(220, 101, 39) 55%,
+		rgb(205, 117, 70) 70%,
+		rgb(255, 204, 178) 90%,
+		white 100%
+	);
+	margin-right: 1px;
+	position: relative;
+	width: 22px;
+	height: 22px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: rgb(255, 255, 255);
+	border-image: initial;
+	border-radius: 3px;
+}
+
+.closeQuestion::before {
+	content: "";
+	position: absolute;
+	left: 9px;
+	top: 2px;
+	transform: rotate(45deg);
+	height: 16px;
+	width: 2px;
+	background-color: white;
+}
+
+.closeQuestion::after {
+	content: "";
+	position: absolute;
+	left: 9px;
+	top: 2px;
+	transform: rotate(-45deg);
+	height: 16px;
+	width: 2px;
+	background-color: white;
+}
+input[type="number"] {
+	-moz-appearance: textfield;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+@media only screen and (max-width: 768px) {
+	.popupContainer {
+		width: 90% !important;
+	}
+
+	.formContainer input {
+		height: 35px;
+		width: 90%;
+	}
+}
+
+
+.toolbar-1{
+	font-size: 12px;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+.toolbar-1:hover{
+	background-color: rgb(22, 96, 232);
+	color: white;
+}
+
+.toolbar-1:hover a{
+	color: white;
+}

@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import attemptedChallengesInterface from './solvedChallenges'
 const Schema = mongoose.Schema;
 
 const challengeSchema = new Schema({
@@ -9,7 +10,7 @@ const challengeSchema = new Schema({
     answer: String,
     startPoints: Number,
     currentPoints: Number,
-    solvedBy: {type: JSON},
+    solvedBy: String,
     hidden: { type: Boolean, required: false }
 });
 
@@ -20,7 +21,7 @@ export interface challengeInterface extends mongoose.Document {
     answer: string,
     startPoints: number,
     currentPoints: number,
-    solvedBy: [],
+    solvedBy: string,
     hidden: boolean
 }
 export const Challenge = mongoose.model<challengeInterface>("Challenge", challengeSchema);

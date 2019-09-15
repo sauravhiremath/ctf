@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
-interface attemptedChallengesInterface extends mongoose.Document {
+export interface attemptedChallengesInterface extends mongoose.Document {
   questionId: string,
   participant: string,
   timeSubmitted: string,
