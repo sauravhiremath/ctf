@@ -1,11 +1,15 @@
 import mongoose from "mongoose";
 import attemptedChallengesInterface from './solvedChallenges'
 const Schema = mongoose.Schema;
+// enum diff { baby ="baby", easy ="easy", medium = "medium", hard = "hard" };
+// enum type { web ="web", forensics = "forensics", steganography = "steganography", pawn = "pawn" };
 
 const challengeSchema = new Schema({
     // index: Number,
     name: String,
     description: String,
+    difficulty: String,
+    type: String,
     hint: { type: String, default: null },
     answer: String,
     startPoints: Number,
@@ -17,7 +21,9 @@ const challengeSchema = new Schema({
 export interface challengeInterface extends mongoose.Document {
     name: string,
     description: string,
-    hint: string
+    difficulty: Array<string>,
+    type: Array<string>,
+    hint: string,
     answer: string,
     startPoints: number,
     currentPoints: number,

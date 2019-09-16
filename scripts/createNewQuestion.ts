@@ -6,6 +6,8 @@ for(var i=0; i<10; i++){
   let question = new Challenge({
     name: `Test${i}`,
     description: `Something00${i}`,
+    type: "web",
+    difficulty: "easy",
     hint: `Lol its Test ${i}`,
     answer: `aaa${i}`,
     startPoints: 100 + i,
