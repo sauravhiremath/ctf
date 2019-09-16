@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const leaderboard = new Schema({
 	username: { type: String, required: true, unique: true },
-	points: { type: Number, required: true, default: 0 }
+	points: { type: Number, required: true, default: 0, index: true }
 });
 
 interface leaderboardInterface extends mongoose.Document {

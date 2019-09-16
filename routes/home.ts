@@ -4,19 +4,43 @@ import { Challenge, challengeInterface } from "../models/challenge";
 import { submissionData } from "../models/socketInterfaces";
 import Leaderboard from "../models/leaderboard";
 import attemptedChallenges from "../models/solvedChallenges";
+import { userInfo } from "os";
+import { runInNewContext } from "vm";
 
 const router = Router();
 export default router;
 
-router.get("/", (req, res) => {
+router.get("/", userCheck, (req, res, next) => {
 	res.render("home.hbs");
 });
 
-router.get("/allQuestions", (req, res) => {
+router.get("/questionStatus?:sortKey", userCheck, async (req, res) => {
+	const sortKey = req.query.sortKey;	//type || difficulty
 
+	if(sortKey != "type" || sortKey != "difficulty") {
+		res.status(400).json({
+			success: false,
+			message: "Wrong API call!"
+		});
+		return;
+	}
+
+	const otherType: string = (sortKey == "type") ? "difficulty" : "type";
+	var query = {};
+	query[sortKey] = 1;
+	query[otherType] = 1;
+	
+	const allChallenges = await Challenge.find({}, query, (err) => {
+		res.status(400).json({
+			success: false,
+			message: "Error finding list of Questions!"
+		});
+	}).sort({ sortKey });
+	
+	res.json({ allChallenges });
 });
 
-router.get("/question", async (req, res) => {
+router.get("/question", userCheck, async (req, res) => {
 	const qname = req.body.qname;
 
 	if(!qname) {
@@ -48,11 +72,9 @@ router.get("/question", async (req, res) => {
 			solvedBy: quest.solvedBy
 		}
 	});
-
-	res.render("questionPopUp.hbs");
 });
 
-router.post("/submit", async (req, res) => {
+router.post("/submit", userCheck, async (req, res) => {
 	const data: submissionData = req.body.submitData;
 
 	const question = await Challenge.findOne({ _id: data.qid });
@@ -130,7 +152,7 @@ router.post("/submit", async (req, res) => {
 				});
 				console.log(err);
 			}
-		);
+		).sort( { points: 1 } );
 	}
 
 	async function updateLog(
@@ -163,10 +185,16 @@ router.post("/submit", async (req, res) => {
 });
 
 router.get("/leaderboard", async (req, res) => {
+	const currStandings = await Leaderboard.find({ points: { $gte: 0 } });
+	console.log(currStandings);
+	res.json(currStandings);
 });
 
-router.get("/questList", (req, res) => {
-
-});
-
+function userCheck(req, res, next) {
+    if (req.session.user) {
+        next();
+    } else {
+        res.redirect("/auth/register");
+    }
+}
 

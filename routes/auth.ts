@@ -199,6 +199,71 @@ router.get("/verify", async (req, res) => {
 	res.render(`success.hbs`);
 });
 
+router.get("/resetPassword", (req, res) => {
+    let email = req.body.email.toString();
+    if (email.length <= 256) {
+        User.findOne({
+            email: email
+        }, function (err, doc) {
+            if (err) {
+                res.render("/auth/resetPassword", {
+                    'message': "Please try again"
+                });
+            } else {
+                if (!doc) {
+                    res.render("register/resetPassword", {
+                        'message': `Looks like you haven't registered yet or you have entered a wrong email. Register <a href="/auth/register">here</a>.`
+                    });
+                    return;
+                }
+                if (doc.flag == undefined) {
+                    let flag = crypto.randomBytes(10).toString('hex');
+                    Register.findOneAndUpdate({
+                        email: email
+                    }, {
+                        flag: flag
+                    }, (err, doc) => {
+                        if (!doc) {
+                            console.log("here");
+                            res.render("register/resetPassword", {
+                                'message': "Your email is not registered. Register <a href='riddler.csivit.com'>here</a>."
+                            });
+                        } else {
+                            sendLink(doc.fullName.toString(), doc.email.toString(), flag, function (err) {
+                                if (err) {
+                                    console.log(err);
+                                    res.render("register/resetPassword", {
+                                        'message': "There was an error in sending the email, please refresh the page and try again."
+                                    });
+                                } else {
+                                    res.render("register/resetPassword", {
+                                        'message': `Hey ${doc.fullName}!<br>We have sent you a mail ${doc.email}, please check your email and follow the instructions to reset your password.`
+                                    });
+                                }
+                            });
+                        }
+                    });
+                } else {
+                    res.render("register/resetPassword", {
+                        message: `We've already sent you a mail at ${doc1.email}. Please check your email. Contact <a href="https://www.facebook.com/csivitu" color="#473D99">us</a> on the listed channels if you have further issues.`
+                    })
+                }
+
+            }
+        });
+    } else {
+        res.send("Too large");
+    }
+});
+
+router.post("/resetPassword", (req, res) => {
+//Get email registered or username
+});
+
+router.get("/resetToken/:?token", (req, res) => {
+
+});
+
 router.get("/logout", function(req, res, next) {
 	req.session.destroy(function() {
 		res.redirect("/");
