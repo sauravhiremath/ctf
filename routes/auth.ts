@@ -259,19 +259,19 @@ router.get("/verify", async (req, res) => {
 //     }
 // });
 
-router.post("/resetPassword", (req, res) => {
-//Get email registered or username
-});
+// router.post("/resetPassword", (req, res) => {
+// //Get email registered or username
+// });
 
-router.get("/resetToken/:?token", (req, res) => {
+// router.get("/resetToken/:?token", (req, res) => {
 
-});
+// });
 
-router.get("/logout", function(req, res, next) {
-	req.session.destroy(function() {
-		res.redirect("/");
-	});
-});
+// router.get("/logout", function(req, res, next) {
+// 	req.session.destroy(function() {
+// 		res.redirect("/");
+// 	});
+// });
 
 async function sendInviteEmail(
 	name: string,

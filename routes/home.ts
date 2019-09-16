@@ -10,13 +10,13 @@ import { runInNewContext } from "vm";
 const router = Router();
 export default router;
 
-router.get("/", userCheck, (req, res, next) => {
+router.get("/", (req, res, next) => {
 	res.render("home.hbs");
 });
 
-router.get("/questionStatus?:sortKey", userCheck, async (req, res) => {
+router.get("/questionStatus?:sortKey", async (req, res) => {
 	const sortKey = req.query.sortKey; //type || difficulty
-	console.log(sortKey);
+
 	if (sortKey != "type" && sortKey != "difficulty") {
 		res.status(400).json({
 			success: false,
@@ -41,9 +41,10 @@ router.get("/questionStatus?:sortKey", userCheck, async (req, res) => {
 	}).sort({ [sortKey]: 1 });
 
 	res.json({ allChallenges });
+	
 });
 
-router.get("/question", userCheck, async (req, res) => {
+router.post("/question", async (req, res) => {
 	const qname = req.body.qname;
 
 	if (!qname) {

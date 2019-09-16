@@ -2,17 +2,7 @@ document.getElementsByTagName("img").draggable = false;
 console.log("hello")
 
 
-$(document).on("click", ".btn", function(){
-    var cl = $(this).attr("class");
-    cl = cl.split(" ");
-    var id = cl[1];
-    $('#' + id + 'Modal').modal({
-        show: true,
-        backdrop: false,
-    }).draggable({
-        handle: ".app_header"
-    })
-})
+
 
 
 $(document).on("click", ".closeIcon", function(){

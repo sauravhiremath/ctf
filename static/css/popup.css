@@ -15,9 +15,11 @@
 	font-family: "Trebuchet MS", "Arial";
 }
 #questionPopupModal{
-	position: relative;
-	width: 800px;
-	left: 300px;
+	position: absolute;
+	height: 460px;
+	width: 700px;
+	left: 60vh;
+	top: 20vh;
 	border: 4px solid #1b70e5;
 	border-top: 0px;
 	border-radius: 10px 10px 0 0;
@@ -26,8 +28,9 @@
 #singlePopupModal{
 	position: relative;
 	width: 604px;
-	left: 450px;
-	top: -300px;
+	height: 377px;
+	left: 64vh;
+	top: -28vh;
 	border: 4px solid #1b70e5;
 	border-top: 0px;
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -240,10 +243,6 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 @media only screen and (max-width: 768px) {
-	.popupContainer {
-		width: 90% !important;
-	}
-
 	.formContainer input {
 		height: 35px;
 		width: 90%;

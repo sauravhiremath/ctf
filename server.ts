@@ -54,14 +54,12 @@ app.use(
 	})
 );
 
-app.use("/auth", authRoutes);
 app.use("/home", homeRoutes);
-app.use("/", (req, res) => {
-	res.redirect("/auth/register");
-});
-
+app.use("/auth", authRoutes);
+// app.use("/", (req, res) => {
+// 	res.redirect("/auth/register");
+// });
 // createQuestion();
-
 io.on("connection", socket => {
 	console.log("Made connection to socketID and ipAddress ", [
 		socket.id,

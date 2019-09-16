@@ -1,0 +1,62 @@
+<div id="questionPopupModal" class="modal" role="dialog" aria-hidden="true" tabindex="-1">
+    <div class="m-auto popupContainer">
+        <header class="d-flex flex-row app_header" style="height: 25px">
+            <div class="justify-content-start"><img src="/static/images/my_documents.png" class="header_icon" alt="">
+            </div>
+            <div><strong>Questions</strong></div>
+            <div class="d-flex ml-auto"><button class="closeIcon"></button></div>
+        </header>
+        <div class="d-flex flex-row toolbar" style="height: 24px">
+            <div class="nav">
+                <div class="nav-item p-1 toolbar-1"><a href="#">File</a> </div>
+                <div class="nav-item p-1 toolbar-1"><a href="#">Edit</a> </div>
+                <div class="nav-item p-1 toolbar-1"><a href="#">View</a> </div>
+                <div class="nav-item p-1 toolbar-1"><a href="#">Favorites</a> </div>
+                <div class="nav-item p-1 toolbar-1"><a href="#">Tools</a> </div>
+                <div class="nav-item p-1 toolbar-1"><a href="#">Help</a> </div>
+            </div>
+        </div>
+        <div class="d-flex flex-row toolbar" style="height: 36px">
+            <div class="function-bar">
+                <img src="/static/images/back.png" alt="">
+                <span class="pt-3">Back</span>
+            </div>
+
+        </div>
+        <div class="d-flex flex-row toolbar" style="height: 20px"></div>
+
+        <!-- Main content -->
+        <div class="d-flex flex-row">
+            <div class="w-25 left_panel">
+                <div class="d-flex flex-column p-3">
+                    <div></div>
+                </div>
+            </div>
+            <div class="w-75 right_panel">
+                <div class="d-flex flex-row p-3">
+                    <div id="question-data">
+                    </div>
+
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.2.0/handlebars.js"></script>
+                   
+                    {{!-- <script id="question-template" type="text/x-handlebars-template">
+                        {{#each data}}
+                            <p>{{data}}</p>
+                        {{else}}
+                            <p>Empty Shit</p>    
+                        {{/each}}
+
+                        {{#each data}}
+                        <button class="btn singlePopup question-icon">
+                            <div class="icon-container">
+                                <img src="/static/images/recycle_bin.png" alt="">
+                                <span class="question-title" value={{ name }}>data.</span>
+                            </div>                        
+                        </button>
+                        {{/each}}
+                    </script> --}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
