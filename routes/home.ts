@@ -29,6 +29,7 @@ router.get("/questionStatus?:sortKey", userCheck, async (req, res) => {
 	var query = {};
 	query[sortKey] = 1;
 	query[otherType] = 1;
+	query["name"] = 1;
 
 	const allChallenges = await Challenge.find({}, query, err => {
 		if (err) {
@@ -37,7 +38,7 @@ router.get("/questionStatus?:sortKey", userCheck, async (req, res) => {
 				message: "Error finding list of Questions!"
 			});
 		}
-	}).sort({ sortKey: 1 });
+	}).sort({ [sortKey]: 1 });
 
 	res.json({ allChallenges });
 });
