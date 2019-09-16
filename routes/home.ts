@@ -15,9 +15,9 @@ router.get("/", userCheck, (req, res, next) => {
 });
 
 router.get("/questionStatus?:sortKey", userCheck, async (req, res) => {
-	const sortKey = req.query.sortKey;	//type || difficulty
-
-	if(sortKey != "type" || sortKey != "difficulty") {
+	const sortKey = req.query.sortKey; //type || difficulty
+	console.log(sortKey);
+	if (sortKey != "type" && sortKey != "difficulty") {
 		res.status(400).json({
 			success: false,
 			message: "Wrong API call!"
@@ -25,29 +25,31 @@ router.get("/questionStatus?:sortKey", userCheck, async (req, res) => {
 		return;
 	}
 
-	const otherType: string = (sortKey == "type") ? "difficulty" : "type";
+	const otherType: string = sortKey == "type" ? "difficulty" : "type";
 	var query = {};
 	query[sortKey] = 1;
 	query[otherType] = 1;
-	
-	const allChallenges = await Challenge.find({}, query, (err) => {
-		res.status(400).json({
-			success: false,
-			message: "Error finding list of Questions!"
-		});
-	}).sort({ sortKey });
-	
+
+	const allChallenges = await Challenge.find({}, query, err => {
+		if (err) {
+			res.status(400).json({
+				success: false,
+				message: "Error finding list of Questions!"
+			});
+		}
+	}).sort({ sortKey: 1 });
+
 	res.json({ allChallenges });
 });
 
 router.get("/question", userCheck, async (req, res) => {
 	const qname = req.body.qname;
 
-	if(!qname) {
+	if (!qname) {
 		res.status(404).json({
 			success: false,
 			message: "Gimme question name"
-		})
+		});
 		return;
 	}
 
@@ -79,7 +81,8 @@ router.post("/submit", userCheck, async (req, res) => {
 
 	const question = await Challenge.findOne({ _id: data.qid });
 
-	if (data.ctfFlag == question.answer) {0
+	if (data.ctfFlag == question.answer) {
+		0;
 		const solved: boolean = true;
 		await updateLog(data, question, solved);
 		await refreshData(data, question);
@@ -152,7 +155,7 @@ router.post("/submit", userCheck, async (req, res) => {
 				});
 				console.log(err);
 			}
-		).sort( { points: 1 } );
+		).sort({ points: 1 });
 	}
 
 	async function updateLog(
@@ -191,10 +194,10 @@ router.get("/leaderboard", async (req, res) => {
 });
 
 function userCheck(req, res, next) {
-    if (req.session.user) {
-        next();
-    } else {
-        res.redirect("/auth/register");
-    }
+	if (req.session.user) {
+		next();
+	} else {
+		// res.redirect("/auth/register");
+		next();
+	}
 }
-

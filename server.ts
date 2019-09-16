@@ -11,6 +11,7 @@ import { handleSubmission } from "./routes/handleSubmission";
 import homeRoutes from "./routes/home";
 import authRoutes from "./routes/auth";
 import Leaderboard from "./models/leaderboard";
+import { createQuestion } from "./scripts/createNewQuestion";
 
 const app = express();
 
@@ -58,6 +59,8 @@ app.use("/home", homeRoutes);
 app.use("/", (req, res) => {
 	res.redirect("/auth/register");
 });
+
+// createQuestion();
 
 io.on("connection", socket => {
 	console.log("Made connection to socketID and ipAddress ", [
