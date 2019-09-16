@@ -11,6 +11,7 @@ export interface userInterface extends mongoose.Document {
   points: number,
   role: string,
   token: string,
+  passToken: string,
   verifiedStatus: boolean
 }
 
@@ -26,6 +27,7 @@ const userSchema = new Schema(
     points: { type: Number, default: 0, required: true },
     role: { type: String, default: "VITparticipant" },
     token: {type: String },
+    passToken: {type: String },
     verifiedStatus: {type: Boolean, required: true} 
   },
 );

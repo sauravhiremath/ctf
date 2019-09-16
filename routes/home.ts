@@ -15,7 +15,7 @@ router.get("/", userCheck, (req, res, next) => {
 });
 
 router.get("/questionStatus?:sortKey", userCheck, async (req, res) => {
-	const sortKey = req.query.sortKey; //type || difficulty
+	const sortKey: string = req.query.sortKey; //type || difficulty
 	console.log(sortKey);
 	if (sortKey != "type" && sortKey != "difficulty") {
 		res.status(400).json({

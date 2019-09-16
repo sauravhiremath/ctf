@@ -6,8 +6,8 @@ export function createQuestion() {
 		let question = new Challenge({
 			name: `Test${i}`,
 			description: `Something00${i}`,
-			type: "web",
-			difficulty: "easy",
+			type: "crypto",
+			difficulty: "hard",
 			hint: `Lol its Test ${i}`,
 			answer: `aaa${i}`,
 			startPoints: 100 + i,
