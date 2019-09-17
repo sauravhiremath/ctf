@@ -74,7 +74,7 @@ io.on("connection", socket => {
 	// socket.on('help', handleHelper)
 
 	socket.on("disconnect", () => {
-		console.log("Removing user lock with socketid ", socket.id);
+		console.log("Removing user with socketid ", socket.id);
 		//Remove the user Lock with the socketid here
 	});
 });
