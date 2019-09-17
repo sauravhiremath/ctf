@@ -1,78 +1,123 @@
-html, body {
-    width:100vw;
-    height:100vh;
+html,
+body {
+	width: 100vw;
+	height: 100vh;
+	font-family: Arial, Helvetica, sans-serif !important;	
 }
 
-.windows-user {
-    height: 200px;
+.windows-user-2 {
+	height: 200px;
 }
 .user-profile-pic {
-    width:64px;
-    height:64px;
-    border-radius: 5px;
-    border: 2px solid white;
-    cursor: pointer;
+	width: 64px;
+	height: 64px;
+	border-radius: 5px;
+	border: 2px solid white;
+	cursor: pointer;
+	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
 }
 
 .bar {
-    height: 12.5vh;
+	height: 12.5vh;
 }
 .accent {
-    margin: 0px;
-    border: 0px;
-    height: 3px;
+	margin: 0px;
+	border: 0px;
+	height: 3px;
 }
 .white-accent {
-    background: linear-gradient(to right, rgba(0,51,153,1) 0%, rgba(255,255,255,1) 23%, rgba(0,51,153,1) 100%);
+	background: linear-gradient(
+		to right,
+		rgba(0, 51, 153, 1) 0%,
+		rgba(255, 255, 255, 1) 23%,
+		rgba(0, 51, 153, 1) 100%
+	);
 }
 
 .orange-accent {
-    background: linear-gradient(to right, rgba(0,51,153,1) 0%, rgba(249,145,0,1) 23%, rgba(0,51,153,1) 100%);
+	background: linear-gradient(
+		to right,
+		rgba(0, 51, 153, 1) 0%,
+		rgba(249, 145, 0, 1) 23%,
+		rgba(0, 51, 153, 1) 100%
+	);
 }
 .shutdown-icon {
-    widows: 32px;
-    height: 32px;
-    cursor: pointer;
+	widows: 32px;
+	height: 32px;
+	cursor: pointer;
 }
 
 .csi-logo {
-    width:150px;
+	width: 150px;
 }
 .xp-text {
-    color: white;
-    font-size: 1.5rem;
+	color: white;
+	font-size: 1.5rem;
 }
 
 .logo-text {
-    font-size: 1.2rem;
-    letter-spacing: 1.2px;
+	font-size: 1.2rem;
+}
+
+.signUpText {
+	text-decoration: underline;
+	font-style: italic;
+	cursor: pointer;
 }
 
 .shutdown-text {
-    font-size: 1rem;
+	font-size: 1rem;
 }
 
+.shutdownScreen {
+	display: none;
+	background-color: black;
+}
 .container-fluid {
-    padding: 0 !important;
+	padding: 0 !important;
 }
 .bar {
-    background-color: #003399;
+	background-color: #003399;
 }
 
 .ctfLogo {
-    width: 300px;
+	width: 300px;
 }
 
 .left-section {
-    border-right: 2px solid rgba(255,255,255, 0.5);
+	border-image: linear-gradient(to bottom, #5a7edc, #6e90e2, #5a7edc) 1 100%;
+	border-right: 2px solid rgba(255, 255, 255, 0.5);
+	width: 60%;
+}
+
+.right-section {
+	width: 40%;
 }
 
 .main-content {
-    background-image: radial-gradient(closest-corner at 7% 15%, rgb(171, 185, 214),#597EDC);;
+	height: 75vh;
+	background-image: radial-gradient(
+		13em circle at 0% 0%,
+		rgb(171, 185, 214),
+		#597edc
+	);
 }
 
 @media only screen and (max-width: 768px) {
-    .main-content {
-        background-image: radial-gradient(closest-corner at 15% 10%, rgb(171, 185, 214),#597EDC);;
+	.main-content {
+		background-image: radial-gradient(
+			13em circle at 0% 0%,
+			rgb(171, 185, 214),
+			#597edc
+		);
+	}
+
+	.ctfLogo {
+		width: 250px;
+    }
+    
+    .sectionContainer {
+        justify-content: center;
     }
 }

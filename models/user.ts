@@ -1,11 +1,25 @@
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
+export interface userInterface extends mongoose.Document {
+  username: string,
+  name: string,
+  regNo: string,
+  password: string,
+  email: string,
+  phoneNo: number,
+  solved: number[],
+  points: number,
+  role: string,
+  token: string,
+  passToken: string,
+  verifiedStatus: boolean
+}
 
 const userSchema = new Schema(
   {
     username: { type: String, required: true, unique: true },
     name: { type: String, required: true },
-    regNo: { type: String, unique: true },
+    regNo: { type: String, unique: false, default: "NULL" },
     password: { type: String, unique: true},
     email: { type: String, required: true, unique: true },
     phoneNo: { type: Number, required: true },
@@ -13,6 +27,7 @@ const userSchema = new Schema(
     points: { type: Number, default: 0, required: true },
     role: { type: String, default: "VITparticipant" },
     token: {type: String },
+    passToken: {type: String },
     verifiedStatus: {type: Boolean, required: true} 
   },
 );
@@ -28,12 +43,13 @@ export function validateUsername(username: string) {
 }
 
 export function validateRegNo(regno: string) {
+  if(regno == null || regno == undefined || regno == "") return true;
   const regNumRegex = /^1\d[a-zA-Z]{3}\d{4}$/;
   return regNumRegex.test(regno);
 }
 
 export function validatePassword(password: string) {
-  const passRegex = /^[a-zA-Z0-9_!@#$%^&*]{5,15}$/;
+  const passRegex = /^[a-zA-Z0-9_!@#$%^&* ]{5,15}$/;
   return passRegex.test(password);
 }
 
@@ -43,9 +59,9 @@ export function validateEmail(email: string) {
 }
 
 export function validatePhoneNo(phoneno: string) {
-  const phoneRegex = /^[2-9]{2}[0-9]{8}$/;
+  const phoneRegex = /^[0-9]{9,10}$/;
   return phoneRegex.test(phoneno);
 }
 
-export const User = mongoose.model("User", userSchema);
+export const User = mongoose.model<userInterface>("User", userSchema);
 export default User;

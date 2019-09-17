@@ -1,0 +1,28 @@
+body, html {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#successPopup {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: url("/static/images/desktop.jpeg");
+    background-repeat: none;
+    background-size: cover;
+}
+
+.popupContainer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50vh;
+    transform: translateY(-50%);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1.3rem;
+}
+
+.success-message {
+    background-color: #EAEDDA;
+}

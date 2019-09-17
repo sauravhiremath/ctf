@@ -34,18 +34,22 @@
             right: 0;
             margin: auto;
             line-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
         }
 
         .loader-image {
-            width: 20vw;
+            width: 40vw;
             position: relative;
-            left: 40vw;
+            display: block;
+            padding: 1rem;
         }
 
         @media (max-width: 768px) {
             .loader-image {
-                width: 60vw;
-                left: 20vw;
+                width: 80vw;
             }
         }
     </style>
@@ -55,21 +59,24 @@
             setTimeout(() => {
                 $(".loader").fadeOut();
                 $(".content").removeClass("content-hidden");
-                document.getElementById("loginSound").play();
             }, 500);
+
+            setTimeout(() => {
+                window.scrollTo(0,1);
+            }, 1200)
         }
 
     </script>
-
 </head>
 
 <body>
+    <audio id="shutdownSound" src="/static/audio/shutdown-sound.mp3" class="d-none"></audio>
     <div class="loader">
         <img src="/static/images/loadingBar.gif" class="loader-image">
     </div>
-
-    <audio class="d-none" id="loginSound" src="/static/audio/startup-sound.mp3"></audio>
+    <div class="shutdownScreen h-100 w-100"></div>
     <div class="content content-hidden">
+        <iframe src="/static/audio/startup-sound.mp3" allow="autoplay" id="audio" style="display:none"></iframe>
         <div class="g-recaptcha" data-sitekey="6LdiUrcUAAAAAKLTyvgt-ewN1EVInC5L9Tj7xCqP" data-callback="onSubmit"
             data-size="invisible">
         </div>
@@ -79,18 +86,18 @@
                 <div>
                     <hr class="accent white-accent">
                 </div>
-                <div class="h-75 main-content d-flex justify-content-center align-items-center flex-column">
-                    <div class="h-75 w-75 d-flex">
-                        <div class="left-section w-50 py-5 pr-5 mr-5 d-none d-md-block d-lg-block">
+                <div class="main-content d-flex justify-content-center align-items-center flex-column">
+                    <div class="h-75 w-75 d-flex sectionContainer">
+                        <div class="left-section py-5 pr-5 mr-5 d-none d-md-block d-lg-block">
                             <div class="d-flex align-items-end justify-content-center flex-column h-100">
                                 <div class="main-logo">
                                     <img src="/static/images/logo.png" class="ctfLogo" alt="" srcset="">
                                 </div>
-                                <strong class="xp-text logo-text mt-3">To begin, click signup</strong>
+                                <strong class="xp-text logo-text mt-3">To begin, click sign up</strong>
                             </div>
                         </div>
-                        <div class="right-section w-50 flex-grow-1">
-                            <div class="d-flex align-items-start justify-content-between flex-column h-100">
+                        <div class="right-section w-auto">
+                            <div class="d-flex mt-4 align-items-start justify-content-center flex-column h-100">
                                 <div class="main-logo mt-5 mb-5">
                                     <img src="/static/images/logo.png" class="ctfLogo d-md-none d-lg-none mr-2" alt=""
                                         srcset="">
@@ -99,7 +106,12 @@
                                     <div class="windows-user row align-items-top py-2 px-2 w-auto" data-toggle="modal"
                                         data-target="#registerPopup">
                                         <img src="/static/images/chess.jpg" alt="" class="user-profile-pic">
-                                        <strong class="ml-3 xp-text">Sign Up</strong>
+                                        <strong class="ml-3 xp-text signUpText">Sign Up</strong>
+                                    </div>
+                                    <div class="windows-user-2 row align-items-top py-2 px-2 w-auto" data-toggle="modal"
+                                        data-target="#loginPopup">
+                                        <img src="/static/images/chess.jpg" alt="" class="user-profile-pic">
+                                        <strong class="ml-3 xp-text signUpText">Login</strong>
                                     </div>
                                 </div>
                                 <div></div>
@@ -113,7 +125,7 @@
                 <div class="bar py-2 px-4">
                     <div class="d-flex justify-content-between align-items-center h-100">
                         <div class="shutdown-container align-items-center">
-                            <img src="/static/images/shutdownIcon.png" alt="" class="shutdown-icon">
+                            <img src="data:image/png;base64,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" alt="" class="shutdown-icon">
                             <strong class="ml-1 xp-text shutdown-text">Turn off</strong>
                         </div>
                         <div></div>
@@ -128,6 +140,7 @@
             </div>
         </div>
         {{> regPopup }}
+        {{> loginPopup}}
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
@@ -139,6 +152,7 @@
         </script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script src="/static/js/reg.js"></script>
+    <script src="/static/js/login.js"></script>
 </body>
 
 </html>

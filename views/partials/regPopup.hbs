@@ -1,10 +1,10 @@
-<div id="registerPopup" class="modal" role="dialog" aria-hidden="true" tabindex="-1">
+<div id="registerPopup" class="modal mt-2" role="dialog" aria-hidden="true" tabindex="-1">
     <div class="m-auto popupContainer">
 
-        <div class="topBar p-2 d-flex justify-content-between">
+        <div class="topBar p-2 d-flex justify-content-between align-items-center">
             <div><strong>Sign Up for CTF</strong></div>
             <div></div>
-            <img data-dismiss="modal" aria-label="Close" src="/static/images/closeIcon.png">
+            <button data-dismiss="modal" class="closeIcon"></button>
         </div>
 
         <div class="logoContainer p-5">
@@ -18,34 +18,48 @@
         <div class="formContainer pl-3 py-4">
             <form id="registerForm">
                 <div class="align-items-center m-2">
-                    <div class="tags d-inline-block">Name: *</div><input type="text" name="name">
-                    <span class="emsg hidden" id="nameError">Please Enter a Valid Name</span>
+                    <div class="tags d-inline-block">Name: *</div>
+					<input type="text" name="name">
+                    <span class="emsg hidden" id="nameError">Alphabets Only Min length-3 Max length-20</span>
                 </div>
                 <div class="align-items-center m-2">
-                    <div class="tags d-inline-block">Username: *</div> <input type="text" name="username">
-                    <span class="emsg hidden" id="usernameError">Please Enter a Valid username</span>
+                    <div class="tags d-inline-block">Username: *</div>
+					<input type="text" name="username">
+                    <span class="emsg hidden" id="usernameError">Min length-3 Max length-20</span>
                 </div>
                 <div class="align-items-center m-2">
-                    <div class="tags d-inline-block">Password: *</div> <input type="password" name="password">
-                    <span class="emsg hidden" id="passwordError">Please Enter a Valid password</span>
+                    <div class="tags d-inline-block">Password: *</div>
+					<input type="password" name="password">
+                    <span class="emsg hidden" id="passwordError">Min length-5 Max length-15</span>
                 </div>
                 <div class="align-items-center m-2">
-                    <div class="tags d-inline-block">Reg. No:</div> <input type="text" name="regNo">
+                    <div class="tags d-inline-block">Reg. No:</div>
+                    <input type="text" name="regNo">
                     <span class="emsg hidden" id="regnoError">Please Enter a Valid Reg No</span>
                 </div>
                 <div class="align-items-center m-2">
-                    <div class="tags d-inline-block">Email: *</div> <input type="text" name="email">
+                    <div class="tags d-inline-block">Email: *</div>
+                    <input type="email" name="email">
                     <span class="emsg hidden" id="emailError">Please Enter a Valid E-mail</span>
                 </div>
                 <div class="align-items-center m-2">
-                    <div class="tags d-inline-block">Phone: *</div> <input type="text" name="phoneNo">
+                    <div class="tags d-inline-block">Phone: *</div>
+                    <input type="number" name="phoneNo">
                     <span class="emsg hidden" id="phoneError">Please Enter a Valid Phone Number</span>
                 </div>
                 <div class="d-flex justify-content-end px-4 mt-4">
-                    <button type="submit" class="ml-3" id="registerSubmitBtn">Submit</button>
+                    <button type="submit" class="ml-3" id="registerSubmitBtn" disabled>Submit</button>
                     <button data-dismiss="modal" aria-label="Close" class="ml-3">Cancel</button>
                 </div>
             </form>
+            <div class="post-form-content">
+                <p>
+                    You have signed up for CSI-CTF!<br>
+                    We have sent you an verification email on your registered email-id. Please click on the verification
+                    link in the email to proceed.<br>
+                    Note that the verification link is valid only for 12 hours.
+                </p>
+            </div>
         </div>
     </div>
 </div>
