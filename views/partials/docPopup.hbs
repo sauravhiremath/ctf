@@ -1,6 +1,6 @@
 <div id="questionPopupModal" class="modal" role="dialog" aria-hidden="true" tabindex="-1">
     <div class="m-auto popupContainer">
-        <header class="d-flex flex-row app_header" style="height: 25px">
+        <header class="d-flex flex-row app_header" style="height: 30px">
             <div class="justify-content-start"><img src="/static/images/my_documents.png" class="header_icon" alt="">
             </div>
             <div><strong>Questions</strong></div>
@@ -32,29 +32,10 @@
                     <div></div>
                 </div>
             </div>
-            <div class="w-75 right_panel">
+            <div class="w-75 right_panel" style="overflow-y: scroll">
                 <div class="d-flex flex-row p-3">
                     <div id="question-data">
                     </div>
-
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.2.0/handlebars.js"></script>
-                   
-                    {{!-- <script id="question-template" type="text/x-handlebars-template">
-                        {{#each data}}
-                            <p>{{data}}</p>
-                        {{else}}
-                            <p>Empty Shit</p>    
-                        {{/each}}
-
-                        {{#each data}}
-                        <button class="btn singlePopup question-icon">
-                            <div class="icon-container">
-                                <img src="/static/images/recycle_bin.png" alt="">
-                                <span class="question-title" value={{ name }}>data.</span>
-                            </div>                        
-                        </button>
-                        {{/each}}
-                    </script> --}}
                 </div>
             </div>
         </div>

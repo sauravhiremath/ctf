@@ -16,9 +16,9 @@
 }
 #questionPopupModal{
 	position: absolute;
-	height: 460px;
-	width: 700px;
-	left: 60vh;
+	height: auto;
+	width: 750px;
+	left: 50vh;
 	top: 20vh;
 	border: 4px solid #1b70e5;
 	border-top: 0px;
@@ -27,8 +27,8 @@
 
 #singlePopupModal{
 	position: relative;
-	width: 604px;
-	height: 377px;
+	width: 600px;
+	height: auto;
 	left: 64vh;
 	top: -28vh;
 	border: 4px solid #1b70e5;
@@ -39,6 +39,10 @@
 
 
 .app_header{
+	font-weight: 700;
+	font-size: 12px;
+    text-shadow: rgb(0, 0, 0) 1px 1px;
+    color: white;
 	background: linear-gradient(
 		rgb(0, 88, 238) 0%,
 		rgb(53, 147, 255) 4%, 

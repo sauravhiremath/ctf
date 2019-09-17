@@ -16,21 +16,21 @@
         </div>
 
         <div class="formContainer pl-3 py-4">
-            <form id="loginForm">
+            <form id="loginForm" onsubmit="onLoginSubmit()">
                 <div class="align-items-center m-2">
                     <div class="tags d-inline-block">Username: *</div>
                     <input type="text" name="username">
-                    <span class="emsg hidden" id="usernameError">Min length-3 Max length-20</span>
+                    <span class="emsg hidden" id="unameError">Min length-3 Max length-20</span>
                 </div>
                 <div class="align-items-center m-2">
                     <div class="tags d-inline-block">Password: *</div>
                     <input type="password" name="password">
-                    <span class="emsg hidden" id="passwordError">Min length-5 Max length-15</span>
+                    <span class="emsg hidden" id="pswError">Min length-5 Max length-15</span>
                 </div>
                 <div>
                     <a class="forgotpsw-text" href="">Forgot Password</a>
                 </div>
-                <button type="submit" class="ml-3" id="loginSubmitBtn" disabled>Submit</button>
+                <button type="submit" class="ml-3" id="loginSubmitBtn" onsubmit="onLoginSubmit()" disabled>Submit</button>
                 <button data-dismiss="modal" aria-label="Close" class="ml-3">Cancel</button>
             </form>
         </div>
