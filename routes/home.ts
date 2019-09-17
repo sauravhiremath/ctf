@@ -95,47 +95,66 @@ router.post("/submit", userCheck, async (req, res) => {
 		data: submissionData,
 		question: challengeInterface
 	) {
-		return async () => {
-			var newPoints = Math.floor(question.currentPoints * (9 / 11));
+		var newPoints = Math.floor(question.currentPoints * (9 / 11));
 
-			//Changes in the challenge Model--> change currentPoints and solvedBy
-			await Challenge.updateOne(
-				{ _id: data.qid },
-				{
-					$set: {
-						currentPoints: newPoints,
-						$push: { solvedBy: data.username }
-					}
-				},
-				err => {
+		//Changes in the challenge Model--> change currentPoints and solvedBy
+		await Challenge.updateOne(
+			{ _id: data.qid },
+			{
+				$set: {
+					currentPoints: newPoints,
+					$push: { solvedBy: data.username }
+				}
+			},
+			(err, doc) => {
+				if (err) {
 					console.log(err);
 					res.status(400).json({
 						success: false,
 						message: "Challenge points update failed 1"
 					});
+					return;
 				}
-			);
+				if(!doc) {
+					res.status(400).json({
+						success: false,
+						message: "Challenge points update failed. Challenge qid not found!"
+					});
+					return;
+				}
+				
+			}
+		);
 
-			//Changes in the user Model--> changed solved and points
-			await User.updateOne(
-				{ _id: data.qid },
-				{
-					$set: {
-						$inc: { points: newPoints },
-						$push: { solved: data.username }
-					}
-				},
-				err => {
+		//Changes in the user Model--> changed solved and points
+		await User.updateOne(
+			{ _id: data.qid },
+			{
+				$set: {
+					$inc: { points: newPoints },
+					$push: { solved: question.name }
+				}
+			},
+			(err, doc) => {
+				if (err) {
 					console.log(err);
 					res.status(400).json({
 						success: false,
 						message: "User points update failed!"
 					});
+					return;
 				}
-			);
+				if (!doc) {
+					res.status(400).json({
+						success: false,
+						message: "User points update failed. Question qid not found"
+					});
+					return;
+				}
+			}
+		);
 
-			await UpdateLeaderboardModel(data, newPoints);
-		};
+		await UpdateLeaderboardModel(data, newPoints);
 	}
 
 	async function UpdateLeaderboardModel(
@@ -146,12 +165,22 @@ router.post("/submit", userCheck, async (req, res) => {
 		await Leaderboard.updateOne(
 			{ username: data.username },
 			{ $set: { $inc: { points: newPoints } } },
-			err => {
-				res.status(400).json({
-					success: false,
-					message: "Leaderboard update Failed!"
-				});
-				console.log(err);
+			(err, doc) => {
+				if (err) {
+					console.log(err);
+					res.status(400).json({
+						success: false,
+						message: "Leaderboard update Failed!"
+					});
+					return;
+				}
+				if (!doc) {
+					res.status(400).json({
+						success: false,
+						message: "Leaderboard update Failed. username not found!"
+					});
+					return;
+				}
 			}
 		).sort({ points: 1 });
 	}
@@ -177,9 +206,15 @@ router.post("/submit", userCheck, async (req, res) => {
 					success: false,
 					message: "Submission not saved in logs"
 				});
+				return;
 			}
 			if (err) {
 				console.log(err);
+				res.status(400).json({
+					success: false,
+					message: "Submission not saved in logs"
+				});
+				return;
 			}
 		});
 	}
