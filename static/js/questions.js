@@ -87,8 +87,8 @@ $(document).on("click", ".submit-button", function(){
     var flag = $(inputFlag).val();
     const id = $(this).attr("id");
 
-    var socket = io.connect('http://localhost:4000');
-    console.log(socket);
+    // var socket = io.connect('http://localhost:4000');
+    // console.log(socket);
     console.log(flag);
     $.ajax({
         method: "POST",
@@ -100,7 +100,7 @@ $(document).on("click", ".submit-button", function(){
             timeStampUser: string,
         },
         success: data=>{
-            if(data["solved"] == true){
+            if(data["success"] == true){
                 console.log("yes");
                 $("#singlePopupModal").modal('hide');
                 $("#successModal").modal('show')

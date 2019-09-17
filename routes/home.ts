@@ -86,11 +86,19 @@ router.post("/submit", userCheck, async (req, res) => {
 		const solved: boolean = true;
 		await updateLog(data, question, solved);
 		await refreshData(data, question);
-		return "Correct Flag";
+		res.json({
+			success: true,
+			message: "Correct"
+		});
+		return;
 	} else {
 		const solved: boolean = false;
 		updateLog(data, question, solved);
-		return "Incorrect Flag";
+		res.json({
+			success: false,
+			message: "Incorrect"
+		});
+		return;
 	}
 
 	async function refreshData(

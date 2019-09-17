@@ -56,20 +56,21 @@ app.use(
 
 app.use("/home", homeRoutes);
 app.use("/auth", authRoutes);
-// app.use("/", (req, res) => {
-// 	res.redirect("/auth/register");
-// });
+app.use("/", (req, res) => {
+	res.redirect("/auth/register");
+});
 // createQuestion();
+// const changeStream = Leaderboard.watch({ fullDocument: 'updateLookup'});
+
 io.on("connection", socket => {
 	console.log("Made connection to socketID and ipAddress ", [
 		socket.id,
 		socket.request.connection._peername.address
 	]);
 
-	const changeStream = Leaderboard.watch({ fullDocument: 'updateLookup'});
-	changeStream.on('change', (change) => {
-		io.emit(change);
-	})
+	// changeStream.on('change', (change) => {
+	// 	io.emit('leaderboardUpdate', change);
+	// })
 	// socket.on("userSubmission", handleSubmission);
 	// socket.on('help', handleHelper)
 
