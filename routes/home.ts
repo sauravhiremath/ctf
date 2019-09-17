@@ -68,6 +68,7 @@ router.post("/question", async (req, res) => {
 	res.json({
 		success: true,
 		message: {
+			id: quest._id,
 			qname: quest.name,
 			description: quest.description,
 			hint: quest.hint,

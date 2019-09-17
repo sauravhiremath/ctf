@@ -14,11 +14,10 @@ $(document).on("dblclick", ".desktop-icon", function(){
             console.log(filtered);
             var data = '';
             for(var i=0; i<filtered.length; i++){
-                var question_data = '<button class="btn singlePopup question-icon"> <div class="icon-container"><img src="/static/images/recycle_bin.png" alt=""><span class="question-title" value='+ filtered.name +'>'+ filtered.name +'</span></div></button>'
+                var question_data = '<button class="btn singlePopup question-icon" value='+ filtered[i].name +' id='+ filtered[i]._id +'> <div class="icon-container"><img src="/static/images/recycle_bin.png" alt=""><span class="question-title">'+ filtered[i].name +'</span></div></button>'
                 data+=question_data;
             }
             document.getElementById("question-data").innerHTML = data;
-            console.log(data);
             // var popupHtml = $("#question-template").html();
             // console.log(popupHtml);
             // var theTemplate = Handlebars.compile(popupHtml);
@@ -55,6 +54,14 @@ $(document).on("dblclick", ".question-icon", function(){
             "qname": questionName,
         },
         success: function(result){
+                data = result["message"]
+                var question_text = '<p>'+ data.description +'</p>'
+                var text_field = '<div class="col-10"><input type="text" class="w-100" name="flag-input"></div><div class=" pl-3 w-50"><button class="pl-3 pr-3 submit-button" id='+ data.id + '>submit</button></div>'
+                $("#nav_content").html(question_text);
+                $("#submit-div").html(text_field);
+                $(document).on("click", "#question_text", function(){
+                    $("#nav_content").html(question_text);
+                })
                 console.log(result);
                 var cl = $(button).attr("class");
                 cl = cl.split(" ");
@@ -75,18 +82,23 @@ $(document).on("dblclick", ".question-icon", function(){
 
 
 
-$(document).on("click", ".flag_submit", function(){
-    const inputFlag = $("input[name='flag_input']")
+$(document).on("click", ".submit-button", function(){
+    const inputFlag = $("input[name='flag-input']")
     var flag = $(inputFlag).val();
+    const id = $(this).attr("id");
+
+    var socket = io.connect('http://localhost:4000');
+    console.log(socket);
     console.log(flag);
     $.ajax({
         method: "POST",
         url: "/submit",
-        // data: {
-        //     qid: 1,
-        //     ctfFlag: flag,
-        //     username: "uname",
-        // },
+        data: {
+            username: string,
+            qid: string,
+            ctfFlag: string,
+            timeStampUser: string,
+        },
         success: data=>{
             if(data["solved"] == true){
                 console.log("yes");

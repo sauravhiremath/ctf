@@ -107,6 +107,10 @@
 	width: 150px;
 }
 
+.forgotpsw-text{
+	margin-left: 150px;
+}
+
 .formContainer input {
 	height: 25px;
 	border: 1px solid rgb(26, 26, 197);
