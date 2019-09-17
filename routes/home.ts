@@ -4,8 +4,6 @@ import { Challenge, challengeInterface } from "../models/challenge";
 import { submissionData } from "../models/socketInterfaces";
 import Leaderboard from "../models/leaderboard";
 import attemptedChallenges from "../models/solvedChallenges";
-import { userInfo } from "os";
-import { runInNewContext } from "vm";
 
 const router = Router();
 export default router;
@@ -83,7 +81,6 @@ router.post("/submit", userCheck, async (req, res) => {
 	const question = await Challenge.findOne({ _id: data.qid });
 
 	if (data.ctfFlag == question.answer) {
-		0;
 		const solved: boolean = true;
 		await updateLog(data, question, solved);
 		await refreshData(data, question);
