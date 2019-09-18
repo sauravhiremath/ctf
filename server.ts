@@ -7,7 +7,7 @@ import session from "express-session";
 import socketio from "socket.io";
 import http from "http";
 import { submissionData } from "./models/socketInterfaces";
-import { handleSubmission } from "./routes/handleSubmission";
+// import { handleSubmission } from "./routes/handleSubmission";
 import homeRoutes from "./routes/home";
 import authRoutes from "./routes/auth";
 import Leaderboard from "./models/leaderboard";
