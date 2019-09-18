@@ -19,7 +19,7 @@ $(document).on("dblclick", ".desktop-icon", function(){
                 console.log(filtered);
                 var data = '';
                 for(var i=0; i<filtered.length; i++){
-                    var question_data = '<button class="btn singlePopup question-icon" value='+ filtered[i].name +' id='+ filtered[i]._id +'> <div class="icon-container"><img src="/static/images/recycle_bin.png" alt=""><span class="question-title">'+ filtered[i].name +'</span></div></button>'
+                    var question_data = '<button class="btn singlePopup question-icon col-2" value='+ filtered[i].name +' id='+ filtered[i]._id +'> <div class="icon-container"><img src="/static/images/'+ filtered[i].type +'.png" alt=""><span class="question-title">'+ filtered[i].name +'</span></div></button>'
                     data+=question_data;
                 }
             }
@@ -27,7 +27,7 @@ $(document).on("dblclick", ".desktop-icon", function(){
                 if(arr.length === 0) return;
                 var data='';
                 for(var i=0; i<arr.length; i++){
-                    var question_data = '<button class="btn singlePopup question-icon" value='+ arr[i].name +' id='+ arr[i]._id +' disabled> <div class="icon-container"><img src="/static/images/recycle_bin.png" alt=""><span class="question-title">'+ arr[i].name +'</span></div></button>'
+                    var question_data = '<button class="btn singlePopup question-icon" value='+ arr[i].name +' id='+ arr[i]._id +' disabled> <div class="icon-container"><img src="/static/images/'+ arr[i].type +'.png" alt=""><span class="question-title">'+ arr[i].name +'</span></div></button>'
                     data+=question_data;
                 }
             }

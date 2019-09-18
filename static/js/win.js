@@ -10,8 +10,6 @@ $(document).on("click", "#leaderBtn", function(){
     });
 })
 
-
-
 $(document).on("click", ".closeIcon", function(){
     $('#questionPopupModal').modal('hide')
 })

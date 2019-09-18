@@ -60,7 +60,7 @@ body {
 	font-size: 1.2rem;
 }
 
-.signUpText {
+.signUpText, .loginText {
 	text-decoration: underline;
 	font-style: italic;
 	cursor: pointer;
