@@ -9,6 +9,8 @@ const router = Router();
 export default router;
 
 router.get("/", (req, res, next) => {
+	req.session.user = "sauravmh";
+	req.session.userID = "5d7bd673f3025f486c70eee9";
 	res.render("home.hbs");
 });
 
@@ -39,7 +41,6 @@ router.get("/questionStatus?:sortKey", async (req, res) => {
 	}).sort({ [sortKey]: 1 });
 
 	res.json({ allChallenges });
-	
 });
 
 router.post("/question", async (req, res) => {
@@ -79,6 +80,7 @@ router.post("/question", async (req, res) => {
 
 router.post("/submit", userCheck, async (req, res) => {
 	const qid = req.body.qid;
+	// console.log(qid);
 	const ctfFlag: string = req.body.ctfFlag;
 	const timeStampUser: string = req.body.timeStampUser;
 
@@ -87,11 +89,12 @@ router.post("/submit", userCheck, async (req, res) => {
 		ctfFlag: ctfFlag,
 		timeStampUser: timeStampUser
 	};
-	
-	console.log(data);
+
+	// console.log(data);
 	const question = await Challenge.findOne({ _id: data.qid });
 	if (data.ctfFlag == question.answer) {
 		const solved: boolean = true;
+		// console.log("ps1");
 		await updateLog(data, question, solved);
 		await refreshData(data, question);
 		res.json({
@@ -114,7 +117,7 @@ router.post("/submit", userCheck, async (req, res) => {
 		question: challengeInterface
 	) {
 		var newPoints = Math.floor(question.currentPoints * (9 / 11));
-
+		// console.log(newPoints, question.currentPoints);
 		//Changes in the challenge Model--> change currentPoints and solvedBy
 		await Challenge.updateOne(
 			{ _id: data.qid },
@@ -126,23 +129,25 @@ router.post("/submit", userCheck, async (req, res) => {
 			},
 			(err, doc) => {
 				if (err) {
-					console.log(err);
+					// console.log(err);
 					res.status(400).json({
 						success: false,
 						message: "Challenge points update failed 1"
 					});
 					return;
 				}
-				if(!doc) {
+				if (!doc) {
 					res.status(400).json({
 						success: false,
-						message: "Challenge points update failed. Challenge qid not found!"
+						message:
+							"Challenge points update failed. Challenge qid not found!"
 					});
 					return;
 				}
-				
 			}
 		);
+
+		// console.log(newPoints, question.currentPoints);
 
 		//Changes in the user Model--> changed solved and points
 		await User.updateOne(
@@ -155,7 +160,7 @@ router.post("/submit", userCheck, async (req, res) => {
 			},
 			(err, doc) => {
 				if (err) {
-					console.log(err);
+					// console.log(err);
 					res.status(400).json({
 						success: false,
 						message: "User points update failed!"
@@ -165,14 +170,18 @@ router.post("/submit", userCheck, async (req, res) => {
 				if (!doc) {
 					res.status(400).json({
 						success: false,
-						message: "User points update failed. Question qid not found"
+						message:
+							"User points update failed. Question qid not found"
 					});
 					return;
 				}
 			}
 		);
 
+		// console.log("ps3");
+
 		await UpdateLeaderboardModel(data, newPoints);
+		// console.log("done");
 	}
 
 	async function UpdateLeaderboardModel(
@@ -195,12 +204,15 @@ router.post("/submit", userCheck, async (req, res) => {
 				if (!doc) {
 					res.status(400).json({
 						success: false,
-						message: "Leaderboard update Failed. username not found!"
+						message:
+							"Leaderboard update Failed. username not found!"
 					});
 					return;
 				}
 			}
 		).sort({ points: 1 });
+
+		// console.log("Leaderboard update done");
 	}
 
 	async function updateLog(
@@ -213,11 +225,11 @@ router.post("/submit", userCheck, async (req, res) => {
 
 		const newAttempt = new attemptedChallenges({
 			questionId: data.qid,
-			participant: req.session.user,
+			participant: req.session.userID,
 			timeSubmitted: Date(),
 			pointsOnSubmission: pointsOnAttempt
 		});
-
+		// console.log(newAttempt);
 		await newAttempt.save((err, doc) => {
 			if (!doc) {
 				res.status(400).json({
@@ -227,7 +239,7 @@ router.post("/submit", userCheck, async (req, res) => {
 				return;
 			}
 			if (err) {
-				console.log(err);
+				// console.log(err);
 				res.status(400).json({
 					success: false,
 					message: "Submission not saved in logs"
@@ -240,7 +252,7 @@ router.post("/submit", userCheck, async (req, res) => {
 
 router.get("/leaderboard", async (req, res) => {
 	const currStandings = await Leaderboard.find({ points: { $gte: 0 } });
-	console.log(currStandings);
+	// console.log(currStandings);
 	res.json(currStandings);
 });
 

@@ -49,6 +49,7 @@ $(document).on("dblclick", ".question-icon", function(){
         success: function(result){
                 data = result["message"]
                 var question_text = '<p>'+ data.description +'</p>'
+                console.log(data)
                 var text_field = '<div class="col-10"><input type="text" class="w-100" name="flag-input"></div><div class=" pl-3 w-50"><button class="pl-3 pr-3 submit-button" id='+ data.id + '>submit</button></div>'
                 $("#nav_content").html(question_text);
                 $("#submit-div").html(text_field);
@@ -83,8 +84,6 @@ $(document).on("dblclick", ".question-icon", function(){
         },
     })
 })
-
-
 
 
 $(document).on("click", ".submit-button", function(){

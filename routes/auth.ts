@@ -45,11 +45,19 @@ router.post("/login", async (req, res, next) => {
 			User.findOne(
 				{ username: username, verifiedStatus: true },
 				(err, doc1) => {
+					if(err){
+						res.json({
+							success: false,
+							message: "Account Not Found"
+						});
+						return;
+					}
 					if (!doc1) {
 						res.json({
 							success: false,
 							message: "Account Not verified"
 						});
+						return;
 					} else {
 						const chkPass = bcrypt.compareSync(
 							password,
@@ -58,6 +66,7 @@ router.post("/login", async (req, res, next) => {
 
 						if (chkPass == true) {
 							req.session.user = username;
+							req.session.userID = doc1._id;
 							res.json({
 								success: true,
 								message: "Logged In"
