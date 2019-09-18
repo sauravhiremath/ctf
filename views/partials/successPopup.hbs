@@ -1,24 +1,14 @@
-<div id="successPopup">
+<div id="successPopup" class="modal" role="dialog" aria-hidden="true" tabindex="-1">
     <div class="m-auto popupContainer">
-
-        <div class="topBar p-2 d-flex justify-content-between">
-            <div><strong>Registration Successful!</strong></div>
-            <div></div>
-            <div class="closeIcon"></div>
-        </div>
-
-        <div class="logoContainer p-5">
-            <img src="/static/images/logo.png">
-        </div>
-
-        <div>
-            <hr class="accent-popup orange-accent-popup">
-        </div>
-
-        <div class="success-message pl-3 py-4">
-        Congratulations! Your email has been successfully verified.
-        <br>
-        Happy Hacking!
-        </div>
+        <header class="d-flex flex-row app_header" style="height: 30px">
+            <div class="justify-content-start"><img src="/static/images/my_documents.png" class="header_icon" alt="">
+            </div>
+            <div><strong>Questions</strong></div>
+            <div class="d-flex ml-auto"><button class="close-success"></button></div>
+        </header>
+        
+        <!-- Main content -->
+        
+        <div class="message p-4">Question Solved</div>
     </div>
 </div>

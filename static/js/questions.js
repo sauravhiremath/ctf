@@ -1,26 +1,38 @@
 $(document).on("dblclick", ".desktop-icon", function(){
     var button = $(this);
-    var difficulty = $(this).attr("name");
+    var difficulty = $(this).attr("id");
+    var solved = $(this).attr("name");
+    console.log(solved);
     $.ajax({
         type: "GET",
         url: "home/questionStatus",
         data: {
             "sortKey": "difficulty",
-            "solved": "False"
+            "solved": solved
         },
         success: function(result){
             var arr=result["allChallenges"]
-            console.log(result)
-            var filtered = arr.filter(question=>question.difficulty==difficulty)
-            if(filtered.length === 0) return;
-            console.log(filtered);
-            var data = '';
-            for(var i=0; i<filtered.length; i++){
-                var question_data = '<button class="btn singlePopup question-icon" value='+ filtered[i].name +' id='+ filtered[i]._id +'> <div class="icon-container"><img src="/static/images/recycle_bin.png" alt=""><span class="question-title">'+ filtered[i].name +'</span></div></button>'
-                data+=question_data;
+            console.log(arr);
+            if(solved=="False"){
+                var filtered = arr.filter(question=>question.difficulty==difficulty)
+                if(filtered.length === 0) return;
+                console.log(filtered);
+                var data = '';
+                for(var i=0; i<filtered.length; i++){
+                    var question_data = '<button class="btn singlePopup question-icon" value='+ filtered[i].name +' id='+ filtered[i]._id +'> <div class="icon-container"><img src="/static/images/recycle_bin.png" alt=""><span class="question-title">'+ filtered[i].name +'</span></div></button>'
+                    data+=question_data;
+                }
             }
-            document.getElementById("question-data").innerHTML = data;
+            else{
+                if(arr.length === 0) return;
+                var data='';
+                for(var i=0; i<arr.length; i++){
+                    var question_data = '<button class="btn singlePopup question-icon" value='+ arr[i].name +' id='+ arr[i]._id +' disabled> <div class="icon-container"><img src="/static/images/recycle_bin.png" alt=""><span class="question-title">'+ arr[i].name +'</span></div></button>'
+                    data+=question_data;
+                }
+            }
             
+            document.getElementById("question-data").innerHTML = data;
             var cl = $(button).attr("class");
             cl = cl.split(" ");
             var id = cl[1];
@@ -35,21 +47,21 @@ $(document).on("dblclick", ".desktop-icon", function(){
 })
 
 
-
 $(document).on("dblclick", ".question-icon", function(){
     var button = $(this);
-    var questionName = $(this).attr("id");
+    var id = $(this).attr("id");
     $.ajax({
         type: "POST",
         url: "/home/question",
         data: {
-            "qid": questionName,
+            "qid": id,
         },
         success: function(result){
-                data = result["message"]
+                var data = result["message"]
+                console.log(data);
                 var question_text = '<p>'+ data.description +'</p>'
-                console.log(data)
-                var text_field = '<div class="col-10"><input type="text" class="w-100" name="flag-input"></div><div class=" pl-3 w-50"><button class="pl-3 pr-3 submit-button" id='+ data.id + '>submit</button></div>'
+                var text_field = '<div class="col-10"><input type="text" class="w-100 pl-1" name="flag-input" placeholder="CSICTF{}"></div><div class=" pl-3 w-50"><button class="pl-3 pr-3 submit-button" id='+ data.id + ' data-toggle="modal">Submit</button></div>'
+                var people = data["solvedBy"];
                 $("#nav_content").html(question_text);
                 $("#submit-div").html(text_field);
                 
@@ -64,7 +76,17 @@ $(document).on("dblclick", ".question-icon", function(){
                 
                 $(document).on("click", "#no_of_people", function(e){
                     e.preventDefault();
-                    $("#nav_content").html("Stats here");
+                    if(people.length === 0){
+                        statsHtml = "Noone has solved this question yet";
+                    }
+                    else{
+                        var statsHtml = '';
+                        for(var i=0; i<people.length; i++){
+                            singleDiv='<div class="py-2">'+ people[i] +'</div>'
+                            statsHtml += singleDiv;
+                        }
+                    }
+                    $("#nav_content").html(statsHtml);
                 })
                 
                 console.log(result);
@@ -107,14 +129,26 @@ $(document).on("click", ".submit-button", function(){
         },
         success: data =>{
             if(data["success"] == true){
-                console.log("yes");
+                $(".message").html(data["message"]);
+                $("#singlePopupModal").modal('hide');
+                $("#successPopup").modal({
+                    show: true,
+                    backdrop: false
+                });
+                $('#'+id).hide();
+                console.log("hidden");
             }
             else{
-                console.log("no");
-                
+                message = data["message"];
+                console.log(message);
+                $(".message").html(message);
+                $("#successPopup").modal({
+                    show: true,
+                    backdrop: false
+                });
             }
         },
-        error: data =>{
+        error: data => {
             console.log(data);
         }
 

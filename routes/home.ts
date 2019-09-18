@@ -10,16 +10,16 @@ const ObjectId = mongoose.Types.ObjectId;
 const router = Router();
 export default router;
 
-router.get("/", (req, res, next) => {
-	req.session.user = "sauravmh";
-	req.session.userID = "5d7bd673f3025f486c70eee9";
+router.get("/", userCheck, (req, res, next) => {
+	// req.session.user = "test123";
+	// req.session.userID = "5d80fe7458fe284e53c4c4eb";
 	res.render("home.hbs");
 });
 
-router.get("/questionStatus", async (req, res) => {
+router.get("/questionStatus", userCheck, async (req, res) => {
 	var sortKey = req.query.sortKey;
 	const solved = req.query.solved;
-	const user = "sauravmh"; //type || difficulty
+	const user = req.session.user; //type || difficulty
 
 	if (sortKey != "type" && sortKey != "difficulty") {
 		res.status(400).json({
@@ -70,7 +70,7 @@ router.get("/questionStatus", async (req, res) => {
 	}
 });
 
-router.post("/question", async (req, res) => {
+router.post("/question", userCheck, async (req, res) => {
 	const qid = req.body.qid;
 
 	if (!qid) {
@@ -309,7 +309,7 @@ function userCheck(req, res, next) {
 	if (req.session.user) {
 		next();
 	} else {
-		// res.redirect("/auth/register");
-		next();
+		res.redirect("/auth/register");
+		// next();
 	}
 }

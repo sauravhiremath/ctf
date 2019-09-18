@@ -15,6 +15,9 @@ $(document).on("click", "#leaderBtn", function(){
 $(document).on("click", ".closeIcon", function(){
     $('#questionPopupModal').modal('hide')
 })
+$(document).on("click", ".close-success", function(){
+    $('#successPopup').modal('hide')
+})
 $(document).on("click", ".closebtn", function(){
    $('#singlePopupModal').modal('hide')
 })

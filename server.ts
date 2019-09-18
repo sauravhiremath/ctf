@@ -12,6 +12,7 @@ import homeRoutes from "./routes/home";
 import authRoutes from "./routes/auth";
 import Leaderboard from "./models/leaderboard";
 import { createQuestion } from "./scripts/createNewQuestion";
+var MongoDBStore = require('connect-mongodb-session')(session);
 
 const app = express();
 
@@ -51,7 +52,10 @@ app.use(
 		secret: process.env.SECRET_KEY,
 		saveUninitialized: true,
 		resave: true,
-		// store: new mongoSto({})
+		store: new MongoDBStore({
+			uri: 'mongodb://localhost:27017/ctf',
+  			collection: 'mySessions'
+		})
 	})
 );
 
