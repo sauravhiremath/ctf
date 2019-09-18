@@ -182,22 +182,6 @@ a:hover{
     background-color: rgba(60, 80, 210, 0.5);
 }
 
-.nav-item a:hover{
-    color: black;
-}
-
-.nav-item a:hover{
-    color: black;
-}
-
-.nav-item:hover{
-    filter: brightness(150%);
-}
-
-.nav-item:active{
-    border-bottom: none;
-}
-
 .questionPopup:active img{
     filter: drop-shadow(blue, 2px, 2px);
 }

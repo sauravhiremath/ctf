@@ -18,20 +18,13 @@ $(document).on("dblclick", ".desktop-icon", function(){
                 data+=question_data;
             }
             document.getElementById("question-data").innerHTML = data;
-            // var popupHtml = $("#question-template").html();
-            // console.log(popupHtml);
-            // var theTemplate = Handlebars.compile(popupHtml);
-            // var contextObj = {name: "hello"};
-            // var compileHtml = theTemplate(contextObj);
-            // console.log(compileHtml);
-            // $("#question-data").html(compileHtml);
             
             var cl = $(button).attr("class");
             cl = cl.split(" ");
             var id = cl[1];
             $('#' + id + 'Modal').modal({
                 show: true,
-                backdrop: false,
+                backdrop: false
             }).draggable({
                 handle: ".app_header"
             })
@@ -59,9 +52,21 @@ $(document).on("dblclick", ".question-icon", function(){
                 var text_field = '<div class="col-10"><input type="text" class="w-100" name="flag-input"></div><div class=" pl-3 w-50"><button class="pl-3 pr-3 submit-button" id='+ data.id + '>submit</button></div>'
                 $("#nav_content").html(question_text);
                 $("#submit-div").html(text_field);
-                $(document).on("click", "#question_text", function(){
+                
+                $(document).on("click", "#question_text", function(e){
+                    e.preventDefault();
                     $("#nav_content").html(question_text);
                 })
+                $(document).on("click", "#trend", function(e){
+                    e.preventDefault();
+                    $("#nav_content").html("Trends here");
+                })
+                
+                $(document).on("click", "#no_of_people", function(e){
+                    e.preventDefault();
+                    $("#nav_content").html("Stats here");
+                })
+                
                 console.log(result);
                 var cl = $(button).attr("class");
                 cl = cl.split(" ");

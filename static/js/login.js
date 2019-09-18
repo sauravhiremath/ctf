@@ -1,31 +1,24 @@
-const Loginusername = $("input[name='username']");
-const Loginpassword = $("input[name='password']");
+const loginUsername = $("input[name='username']");
+const loginPassword = $("input[name='password']");
 
 
-function onLoginSubmit(token) {
-    const username = encodeURIComponent(usernameInput.val());
-    const password = encodeURIComponent(passwordInput.val());
-    const formData = `g-recaptcha-response=${token}&username=${username}&password=${password}`;
-    console.log(formData)
+
+$(document).on("click", "#loginSubmitBtn", function(){
+    const username = encodeURIComponent(loginUsername.val());
+    const password = encodeURIComponent(loginPassword.val());
     $.ajax({
-		type: "POST",
-		url: "/auth/login",
-		data: formData,
-        error: (xhr, status, message) => {
-            const error = JSON.parse(xhr.responseText);
-            if (error["message"] == "Not registered") {
-				alert("Please register");
-			} else if (error["message"] == "missingFields") {
-				alert("Fields marked with * cannot be blank.");
-			} else {
-				alert(error["message"]);
-			}
+        type: "POST",
+        url: "/auth/login",
+        data: {
+            username: username,
+            password: password
+        },
+        success: data=> {
+            console.log(data);
         }
-    });
 
-    grecaptcha.reset();
-}
-
+    })
+})
 
 usernameInput.on("keyup", function () {
     if (!$(this).val().match(regexname)) {
