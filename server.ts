@@ -63,6 +63,7 @@ app.use('*', (req, res) => {
 app.use("/", (req, res) => {
 	res.redirect("/auth/register");
 });
+
 // createQuestion();
 // const changeStream = Leaderboard.watch({ fullDocument: 'updateLookup'});
 

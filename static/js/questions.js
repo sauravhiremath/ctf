@@ -3,12 +3,14 @@ $(document).on("dblclick", ".desktop-icon", function(){
     var difficulty = $(this).attr("name");
     $.ajax({
         type: "GET",
-        url: "/home/questionStatus",
+        url: "home/questionStatus",
         data: {
             "sortKey": "difficulty",
+            "solved": "False"
         },
         success: function(result){
             var arr=result["allChallenges"]
+            console.log(result)
             var filtered = arr.filter(question=>question.difficulty==difficulty)
             if(filtered.length === 0) return;
             console.log(filtered);
@@ -29,9 +31,6 @@ $(document).on("dblclick", ".desktop-icon", function(){
                 handle: ".app_header"
             })
         },
-        error: function(){
-                console.log(err);
-        },
     })
 })
 
@@ -39,12 +38,12 @@ $(document).on("dblclick", ".desktop-icon", function(){
 
 $(document).on("dblclick", ".question-icon", function(){
     var button = $(this);
-    var questionName = $(this).attr("value");
+    var questionName = $(this).attr("id");
     $.ajax({
         type: "POST",
         url: "/home/question",
         data: {
-            "qname": questionName,
+            "qid": questionName,
         },
         success: function(result){
                 data = result["message"]
@@ -79,7 +78,7 @@ $(document).on("dblclick", ".question-icon", function(){
                     handle: ".app_header"
                 })
         },
-        error: function(){
+        error: function(data){
                 console.log(data);
         },
     })

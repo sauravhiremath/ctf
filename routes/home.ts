@@ -1,10 +1,12 @@
 import { Router } from "express";
 import { User } from "../models/user";
+import mongoose from "mongoose";
 import { Challenge, challengeInterface } from "../models/challenge";
 import { submissionData } from "../models/socketInterfaces";
 import Leaderboard from "../models/leaderboard";
 import attemptedChallenges from "../models/solvedChallenges";
 
+const ObjectId = mongoose.Types.ObjectId;
 const router = Router();
 export default router;
 
@@ -14,8 +16,10 @@ router.get("/", (req, res, next) => {
 	res.render("home.hbs");
 });
 
-router.get("/questionStatus?:sortKey", async (req, res) => {
-	const sortKey = req.query.sortKey; //type || difficulty
+router.get("/questionStatus", async (req, res) => {
+	var sortKey = req.query.sortKey;
+	const solved = req.query.solved;
+	const user = "sauravmh"; //type || difficulty
 
 	if (sortKey != "type" && sortKey != "difficulty") {
 		res.status(400).json({
@@ -25,24 +29,45 @@ router.get("/questionStatus?:sortKey", async (req, res) => {
 		return;
 	}
 
-	const otherType: string = sortKey == "type" ? "difficulty" : "type";
 	var query = {};
-	query[sortKey] = 1;
-	query[otherType] = 1;
+	query["type"] = 1;
+	query["difficulty"] = 1;
 	query["name"] = 1;
-	query["solvedBy"] = 1;
 
-	const allChallenges = await Challenge.find({}, query, err => {
-		if (err) {
-			res.status(400).json({
-				success: false,
-				message: "Error finding list of Questions!"
-			});
-		}
-	}).sort({ [sortKey]: 1 });
+	// console.log(solved);
 
-	res.json({ allChallenges });
-	
+	// console.log(user);
+	if (solved === "True") {
+		const allChallenges = await Challenge.find(
+			{ solvedBy: { $in: [user] } },
+			query,
+			(err, doc) => {
+				if (err) {
+					res.status(400).json({
+						success: false,
+						message: "Error finding list of Questions!"
+					});
+				}
+			}
+		).sort({ [sortKey]: 1 });
+
+		res.json({ allChallenges });
+	} else {
+		const allChallenges = await Challenge.find(
+			{ solvedBy: { $nin: [req.session.user] } },
+			query,
+			(err, doc) => {
+				if (err) {
+					res.status(400).json({
+						success: false,
+						message: "Error finding list of Questions!"
+					});
+				}
+			}
+		).sort({ [sortKey]: 1 });
+
+		res.json({ allChallenges });
+	}
 });
 
 router.post("/question", async (req, res) => {
@@ -94,15 +119,28 @@ router.post("/submit", userCheck, async (req, res) => {
 
 	// console.log(data);
 	const question = await Challenge.findOne({ _id: data.qid });
+	if (!question) {
+		res.json({
+			success: false,
+			message: "No qid"
+		});
+		return;
+	}
+	// console.log(question.solvedBy);
+	if (question.solvedBy.indexOf(req.session.user) > -1) {
+		res.json({
+			success: false,
+			message: "Stop spamming!"
+		});
+		return;
+	}
+	console.log(question, data);
 	if (data.ctfFlag == question.answer) {
+		console.log(req.session.user);
 		const solved: boolean = true;
 		// console.log("ps1");
 		await updateLog(data, question, solved);
-		await refreshData(data, question);
-		res.json({
-			success: true,
-			message: "Correct"
-		});
+		await refreshData(data, question, req, res);
 		return;
 	} else {
 		const solved: boolean = false;
@@ -116,18 +154,21 @@ router.post("/submit", userCheck, async (req, res) => {
 
 	async function refreshData(
 		data: submissionData,
-		question: challengeInterface
+		question: challengeInterface,
+		req,
+		res
 	) {
 		var newPoints = Math.floor(question.currentPoints * (9 / 11));
+		// console.log(username);
 		// console.log(newPoints, question.currentPoints);
 		//Changes in the challenge Model--> change currentPoints and solvedBy
 		await Challenge.updateOne(
-			{ _id: data.qid },
+			{ _id: new ObjectId(data.qid) },
 			{
 				$set: {
-					currentPoints: newPoints,
-					$push: { solvedBy: req.session.user }
-				}
+					currentPoints: newPoints
+				},
+				$push: { solvedBy: req.session.user }
 			},
 			(err, doc) => {
 				if (err) {
@@ -136,7 +177,7 @@ router.post("/submit", userCheck, async (req, res) => {
 						success: false,
 						message: "Challenge points update failed 1"
 					});
-					return;
+					return false;
 				}
 				if (!doc) {
 					res.status(400).json({
@@ -144,7 +185,7 @@ router.post("/submit", userCheck, async (req, res) => {
 						message:
 							"Challenge points update failed. Challenge qid not found!"
 					});
-					return;
+					return false;
 				}
 			}
 		);
@@ -153,21 +194,20 @@ router.post("/submit", userCheck, async (req, res) => {
 
 		//Changes in the user Model--> changed solved and points
 		await User.updateOne(
-			{ _id: data.qid },
+			{ _id: new ObjectId(req.session.userID) },
 			{
-				$set: {
-					$inc: { points: newPoints },
-					$push: { solved: question.name }
-				}
+				$inc: { points: newPoints },
+				$push: { solved: question.name }
 			},
 			(err, doc) => {
+				console.log(doc);
 				if (err) {
-					// console.log(err);
+					console.log(err);
 					res.status(400).json({
 						success: false,
 						message: "User points update failed!"
 					});
-					return;
+					return false;
 				}
 				if (!doc) {
 					res.status(400).json({
@@ -175,7 +215,7 @@ router.post("/submit", userCheck, async (req, res) => {
 						message:
 							"User points update failed. Question qid not found"
 					});
-					return;
+					return false;
 				}
 			}
 		);
@@ -183,6 +223,11 @@ router.post("/submit", userCheck, async (req, res) => {
 		// console.log("ps3");
 
 		await UpdateLeaderboardModel(data, newPoints);
+		
+		res.json({
+			success: true,
+			message: "Correct"
+		});
 		// console.log("done");
 	}
 
@@ -193,7 +238,7 @@ router.post("/submit", userCheck, async (req, res) => {
 		//Changes in leaderboard Model--> change username and points
 		await Leaderboard.updateOne(
 			{ username: req.session.user },
-			{ $set: { $inc: { points: newPoints } } },
+			{ $inc: { points: newPoints } },
 			(err, doc) => {
 				if (err) {
 					console.log(err);
@@ -212,7 +257,9 @@ router.post("/submit", userCheck, async (req, res) => {
 					return;
 				}
 			}
-		).sort({ points: 1 });
+		);
+		
+
 
 		// console.log("Leaderboard update done");
 	}
