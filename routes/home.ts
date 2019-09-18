@@ -30,6 +30,7 @@ router.get("/questionStatus?:sortKey", async (req, res) => {
 	query[sortKey] = 1;
 	query[otherType] = 1;
 	query["name"] = 1;
+	query["solvedBy"] = 1;
 
 	const allChallenges = await Challenge.find({}, query, err => {
 		if (err) {
@@ -41,12 +42,13 @@ router.get("/questionStatus?:sortKey", async (req, res) => {
 	}).sort({ [sortKey]: 1 });
 
 	res.json({ allChallenges });
+	
 });
 
 router.post("/question", async (req, res) => {
-	const qname = req.body.qname;
+	const qid = req.body.qid;
 
-	if (!qname) {
+	if (!qid) {
 		res.status(404).json({
 			success: false,
 			message: "Gimme question name"
@@ -54,7 +56,7 @@ router.post("/question", async (req, res) => {
 		return;
 	}
 
-	const quest = await Challenge.findOne({ name: qname });
+	const quest = await Challenge.findOne({ _id: qid });
 
 	if (!quest) {
 		res.status(404).json({

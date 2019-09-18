@@ -51,7 +51,7 @@ app.use(
 		secret: process.env.SECRET_KEY,
 		saveUninitialized: true,
 		resave: true,
-		store: new mongoSto({})
+		// store: new mongoSto({})
 	})
 );
 
