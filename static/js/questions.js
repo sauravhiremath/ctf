@@ -91,30 +91,34 @@ $(document).on("click", ".submit-button", function(){
     const inputFlag = $("input[name='flag-input']")
     var flag = $(inputFlag).val();
     const id = $(this).attr("id");
-
-    // var socket = io.connect('http://localhost:4000');
-    // console.log(socket);
+    const time = new Date;
+    console.log(time);
+    submitData = {
+        "qid": id,
+        "ctfFlag": flag,
+        "timeStampUser": time,
+    }
     console.log(flag);
     $.ajax({
         method: "POST",
-        url: "/submit",
+        url: "/home/submit",
         data: {
-            username: string,
-            qid: string,
-            ctfFlag: string,
-            timeStampUser: string,
+            "qid": id,
+            "ctfFlag": flag,
+            "timeStampUser": time,
         },
-        success: data=>{
+        success: data =>{
             if(data["success"] == true){
                 console.log("yes");
-                $("#singlePopupModal").modal('hide');
-                $("#successModal").modal('show')
             }
             else{
                 console.log("no");
-                $("#successModal").modal('show')
+                
             }
         },
+        error: data =>{
+            console.log(data);
+        }
 
     });
 })

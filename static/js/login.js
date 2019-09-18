@@ -1,26 +1,30 @@
-const loginUsername = $("input[name='username']");
-const loginPassword = $("input[name='password']");
+const loginUsername = $("input[name='username-login']");
+const loginPassword = $("input[name='password-login']");
 
 
 
 $(document).on("click", "#loginSubmitBtn", function(){
     const username = encodeURIComponent(loginUsername.val());
     const password = encodeURIComponent(loginPassword.val());
+    console.log("aaa");
     $.ajax({
         type: "POST",
         url: "/auth/login",
         data: {
-            username: username,
-            password: password
+            "username": username,
+            "password": password
         },
-        success: data=> {
-            console.log(data);
+        success: function(result) {
+            if(result["success"] == true){
+                console.log("home");
+                window.location.href = '/home'
+            }
         }
 
     })
 })
 
-usernameInput.on("keyup", function () {
+loginUsername.on("keyup", function () {
     if (!$(this).val().match(regexname)) {
         // there is a mismatch, hence show the error message
         $("#nameError.emsg").removeClass("hidden");
@@ -33,7 +37,7 @@ usernameInput.on("keyup", function () {
         $("#loginSubmitBtn").prop("disabled", false);
     }
 });
-passwordInput.on("keyup", function () {
+loginPassword.on("keyup", function () {
     if (
         !$(this)
             .val()

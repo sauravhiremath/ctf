@@ -78,10 +78,18 @@ router.post("/question", async (req, res) => {
 });
 
 router.post("/submit", userCheck, async (req, res) => {
-	const data: submissionData = req.body.submitData;
+	const qid = req.body.qid;
+	const ctfFlag: string = req.body.ctfFlag;
+	const timeStampUser: string = req.body.timeStampUser;
 
+	const data: submissionData = {
+		qid: qid,
+		ctfFlag: ctfFlag,
+		timeStampUser: timeStampUser
+	};
+	
+	console.log(data);
 	const question = await Challenge.findOne({ _id: data.qid });
-
 	if (data.ctfFlag == question.answer) {
 		const solved: boolean = true;
 		await updateLog(data, question, solved);
@@ -113,7 +121,7 @@ router.post("/submit", userCheck, async (req, res) => {
 			{
 				$set: {
 					currentPoints: newPoints,
-					$push: { solvedBy: data.username }
+					$push: { solvedBy: req.session.user }
 				}
 			},
 			(err, doc) => {
@@ -173,7 +181,7 @@ router.post("/submit", userCheck, async (req, res) => {
 	) {
 		//Changes in leaderboard Model--> change username and points
 		await Leaderboard.updateOne(
-			{ username: data.username },
+			{ username: req.session.user },
 			{ $set: { $inc: { points: newPoints } } },
 			(err, doc) => {
 				if (err) {
@@ -205,7 +213,7 @@ router.post("/submit", userCheck, async (req, res) => {
 
 		const newAttempt = new attemptedChallenges({
 			questionId: data.qid,
-			participant: data.username,
+			participant: req.session.user,
 			timeSubmitted: Date(),
 			pointsOnSubmission: pointsOnAttempt
 		});

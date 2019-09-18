@@ -27,7 +27,6 @@ router.post("/login", async (req, res, next) => {
 
 	const username = req.body.username.toString().trim();
 	const password = req.body.password.toString().trim();
-	console.log(password);
 	if (!username || !password) {
 		res.status(400).json({
 			success: false,
