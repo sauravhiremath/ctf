@@ -22,23 +22,8 @@ const router = Router();
 export default router;
 
 router.post("/login", async (req, res, next) => {
-	const captcha = req.body["g-recaptcha-response"];
-	const verificationURL = "https://www.google.com/recaptcha/api/siteverify";
-	const gRes = await request.post(verificationURL, {
-		form: {
-			secret: process.env.GOOGLE_RECAPTCHA_SECRET,
-			response: captcha
-		}
-	});
-
-	const recaptchaStatus = JSON.parse(gRes);
-	if (recaptchaStatus.success === false) {
-		res.json({
-			success: false,
-			message: "recaptchaFailed"
-		});
-		return;
-	}
+	console.log(req.body);
+	console.log("aaa");
 
 	const username = req.body.username.toString().trim();
 	const password = req.body.password.toString().trim();

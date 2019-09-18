@@ -1,7 +1,14 @@
 document.getElementsByTagName("img").draggable = false;
 console.log("hello")
 
-
+$(document).on("click", "#leaderBtn", function(){
+    $("#leaderBoardPopup").modal({
+        show: true,
+        backdrop: false
+    }).draggable({
+        handle: ".app_header"
+    });
+})
 
 
 
@@ -16,10 +23,3 @@ $(document).on("click", ".closeQuestion", function(){
 })
 
 
-$(document).on("click", "#trend", function(){
-    $("#nav_content").html("Trends here");
-})
-
-$(document).on("click", "#no_of_people", function(){
-    $("#nav_content").html("Stats here");
-})

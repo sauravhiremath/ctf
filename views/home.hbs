@@ -107,7 +107,7 @@
                                 <div class="participant p-1">CSI CTF</div>
                                 <div class="menu_seperator "></div>
 
-                                <div class="dropright"><button class="btn participant all_programs">Leaderboard<img
+                                <div class="dropright"><button class="btn participant all_programs" id="leaderBtn" data-toggle="modal">Leaderboard<img
                                             src="/static/images/allprograms.ico" alt=""></button>
 
                                 </div>
@@ -150,6 +150,10 @@
 
         <!-- SuccessPopup -->
         {{> successModal }}
+
+
+        <!-- LeaderBoard Popup -->
+        {{> leaderboardPopup }}
     </div>
 
 </body>

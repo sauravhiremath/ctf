@@ -25,7 +25,7 @@
 	border-radius: 10px 10px 0 0;
 }
 
-#singlePopupModal{
+#singlePopupModal, #leaderBoardPopup{
 	position: relative;
 	width: 606px;
 	height: auto;
@@ -409,7 +409,8 @@ input[type="number"]::-webkit-outer-spin-button {
     border-width: 1px;
     border-style: solid;
     border-color: rgba(0, 0, 0, 0.1);
-    border-image: initial;
+	border-image: initial;
+	cursor: default;
 }
 
 .back-button{
@@ -425,4 +426,21 @@ input[type="number"]::-webkit-outer-spin-button {
 	height: 22px;
     width: 22px;
     margin: 0px 4px 0px 1px;
+}
+
+.nav-item{
+	background-color: rgb(240,239,237);
+}
+
+.nav-item a:hover{
+    color: black;
+}
+
+.nav-item:hover{
+    filter: brightness(150%);
+}
+
+.nav-item:active{
+	border-bottom: none;
+	border-top: orange 1px;
 }
