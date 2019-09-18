@@ -50,7 +50,8 @@ app.use(
 	session({
 		secret: process.env.SECRET_KEY,
 		saveUninitialized: true,
-		resave: true
+		resave: true,
+		store: new mongoSto({})
 	})
 );
 
