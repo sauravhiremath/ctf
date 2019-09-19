@@ -26,7 +26,17 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
-
+<script>
+    $(document).on("click", ".start_button", function(){
+        $.ajax({
+            method: "GET",
+            url: "/home/startMenu",
+            success: data => {
+                console.log(data);
+            }
+        })
+    })
+</script>
 <body>
     <div class="container-fluid h-100 w-100">
         <img src="./static/images/windows.jpg" alt="background" class="bg">
@@ -94,18 +104,7 @@
                         <section class="menu d-flex flex-row position-relative">
 
                             <div class="menu_left d-flex flex-column align">
-                                <div class="participant p-1 winner">Hello</div>
-                                <div class="participant p-1 winner">CSI CTF</div>
-                                <div class="participant p-1 winner">CSI CTF</div>
-                                <div class="menu_seperator "></div>
-                                <div class="participant p-1">CSI CTF</div>
-                                <div class="participant p-1">CSI CTF</div>
-                                <div class="participant p-1">CSI CTF</div>
-                                <div class="participant p-1">CSI CTF</div>
-                                <div class="participant p-1">CSI CTF</div>
-                                <div class="participant p-1">CSI CTF</div>
-                                <div class="participant p-1">CSI CTF</div>
-                                <div class="menu_seperator "></div>
+                                
 
                                 <div class="dropright"><button class="btn participant all_programs" id="leaderBtn" data-toggle="modal">Leaderboard<img
                                             src="/static/images/allprograms.ico" alt=""></button>

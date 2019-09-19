@@ -15,10 +15,14 @@ router.get("/", userCheck, (req, res, next) => {
 	res.render("home.hbs");
 });
 
-router.get("/startMenu", userCheck, (req, res) => {
+router.get("/startMenu", userCheck, async (req, res) => {
+	const currUserData = await User.findById( { _id: req.session.userID }, { points: 1, solved: 1, name: 1 } );
+	console.log(currUserData);
 	res.json({
+		userID: currUserData._id,
+		fname: currUserData.name,
+		solved: currUserData.solved,
 		username: req.session.user,
-		fname: req.session.name
 	});
 })
 
@@ -305,12 +309,29 @@ router.post("/submit", userCheck, async (req, res) => {
 	}
 });
 
-// router.get("/leaderboard", async (req, res) => {
-// 	let currStandings = await Leaderboard.find();
-// 	let sorrtedStandings = currStandings.sort({ points: 1 }).toArray((err, doc) => {});
-// 	// console.log(currStandings);
-// 	res.json(currStandings);
-// });
+router.get("/leaderboard", async (req, res) => {
+	let currStandings = await Leaderboard.find({}, (err, doc) => {
+		if(err) {
+			console.log(err);
+			res.status(400).json({
+				success: false,
+				message: "Failed leaderboard fetch"
+			});
+			return;
+		}
+		if(!doc) {
+			res.status(400).json({
+				success: false,
+				message: "leaderboard not found"
+			});
+			return;
+		}
+	}).sort({ points: 1 });
+
+	console.log(currStandings);
+	// console.log(currStandings);
+	res.json(currStandings);
+});
 
 function userCheck(req, res, next) {
 	if (req.session.user) {
