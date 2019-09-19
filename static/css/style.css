@@ -6,7 +6,7 @@ body {
 }
 
 .windows-user-2 {
-	height: 200px;
+	height: 180px;
 }
 .user-profile-pic {
 	width: 64px;
@@ -60,7 +60,7 @@ body {
 	font-size: 1.2rem;
 }
 
-.signUpText {
+.signUpText, .loginText {
 	text-decoration: underline;
 	font-style: italic;
 	cursor: pointer;

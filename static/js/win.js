@@ -39,18 +39,20 @@ $(document).on("click", "#leaderBtn", function (e) {
 })
 
 
-$(document).on("click", ".closeIcon", function () {
+$(document).on("click", ".closeIcon", function(){
     $('#questionPopupModal').modal('hide')
 })
-$(document).on("click", ".closebtn", function () {
-    $('#singlePopupModal').modal('hide')
+$(document).on("click", ".close-success", function(){
+    $('#errorModal').modal('hide')
+})
+$(document).on("click", ".closebtn", function(){
+   $('#singlePopupModal').modal('hide')
 })
 $(document).on("click", ".closeQuestion", function () {
     $('#singlePopupModal').modal('hide')
 })
 
-
-$(document).on("click", ".tmngr_btn", function () {
-
-    //$("#leaderboard_names").addClass("active");
-});
+$(document).on("click", ".nav-item", function(){
+    $(".nav-item").removeClass("active-nav");
+    $(this).addClass("active-nav");
+})

@@ -14,7 +14,7 @@ const challengeSchema = new Schema({
     answer: String,
     startPoints: Number,
     currentPoints: Number,
-    solvedBy: String,
+    solvedBy: Array,
     hidden: { type: Boolean, required: false }
 });
 

@@ -23,7 +23,6 @@ export default router;
 
 router.post("/login", async (req, res, next) => {
 	console.log(req.body);
-	console.log("aaa");
 
 	const username = req.body.username.toString().trim();
 	const password = req.body.password.toString().trim();
@@ -32,6 +31,7 @@ router.post("/login", async (req, res, next) => {
 			success: false,
 			message: "missingFields"
 		});
+		console.log(res);
 		return;
 	}
 
@@ -39,7 +39,7 @@ router.post("/login", async (req, res, next) => {
 		if (!doc0) {
 			res.status(400).json({
 				success: false,
-				message: "Not registered"
+				message: `User with ${username} is not registered`
 			});
 		} else {
 			User.findOne(
@@ -55,7 +55,7 @@ router.post("/login", async (req, res, next) => {
 					if (!doc1) {
 						res.json({
 							success: false,
-							message: "Account Not verified"
+							message: "Please verify your account first"
 						});
 						return;
 					} else {
@@ -66,6 +66,7 @@ router.post("/login", async (req, res, next) => {
 
 						if (chkPass == true) {
 							req.session.user = username;
+							req.session.fname = doc1.name;
 							req.session.userID = doc1._id;
 							res.json({
 								success: true,
@@ -297,7 +298,7 @@ async function sendInviteEmail(
 	randomToken: string
 ) {
 	sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-	const vLink = `https://ctf.csivit.com/auth/verify?token=${randomToken}`;
+	const vLink = `https://ctfdev.csivit.com/auth/verify?token=${randomToken}`;
 	const msg = {
 		to: email,
 		from: {

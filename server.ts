@@ -7,11 +7,12 @@ import session from "express-session";
 import socketio from "socket.io";
 import http from "http";
 import { submissionData } from "./models/socketInterfaces";
-import { handleSubmission } from "./routes/handleSubmission";
+// import { handleSubmission } from "./routes/handleSubmission";
 import homeRoutes from "./routes/home";
 import authRoutes from "./routes/auth";
 import Leaderboard from "./models/leaderboard";
 import { createQuestion } from "./scripts/createNewQuestion";
+var MongoDBStore = require('connect-mongodb-session')(session);
 
 const app = express();
 
@@ -51,7 +52,10 @@ app.use(
 		secret: process.env.SECRET_KEY,
 		saveUninitialized: true,
 		resave: true,
-		// store: new mongoSto({})
+		store: new MongoDBStore({
+			uri: 'mongodb://localhost:27017/ctf',
+  			collection: 'mySessions'
+		})
 	})
 );
 
@@ -63,6 +67,7 @@ app.use('*', (req, res) => {
 app.use("/", (req, res) => {
 	res.redirect("/auth/register");
 });
+
 // createQuestion();
 // const changeStream = Leaderboard.watch({ fullDocument: 'updateLookup'});
 

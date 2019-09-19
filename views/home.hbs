@@ -17,7 +17,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.2.0/handlebars.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.2.0/handlebars.js"></script>
     <link rel="stylesheet" href="static/css/home.css">
     <link rel="stylesheet" href="static/css/popup.css">
     <script src="static/js/win.js"></script>
@@ -26,14 +26,53 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+<script>
+    $(function () {
+        $(".start_button").click(function () {
+            if ($("#startMenu").hasClass("show")) {
+                console.log("ran");
+                return;
+            }
+            $.ajax({
+                method: "GET",
+                url: "/home/startMenu",
+                success: data => {
+                    $(".user-stats").html('');
+                    var userInfo = '<div class="participant p-1"><strong>Username:</strong> ' + data.username + '</div><div class="participant p-1"><strong>Points:</strong>' + data.points + '</div><div class="participant p-1"><strong>Solved:</strong>' + data.solved.length + '</div>'
+                    $(".user-stats").html(userInfo);
+                    $(".start_button").dropdown("toggle");
+                    $(".start_button").dropdown("toggle");
+                },
+                error: data => {
+                    console.log(data);
+                }
+            })
+        });
+    })
+    function startTime() {
+        var today = new Date();
+        var h = today.getHours();
+        var m = today.getMinutes();
+        m = checkTime(m);
+        var time = h + ":" + m;
+        console.log(time)
+        document.getElementById('clock').innerHTML = time;
+        var t = setTimeout(startTime, 10000);
+    }
+    function checkTime(i) {
+        if (i < 10) { i = "0" + i };  // add zero in front of numbers < 10
+        return i;
+    }
+</script>
 
-<body>
+<body onload="startTime()">
     <div class="container-fluid h-100 w-100">
         <img src="./static/images/windows.jpg" alt="background" class="bg">
         <div class="d-inline-flex flex-column">
             <div class="p-4 d-flex flex-column icon">
                 <div class="d-flex flex-column">
-                    <button type="button" class="btn questionPopup desktop-icon" name="baby" data-toggle="modal">
+                    <button type="button" class="btn questionPopup desktop-icon" id="baby" name="False"
+                        data-toggle="modal">
                         <div class="icon-container">
                             <img src="static/images/my_documents.png" alt="">
                             <div class="col"></div>
@@ -41,7 +80,8 @@
                         <span class="desktop-text">Baby</span>
                     </button>
                     <br>
-                    <button type="button" class="btn questionPopup desktop-icon" name="easy" data-toggle="modal">
+                    <button type="button" class="btn questionPopup desktop-icon" id="easy" name="False"
+                        data-toggle="modal">
                         <div class="icon-container">
                             <img src="static/images/my_documents.png" alt="">
                             <div class="col"></div>
@@ -49,7 +89,8 @@
                         <span class="desktop-text">Easy</span>
                     </button>
                     <br>
-                    <button type="button" class="btn questionPopup desktop-icon" name="medium" data-toggle="modal">
+                    <button type="button" class="btn questionPopup desktop-icon" id="medium" name="False"
+                        data-toggle="modal">
                         <div class="icon-container">
                             <img src="static/images/my_documents.png" alt="">
                             <div class="col"></div>
@@ -57,7 +98,8 @@
                         <span class="desktop-text">Medium</span>
                     </button>
                     <br>
-                    <button type="button" class="btn questionPopup desktop-icon" name="hard" data-toggle="modal">
+                    <button type="button" class="btn questionPopup desktop-icon" id="hard" name="False"
+                        data-toggle="modal">
                         <div class="icon-container">
                             <img src="static/images/my_documents.png" alt="">
                             <div class="col"></div>
@@ -65,12 +107,12 @@
                         <span class="desktop-text">Hard</span>
                     </button>
                     <br>
-                    <button type="button" class="btn questionPopup desktop-icon" name="solved" data-toggle="modal">
+                    <button type="button" class="btn questionPopup desktop-icon" name="True" data-toggle="modal">
                         <div class="icon-container">
                             <img src="static/images/recycle_bin.png" alt="">
                             <div class="col"></div>
                         </div>
-                        <span class="desktop-text">Solved</span>
+                        <span class="desktop-text">Recycle bin</span>
                     </button>
                 </div>
                 <div class="d-inline-flex ">
@@ -79,62 +121,74 @@
 
         </div>
 
-        <footer class="bottom position-fixed p-0">
+        <footer class="d-flex bottom position-fixed p-0">
             <div class="dropup">
-                <button data-toggle="dropdown" class="start_button" style="margin-left: -6px">
+                <button class="start_button" style="margin-left: -6px" data-toggle="dropdown">
                     <img src="/static/images/start.png" class="footer_start h-100 position-relative">
                     <span class="caret"></span>
                 </button>
-                <div class="dropdown-menu footer_start_menu" style="margin-left: -6px">
-                    <div class="abc">
-                        <header class="d-felx align-self-center w-100">
+                <div class="dropdown-menu footer_start_menu" id="startMenu" style="margin-left: -6px;">
+                    <div>
+                        <header class="d-felx align-self-center w-100 pt-2">
                             <img src="/static/images/chess.jpg" class="header_img" alt="Chess">
                             <span class="header-text">User</span>
                         </header>
                         <section class="menu d-flex flex-row position-relative">
 
                             <div class="menu_left d-flex flex-column align">
-                                <div class="participant p-1 winner">Hello</div>
-                                <div class="participant p-1 winner">CSI CTF</div>
-                                <div class="participant p-1 winner">CSI CTF</div>
-                                <div class="menu_seperator "></div>
-                                <div class="participant p-1">CSI CTF</div>
-                                <div class="participant p-1">CSI CTF</div>
-                                <div class="participant p-1">CSI CTF</div>
-                                <div class="participant p-1">CSI CTF</div>
-                                <div class="participant p-1">CSI CTF</div>
-                                <div class="participant p-1">CSI CTF</div>
-                                <div class="participant p-1">CSI CTF</div>
+                                <div class="start-left-content">
+                                    <div class="user-stats"></div>
+                                    <div class="menu_seperator "></div>
+                                    <div class="participant p-1"><img src="/static/images/my_documents.png"
+                                            class="start-icons" alt=""><span class="start-icon-text py-2">Baby</span>
+                                    </div>
+                                    <div class="participant p-1"><img src="/static/images/my_documents.png"
+                                            class="start-icons" alt=""><span class="start-icon-text py-2">Easy</span>
+                                    </div>
+                                    <div class="participant p-1"><img src="/static/images/my_documents.png"
+                                            class="start-icons" alt=""><span class="start-icon-text py-2">Medium</span>
+                                    </div>
+                                    <div class="participant p-1"><img src="/static/images/my_documents.png"
+                                            class="start-icons" alt=""><span class="start-icon-text py-2">Hard</span>
+                                    </div>
+                                    <div class="participant p-1"><img src="/static/images/recycle_bin.png"
+                                            class="start-icons" alt=""><span class="start-icon-text py-2">Recycle
+                                            bin</span></div>
+                                </div>
                                 <div class="menu_seperator "></div>
 
-                                <div class="dropright"><button class="btn participant all_programs" id="leaderBtn" data-toggle="modal">Leaderboard<img
-                                            src="/static/images/allprograms.ico" alt=""></button>
+                                <div class="dropright"><button class="btn participant all_programs" id="leaderBtn"
+                                        data-toggle="modal">Leaderboard<img src="/static/images/allprograms.ico"
+                                            alt=""></button>
 
                                 </div>
                             </div>
                             <div class="menu_right d-flex flex-column">
-                                <div class="csi_info winner">CSI</div>
-                                <div class="csi_info winner">Computer Society of India</div>
+                                <div class="csi_info winner pl-1">CSI</div>
+                                <div class="csi_info winner pl-1">Computer Society of India</div>
                                 <div class="menu_seperator "></div>
-                                <div class="csi_info winner">Events</div>
-                                <div class="csi_info"><a href="https://clickbait.csivit.com"
-                                        style="text-decoration: none">Clickbait</a></div>
-                                <div class="csi_info"><a href="https://lasertag.csivit.com"
-                                        style="text-decoration: none">Lasertag</a></div>
+                                <div class="csi_info winner pl-1">Events</div>
+                                <a href="https://clickbait.csivit.com">
+                                    <div class="csi_info pl-1">Clickbait</div>
+                                </a>
+                                <a href="https://lasertag.csivit.com">
+                                    <div class="csi_info pl-1">Lasertag</div>
+                                </a>
                                 <div class="menu_seperator "></div>
                             </div>
                         </section>
                         <footer class="d-flex flex-row">
-                            <div class="ml-auto p-1 power_buttons"><a href="/index.html" style="color: white;"><img
+                            <div class="ml-auto p-1 power_buttons"><a href="/auth/register" style="color: white;"><img
                                         src="/static/images/logoff.png" class="p-1" style="width:30px; height:30px"
                                         alt="">Log off</a></div>
-                            <div class="p-1 power_buttons"><a href="https://google.com" style="color: white;"><img
+                            <div class="p-1 pr-2 power_buttons"><a href="https://google.com" style="color: white;"><img
                                         src="/static/images/poweroff.png" class="p-1" style="width:30px; height:30px"
                                         alt="">Turn off computer</a></div>
                         </footer>
                     </div>
                 </div>
             </div>
+            <div class="ml-auto p-2" id="clock"></div>
         </footer>
 
 
@@ -149,7 +203,7 @@
         {{> questionPopup}}
 
         <!-- SuccessPopup -->
-        {{> successModal }}
+        {{> errorModal }}
 
 
         <!-- LeaderBoard Popup -->
