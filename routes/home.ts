@@ -12,8 +12,10 @@ export default router;
 
 router.get("/", userCheck, (req, res, next) => {
 	// req.session.user = "test123";
-	// req.session.userID = "5d80fe7458fe284e53c4c4eb";
-	res.render("home.hbs");
+	res.render("home.hbs", {
+		username: req.session.user,
+		fname: req.session.name
+	});
 });
 
 router.get("/questionStatus", userCheck, async (req, res) => {

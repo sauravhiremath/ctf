@@ -66,6 +66,7 @@ router.post("/login", async (req, res, next) => {
 
 						if (chkPass == true) {
 							req.session.user = username;
+							req.session.fname = doc1.name;
 							req.session.userID = doc1._id;
 							res.json({
 								success: true,
@@ -297,7 +298,7 @@ async function sendInviteEmail(
 	randomToken: string
 ) {
 	sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-	const vLink = `https://ctf.csivit.com/auth/verify?token=${randomToken}`;
+	const vLink = `https://ctfdev.csivit.com/auth/verify?token=${randomToken}`;
 	const msg = {
 		to: email,
 		from: {
