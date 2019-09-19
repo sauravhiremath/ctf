@@ -2,29 +2,23 @@
     <div class="m-auto popupContainer" style="background-color: #eaedda; width: 600px;">
         <header class="d-flex flex-row app_header" style="height: 30px">
                 <div class="justify-content-start"><img src="/static/images/my_documents.png" class="header_icon" alt=""></div>
-                <div><strong>Questions</strong></div>
+                <div class="ml-1"><strong class="question-name"></strong></div>
                 <div class="d-flex ml-auto"><button class="closeQuestion"></button></div>
         </header>
         <div class="d-flex flex-column p-2">
             <p>Here is the question:</p>
             <nav class="nav nav-tabs">
-                <div class="active-nav">
-                <li class="nav-item border border-light rounded-top">
-                    <a class="nav-link p-0 pl-1 pr-3 active" id="question_text" href="">Question</a>
+                <li class="nav-item question-nav rounded-top active-nav">
+                    <a class="nav-link py-1 px-2" id="question_text" href="">Question</a>
                 </li>
-                </div>
-                <div>
-                <li class="nav-item border border-light rounded-top">
-                    <a class="nav-link p-0 pl-1 pr-3" id="trend" href="" tabindex="-1">Trend</a>
+                <li class="nav-item question-nav rounded-top">
+                    <a class="nav-link py-1 px-2" id="trend" href="" tabindex="-1">Trend</a>
                 </li>
-                </div>
-                <div>
-                <li class="nav-item border border-light rounded-top">
-                        <a class="nav-link p-0 pl-1 pr-3" id="no_of_people" href="" tabindex="-1">No of people Solved</a>
+                <li class="nav-item question-nav rounded-top">
+                        <a class="nav-link py-1 px-2" id="no_of_people" href="" tabindex="-1">No of people Solved</a>
                 </li>
-                </div>
             </nav>
-                <div class="border border-light p-2" style="height: 200px" style="overflow-y: scroll">
+                <div class="p-2 question-container">
                     <div class="p-2" id="nav_content">
                         
                     </div>
@@ -33,7 +27,7 @@
                         
                     </div>
 
-                    <div class="d-flex justify-content-center p-2"><button class="closebtn pl-4 pr-4" data-dismiss="modal">Close</button></div>
+                    <div class="d-flex justify-content-center p-2"><button class="closebtn pl-4 pr-4 popup-button" data-dismiss="modal">Close</button></div>
         </div>
     </div>
 </div>

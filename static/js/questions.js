@@ -13,7 +13,9 @@ $(document).on("dblclick", ".desktop-icon", function(){
         success: function(result){
             var arr=result["allChallenges"]
             console.log(arr);
+            //unsolved question
             if(solved=="False"){
+                $(".question-type").html(difficulty);
                 var filtered = arr.filter(question=>question.difficulty==difficulty)
                 if(filtered.length === 0) return;
                 console.log(filtered);
@@ -23,8 +25,17 @@ $(document).on("dblclick", ".desktop-icon", function(){
                     data+=question_data;
                 }
             }
+            //solved questions
             else{
-                if(arr.length === 0) return;
+                if(arr.length === 0){
+                    var message = "No questions solved yet";
+                    $(".message").html(message);
+                    $("#errorModal").modal({
+                        show: true,
+                        backdrop: false
+                    });
+                    return;
+                };
                 var data='';
                 for(var i=0; i<arr.length; i++){
                     var question_data = '<button class="btn singlePopup question-icon" value='+ arr[i].name +' id='+ arr[i]._id +' disabled> <div class="icon-container"><img src="/static/images/'+ arr[i].type +'.png" alt=""><span class="question-title">'+ arr[i].name +'</span></div></button>'
@@ -51,17 +62,19 @@ $(document).on("dblclick", ".question-icon", function(){
     var button = $(this);
     var id = $(this).attr("id");
     $.ajax({
-        type: "POST",
+        type: "GET",
         url: "/home/question",
         data: {
             "qid": id,
         },
         success: function(result){
                 var data = result["message"]
-                console.log(data);
+                console.log(data.qname);
+                var questionName = data.qname;
                 var question_text = '<p>'+ data.description +'</p>'
                 var text_field = '<div class="col-10"><input type="text" class="w-100 pl-1" name="flag-input" placeholder="CSICTF{}"></div><div class=" pl-3 w-50"><button class="pl-3 pr-3 submit-button" id='+ data.id + ' data-toggle="modal">Submit</button></div>'
                 var people = data["solvedBy"];
+                $(".question-name").html(questionName);
                 $("#nav_content").html(question_text);
                 $("#submit-div").html(text_field);
                 
@@ -82,7 +95,7 @@ $(document).on("dblclick", ".question-icon", function(){
                     else{
                         var statsHtml = '';
                         for(var i=0; i<people.length; i++){
-                            singleDiv='<div class="py-2">'+ people[i] +'</div>'
+                            singleDiv='<div>'+ (i+1)+". " + people[i] +'</div><hr>'
                             statsHtml += singleDiv;
                         }
                     }
@@ -131,7 +144,7 @@ $(document).on("click", ".submit-button", function(){
             if(data["success"] == true){
                 $(".message").html(data["message"]);
                 $("#singlePopupModal").modal('hide');
-                $("#successModal").modal({
+                $("#errorModal").modal({
                     show: true,
                     backdrop: false
                 });
@@ -142,7 +155,7 @@ $(document).on("click", ".submit-button", function(){
                 message = data["message"];
                 console.log(message);
                 $(".message").html(message);
-                $("#successModal").modal({
+                $("#errorModal").modal({
                     show: true,
                     backdrop: false
                 });
@@ -154,4 +167,3 @@ $(document).on("click", ".submit-button", function(){
 
     });
 })
-

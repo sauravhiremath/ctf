@@ -32,12 +32,34 @@
             method: "GET",
             url: "/home/startMenu",
             success: data => {
+                $(".user-stats").html('');
+                var userInfo = '<div class="participant p-1"><strong>Username:</strong> '+ data.username +'</div><div class="participant p-1"><strong>Points:</strong>'+ data.points +'</div><div class="participant p-1"><strong>Solved:</strong>'+ data.solved.length +'</div>'
+                $(".user-stats").html(userInfo);
+            },
+            error: data => {
                 console.log(data);
             }
+        }).done(function(){
+            $(".dropup").addClass("show");
+            //$(document).on("click", "body",)
         })
     })
+    function startTime() {
+        var today = new Date();
+        var h = today.getHours();
+        var m = today.getMinutes();
+        m = checkTime(m);
+        var time = h + ":" + m;
+        console.log(time)
+        document.getElementById('clock').innerHTML = time;
+        var t = setTimeout(startTime, 10000);
+    }
+    function checkTime(i) {
+        if (i < 10) { i = "0" + i };  // add zero in front of numbers < 10
+        return i;
+    }
 </script>
-<body>
+<body onload="startTime()">
     <div class="container-fluid h-100 w-100">
         <img src="./static/images/windows.jpg" alt="background" class="bg">
         <div class="d-inline-flex flex-column">
@@ -89,7 +111,7 @@
 
         </div>
 
-        <footer class="bottom position-fixed p-0">
+        <footer class="d-flex bottom position-fixed p-0">
             <div class="dropup">
                 <button data-toggle="dropdown" class="start_button" style="margin-left: -6px">
                     <img src="/static/images/start.png" class="footer_start h-100 position-relative">
@@ -104,7 +126,16 @@
                         <section class="menu d-flex flex-row position-relative">
 
                             <div class="menu_left d-flex flex-column align">
-                                
+                                <div class="start-left-content">
+                                    <div class="user-stats"></div>
+                                    <div class="menu_seperator "></div>
+                                    <div class="participant p-1"><img src="/static/images/my_documents.png" class="start-icons" alt=""><span class="start-icon-text py-2">Baby</span></div>
+                                    <div class="participant p-1"><img src="/static/images/my_documents.png" class="start-icons" alt=""><span class="start-icon-text py-2">Easy</span></div>
+                                    <div class="participant p-1"><img src="/static/images/my_documents.png" class="start-icons" alt=""><span class="start-icon-text py-2">Medium</span></div>
+                                    <div class="participant p-1"><img src="/static/images/my_documents.png" class="start-icons" alt=""><span class="start-icon-text py-2">Hard</span></div>
+                                    <div class="participant p-1"><img src="/static/images/recycle_bin.png" class="start-icons" alt=""><span class="start-icon-text py-2">Recycle bin</span></div>
+                                </div>
+                                <div class="menu_seperator "></div>
 
                                 <div class="dropright"><button class="btn participant all_programs" id="leaderBtn" data-toggle="modal">Leaderboard<img
                                             src="/static/images/allprograms.ico" alt=""></button>
@@ -116,10 +147,8 @@
                                 <div class="csi_info winner pl-1">Computer Society of India</div>
                                 <div class="menu_seperator "></div>
                                 <div class="csi_info winner pl-1">Events</div>
-                                <div class="csi_info pl-1"><a href="https://clickbait.csivit.com"
-                                        style="text-decoration: none">Clickbait</a></div>
-                                <div class="csi_info pl-1"><a href="https://lasertag.csivit.com"
-                                        style="text-decoration: none">Lasertag</a></div>
+                                <a href="https://clickbait.csivit.com"><div class="csi_info pl-1">Clickbait</div></a>
+                                <a href="https://lasertag.csivit.com"><div class="csi_info pl-1">Lasertag</div></a>
                                 <div class="menu_seperator "></div>
                             </div>
                         </section>
@@ -134,6 +163,7 @@
                     </div>
                 </div>
             </div>
+            <div class="ml-auto p-2" id="clock"></div>
         </footer>
 
 
@@ -148,7 +178,7 @@
         {{> questionPopup}}
 
         <!-- SuccessPopup -->
-        {{> successModal }}
+        {{> errorModal }}
 
 
         <!-- LeaderBoard Popup -->
