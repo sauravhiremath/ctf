@@ -23,6 +23,7 @@ router.get("/startMenu", userCheck, async (req, res) => {
 		fname: currUserData.name,
 		solved: currUserData.solved,
 		username: req.session.user,
+		points: currUserData.points
 	});
 })
 
@@ -80,8 +81,8 @@ router.get("/questionStatus", userCheck, async (req, res) => {
 	}
 });
 
-router.post("/question", userCheck, async (req, res) => {
-	const qid = req.body.qid;
+router.get("/question", userCheck, async (req, res) => {
+	const qid = req.query.qid;
 
 	if (!qid) {
 		res.status(404).json({

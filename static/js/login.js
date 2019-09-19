@@ -6,31 +6,39 @@ const loginPassword = $("input[name='password-login']");
 $(document).on("click", "#loginSubmitBtn", function(){
     const username = encodeURIComponent(loginUsername.val());
     const password = encodeURIComponent(loginPassword.val());
-    console.log("aaa");
-    $.ajax({
-        type: "POST",
-        url: "/auth/login",
-        data: {
-            "username": username,
-            "password": password
-        },
-        success: function(result) {
-            if(result["success"] == true){
-                console.log("home");
-                window.location.href = '/home'
-            }
+    if(username.length<=3 && password.length<=5){
+        alert("Enter a valid username/password");
+    }
+    else{
+            $.ajax({
+                type: "POST",
+                url: "/auth/login",
+                data: {
+                    "username": username,
+                    "password": password
+                },
+                success: function(result) {
+                    if(result["success"] == true){
+                        console.log("home");
+                        window.location.href = '/home'
+                    }
+                    if(result["success"] == false){
+                        console.log(result);
+                        var message = result["message"];
+                        $(".message").html(message);
+                        $("#errorModal").modal('show');
+                    }
+                }
+        
+            })
         }
-
     })
-})
 
 loginUsername.on("keyup", function () {
     if (!$(this).val().match(regexname)) {
         // there is a mismatch, hence show the error message
-        $("#nameError.emsg").removeClass("hidden");
         $("#loginSubmitBtn").prop("disabled", true);
         $("#nameError.emsg").show();
-        console.log("aaaaaa");
     } else {
         // else, do not display message
         $("#nameError.emsg").addClass("hidden");
@@ -38,11 +46,7 @@ loginUsername.on("keyup", function () {
     }
 });
 loginPassword.on("keyup", function () {
-    if (
-        !$(this)
-            .val()
-            .match(passregex)
-    ) {
+    if (!$(this).val().match(passregex)) {
         // there is a mismatch, hence show the error message
         $("#passwordError.emsg").removeClass("hidden");
         $("#loginSubmitBtn").prop("disabled", true);

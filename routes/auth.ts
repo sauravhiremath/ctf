@@ -22,8 +22,6 @@ const router = Router();
 export default router;
 
 router.post("/login", async (req, res, next) => {
-	// console.log(req.body);
-	// console.log("aaa");
 
 	const username = req.body.username.toString().trim();
 	const password = req.body.password.toString().trim();
@@ -32,6 +30,7 @@ router.post("/login", async (req, res, next) => {
 			success: false,
 			message: "missingFields"
 		});
+		console.log(res);
 		return;
 	}
 
@@ -39,7 +38,7 @@ router.post("/login", async (req, res, next) => {
 		if (!doc0) {
 			res.json({
 				success: false,
-				message: "Not registered"
+				message: `User with ${username} is not registered`
 			});
 		} else {
 			User.findOne(
@@ -55,7 +54,7 @@ router.post("/login", async (req, res, next) => {
 					if (!doc1) {
 						res.json({
 							success: false,
-							message: "Account Not verified"
+							message: "Please verify your account first"
 						});
 						return;
 					} else {
