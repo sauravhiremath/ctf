@@ -254,7 +254,7 @@ router.post("/resetPassword", async (req, res) => {
 
 router.get("/updatePassword", async (req, res) => {
 	const token = req.query.token;
-
+	console.log(token);
 	if (!token) {
 		res.status(400).json({
 			success: false,
@@ -266,14 +266,6 @@ router.get("/updatePassword", async (req, res) => {
 
 	if (!user) {
 		res.send("Invalid token, user not found");
-		return;
-	}
-
-	if(user.emailReSent == true) {
-		res.json({
-			success: false,
-			message: `Email sent to ${user.email}. Wait for 5 mins and Check again in Spam too`
-		});
 		return;
 	}
 
