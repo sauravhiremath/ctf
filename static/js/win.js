@@ -1,36 +1,42 @@
 document.getElementsByTagName("img").draggable = false;
 console.log("hello")
 
-var socketData = [
+// $(function () {
+//     $(".tmngr_btn").click(function () {
+//         $(".tmngr_btn").removeClass("active");
+//         $(this).addClass("active");
+//     });
 
-    { name: "david", points: 42 }, { name: "velho", points: 43 },
-    { name: "devam", points: 45 }, { name: "kuhoo", points: 52 },
-    { name: "rishit", points: 72 }, { name: "rohan", points: 40 },
-    { name: "ayush", points: 22 }, { name: "namit", points: 142 }
+//     // for(const user of socketData){
+//     //     let elem = $(`<p> ${user.name}: ${user.points} </p>`);
+//     //     $(".leaderboard_display_names").append(elem);
+//     // }
+// });
 
-];
+$(document).on("click", "#leaderBtn", function(){
+    $.ajax({
+        type: "GET",
+        url: "/leaderboard",
+        data: "data",
+        dataType: "dataType",
+        success: function (data) {
+            
+        }
+    });
+})
 
-
-
-$(function () {
-    // $(".tmngr_btn").click(function () {
-    //     $(".tmngr_btn").removeClass("active");
-    //     console.log(this);
-    //     $(this).addClass("active");
-    // });
-
-    for(const user of socketData){
-        let elem = $(`<p> ${user.name}: ${user.points} </p>`);
-        $(".leaderboard_display_names").append(elem);
-    }
-});
-
-
+$(document).on("dblclick",".desktop-icon-2", function(){
+    $("#rulesPopup").modal({
+        show: true,
+        backdrop: false
+    }).draggable({
+        handle: ".app_header"
+    });
+})
 
 $(document).on("click", "#leaderBtn", function (e) {
 
     $("#leaderBoardPopup").modal({
-
         show: true,
         backdrop: false
     }).draggable({
