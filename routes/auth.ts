@@ -204,7 +204,7 @@ router.post("/resetPassword", async (req, res) => {
 
 	const user = await User.findOne(
 		{ email },
-		{ name: 1, token: 1, verifiedStatus: 1, emailReSent: 1 },
+		{ name: 1, token: 1, verifiedStatus: 1, emailReSent: 1, email: 1 },
 	);
 
 	if(!user) {
@@ -223,9 +223,11 @@ router.post("/resetPassword", async (req, res) => {
 		return;
 	};
 
-	const randomToken = crypto.randomBytes(64).toString("hex");
-	const userDetails = await User.findByIdAndUpdate({ id: new ObjectId(user._id) }, { passToken: randomToken, emailReSent: true });
+	const randomToken = crypto.randomBytes(10).toString("hex");
+	const userDetails = await User.findByIdAndUpdate({ _id: new ObjectId(user._id) }, { passToken: randomToken, emailReSent: true });
 	
+	// console.log(user.name, user.email, randomToken);
+
 	sendPasswordEmail(user.name, user.email, randomToken);
 
 	res.json({
