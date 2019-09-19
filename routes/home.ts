@@ -12,11 +12,15 @@ export default router;
 
 router.get("/", userCheck, (req, res, next) => {
 	// req.session.user = "test123";
-	res.render("home.hbs", {
+	res.render("home.hbs");
+});
+
+router.get("/startMenu", userCheck, (req, res) => {
+	res.json({
 		username: req.session.user,
 		fname: req.session.name
 	});
-});
+})
 
 router.get("/questionStatus", userCheck, async (req, res) => {
 	var sortKey = req.query.sortKey;
@@ -301,11 +305,12 @@ router.post("/submit", userCheck, async (req, res) => {
 	}
 });
 
-router.get("/leaderboard", async (req, res) => {
-	const currStandings = await Leaderboard.find({ points: { $gte: 0 } });
-	// console.log(currStandings);
-	res.json(currStandings);
-});
+// router.get("/leaderboard", async (req, res) => {
+// 	let currStandings = await Leaderboard.find();
+// 	let sorrtedStandings = currStandings.sort({ points: 1 }).toArray((err, doc) => {});
+// 	// console.log(currStandings);
+// 	res.json(currStandings);
+// });
 
 function userCheck(req, res, next) {
 	if (req.session.user) {
