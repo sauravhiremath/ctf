@@ -11,6 +11,7 @@ import {
 import { hash } from "bcrypt";
 import bcrypt from "bcrypt";
 import * as crypto from "crypto";
+import mongoose from "mongoose";
 import { checkUserExists } from "../db/user";
 import request from "request-promise";
 import sgMail from "@sendgrid/mail";
@@ -20,6 +21,8 @@ const hbs = hbsexp.create();
 
 const router = Router();
 export default router;
+
+const ObjectId = mongoose.Types.ObjectId;
 
 router.post("/login", async (req, res, next) => {
 
@@ -191,37 +194,38 @@ router.get("/verify", async (req, res) => {
 	await user.save();
 	res.render(`success.hbs`);
 });
-
 // router.get("/resetPassword", (req, res) => {
 // 	res.render("/forgotPassword");
 // });
 
 router.post("/resetPassword", async (req, res) => {
 	//Get email registered or username
-	const email = req.body.email;
+	const email = req.body.email.toString().trim();
+
 	const user = await User.findOne(
 		{ email },
-		{ name: 1, token: 1, verifiedStatus: 1 },
-		(err, doc) => {
-			if (err) {
-				res.json({
-					success: false,
-					message: "Please, try again"
-				});
-				return;
-			} else if (!doc) {
-				res.json({
-					success: false,
-					message: `Email Not Registered. Click <a href="ctf.csivit.com">here</a> to register`
-				});
-				return;
-			}
-		}
+		{ name: 1, token: 1, verifiedStatus: 1, emailReSent: 1 },
 	);
 
-	const randomToken = crypto.randomBytes(64).toString("hex");
-	await User.findByIdAndUpdate({ id: user._id }, { passToken: randomToken });
+	if(!user) {
+		res.json({
+			success: false,
+			message: "Email not registered. Register again"
+		});
+		return;
+	}
 
+	if(user.emailReSent) {
+		res.json({
+			success: false,
+			message: `Email already sent to ${user.email}. Wait for 5 min. Kindly check in spam`
+		});
+		return;
+	};
+
+	const randomToken = crypto.randomBytes(64).toString("hex");
+	const userDetails = await User.findByIdAndUpdate({ id: new ObjectId(user._id) }, { passToken: randomToken, emailReSent: true });
+	
 	sendPasswordEmail(user.name, user.email, randomToken);
 
 	res.json({
@@ -247,37 +251,40 @@ router.get("/updatePassword", async (req, res) => {
 		return;
 	}
 
+	if(user.emailReSent == true) {
+		res.json({
+			success: false,
+			message: `Email sent to ${user.email}. Wait for 5 mins and Check again in Spam too`
+		});
+		return;
+	}
+
 	res.render("passwordReset.hbs", { name: user.name, token: token });
 });
 
 router.post("/updatePassword", async (req, res) => {
 	const username = req.body.username;
 	const token = req.body.token;
+	const password = await hash(
+		req.body.password,
+		parseInt(process.env.SALT_ROUNDS)
+	);
 
-	await User.findOneAndUpdate(
-		{ name: username, passToken: token },
+	const UserDetails = await User.findOneAndUpdate(
+		{ name: username, passToken: token, emailReSent: true },
 		{
-			password: await hash(
-				req.body.password,
-				parseInt(process.env.SALT_ROUNDS)
-			)
-		},
-		(err, doc) => {
-            if(err){
-                res.status(400).json({
-                    success: false,
-                    message: "Password Update Failed try again."
-                });
-                return;
-            } else if (!doc) {
-                res.status(400).json({
-                    success: false,
-                    message: "Username and Token combo dont work. Kindly don't spam"
-                });
-                return;
-            }
-        }
-    );
+			password: password,
+			emailReSent: false
+		}
+	);
+	
+	if (!UserDetails) {
+		res.json({
+			success: false,
+			message: "Password change failed!"
+		});
+		return;
+	}
     
     res.json({
         success: true,
