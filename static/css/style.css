@@ -5,6 +5,10 @@ body {
 	font-family: Arial, Helvetica, sans-serif !important;	
 }
 
+#postResetContent {
+	display: none;
+
+}
 .windows-user-2 {
 	height: 180px;
 }

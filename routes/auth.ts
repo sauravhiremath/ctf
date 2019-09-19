@@ -238,7 +238,7 @@ router.post("/resetPassword", async (req, res) => {
 
 router.get("/updatePassword", async (req, res) => {
 	const token = req.query.token;
-
+	console.log(token);
 	if (!token) {
 		res.status(400).json({
 			success: false,
@@ -246,18 +246,10 @@ router.get("/updatePassword", async (req, res) => {
 		});
 		return;
 	}
-	const user = await User.findOne({ token });
+	const user = await User.findOne({ passToken: token });
 
 	if (!user) {
 		res.send("Invalid token, user not found");
-		return;
-	}
-
-	if(user.emailReSent == true) {
-		res.json({
-			success: false,
-			message: `Email sent to ${user.email}. Wait for 5 mins and Check again in Spam too`
-		});
 		return;
 	}
 
@@ -265,7 +257,6 @@ router.get("/updatePassword", async (req, res) => {
 });
 
 router.post("/updatePassword", async (req, res) => {
-	const username = req.body.username;
 	const token = req.body.token;
 	const password = await hash(
 		req.body.password,
@@ -273,7 +264,7 @@ router.post("/updatePassword", async (req, res) => {
 	);
 
 	const UserDetails = await User.findOneAndUpdate(
-		{ name: username, passToken: token, emailReSent: true },
+		{ passToken: token, emailReSent: true },
 		{
 			password: password,
 			emailReSent: false
