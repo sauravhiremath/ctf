@@ -61,11 +61,11 @@ app.use(
 
 app.use("/home", homeRoutes);
 app.use("/auth", authRoutes);
-app.use('*', (req, res) => {
-	res.render("bsod404.hbs");
-});
 app.use("/", (req, res) => {
 	res.redirect("/auth/register");
+});
+app.use('*', (req, res) => {
+	res.render("bsod404.hbs");
 });
 
 // createQuestion();
