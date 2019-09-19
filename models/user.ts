@@ -7,13 +7,18 @@ export interface userInterface extends mongoose.Document {
   password: string,
   email: string,
   phoneNo: number,
-  solved: number[],
+  solved: solvedq[],
   points: number,
   role: string,
   token: string,
   passToken: string,
   emailReSent: boolean,
   verifiedStatus: boolean
+}
+
+interface solvedq {
+  username: string,
+  usertime: string
 }
 
 const userSchema = new Schema(

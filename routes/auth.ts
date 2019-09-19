@@ -16,6 +16,7 @@ import { checkUserExists } from "../db/user";
 import request from "request-promise";
 import sgMail from "@sendgrid/mail";
 import hbsexp from "express-handlebars";
+import Leaderboard from "../models/leaderboard";
 
 const hbs = hbsexp.create();
 
@@ -192,6 +193,13 @@ router.get("/verify", async (req, res) => {
 	user["verifiedStatus"] = true;
 
 	await user.save();
+
+	const leadderboardName = new Leaderboard({
+		username: user.username,
+		points: 0
+	})
+	await leadderboardName.save();
+
 	res.render(`success.hbs`);
 });
 // router.get("/resetPassword", (req, res) => {
@@ -201,6 +209,14 @@ router.get("/verify", async (req, res) => {
 router.post("/resetPassword", async (req, res) => {
 	//Get email registered or username
 	const email = req.body.email.toString().trim();
+
+	if(!email) {
+		res.json({
+			success: false,
+			message: "Enter Mail"
+		});
+		return;
+	};
 
 	const user = await User.findOne(
 		{ email },
@@ -258,6 +274,13 @@ router.get("/updatePassword", async (req, res) => {
 
 router.post("/updatePassword", async (req, res) => {
 	const token = req.body.token;
+	if(!req.body.password){
+		res.json({
+			success: false,
+			message: "Enter password"
+		});
+		return;
+	};
 	const password = await hash(
 		req.body.password,
 		parseInt(process.env.SALT_ROUNDS)
