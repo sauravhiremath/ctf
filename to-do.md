@@ -5,7 +5,10 @@
 * Score on question pallet
 
 
-## On question icon click
+## Re-write submit if flag==subittedAns part
+
+
+## On question icon click (DONE)
 
 - request JSON{qname}
 
@@ -20,7 +23,7 @@
     solvedBy,
 }
 
-## All question for listing
+## All question for listing (DONE)
 
 - request JSON {
     username: "DevamSux"

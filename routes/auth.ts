@@ -22,8 +22,8 @@ const router = Router();
 export default router;
 
 router.post("/login", async (req, res, next) => {
-	console.log(req.body);
-	console.log("aaa");
+	// console.log(req.body);
+	// console.log("aaa");
 
 	const username = req.body.username.toString().trim();
 	const password = req.body.password.toString().trim();
@@ -37,7 +37,7 @@ router.post("/login", async (req, res, next) => {
 
 	await User.findOne({ username }, (err, doc0) => {
 		if (!doc0) {
-			res.status(400).json({
+			res.json({
 				success: false,
 				message: "Not registered"
 			});

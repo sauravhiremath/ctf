@@ -117,7 +117,6 @@ router.post("/question", userCheck, async (req, res) => {
 
 router.post("/submit", userCheck, async (req, res) => {
 	const qid = req.body.qid;
-	// console.log(qid);
 	const ctfFlag: string = req.body.ctfFlag;
 	const timeStampUser: string = req.body.timeStampUser;
 
@@ -140,11 +139,11 @@ router.post("/submit", userCheck, async (req, res) => {
 	if (question.solvedBy.indexOf(req.session.user) > -1) {
 		res.json({
 			success: false,
-			message: "Stop spamming!"
+			message: "Stop spamming!. Question already solved by you"
 		});
 		return;
 	}
-	console.log(question, data);
+	// console.log(question, data);
 	if (data.ctfFlag == question.answer) {
 		console.log(req.session.user);
 		const solved: boolean = true;
@@ -178,7 +177,7 @@ router.post("/submit", userCheck, async (req, res) => {
 				$set: {
 					currentPoints: newPoints
 				},
-				$push: { solvedBy: req.session.user }
+				$push: { solvedBy: [req.session.user, new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')] }
 			},
 			(err, doc) => {
 				if (err) {
@@ -207,7 +206,7 @@ router.post("/submit", userCheck, async (req, res) => {
 			{ _id: new ObjectId(req.session.userID) },
 			{
 				$inc: { points: newPoints },
-				$push: { solved: question.name }
+				$push: { solved: [question.name, new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')] }
 			},
 			(err, doc) => {
 				console.log(doc);
@@ -285,7 +284,7 @@ router.post("/submit", userCheck, async (req, res) => {
 		const newAttempt = new attemptedChallenges({
 			questionId: data.qid,
 			participant: req.session.userID,
-			timeSubmitted: Date(),
+			timeSubmitted: new Date().toISOString().replace(/T/, ' ').replace(/\..+/, ''),
 			pointsOnSubmission: pointsOnAttempt
 		});
 		// console.log(newAttempt);
@@ -310,25 +309,15 @@ router.post("/submit", userCheck, async (req, res) => {
 });
 
 router.get("/leaderboard", async (req, res) => {
-	let currStandings = await Leaderboard.find({}, (err, doc) => {
-		if(err) {
-			console.log(err);
-			res.status(400).json({
-				success: false,
-				message: "Failed leaderboard fetch"
-			});
-			return;
-		}
-		if(!doc) {
-			res.status(400).json({
-				success: false,
-				message: "leaderboard not found"
-			});
-			return;
-		}
-	}).sort({ points: 1 });
-
-	console.log(currStandings);
+	let currStandings = await Leaderboard.find({}).sort( { points: 1} )
+	if(!currStandings) {
+		res.status(400).json({
+			success: false,
+			message: "Cannot find leaderboard this moment"
+		});
+		return;
+	}
+	// console.log(currStandings);
 	// console.log(currStandings);
 	res.json(currStandings);
 });
