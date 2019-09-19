@@ -131,7 +131,7 @@ $(document).on("click", ".submit-button", function(){
             if(data["success"] == true){
                 $(".message").html(data["message"]);
                 $("#singlePopupModal").modal('hide');
-                $("#successPopup").modal({
+                $("#successModal").modal({
                     show: true,
                     backdrop: false
                 });
@@ -142,7 +142,7 @@ $(document).on("click", ".submit-button", function(){
                 message = data["message"];
                 console.log(message);
                 $(".message").html(message);
-                $("#successPopup").modal({
+                $("#successModal").modal({
                     show: true,
                     backdrop: false
                 });

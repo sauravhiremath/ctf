@@ -38,7 +38,7 @@
 }
 
 
-#successPopup{
+#successModal{
 	position: absolute;
 	width: 400px;
 	height: auto;
@@ -52,7 +52,7 @@
 }
 
 .message {
-	background-color: white;
+	background-color: rgb(237,233,210);
 }
 
 .app_header{
