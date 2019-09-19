@@ -18,6 +18,10 @@ const challengeSchema = new Schema({
     hidden: { type: Boolean, required: false }
 });
 
+interface solvedByUser {
+    username: string,
+    usertime: string
+}
 export interface challengeInterface extends mongoose.Document {
     name: string,
     description: string,
@@ -27,7 +31,7 @@ export interface challengeInterface extends mongoose.Document {
     answer: string,
     startPoints: number,
     currentPoints: number,
-    solvedBy: string,
+    solvedBy: solvedByUser[],
     hidden: boolean
 }
 export const Challenge = mongoose.model<challengeInterface>("Challenge", challengeSchema);

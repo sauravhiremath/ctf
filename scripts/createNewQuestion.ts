@@ -12,7 +12,7 @@ export function createQuestion() {
 			answer: `aaa${i}`,
 			startPoints: 100 + i,
 			currentPoints: 55,
-			solvedBy: ["abc", "xyz"],
+			solvedBy: [],
 			hidden: false
 		});
 
