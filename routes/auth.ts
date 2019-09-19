@@ -192,9 +192,9 @@ router.get("/verify", async (req, res) => {
 	res.render(`success.hbs`);
 });
 
-router.get("/resetPassword", (req, res) => {
-	res.render("/forgotPassword");
-});
+// router.get("/resetPassword", (req, res) => {
+// 	res.render("/forgotPassword");
+// });
 
 router.post("/resetPassword", async (req, res) => {
 	//Get email registered or username
@@ -204,13 +204,13 @@ router.post("/resetPassword", async (req, res) => {
 		{ name: 1, token: 1, verifiedStatus: 1 },
 		(err, doc) => {
 			if (err) {
-				res.status(400).json({
+				res.json({
 					success: false,
 					message: "Please, try again"
 				});
 				return;
 			} else if (!doc) {
-				res.status(400).json({
+				res.json({
 					success: false,
 					message: `Email Not Registered. Click <a href="ctf.csivit.com">here</a> to register`
 				});

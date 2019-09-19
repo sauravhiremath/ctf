@@ -146,19 +146,27 @@ router.post("/submit", userCheck, async (req, res) => {
 	}
 	// console.log(question, data);
 	if (data.ctfFlag == question.answer) {
-		console.log(req.session.user);
 		const solved: boolean = true;
-		// console.log("ps1");
-		await updateLog(data, question, solved);
-		await refreshData(data, question, req, res);
-		return;
+		const success1: boolean = await updateLog(data, question, solved);
+		const success2:boolean = await refreshData(data, question, req, res);
+		if(success1 && success2) {
+			res.json({
+				success: false,
+				message: "Incorrect"
+			});
+			return;
+		}
+			return;
 	} else {
 		const solved: boolean = false;
-		updateLog(data, question, solved);
-		res.json({
-			success: false,
-			message: "Incorrect"
-		});
+		const success3: boolean = await updateLog(data, question, solved);
+		if(success3) {
+			res.json({
+				success: false,
+				message: "Incorrect"
+			});
+			return;
+		}
 		return;
 	}
 
@@ -172,72 +180,50 @@ router.post("/submit", userCheck, async (req, res) => {
 		// console.log(username);
 		// console.log(newPoints, question.currentPoints);
 		//Changes in the challenge Model--> change currentPoints and solvedBy
-		await Challenge.updateOne(
+		const challengeUpdate = await Challenge.updateOne(
 			{ _id: new ObjectId(data.qid) },
 			{
 				$set: {
 					currentPoints: newPoints
 				},
 				$push: { solvedBy: [req.session.user, new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')] }
-			},
-			(err, doc) => {
-				if (err) {
-					// console.log(err);
-					res.status(400).json({
-						success: false,
-						message: "Challenge points update failed 1"
-					});
-					return false;
-				}
-				if (!doc) {
-					res.status(400).json({
-						success: false,
-						message:
-							"Challenge points update failed. Challenge qid not found!"
-					});
-					return false;
-				}
 			}
 		);
-
-		// console.log(newPoints, question.currentPoints);
+		if (!challengeUpdate) {
+				res.json({
+					success: false,
+					message: "Challenge points update failed 1"
+				});
+				return false;
+		}
 
 		//Changes in the user Model--> changed solved and points
-		await User.updateOne(
+		const userUpdate = await User.updateOne(
 			{ _id: new ObjectId(req.session.userID) },
 			{
 				$inc: { points: newPoints },
 				$push: { solved: [question.name, new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')] }
 			},
-			(err, doc) => {
-				console.log(doc);
-				if (err) {
-					console.log(err);
-					res.status(400).json({
-						success: false,
-						message: "User points update failed!"
-					});
-					return false;
-				}
-				if (!doc) {
-					res.status(400).json({
-						success: false,
-						message:
-							"User points update failed. Question qid not found"
-					});
-					return false;
-				}
-			}
 		);
-
-		// console.log("ps3");
-
-		await UpdateLeaderboardModel(data, newPoints);
 		
+			if (!userUpdate) {
+				res.json({
+					success: false,
+					message: "User points update failed!"
+				});
+				return false;
+			}
+
+		const updateLeaderboard: boolean = await UpdateLeaderboardModel(data, newPoints);
+		if(!updateLeaderboard) {
+			return false;
+		}
+
 		res.json({
 			success: true,
 			message: "Correct"
 		});
+		return true;
 		// console.log("done");
 	}
 
@@ -246,32 +232,16 @@ router.post("/submit", userCheck, async (req, res) => {
 		newPoints: number
 	) {
 		//Changes in leaderboard Model--> change username and points
-		await Leaderboard.updateOne(
+		const updateOrder = await Leaderboard.updateOne(
 			{ username: req.session.user },
 			{ $inc: { points: newPoints } },
-			(err, doc) => {
-				if (err) {
-					console.log(err);
-					res.status(400).json({
-						success: false,
-						message: "Leaderboard update Failed!"
-					});
-					return;
-				}
-				if (!doc) {
-					res.status(400).json({
-						success: false,
-						message:
-							"Leaderboard update Failed. username not found!"
-					});
-					return;
-				}
-			}
 		);
 		
+		if(!updateOrder) {
+			return false;
+		}
 
-
-		// console.log("Leaderboard update done");
+		return true;
 	}
 
 	async function updateLog(
@@ -291,21 +261,14 @@ router.post("/submit", userCheck, async (req, res) => {
 		// console.log(newAttempt);
 		await newAttempt.save((err, doc) => {
 			if (!doc) {
-				res.status(400).json({
-					success: false,
-					message: "Submission not saved in logs"
-				});
-				return;
+				return false;
 			}
 			if (err) {
-				// console.log(err);
-				res.status(400).json({
-					success: false,
-					message: "Submission not saved in logs"
-				});
-				return;
+				return false;
 			}
 		});
+
+		return true;
 	}
 });
 
