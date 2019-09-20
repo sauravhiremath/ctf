@@ -23,7 +23,7 @@ $(document).on("dblclick", ".desktop-icon", function () {
                 for (var i = 0; i < filtered.length; i++) {
                     var image = filtered[i].name.toLowerCase().replace(" ", "-");
                     var divId = filtered[i]._id + "div"
-                    var question_data = '<div class="col-4 d-inline-flex" id='+ divId + '><button class="btn singlePopup question-icon" value='+ filtered[i].name +' id='+ filtered[i]._id +'> <div class="icon-container"><img src="/static/images/'+ image +'.png" style="width:32px; height:32px" alt=""><span class="question-title ml-1">'+ filtered[i].name +'</span></div></button></div>'
+                    var question_data = '<div class="flex" id='+ divId + '><button class="btn singlePopup question-icon" value='+ filtered[i].name +' id='+ filtered[i]._id +'> <div class="icon-container"><img src="/static/images/'+ image +'.png" style="width:32px; height:32px" alt=""><span class="question-title ml-1">'+ filtered[i].name +'</span></div></button></div>'
                     data+=question_data;
                 }
             }
@@ -43,7 +43,7 @@ $(document).on("dblclick", ".desktop-icon", function () {
                     $(".question-type").html(difficulty)
                     for(var i=0; i<arr.length; i++){
                         var image = arr[i].name.toLowerCase().replace(" ", "-");
-                        var question_data = '<button class="btn singlePopup question-icon col-4 d-inline-flex" id='+ filtered[i]._id + ' value='+ arr[i].name +' id='+ arr[i]._id +' disabled> <div class="icon-container"><img src="/static/images/'+ image +'.png" style="width:32px; height:32px" alt=""><span class="question-title ml-1">'+ arr[i].name +'</span></div></button>'
+                        var question_data = '<button class="btn singlePopup question-icon d-inline-flex" id='+ arr[i]._id + ' value='+ arr[i].name +' id='+ arr[i]._id +' disabled> <div class="icon-container"><img src="/static/images/'+ image +'.png" style="width:32px; height:32px" alt=""><span class="question-title ml-1">'+ arr[i].name +'</span></div></button>'
                         data+=question_data;
                     }
                 }
@@ -89,7 +89,7 @@ $(document).on("click", ".start-icon-modal", function(){
                 for(var i=0; i<filtered.length; i++){
                     var image = filtered[i].name.toLowerCase().replace(" ", "-");
                     console.log(image);
-                    var question_data = '<button class="btn singlePopup question-icon col-4 d-inline-flex" id='+ filtered[i]._id + ' value='+ filtered[i].name +' id='+ filtered[i]._id +'> <div class="icon-container"><img src="/static/images/'+ image +'.png" style="width: 32px; height: 32px" alt=""><span class="question-title ml-1">'+ filtered[i].name +'</span></div></button>'
+                    var question_data = '<button class="btn singlePopup question-icon d-inline-flex" id='+ filtered[i]._id + ' value='+ filtered[i].name +' id='+ filtered[i]._id +'> <div class="icon-container"><img src="/static/images/'+ image +'.png" style="width: 32px; height: 32px" alt=""><span class="question-title ml-1">'+ filtered[i].name +'</span></div></button>'
                     data+=question_data;
                 }
             }
@@ -109,7 +109,7 @@ $(document).on("click", ".start-icon-modal", function(){
                 console.log(difficulty);
                 for(var i=0; i<arr.length; i++){
                     var image = arr[i].name.toLowerCase().replace(" ", "-");
-                    var question_data = '<button class="btn singlePopup question-icon col-4 d-inline-flex" id='+ filtered[i]._id + ' value='+ arr[i].name +' id='+ arr[i]._id +' disabled> <div class="icon-container"><img src="/static/images/'+ image +'.png" style="width:32px; height:32px" alt=""><span class="question-title ml-1">'+ arr[i].name +'</span></div></button>'
+                    var question_data = '<button class="btn singlePopup question-icon d-inline-flex" id='+ filtered[i]._id + ' value='+ arr[i].name +' id='+ arr[i]._id +' disabled> <div class="icon-container"><img src="/static/images/'+ image +'.png" style="width:32px; height:32px" alt=""><span class="question-title ml-1">'+ arr[i].name +'</span></div></button>'
                     data+=question_data;
                 }
             }
@@ -219,8 +219,11 @@ $(document).on("click", ".submit-button", function () {
                 $("#errorModal").modal({
                     show: true,
                     backdrop: false
-                });
-                $('#'+id + 'div').hide();
+                })
+                var parentDiv = '#'+id +'div';
+                console.log(parentDiv);
+                $(parentDiv).hide();
+                console.log("hidden");
             }
             else{
                 var htmlData = '<img src="/static/images/wrong-ans.png" style="width: 30px; height:30px" class="start-icons" alt=""><div class="pl-2 pb-4">Wrong Answer</div><br>'
@@ -230,6 +233,7 @@ $(document).on("click", ".submit-button", function () {
                     show: true,
                     backdrop: false
                 });
+                document.getElementById("duh").play();
             }
         },
         error: data => {
