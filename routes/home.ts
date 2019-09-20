@@ -120,7 +120,8 @@ router.get("/question", userCheck, async (req, res) => {
 			hint: quest.hint,
 			startPoints: quest.startPoints,
 			currentPoints: quest.currentPoints,
-			solvedBy: quest.solvedBy
+			solvedBy: quest.solvedBy,
+			type: quest.type
 		}
 	});
 });
