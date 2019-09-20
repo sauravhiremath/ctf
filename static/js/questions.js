@@ -169,7 +169,7 @@ $(document).on("dblclick", ".question-icon", function(){
                     else{
                         var statsHtml = '';
                         for(var i=0; i<people.length; i++){
-                            singleDiv='<div>'+ (i+1)+". " + people[i] +'</div><hr>'
+                            singleDiv='<div class="d-flex">'+ (i+1)+". " + people[i].username +'<div class="ml-auto">'+ people[i].usertime +'</div></div><hr>'
                             statsHtml += singleDiv;
                         }
                     }
