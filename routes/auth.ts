@@ -320,7 +320,7 @@ async function sendInviteEmail(
 	randomToken: string
 ) {
 	sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-	const vLink = `https://ctfdev.csivit.com/auth/verify?token=${randomToken}`;
+	const vLink = `https://ctf.csivit.com/auth/verify?token=${randomToken}`;
 	const msg = {
 		to: email,
 		from: {
