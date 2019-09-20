@@ -26,7 +26,6 @@ export default router;
 const ObjectId = mongoose.Types.ObjectId;
 
 router.post("/login", async (req, res, next) => {
-
 	const username = req.body.username.toString().trim();
 	const password = req.body.password.toString().trim();
 	if (!username || !password) {
@@ -48,7 +47,7 @@ router.post("/login", async (req, res, next) => {
 			User.findOne(
 				{ username: username, verifiedStatus: true },
 				(err, doc1) => {
-					if(err){
+					if (err) {
 						res.json({
 							success: false,
 							message: "Account Not Found"
@@ -197,7 +196,7 @@ router.get("/verify", async (req, res) => {
 	const leadderboardName = new Leaderboard({
 		username: user.username,
 		points: 0
-	})
+	});
 	await leadderboardName.save();
 
 	res.render(`success.hbs`);
@@ -210,20 +209,20 @@ router.post("/resetPassword", async (req, res) => {
 	//Get email registered or username
 	const email = req.body.email.toString().trim();
 
-	if(!email) {
+	if (!email) {
 		res.json({
 			success: false,
 			message: "Enter Mail"
 		});
 		return;
-	};
+	}
 
 	const user = await User.findOne(
 		{ email },
-		{ name: 1, token: 1, verifiedStatus: 1, emailReSent: 1, email: 1 },
+		{ name: 1, token: 1, verifiedStatus: 1, emailReSent: 1, email: 1 }
 	);
 
-	if(!user) {
+	if (!user) {
 		res.json({
 			success: false,
 			message: "Email not registered. Register again"
@@ -231,17 +230,20 @@ router.post("/resetPassword", async (req, res) => {
 		return;
 	}
 
-	if(user.emailReSent) {
+	if (user.emailReSent) {
 		res.json({
 			success: false,
 			message: `Email already sent to ${user.email}. Wait for 5 min. Kindly check in spam`
 		});
 		return;
-	};
+	}
 
 	const randomToken = crypto.randomBytes(10).toString("hex");
-	const userDetails = await User.findByIdAndUpdate({ _id: new ObjectId(user._id) }, { passToken: randomToken, emailReSent: true });
-	
+	const userDetails = await User.findByIdAndUpdate(
+		{ _id: new ObjectId(user._id) },
+		{ passToken: randomToken, emailReSent: true }
+	);
+
 	// console.log(user.name, user.email, randomToken);
 
 	sendPasswordEmail(user.name, user.email, randomToken);
@@ -274,13 +276,13 @@ router.get("/updatePassword", async (req, res) => {
 
 router.post("/updatePassword", async (req, res) => {
 	const token = req.body.token;
-	if(!req.body.password){
+	if (!req.body.password) {
 		res.json({
 			success: false,
 			message: "Enter password"
 		});
 		return;
-	};
+	}
 	const password = await hash(
 		req.body.password,
 		parseInt(process.env.SALT_ROUNDS)
@@ -293,7 +295,7 @@ router.post("/updatePassword", async (req, res) => {
 			emailReSent: false
 		}
 	);
-	
+
 	if (!UserDetails) {
 		res.json({
 			success: false,
@@ -301,11 +303,11 @@ router.post("/updatePassword", async (req, res) => {
 		});
 		return;
 	}
-    
-    res.json({
-        success: true,
-        message: `Password updated successfully. Click <a href='ctf.csivit.com'>here</a> to login`
-    })
+
+	res.json({
+		success: true,
+		message: `Password updated successfully. Click <a href='ctf.csivit.com'>here</a> to login`
+	});
 });
 
 router.get("/logout", function(req, res, next) {

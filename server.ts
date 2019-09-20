@@ -13,9 +13,8 @@ import authRoutes from "./routes/auth";
 import Leaderboard from "./models/leaderboard";
 import { createQuestion } from "./scripts/addQuestions";
 import disp from "./scripts/lbMigrate";
-var MongoDBStore = require('connect-mongodb-session')(session);
+var MongoDBStore = require("connect-mongodb-session")(session);
 require("dotenv").config();
-
 
 const app = express();
 
@@ -56,8 +55,8 @@ app.use(
 		saveUninitialized: true,
 		resave: true,
 		store: new MongoDBStore({
-			uri: 'mongodb://localhost:27017/ctf',
-  			collection: 'mySessions'
+			uri: "mongodb://localhost:27017/ctf",
+			collection: "mySessions"
 		})
 	})
 );
@@ -67,7 +66,7 @@ app.use("/auth", authRoutes);
 app.use("/", (req, res) => {
 	res.redirect("/home");
 });
-app.use('*', (req, res) => {
+app.use("*", (req, res) => {
 	res.render("bsod404.hbs");
 });
 

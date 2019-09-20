@@ -18,7 +18,10 @@ router.get("/", userCheck, (req, res, next) => {
 });
 
 router.get("/startMenu", userCheck, async (req, res) => {
-	const currUserData = await User.findById( { _id: req.session.userID }, { points: 1, solved: 1, name: 1 } );
+	const currUserData = await User.findById(
+		{ _id: req.session.userID },
+		{ points: 1, solved: 1, name: 1 }
+	);
 	// console.log(currUserData);
 	res.json({
 		userID: currUserData._id,
@@ -27,7 +30,7 @@ router.get("/startMenu", userCheck, async (req, res) => {
 		username: req.session.user,
 		points: currUserData.points
 	});
-})
+});
 
 router.get("/questionStatus", userCheck, async (req, res) => {
 	var sortKey = req.query.sortKey;
@@ -51,42 +54,42 @@ router.get("/questionStatus", userCheck, async (req, res) => {
 
 	// console.log(user);
 	if (solved === "True") {
-		const allChallenges = await Challenge.find(
-			{},
-			(err, doc) => {
-				doc = doc.filter((challenge) => {
-					return challenge.solvedBy.map((solvedUser) => solvedUser.username).indexOf(user) > -1;
+		const allChallenges = await Challenge.find({}, (err, doc) => {
+			doc = doc.filter(challenge => {
+				return (
+					challenge.solvedBy
+						.map(solvedUser => solvedUser.username)
+						.indexOf(user) > -1
+				);
+			});
+			// console.log(doc);
+			if (err) {
+				res.status(400).json({
+					success: false,
+					message: "Error finding list of Unsolved Questions!"
 				});
-				// console.log(doc);
-				if (err) {
-					res.status(400).json({
-						success: false,
-						message: "Error finding list of Unsolved Questions!"
-					});
-					return;
-				}
-				res.json({ allChallenges: doc });
+				return;
 			}
-		);
-
-
+			res.json({ allChallenges: doc });
+		});
 	} else {
-		const allChallenges = await Challenge.find(
-			{},
-			(err, doc) => {
-				doc = doc.filter((challenge) => {
-					return challenge.solvedBy.map((solvedUser) => solvedUser.username).indexOf(user) == -1;
+		const allChallenges = await Challenge.find({}, (err, doc) => {
+			doc = doc.filter(challenge => {
+				return (
+					challenge.solvedBy
+						.map(solvedUser => solvedUser.username)
+						.indexOf(user) == -1
+				);
+			});
+			if (err) {
+				res.status(400).json({
+					success: false,
+					message: "Error finding list of solved Questions!"
 				});
-				if (err) {
-					res.status(400).json({
-						success: false,
-						message: "Error finding list of solved Questions!"
-					});
-					return;
-				}
-				res.json({ allChallenges: doc });
+				return;
 			}
-		);
+			res.json({ allChallenges: doc });
+		});
 	}
 });
 
@@ -129,6 +132,13 @@ router.get("/question", userCheck, async (req, res) => {
 router.post("/submit", userCheck, async (req, res) => {
 	const qid = req.body.qid;
 	const ctfFlag: string = req.body.ctfFlag;
+	if (ctfFlag.length > 256) {
+		res.json({
+			success: false,
+			message: "Too long submission"
+		});
+		return;
+	}
 	const timeStampUser: string = req.body.timeStampUser;
 
 	const data: submissionData = {
@@ -147,7 +157,11 @@ router.post("/submit", userCheck, async (req, res) => {
 		return;
 	}
 	// console.log(question.solvedBy);
-	if (question.solvedBy.map((solvedUser) => solvedUser.username).indexOf(req.session.user) > -1) {
+	if (
+		question.solvedBy
+			.map(solvedUser => solvedUser.username)
+			.indexOf(req.session.user) > -1
+	) {
 		res.json({
 			success: false,
 			message: "Stop spamming!. Question already solved by you"
@@ -158,8 +172,8 @@ router.post("/submit", userCheck, async (req, res) => {
 	if (data.ctfFlag == question.answer) {
 		const solved: boolean = true;
 		const success1: boolean = await updateLog(data, question, solved);
-		const success2:boolean = await refreshData(data, question, req, res);
-		if(success1==true && success2==true) {
+		const success2: boolean = await refreshData(data, question, req, res);
+		if (success1 == true && success2 == true) {
 			res.json({
 				success: true,
 				message: "Correct"
@@ -172,16 +186,14 @@ router.post("/submit", userCheck, async (req, res) => {
 			});
 			return;
 		}
-
 	} else {
 		const solved: boolean = false;
 		await updateLog(data, question, solved);
 		res.json({
 			success: false,
 			message: "Incorrect"
-		})
+		});
 		return;
-
 	}
 
 	async function refreshData(
@@ -190,14 +202,15 @@ router.post("/submit", userCheck, async (req, res) => {
 		req,
 		res
 	) {
-
 		const x = question.solvedBy.length;
-		const b = question.startPoints/2;
+		const b = question.startPoints / 2;
 		const a = question.startPoints;
 		const s = 15;
 
 		const oldPoints = question.currentPoints;
-		var newPoints = Math.floor(Math.max((((b - a)*x*x/(s*s)) + a),b));
+		var newPoints = Math.floor(
+			Math.max(((b - a) * x * x) / (s * s) + a, b)
+		);
 		// console.log(username);
 		// console.log(newPoints, question.currentPoints);
 		//Changes in the challenge Model--> change currentPoints and solvedBy
@@ -208,16 +221,24 @@ router.post("/submit", userCheck, async (req, res) => {
 				$set: {
 					currentPoints: newPoints
 				},
-				$push: { solvedBy: {username: req.session.user, usertime: new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '') } }
+				$push: {
+					solvedBy: {
+						username: req.session.user,
+						usertime: new Date()
+							.toISOString()
+							.replace(/T/, " ")
+							.replace(/\..+/, "")
+					}
+				}
 			}
 		);
 
 		if (!challengeUpdate) {
-				// res.json({
-				// 	success: false,
-				// 	message: "Challenge points update failed 1"
-				// });
-				return false;
+			// res.json({
+			// 	success: false,
+			// 	message: "Challenge points update failed 1"
+			// });
+			return false;
 		}
 
 		//Changes in the user Model--> changed solved and points
@@ -225,17 +246,25 @@ router.post("/submit", userCheck, async (req, res) => {
 			{ _id: new ObjectId(req.session.userID) },
 			{
 				$inc: { points: newPoints },
-				$push: { solved: {qname: question.name, qtime: new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')} }
-			},
+				$push: {
+					solved: {
+						qname: question.name,
+						qtime: new Date()
+							.toISOString()
+							.replace(/T/, " ")
+							.replace(/\..+/, "")
+					}
+				}
+			}
 		);
 		console.log(userUpdate);
-			if (!userUpdate) {
-				// res.json({
-				// 	success: false,
-				// 	message: "User points update failed!"
-				// });
-				return false;
-			}
+		if (!userUpdate) {
+			// res.json({
+			// 	success: false,
+			// 	message: "User points update failed!"
+			// });
+			return false;
+		}
 
 		// const attemptedForUser: any = await attemptedChallenges.find({ questionId: new ObjectId(data.qid), points: { $gt: 0 } });
 		// for (var i=0; i< attemptedForUser.length; i++) {
@@ -251,14 +280,21 @@ router.post("/submit", userCheck, async (req, res) => {
 		// }
 		// const updateForAll = await User.updateMany({ solved: question.name }, { points: })
 
-		const solvedUsers = question.solvedBy.map((solved) => solved.username);
-		const users = await User.find({username: {$in: solvedUsers}});
-		await Promise.all(users.map((user) => {
-			user.points += (newPoints - oldPoints);
-			return user.save()
-		}));
-		const updateLeaderboard: boolean = await UpdateLeaderboardModel(data, newPoints, req, res);
-		if(!updateLeaderboard) {
+		const solvedUsers = question.solvedBy.map(solved => solved.username);
+		const users = await User.find({ username: { $in: solvedUsers } });
+		await Promise.all(
+			users.map(user => {
+				user.points += newPoints - oldPoints;
+				return user.save();
+			})
+		);
+		const updateLeaderboard: boolean = await UpdateLeaderboardModel(
+			data,
+			newPoints,
+			req,
+			res
+		);
+		if (!updateLeaderboard) {
 			return false;
 		}
 
@@ -272,19 +308,21 @@ router.post("/submit", userCheck, async (req, res) => {
 
 	async function UpdateLeaderboardModel(
 		data: submissionData,
-		newPoints: number, req, res
+		newPoints: number,
+		req,
+		res
 	) {
 		// console.log(req.session.userID, newPoints);
 		//Changes in leaderboard Model--> change username and points
 		console.log(req.session.userID);
 		const updateOrder = await Leaderboard.updateOne(
 			{ username: req.session.user },
-			{ $inc: { points: newPoints } },
+			{ $inc: { points: newPoints } }
 		);
 
 		// console.log(updateOrder);
 
-		if(!updateOrder) {
+		if (!updateOrder) {
 			return false;
 		}
 
@@ -302,7 +340,10 @@ router.post("/submit", userCheck, async (req, res) => {
 		const newAttempt = new attemptedChallenges({
 			questionId: new ObjectId(data.qid),
 			participant: req.session.userID,
-			timeSubmitted: new Date().toISOString().replace(/T/, ' ').replace(/\..+/, ''),
+			timeSubmitted: new Date()
+				.toISOString()
+				.replace(/T/, " ")
+				.replace(/\..+/, ""),
 			pointsOnSubmission: pointsOnAttempt
 		});
 		// console.log(newAttempt);
@@ -322,11 +363,13 @@ router.post("/submit", userCheck, async (req, res) => {
 });
 
 router.get("/leaderboard", async (req, res) => {
-	let currStandings = await Leaderboard.find({}).sort( { points: 1 } )
+	let currStandings = await Leaderboard.find({}).sort({ points: 1 });
 
-	let standings = await User.find({}, {username: 1, points: 1}).sort({ points: -1 });
+	let standings = await User.find({}, { username: 1, points: 1 }).sort({
+		points: -1
+	});
 
-	if(!standings) {
+	if (!standings) {
 		res.status(400).json({
 			success: false,
 			message: "Cannot find leaderboard this moment"
@@ -358,7 +401,7 @@ const Questions = [
 		startPoints: 70,
 		currentPoints: 70,
 		solvedBy: [],
-		hidden: false,
+		hidden: false
 	},
 	// {
 	// 	name: "Paint",
@@ -396,7 +439,4 @@ const Questions = [
 		solvedBy: [],
 		hidden: false
 	}
-	
-
-
-]
+];
