@@ -36,7 +36,6 @@
     $(function () {
         $(".start_button").click(function () {
             if ($("#startMenu").hasClass("show")) {
-                console.log("ran");
                 return;
             }
             $.ajax({
@@ -44,7 +43,6 @@
                 url: "/home/startMenu",
                 success: data => {
                     $(".user-stats").html('');
-                    console.log(data);
                     $(".header-text").html(data.fname);
                     var userInfo = '<div class="participant p-1"><strong>Username:</strong> ' + data.username + '</div><div class="participant p-1"><strong>Points:</strong>' + data.points + '</div><div class="participant p-1"><strong>Solved:</strong>' + data.solved.length + '</div>'
                     $(".user-stats").html(userInfo);
@@ -63,7 +61,6 @@
         var m = today.getMinutes();
         m = checkTime(m);
         var time = h + ":" + m;
-        console.log(time)
         document.getElementById('clock').innerHTML = time;
         var t = setTimeout(startTime, 10000);
     }
@@ -168,6 +165,8 @@
                                 <div class="start-left-content">
                                     <div class="user-stats"></div>
                                     <div class="menu_seperator "></div>
+                                    <div class="phone-hidden">
+
                                     <button class="start-icon-modal questionPopup py-1 d-flex w-100"
                                         id="Baby" name="False" data-toggle="modal"><img src="/static/images/my_documents.png"
                                             class="start-icons" alt=""><span class="start-icon-text py-2">Baby</span></button>
@@ -184,12 +183,13 @@
                                         id="Recycle-bin" name="True" data-toggle="modal"><img src="/static/images/recycle_bin.png"
                                             class="start-icons" alt=""><span class="start-icon-text py-2">Recycle
                                             bin</span></button>
+                                    </div>
                                 </div>
-                                <div class="menu_seperator "></div>
+                                <div class="menu_seperator phone-hidden"></div>
 
-                                <div class="dropright p-0 mr-0"><button class="participant leaderbtn px-4 py-1 w-100"
+                                <div class="dropright p-0 mr-0 mt-auto"><button class="participant leaderbtn px-4 py-1 w-100"
                                         id="leaderBtn" data-toggle="modal">Leaderboard<img
-                                            src="/static/images/allprograms.ico" alt=""></button>
+                                            src="/static/images/allprograms.ico" class="ml-1" alt=""></button>
 
                                 </div>
                             </div>

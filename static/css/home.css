@@ -258,8 +258,19 @@ a:hover{
     font-size: 11px;
 }
 
-@media only screen and (max-width: 768px){
+@media (max-width: 768px){
     .desktop-icon{
         display: none;
     }
-}
+
+    .phone-hidden {
+        display: none;
+    }
+    .modal {
+        left: 2rem !important;
+        right: 2rem !important;
+        top: 1rem !important;
+        width: 90% !important;
+        height: 650px !important;
+    }
+}   

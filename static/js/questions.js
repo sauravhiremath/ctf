@@ -18,7 +18,18 @@ $(document).on("dblclick", ".desktop-icon", function () {
             if (solved == "False") {
                 $(".question-type").html(difficulty);
                 var filtered = arr.filter(question=>question.difficulty==diff)
-                if(filtered.length === 0) return;
+                if(filtered.length === 0) {
+                    var text = "No questions left from this catagory";
+                    var htmlData = '<img src="/static/images/wrong-ans.png" style="width: 30px; height:30px" class="start-icons" alt=""><div class="pl-2 pb-4">'+ text +'</div><br>'
+                    $(".message").html(htmlData);
+                    $(".header-text").html("Uh-oh");
+                    $("#errorModal").modal({
+                        show: true,
+                        backdrop: false
+                    });
+                    document.getElementById("duh").play();
+                    return;
+                };
                 var data = '';
                 for (var i = 0; i < filtered.length; i++) {
                     var image = filtered[i].name.toLowerCase().replace(" ", "-");
@@ -31,11 +42,14 @@ $(document).on("dblclick", ".desktop-icon", function () {
             else {
                 if (arr.length === 0) {
                     var text = "No questions solved yet";
-                    $(".message").html(message);
+                    var htmlData = '<img src="/static/images/wrong-ans.png" style="width: 30px; height:30px" class="start-icons" alt=""><div class="pl-2 pb-4">'+ text +'</div><br>'
+                    $(".message").html(htmlData);
+                    $(".header-text").html("Uh-oh");
                     $("#errorModal").modal({
                         show: true,
                         backdrop: false
                     });
+                    document.getElementById("duh").play();
                     return;
                 }
                 else {
@@ -228,7 +242,8 @@ function sendAns(e) {
                 console.log("hidden");
             }
             else{
-                var htmlData = '<img src="/static/images/wrong-ans.png" style="width: 30px; height:30px" class="start-icons" alt=""><div class="pl-2 pb-4">Wrong Answer</div><br>'
+                var text = data.message;
+                var htmlData = '<img src="/static/images/wrong-ans.png" style="width: 30px; height:30px" class="start-icons" alt=""><div class="pl-2 pb-4">'+ text +'</div><br>'
                 $(".message").html(htmlData);
                 $(".header-text").html("Uh-oh")
                 $("#errorModal").modal({
@@ -245,3 +260,4 @@ function sendAns(e) {
     });
     return false;
 }
+
