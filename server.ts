@@ -49,9 +49,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // createQuestion(0);
-// createQuestion(1);
-// createQuestion(2);
-// createQuestion(3);
 
 app.use(
 	session({
