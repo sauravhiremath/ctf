@@ -12,6 +12,7 @@ const router = Router();
 export default router;
 
 router.get("/", userCheck, (req, res, next) => {
+	// Challenge.insertMany(Questions);
 	// req.session.user = "test123";
 	res.render("home.hbs");
 });
@@ -320,3 +321,68 @@ function userCheck(req, res, next) {
 		// next();
 	}
 }
+
+const Questions = [
+	{
+		name: "Windows Media Player",
+		description: "Enjoy this thing!",
+		difficulty: "Medium",
+		type: "Forensics",
+		hint: null,
+		answer: "CSICTF{aLAn_7UR1N'}",
+		startPoints: 70,
+		currentPoints: 70,
+		solvedBy: [],
+		hidden: false,
+	},
+	// {
+	// 	name: "Paint",
+	// 	description: "Enjoy this thing!",
+	// 	difficulty: "Easy",
+	// 	type: "Forensics",
+	// 	hint: null,
+	// 	answer: String,
+	// 	startPoints: Number,
+	// 	currentPoints: Number,
+	// 	solvedBy: Array,
+	// 	hidden: { type: Boolean, required: false }
+	// },
+	{
+		name: "Windows Registry Editor",
+		description: "Enjoy this thing!",
+		difficulty: "Hard",
+		type: "Reverse Engineering",
+		hint: null,
+		answer: "CSICTF{NOWYOUKNOWNODEJSBOI}",
+		startPoints: 100,
+		currentPoints: 100,
+		solvedBy: [],
+		hidden: false
+	},
+	{
+		name: "MS Word",
+		description: "Enjoy this thing!",
+		difficulty: "Hard",
+		type: "Jail",
+		hint: null,
+		answer: "CSICTF{Y0u_c4N_J41l_4_rev0luT10nary_buT_N0T_th3_r3V0lUT10n}",
+		startPoints: 100,
+		currentPoints: 100,
+		solvedBy: [],
+		hidden: false
+	}
+	// {
+	// 	name: "Internet Explorer",
+	// 	description: "I need to go to the hospital",
+	// 	difficulty: "Hard",
+	// 	type: "Web",
+	// 	hint: null,
+	// 	answer: String,
+	// 	startPoints: Number,
+	// 	currentPoints: Number,
+	// 	solvedBy: Array,
+	// 	hidden: { type: Boolean, required: false }
+	// },
+		
+
+]
