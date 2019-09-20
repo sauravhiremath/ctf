@@ -85,9 +85,13 @@ $(document).on("click", ".closeQuestion", function () {
     $('#singlePopupModal').modal('hide')
 })
 
-$(document).on("click", ".nav-item", function(){
-    $(".nav-item").removeClass("active-nav");
+$(document).on("click", ".question-nav", function(){
+    $(".question-nav").removeClass("active-nav");
     $(this).addClass("active-nav");
+})
+
+$(document).on("click", ".nav-item", function(e){
+    e.preventDefault();
 })
 
 
