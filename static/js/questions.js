@@ -242,7 +242,8 @@ function sendAns(e) {
                 console.log("hidden");
             }
             else{
-                var htmlData = '<img src="/static/images/wrong-ans.png" style="width: 30px; height:30px" class="start-icons" alt=""><div class="pl-2 pb-4">Wrong Answer</div><br>'
+                var text = data.message;
+                var htmlData = '<img src="/static/images/wrong-ans.png" style="width: 30px; height:30px" class="start-icons" alt=""><div class="pl-2 pb-4">'+ text +'</div><br>'
                 $(".message").html(htmlData);
                 $(".header-text").html("Uh-oh")
                 $("#errorModal").modal({
