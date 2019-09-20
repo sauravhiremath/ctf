@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 
 const challengeSchema = new Schema({
     // index: Number,
-    name: String,
+    name: { type:String, unique: true },
     description: String,
     difficulty: String,
     type: String,

@@ -12,6 +12,7 @@ const router = Router();
 export default router;
 
 router.get("/", userCheck, (req, res, next) => {
+	// Challenge.insertMany(Questions);
 	// req.session.user = "test123";
 	res.render("home.hbs");
 });
@@ -255,7 +256,8 @@ router.post("/submit", userCheck, async (req, res) => {
 		// console.log(req.session.userID, newPoints);
 		//Changes in leaderboard Model--> change username and points
 		console.log(req.session.userID);
-		const updateOrder = await Leaderboard.update({},
+		const updateOrder = await Leaderboard.updateOne(
+			{ username: req.session.user },
 			{ $inc: { points: newPoints } },
 		);
 		
@@ -300,7 +302,10 @@ router.post("/submit", userCheck, async (req, res) => {
 
 router.get("/leaderboard", async (req, res) => {
 	let currStandings = await Leaderboard.find({}).sort( { points: 1 } )
-	if(!currStandings) {
+
+	let standings = await User.find({}, {username: 1, points: 1}).sort({points: 1});
+
+	if(!standings) {
 		res.status(400).json({
 			success: false,
 			message: "Cannot find leaderboard this moment"
@@ -309,7 +314,7 @@ router.get("/leaderboard", async (req, res) => {
 	}
 	// console.log(currStandings);
 	// console.log(currStandings);
-	res.json(currStandings);
+	res.json(standings);
 });
 
 function userCheck(req, res, next) {
@@ -320,3 +325,68 @@ function userCheck(req, res, next) {
 		// next();
 	}
 }
+
+const Questions = [
+	{
+		name: "Windows Media Player",
+		description: "Enjoy this thing!",
+		difficulty: "Medium",
+		type: "Forensics",
+		hint: null,
+		answer: "CSICTF{aLAn_7UR1N'}",
+		startPoints: 70,
+		currentPoints: 70,
+		solvedBy: [],
+		hidden: false,
+	},
+	// {
+	// 	name: "Paint",
+	// 	description: "Enjoy this thing!",
+	// 	difficulty: "Easy",
+	// 	type: "Forensics",
+	// 	hint: null,
+	// 	answer: String,
+	// 	startPoints: Number,
+	// 	currentPoints: Number,
+	// 	solvedBy: Array,
+	// 	hidden: { type: Boolean, required: false }
+	// },
+	{
+		name: "Windows Registry Editor",
+		description: "Enjoy this thing!",
+		difficulty: "Hard",
+		type: "Reverse Engineering",
+		hint: null,
+		answer: "CSICTF{NOWYOUKNOWNODEJSBOI}",
+		startPoints: 100,
+		currentPoints: 100,
+		solvedBy: [],
+		hidden: false
+	},
+	{
+		name: "MS Word",
+		description: "Enjoy this thing!",
+		difficulty: "Hard",
+		type: "Jail",
+		hint: null,
+		answer: "CSICTF{Y0u_c4N_J41l_4_rev0luT10nary_buT_N0T_th3_r3V0lUT10n}",
+		startPoints: 100,
+		currentPoints: 100,
+		solvedBy: [],
+		hidden: false
+	}
+	// {
+	// 	name: "Internet Explorer",
+	// 	description: "I need to go to the hospital",
+	// 	difficulty: "Hard",
+	// 	type: "Web",
+	// 	hint: null,
+	// 	answer: String,
+	// 	startPoints: Number,
+	// 	currentPoints: Number,
+	// 	solvedBy: Array,
+	// 	hidden: { type: Boolean, required: false }
+	// },
+		
+
+]

@@ -24,7 +24,7 @@ $(document).on("dblclick", ".desktop-icon", function(){
                 for(var i=0; i<filtered.length; i++){
                     var image = filtered[i].name.toLowerCase().replace(" ", "-");
                     console.log(image);
-                    var question_data = '<button class="btn singlePopup question-icon col-4 d-inline-flex" value='+ filtered[i].name +' id='+ filtered[i]._id +'> <div class="icon-container"><img src="/static/images/'+ image +'.png" width="32px" height="32px" alt=""><span class="question-title">'+ filtered[i].name +'</span></div></button>'
+                    var question_data = '<div class="col-4 d-inline-flex"><button class="btn singlePopup question-icon" value='+ filtered[i].name +' id='+ filtered[i]._id +'> <div class="icon-container"><img src="/static/images/'+ image +'.png" width="32px" height="32px" alt=""><span class="question-title ml-1">'+ filtered[i].name +'</span></div></button></div>'
                     data+=question_data;
                 }
             }
@@ -158,7 +158,7 @@ $(document).on("dblclick", ".question-icon", function(){
                 })
                 $(document).on("click", "#trend", function(e){
                     e.preventDefault();
-                    $("#nav_content").html("Trends here");
+                    $("#nav_content").html("Statistics coming soon");
                 })
 
                 $(document).on("click", "#no_of_people", function(e){
@@ -169,7 +169,7 @@ $(document).on("dblclick", ".question-icon", function(){
                     else{
                         var statsHtml = '';
                         for(var i=0; i<people.length; i++){
-                            singleDiv='<div>'+ (i+1)+". " + people[i] +'</div><hr>'
+                            singleDiv='<div class="d-flex">'+ (i+1)+". " + people[i].username +'<div class="ml-auto">'+ people[i].usertime +'</div></div><hr>'
                             statsHtml += singleDiv;
                         }
                     }
