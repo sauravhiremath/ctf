@@ -55,7 +55,7 @@ router.get("/questionStatus", userCheck, async (req, res) => {
 			{},
 			(err, doc) => {
 				doc = doc.filter((challenge) => {
-					return challenge.solvedBy.map((solvedUser) => solvedUser.username).indexOf(user) > -1; 
+					return challenge.solvedBy.map((solvedUser) => solvedUser.username).indexOf(user) > -1;
 				});
 				// console.log(doc);
 				if (err) {
@@ -69,20 +69,20 @@ router.get("/questionStatus", userCheck, async (req, res) => {
 			}
 		);
 
-		
+
 	} else {
 		const allChallenges = await Challenge.find(
 			{},
 			(err, doc) => {
 				doc = doc.filter((challenge) => {
-					return challenge.solvedBy.map((solvedUser) => solvedUser.username).indexOf(user) == -1; 
+					return challenge.solvedBy.map((solvedUser) => solvedUser.username).indexOf(user) == -1;
 				});
 				if (err) {
 					res.status(400).json({
 						success: false,
 						message: "Error finding list of solved Questions!"
 					});
-					return;	
+					return;
 				}
 				res.json({ allChallenges: doc });
 			}
@@ -181,7 +181,7 @@ router.post("/submit", userCheck, async (req, res) => {
 			message: "Incorrect"
 		})
 		return;
-		
+
 	}
 
 	async function refreshData(
@@ -201,7 +201,7 @@ router.post("/submit", userCheck, async (req, res) => {
 		// console.log(username);
 		// console.log(newPoints, question.currentPoints);
 		//Changes in the challenge Model--> change currentPoints and solvedBy
-		
+
 		const challengeUpdate = await Challenge.updateOne(
 			{ _id: new ObjectId(data.qid) },
 			{
@@ -236,7 +236,7 @@ router.post("/submit", userCheck, async (req, res) => {
 				// });
 				return false;
 			}
-		
+
 		// const attemptedForUser: any = await attemptedChallenges.find({ questionId: new ObjectId(data.qid), points: { $gt: 0 } });
 		// for (var i=0; i< attemptedForUser.length; i++) {
 		// 	// const some: any = attemptedForUser;
@@ -244,13 +244,13 @@ router.post("/submit", userCheck, async (req, res) => {
 		// 	console.log(user);
 		// 	const finalPoints = Math.floor(newPoints - attemptedForUser[i].pointsOnSubmission);
 		// 	console.log(finalPoints);
-			
+
 		// 	const myUser = await User.findOne({_id: req.session.userID});
 		// 	myUser.points = myUser.points + finalPoints;
 		// 	await myUser.save();
 		// }
 		// const updateForAll = await User.updateMany({ solved: question.name }, { points: })
-		
+
 		const solvedUsers = question.solvedBy.map((solved) => solved.username);
 		const users = await User.find({username: {$in: solvedUsers}});
 		await Promise.all(users.map((user) => {
@@ -281,7 +281,7 @@ router.post("/submit", userCheck, async (req, res) => {
 			{ username: req.session.user },
 			{ $inc: { points: newPoints } },
 		);
-		
+
 		// console.log(updateOrder);
 
 		if(!updateOrder) {
@@ -396,18 +396,7 @@ const Questions = [
 		solvedBy: [],
 		hidden: false
 	}
-	// {
-	// 	name: "Internet Explorer",
-	// 	description: "I need to go to the hospital",
-	// 	difficulty: "Hard",
-	// 	type: "Web",
-	// 	hint: null,
-	// 	answer: String,
-	// 	startPoints: Number,
-	// 	currentPoints: Number,
-	// 	solvedBy: Array,
-	// 	hidden: { type: Boolean, required: false }
-	// },
-		
+	
+
 
 ]
