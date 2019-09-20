@@ -36,7 +36,7 @@ var baby = [{
 	},
 	{
 		name: "MS Word",
-		description: "I choose to have faith, because without that, I have nothing… It’s the only thing that’s keeping me going.",
+		description: "I choose to have faith, because without that, I have nothing… It’s the only thing that’s keeping me going.<br><br>Server: nc ctf-xp.csivit.com 2001",
 		difficulty: "hard",
 		type: "Jail",
 		hint: null,
