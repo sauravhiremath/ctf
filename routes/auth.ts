@@ -308,11 +308,11 @@ router.post("/updatePassword", async (req, res) => {
     })
 });
 
-// router.get("/logout", function(req, res, next) {
-// 	req.session.destroy(function() {
-// 		res.redirect("/");
-// 	});
-// });
+router.get("/logout", function(req, res, next) {
+	req.session.destroy(function() {
+		res.redirect("/");
+	});
+});
 
 async function sendInviteEmail(
 	name: string,
