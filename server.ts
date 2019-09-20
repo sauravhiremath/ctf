@@ -12,7 +12,7 @@ import homeRoutes from "./routes/home";
 import authRoutes from "./routes/auth";
 import Leaderboard from "./models/leaderboard";
 import { createQuestion } from "./scripts/addQuestions";
-import name from "./scripts/lbMigrate";
+import disp from "./scripts/lbMigrate";
 var MongoDBStore = require('connect-mongodb-session')(session);
 require("dotenv").config();
 
@@ -49,6 +49,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // createQuestion(0);
+disp();
 
 app.use(
 	session({
