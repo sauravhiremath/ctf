@@ -287,12 +287,12 @@ router.post("/updatePassword", async (req, res) => {
 		req.body.password,
 		parseInt(process.env.SALT_ROUNDS)
 	);
-
+	const userData = await User.findOne({ passToken: token }, {username: 1});
+	const username = userData.username;
 	const UserDetails = await User.findOneAndUpdate(
 		{ passToken: token, emailReSent: true },
 		{
-			password: password,
-			emailReSent: false
+			$set: { password: password, emailReSent: false }
 		}
 	);
 
@@ -306,7 +306,7 @@ router.post("/updatePassword", async (req, res) => {
 
 	res.json({
 		success: true,
-		message: `Password updated successfully. Click <a href='ctf.csivit.com'>here</a> to login`
+		message: `Password updated successfully. Your username is ${username}. Click <a href='ctf.csivit.com'>here</a> to login`
 	});
 });
 

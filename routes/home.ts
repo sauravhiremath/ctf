@@ -14,6 +14,7 @@ export default router;
 router.get("/", userCheck, (req, res, next) => {
 	// Challenge.insertMany(Questions);
 	// req.session.user = "test123";
+	// res.render("successMail.hbs");
 	res.render("home.hbs");
 });
 
