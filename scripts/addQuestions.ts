@@ -60,7 +60,7 @@ var baby = [{
 		},
 		{
 			name: "Internet Explorer",
-			description: "You know what to do",
+			description: "You know what to do<br><br><a href='https://ctf-xp.csivit.com:2008'>https://ctf-xp.csivit.com:2008</a>",
 			difficulty: "medium",
 			type: "Web",
 			hint: null,
