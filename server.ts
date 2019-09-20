@@ -12,9 +12,9 @@ import homeRoutes from "./routes/home";
 import authRoutes from "./routes/auth";
 import Leaderboard from "./models/leaderboard";
 import { createQuestion } from "./scripts/addQuestions";
-import name from "./scripts/lbMigrate";
-var MongoDBStore = require('connect-mongodb-session')(session);
-
+import disp from "./scripts/lbMigrate";
+var MongoDBStore = require("connect-mongodb-session")(session);
+require("dotenv").config();
 
 const app = express();
 
@@ -26,7 +26,6 @@ server.listen(port, () => {
 	console.log(`Server running on port ${port}`);
 });
 
-// const server = app.listen(4000);
 export const mongo_uri = "mongodb://localhost:27017/ctf";
 export const connect = mongoose.connect(mongo_uri, { useMongoClient: true });
 
@@ -48,17 +47,16 @@ app.use(logger("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-createQuestion();
+//createQuestion(3);
 
-require("dotenv").config();
 app.use(
 	session({
 		secret: process.env.SECRET_KEY,
 		saveUninitialized: true,
 		resave: true,
 		store: new MongoDBStore({
-			uri: 'mongodb://localhost:27017/ctf',
-  			collection: 'mySessions'
+			uri: "mongodb://localhost:27017/ctf",
+			collection: "mySessions"
 		})
 	})
 );
@@ -68,7 +66,7 @@ app.use("/auth", authRoutes);
 app.use("/", (req, res) => {
 	res.redirect("/home");
 });
-app.use('*', (req, res) => {
+app.use("*", (req, res) => {
 	res.render("bsod404.hbs");
 });
 
