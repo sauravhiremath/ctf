@@ -23,7 +23,16 @@
 	border-top: 0px;
 	border-radius: 10px 10px 0 0;
 }
-
+#rulesPopup{
+	position: absolute;
+	height: auto;
+	width: 750px;
+	left: 50vh;
+	top: 20vh;
+	border: 4px solid #1b70e5;
+	border-top: 0px;
+	border-radius: 10px 10px 0 0;
+}
 #singlePopupModal, #leaderBoardPopup{
 	position: absolute;
 	width: 606px;
@@ -37,6 +46,9 @@
 	font-size: 13px;
 }
 
+.modal-backdrop {
+    z-index: 1040 !important;
+}
 .question-container {
 	height: 350px;
 	overflow-y: scroll;
@@ -208,7 +220,7 @@ header {
 	display: none;
 }
 
-.closeIcon, .closeQuestion, .close-error {
+.closeIcon, .closeQuestion, .close-error, .close-notepad, .close-leaderboard {
 	box-shadow: rgb(218, 70, 0) 0px -1px 2px 1px inset;
 	background-image: radial-gradient(
 		circle at 90% 90%,
@@ -229,7 +241,7 @@ header {
 	border-radius: 3px;
 }
 
-.closeIcon::before, .closeQuestion::before, .close-error::before {
+.closeIcon::before, .closeQuestion::before, .close-error::before, .close-notepad::before, .close-leaderboard::before {
 	content: "";
 	position: absolute;
 	left: 9px;
@@ -240,7 +252,7 @@ header {
 	background-color: white;
 }
 
-.closeIcon::after, .closeQuestion::after, .close-error::after {
+.closeIcon::after, .closeQuestion::after, .close-error::after, .close-notepad::after, .close-leaderboard::after {
 	content: "";
 	position: absolute;
 	left: 9px;
@@ -455,4 +467,10 @@ input[type="number"]::-webkit-outer-spin-button {
 	border-left: 0;
 	border-right: 0;
 	border-radius: 10px 10px 0px 0px;
+}
+
+.notepad {
+	background-color: white;
+	cursor: text;
+	padding: 10px;
 }
