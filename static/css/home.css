@@ -9,9 +9,9 @@ body {
 body:hover{
     cursor: default;
 }
-
-::selection{
-    background-color: none;
+.selectable{
+    cursor: text;
+    font-size: 1rem;
 }
 .container-fluid{
     position: fixed;
@@ -169,9 +169,14 @@ a{
     color: black;
 }
 
-.participant:hover{
+.start-icon-modal:hover, .participant:hover{
     color: white;
     background-color: rgb(47, 113, 205);
+}
+.start-icon-modal , .participant{
+    padding: 0;
+    background-color: transparent;
+    border: 0;
 }
 
 .leaderbtn{

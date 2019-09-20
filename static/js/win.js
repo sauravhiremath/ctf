@@ -89,3 +89,14 @@ $(document).on("click", ".nav-item", function(){
     $(".nav-item").removeClass("active-nav");
     $(this).addClass("active-nav");
 })
+
+
+$(document).on("click", ".logoff", function(){
+    $.ajax({
+        method: "GET",
+        url: "/auth/logout",
+        success: function(){
+            window.location.href = 'auth/register'
+        },
+    })
+})

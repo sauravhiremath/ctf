@@ -19,12 +19,11 @@ $(document).on("dblclick", ".desktop-icon", function(){
                 $(".question-type").html(difficulty);
                 var filtered = arr.filter(question=>question.difficulty==diff)
                 if(filtered.length === 0) return;
-                console.log(filtered);
                 var data = '';
                 for(var i=0; i<filtered.length; i++){
                     var image = filtered[i].name.toLowerCase().replace(" ", "-");
-                    console.log(image);
-                    var question_data = '<div class="col-4 d-inline-flex"><button class="btn singlePopup question-icon" value='+ filtered[i].name +' id='+ filtered[i]._id +'> <div class="icon-container"><img src="/static/images/'+ image +'.png" width="32px" height="32px" alt=""><span class="question-title ml-1">'+ filtered[i].name +'</span></div></button></div>'
+                    var divId = filtered[i]._id + "div"
+                    var question_data = '<div class="col-4 d-inline-flex" id='+ divId + '><button class="btn singlePopup question-icon" value='+ filtered[i].name +' id='+ filtered[i]._id +'> <div class="icon-container"><img src="/static/images/'+ image +'.png" style="width:32px; height:32px" alt=""><span class="question-title ml-1">'+ filtered[i].name +'</span></div></button></div>'
                     data+=question_data;
                 }
             }
@@ -43,7 +42,8 @@ $(document).on("dblclick", ".desktop-icon", function(){
                     var data='';
                     $(".question-type").html(difficulty)
                     for(var i=0; i<arr.length; i++){
-                        var question_data = '<button class="btn singlePopup question-icon col-4 d-inline-flex" value='+ arr[i].name +' id='+ arr[i]._id +' disabled> <div class="icon-container"><img src="/static/images/'+ image +'.png" alt=""><span class="question-title">'+ arr[i].name +'</span></div></button>'
+                        var image = arr[i].name.toLowerCase().replace(" ", "-");
+                        var question_data = '<button class="btn singlePopup question-icon col-4 d-inline-flex" id='+ filtered[i]._id + ' value='+ arr[i].name +' id='+ arr[i]._id +' disabled> <div class="icon-container"><img src="/static/images/'+ image +'.png" style="width:32px; height:32px" alt=""><span class="question-title ml-1">'+ arr[i].name +'</span></div></button>'
                         data+=question_data;
                     }
                 }
@@ -63,71 +63,70 @@ $(document).on("dblclick", ".desktop-icon", function(){
     })
 })
 
-// $(document).on("click", ".start-icon-modal", function(){
-//     var button = $(this);
-//     var difficulty = $(this).attr("id");
-//     diff = difficulty.toLowerCase();
-//     var solved = $(this).attr("name");
-//     console.log(solved);
-//     $.ajax({
-//         type: "GET",
-//         url: "home/questionStatus",
-//         data: {
-//             "sortKey": "difficulty",
-//             "solved": solved
-//         },
-//         success: function(result){
-//             var arr=result["allChallenges"]
-//             console.log(arr);
-//             //unsolved question
-//             if(solved=="False"){
-//                 $(".question-type").html(difficulty);
-//                 var filtered = arr.filter(question=>question.difficulty==diff)
-//                 if(filtered.length === 0) return;
-//                 console.log(filtered);
-//                 var data = '';
-//                 for(var i=0; i<filtered.length; i++){
-//                     var image = filtered[i].name.toLowerCase().replace(" ", "-");
-//                     console.log(image);
-//                     var question_data = '<button class="btn singlePopup question-icon col-4 d-inline-flex" value='+ filtered[i].name +' id='+ filtered[i]._id +'> <div class="icon-container"><img src="/static/images/'+ image +'.png" alt=""><span class="question-title">'+ filtered[i].name +'</span></div></button>'
-//                     data+=question_data;
-//                 }
-//             }
-//             //solved questions
-//             else{
-//                 if(arr.length === 0){
-//                     var message = "No questions solved yet";
-//                     $(".message").html(message);
-//                     $("#errorModal").modal({
-//                         show: true,
-//                         backdrop: false
-//                     });
-//                     return;
-//                 };
-//                 var data='';
-//                 $(".question-type").html(difficulty)
-//                 console.log(difficulty);
-//                 for(var i=0; i<arr.length; i++){
-//                     var image = arr[i].name.toLowerCase().replace(" ", "-");
-//                     console.log("asdfsafasdf");
-//                     var question_data = '<button class="btn singlePopup question-icon" value='+ arr[i].name +' id='+ arr[i]._id +' disabled> <div class="icon-container"><img src="/static/images/'+ image +'.png" alt=""><span class="question-title">'+ arr[i].name +'</span></div></button>'
-//                     data+=question_data;
-//                 }
-//             }
+$(document).on("click", ".start-icon-modal", function(){
+    var button = $(this);
+    var difficulty = $(this).attr("id");
+    diff = difficulty.toLowerCase();
+    var solved = $(this).attr("name");
+    console.log(solved);
+    $.ajax({
+        type: "GET",
+        url: "home/questionStatus",
+        data: {
+            "sortKey": "difficulty",
+            "solved": solved
+        },
+        success: function(result){
+            var arr=result["allChallenges"]
+            console.log(arr);
+            //unsolved question
+            if(solved=="False"){
+                $(".question-type").html(difficulty);
+                var filtered = arr.filter(question=>question.difficulty==diff)
+                if(filtered.length === 0) return;
+                console.log(filtered);
+                var data = '';
+                for(var i=0; i<filtered.length; i++){
+                    var image = filtered[i].name.toLowerCase().replace(" ", "-");
+                    console.log(image);
+                    var question_data = '<button class="btn singlePopup question-icon col-4 d-inline-flex" id='+ filtered[i]._id + ' value='+ filtered[i].name +' id='+ filtered[i]._id +'> <div class="icon-container"><img src="/static/images/'+ image +'.png" style="width: 32px; height: 32px" alt=""><span class="question-title ml-1">'+ filtered[i].name +'</span></div></button>'
+                    data+=question_data;
+                }
+            }
+            //solved questions
+            else{
+                if(arr.length === 0){
+                    var message = "No questions solved yet";
+                    $(".message").html(message);
+                    $("#errorModal").modal({
+                        show: true,
+                        backdrop: false
+                    });
+                    return;
+                };
+                var data='';
+                $(".question-type").html(difficulty)
+                console.log(difficulty);
+                for(var i=0; i<arr.length; i++){
+                    var image = arr[i].name.toLowerCase().replace(" ", "-");
+                    var question_data = '<button class="btn singlePopup question-icon col-4 d-inline-flex" id='+ filtered[i]._id + ' value='+ arr[i].name +' id='+ arr[i]._id +' disabled> <div class="icon-container"><img src="/static/images/'+ image +'.png" style="width:32px; height:32px" alt=""><span class="question-title ml-1">'+ arr[i].name +'</span></div></button>'
+                    data+=question_data;
+                }
+            }
 
-//             document.getElementById("question-data").innerHTML = data;
-//             var cl = $(button).attr("class");
-//             cl = cl.split(" ");
-//             var id = cl[1];
-//             $('#' + id + 'Modal').modal({
-//                 show: true,
-//                 backdrop: false
-//             }).draggable({
-//                 handle: ".app_header"
-//             })
-//         },
-//     })
-// })
+            document.getElementById("question-data").innerHTML = data;
+            var cl = $(button).attr("class");
+            cl = cl.split(" ");
+            var id = cl[1];
+            $('#' + id + 'Modal').modal({
+                show: true,
+                backdrop: false
+            }).draggable({
+                handle: ".app_header"
+            })
+        },
+    })
+})
 
 
 $(document).on("dblclick", ".question-icon", function(){
@@ -144,7 +143,7 @@ $(document).on("dblclick", ".question-icon", function(){
                 console.log(data.qname);
                 var questionName = data.qname;
                 var questionCatagory = '<div class="d-flex p-2"><strong>Catagory: '+ data.type +'</strong><div class="ml-auto"><strong>Current Points: '+ data.currentPoints +'</strong></div></div><div class="d-flex pr-2"><div class="ml-auto"><strong> Start Points: '+ data.startPoints +'</strong></div></div>'
-                var question_text = '<p>'+ data.description +'</p>'
+                var question_text = '<p class="selectable">'+ data.description +'</p>'
                 var text_field = '<div class="col-10"><input type="text" class="w-100 pl-1" name="flag-input" placeholder="CSICTF{The_flag_goes_here}"></div><div class=" pl-3 w-50"><button class="pl-3 pr-3 submit-button" id='+ data.id + ' data-toggle="modal">Submit</button></div>'
                 var people = data["solvedBy"];
                 $(".question-name").html(questionName);
@@ -213,19 +212,20 @@ $(document).on("click", ".submit-button", function(){
         },
         success: data =>{
             if(data["success"] == true){
-                $(".message").html(data["message"]);
+                $(".header-text").html("Success!")
+                var htmlData = '<img src="/static/images/correct-ans.png" style="width: 30px; height:30px" class="start-icons" alt=""><div class="pl-2 pb-4">Flag Captured</div><br>'
+                $(".message").html(htmlData);
                 $("#singlePopupModal").modal('hide');
                 $("#errorModal").modal({
                     show: true,
                     backdrop: false
                 });
-                $('#'+id).hide();
-                console.log("hidden");
+                $('#'+id + 'div').hide();
             }
             else{
-                message = data["message"];
-                console.log(message);
-                $(".message").html(message);
+                var htmlData = '<img src="/static/images/wrong-ans.png" style="width: 30px; height:30px" class="start-icons" alt=""><div class="pl-2 pb-4">Wrong Answer</div><br>'
+                $(".message").html(htmlData);
+                $(".header-text").html("Uh-oh")
                 $("#errorModal").modal({
                     show: true,
                     backdrop: false

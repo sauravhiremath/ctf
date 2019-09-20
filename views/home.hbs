@@ -115,7 +115,7 @@
                         <span class="desktop-text">Hard</span>
                     </button>
                     <br>
-                    <button type="button" class="btn questionPopup desktop-icon" id="Recycle bin" name="True"
+                    <button type="button" class="btn questionPopup desktop-icon" id="Recycle-bin" name="True"
                         data-toggle="modal">
                         <div class="icon-container">
                             <img src="static/images/recycle_bin.png" alt="">
@@ -167,21 +167,22 @@
                                 <div class="start-left-content">
                                     <div class="user-stats"></div>
                                     <div class="menu_seperator "></div>
-                                    <div class="participant p-1"><img src="/static/images/my_documents.png"
-                                            class="start-icons" alt=""><span class="start-icon-text py-2">Baby</span>
-                                    </div>
-                                    <div class="participant p-1"><img src="/static/images/my_documents.png"
-                                            class="start-icons" alt=""><span class="start-icon-text py-2">Easy</span>
-                                    </div>
-                                    <div class="participant p-1"><img src="/static/images/my_documents.png"
-                                            class="start-icons" alt=""><span class="start-icon-text py-2">Medium</span>
-                                    </div>
-                                    <div class="participant p-1"><img src="/static/images/my_documents.png"
-                                            class="start-icons" alt=""><span class="start-icon-text py-2">Hard</span>
-                                    </div>
-                                    <div class="participant p-1"><img src="/static/images/recycle_bin.png"
+                                    <button class="start-icon-modal questionPopup py-1 d-flex w-100"
+                                        id="Baby" name="False" data-toggle="modal"><img src="/static/images/my_documents.png"
+                                            class="start-icons" alt=""><span class="start-icon-text py-2">Baby</span></button>
+                                    <button class="start-icon-modal questionPopup py-1 d-flex w-100"
+                                        id="Easy" name="False" data-toggle="modal"><img src="/static/images/my_documents.png"
+                                            class="start-icons" alt=""><span class="start-icon-text py-2">Easy</span></button>
+                                    <button class="start-icon-modal questionPopup py-1 d-flex w-100"
+                                        id="Medium" name="False" data-toggle="modal"><img src="/static/images/my_documents.png"
+                                            class="start-icons" alt=""><span class="start-icon-text py-2">Medium</span></button>
+                                    <button class="start-icon-modal questionPopup py-1 d-flex w-100"
+                                        id="Hard" name="False" data-toggle="modal"><img src="/static/images/my_documents.png"
+                                            class="start-icons" alt=""><span class="start-icon-text py-2">Hard</span></button>
+                                    <button class="start-icon-modal questionPopup py-1 d-flex w-100"
+                                        id="Recycle-bin" name="True" data-toggle="modal"><img src="/static/images/recycle_bin.png"
                                             class="start-icons" alt=""><span class="start-icon-text py-2">Recycle
-                                            bin</span></div>
+                                            bin</span></button>
                                 </div>
                                 <div class="menu_seperator "></div>
 
@@ -192,8 +193,7 @@
                                 </div>
                             </div>
                             <div class="menu_right d-flex flex-column">
-                                <div class="csi_info winner pl-1">CSI</div>
-                                <div class="csi_info winner pl-1" style="font-size: 13px">Computer Society of India
+                                <div class="csi_info winner pl-1" style="font-size: 14px">Computer Society of India VIT Student Chapter
                                 </div>
                                 <div class="menu_seperator "></div>
                                 <div class="csi_info winner pl-1">Events</div>
@@ -205,22 +205,22 @@
                                 </a>
                                 <div class="menu_seperator "></div>
                                 <div class="winner pl-1">Social</div>
-                                <a href="https://www.facebook.com/csivitu/">
+                                <a href="https://www.facebook.com/csivitu/" target="_blank">
                                     <div class="csi_info pl-1">Facebook</div>
                                 </a>
-                                <a href="https://www.instagram.com/csivitu/">
+                                <a href="https://www.instagram.com/csivitu/" target="_blank">
                                     <div class="csi_info pl-1">Instagram</div>
                                 </a>
-                                <a href="https://twitter.com/csivitu">
+                                <a href="https://twitter.com/csivitu" target="_blank">
                                     <div class="csi_info pl-1">Twitter</div>
                                 </a>
                             </div>
                         </section>
                         <footer class="d-flex flex-row">
-                            <div class="ml-auto p-1 power_buttons"><a href="/auth/logout" style="color: white;"><img
+                            <div class="ml-auto p-1 power_buttons"><a href="" class="logoff" style="color: white;"><img
                                         src="/static/images/logoff.png" class="p-1" style="width:30px; height:30px"
                                         alt="">Log off</a></div>
-                            <div class="p-1 pr-2 power_buttons"><a href="/auth/logout" style="color: white;"><img
+                            <div class="p-1 pr-2 power_buttons"><a href="" class="poweroff" style="color: white;"><img
                                         src="/static/images/poweroff.png" class="p-1" style="width:30px; height:30px"
                                         alt="">Turn off computer</a></div>
                         </footer>
