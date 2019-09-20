@@ -48,7 +48,7 @@ app.use(logger("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-createQuestion(1);
+createQuestion(2);
 
 app.use(
 	session({
