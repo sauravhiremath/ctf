@@ -29,8 +29,8 @@ var baby = [{
 			type: "Reverse Engineering",
 			hint: null,
 			answer: "CSICTF{NOWYOUKNOWNODEJSBOI}",
-			startPoints: 200,
-			currentPoints: 200,
+			startPoints: 400,
+			currentPoints: 400,
 			solvedBy: [],
 			hidden: false
 		},
@@ -41,8 +41,8 @@ var baby = [{
 			type: "Jail",
 			hint: null,
 			answer: "CSICTF{Y0u_c4N_J41l_4_rev0luT10nary_buT_N0T_th3_r3V0lUT10n}",
-			startPoints: 200,
-			currentPoints: 200,
+			startPoints: 350,
+			currentPoints: 350,
 			solvedBy: [],
 			hidden: false
 		},
@@ -53,8 +53,8 @@ var baby = [{
 			type: "Forensics",
 			hint: null,
 			answer: "CSICTF{aLAn_7UR1N'}",
-			startPoints: 200,
-			currentPoints: 200,
+			startPoints: 250,
+			currentPoints: 250,
 			solvedBy: [],
 			hidden: false
 		},
@@ -64,26 +64,23 @@ var baby = [{
 			difficulty: "medium",
 			type: "Web",
 			hint: null,
-			answer: String,
-			startPoints: Number,
-			currentPoints: Number,
-			solvedBy: Array,
-			hidden: {
-				type: Boolean,
-				required: false
-			}
+			answer: "CSICTF{Thi5_i5_5parta}",
+			startPoints: 400,
+			currentPoints: 400,
+			solvedBy: [],
+			hidden: false
 		},
 		{
 			name: "Paint",
 			description: "A detective doesn't miss anything in his surrounding.<br><br>Server: nc ctf-xp.csivit.com 2009",
-			difficulty: "Easy",
+			difficulty: "easy",
 			type: "Forensics",
 			hint: null,
-			answer: String,
-			startPoints: Number,
-			currentPoints: Number,
-			solvedBy: Array,
-			hidden: { type: Boolean, required: false }
+			answer: "CSICTF{XIAO-m3_h0W_Y0u_d0_1t}",
+			startPoints: 150,
+			currentPoints: 150,
+			solvedBy: [],
+			hidden: false
 		},
 		]
 		import {
