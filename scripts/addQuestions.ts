@@ -23,18 +23,18 @@ var baby = [
         solvedBy: [],
         hidden: false
     },
-    // {
-	// 	name: "Windows Registry Editor",
-	// 	description: "I was hungry so I made alphabet soup.",
-	// 	difficulty: "hard",
-	// 	type: "Reverse Engineering",
-	// 	hint: null,
-	// 	answer: "CSICTF{NOWYOUKNOWNODEJSBOI}",
-	// 	startPoints: 100,
-	// 	currentPoints: 100,
-	// 	solvedBy: [],
-	// 	hidden: false
-	// },
+    {
+		name: "Windows Registry Editor",
+		description: `I was hungry so I made alphabet soup.<br><br>Get the file <a href="https://ctf.csivit.com/challenges/programming.zip">here</a>.`,
+		difficulty: "hard",
+		type: "Reverse Engineering",
+		hint: null,
+		answer: "CSICTF{NOWYOUKNOWNODEJSBOI}",
+		startPoints: 100,
+		currentPoints: 100,
+		solvedBy: [],
+		hidden: false
+	},
 	// {
 	// 	name: "MS Word",
 	// 	description: "I choose to have faith, because without that, I have nothing… It’s the only thing that’s keeping me going.",
