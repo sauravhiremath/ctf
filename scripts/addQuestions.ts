@@ -23,7 +23,7 @@ var baby = [{
 		hidden: false
 	},
 	{
-		name: "Windows Registry Editor",
+		name: "Regedit",
 		description: `I was hungry so I made alphabet soup.<br><br>Get the file <a href="https://ctf.csivit.com/challenges/programming.zip">here</a>.`,
 		difficulty: "hard",
 		type: "Reverse Engineering",
