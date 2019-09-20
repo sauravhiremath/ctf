@@ -64,7 +64,7 @@ var baby = [{
 			difficulty: "medium",
 			type: "Web",
 			hint: null,
-			answer: {"CSICTF{Thi5_i5_5parta}"},
+			answer: "CSICTF{Thi5_i5_5parta}",
 			startPoints: 400,
 			currentPoints: 400,
 			solvedBy: [],
