@@ -13,7 +13,7 @@ var baby = [
     // },
     {
         name: "Gambler",
-        description: "What happens if we use 100% of our brain!<br><br>nc ctf-xp.csivit.com 2001",
+        description: "What happens if we use 100% of our brain!<br><br>Server: nc ctf-xp.csivit.com 2001",
         type: "Miscellaneous",
         difficulty: "baby",
         hint: "",
