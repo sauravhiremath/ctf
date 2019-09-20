@@ -235,6 +235,12 @@ router.post("/submit", userCheck, async (req, res) => {
 				// });
 				return false;
 			}
+		
+		// const attemptedForUser = await attemptedChallenges.find({ questionId: req.session.userID });
+		// for (var i=0; i< attemptedForUser.length; i++) {
+		// 	const user = attemptedForUser.participant
+		// }
+		// const updateForAll = await User.updateMany({ solved: question.name }, { points: })
 
 		const updateLeaderboard: boolean = await UpdateLeaderboardModel(data, newPoints, req, res);
 		if(!updateLeaderboard) {
@@ -303,7 +309,7 @@ router.post("/submit", userCheck, async (req, res) => {
 router.get("/leaderboard", async (req, res) => {
 	let currStandings = await Leaderboard.find({}).sort( { points: 1 } )
 
-	let standings = await User.find({}, {username: 1, points: 1}).sort({points: 1});
+	let standings = await User.find({}, {username: 1, points: 1}).sort({ points: -1 });
 
 	if(!standings) {
 		res.status(400).json({

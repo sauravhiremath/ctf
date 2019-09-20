@@ -19,7 +19,6 @@ $(document).on("click", "#leaderBtn", function(){
         url: "home/leaderboard",
         success: function (data) {
             console.log(data);
-            data.username
             var leaderboard = ''
             for(var i=0; i<data.length; i++){
                 var singleDiv = '<div class="d-flex">'+ (i+1)+". " + data[i].username +'<div class="ml-auto">'+ data[i].points +'</div></div><hr>'
