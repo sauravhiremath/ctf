@@ -52,8 +52,7 @@ import {
 } from "../models/challenge";
 import io from "socket.io-client";
 
-export function createQuestion() {
-	var i = 1;
+export function createQuestion(i) {
 	Challenge.findOne({
 		type: baby[i].type,
 		difficulty: baby[i].difficulty,
