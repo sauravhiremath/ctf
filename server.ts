@@ -14,6 +14,7 @@ import Leaderboard from "./models/leaderboard";
 import { createQuestion } from "./scripts/addQuestions";
 import name from "./scripts/lbMigrate";
 var MongoDBStore = require('connect-mongodb-session')(session);
+require("dotenv").config();
 
 
 const app = express();
@@ -26,7 +27,6 @@ server.listen(port, () => {
 	console.log(`Server running on port ${port}`);
 });
 
-// const server = app.listen(4000);
 export const mongo_uri = "mongodb://localhost:27017/ctf";
 export const connect = mongoose.connect(mongo_uri, { useMongoClient: true });
 
@@ -50,7 +50,6 @@ app.use(bodyParser.json());
 
 // createQuestion();
 
-require("dotenv").config();
 app.use(
 	session({
 		secret: process.env.SECRET_KEY,
