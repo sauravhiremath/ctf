@@ -11,7 +11,7 @@ import { submissionData } from "./models/socketInterfaces";
 import homeRoutes from "./routes/home";
 import authRoutes from "./routes/auth";
 import Leaderboard from "./models/leaderboard";
-import { createQuestion } from "./scripts/createNewQuestion";
+import { createQuestion } from "./scripts/addQuestions";
 import name from "./scripts/lbMigrate";
 var MongoDBStore = require('connect-mongodb-session')(session);
 
@@ -71,7 +71,7 @@ app.use('*', (req, res) => {
 	res.render("bsod404.hbs");
 });
 
-// createQuestion();
+createQuestion();
 // name();
 // const changeStream = Leaderboard.watch({ fullDocument: 'updateLookup'});
 
