@@ -196,7 +196,7 @@ router.post("/submit", userCheck, async (req, res) => {
 		const a = question.startPoints;
 		const s = 15;
 
-		var newPoints = Math.max((((b - a)*x*x/(s*s)) + a),b);
+		var newPoints = Math.floor(Math.max((((b - a)*x*x/(s*s)) + a),b));
 		// console.log(username);
 		// console.log(newPoints, question.currentPoints);
 		//Changes in the challenge Model--> change currentPoints and solvedBy
@@ -236,9 +236,17 @@ router.post("/submit", userCheck, async (req, res) => {
 				return false;
 			}
 		
-		// const attemptedForUser = await attemptedChallenges.find({ questionId: req.session.userID });
+		// const attemptedForUser: any = await attemptedChallenges.find({ questionId: new ObjectId(data.qid), points: { $gt: 0 } });
 		// for (var i=0; i< attemptedForUser.length; i++) {
-		// 	const user = attemptedForUser.participant
+		// 	// const some: any = attemptedForUser;
+		// 	const user = attemptedForUser[i].participant;
+		// 	console.log(user);
+		// 	const finalPoints = Math.floor(newPoints - attemptedForUser[i].pointsOnSubmission);
+		// 	console.log(finalPoints);
+			
+		// 	const myUser = await User.findOne({_id: req.session.userID});
+		// 	myUser.points = myUser.points + finalPoints;
+		// 	await myUser.save();
 		// }
 		// const updateForAll = await User.updateMany({ solved: question.name }, { points: })
 
