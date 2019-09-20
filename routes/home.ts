@@ -196,6 +196,7 @@ router.post("/submit", userCheck, async (req, res) => {
 		const a = question.startPoints;
 		const s = 15;
 
+		const oldPoints = question.currentPoints;
 		var newPoints = Math.floor(Math.max((((b - a)*x*x/(s*s)) + a),b));
 		// console.log(username);
 		// console.log(newPoints, question.currentPoints);
@@ -249,7 +250,13 @@ router.post("/submit", userCheck, async (req, res) => {
 		// 	await myUser.save();
 		// }
 		// const updateForAll = await User.updateMany({ solved: question.name }, { points: })
-
+		
+		const solvedUsers = question.solvedBy.map((solved) => solved.username);
+		const users = await User.find({username: {$in: solvedUsers}});
+		await Promise.all(users.map((user) => {
+			user.points += (newPoints - oldPoints);
+			return user.save()
+		}));
 		const updateLeaderboard: boolean = await UpdateLeaderboardModel(data, newPoints, req, res);
 		if(!updateLeaderboard) {
 			return false;
