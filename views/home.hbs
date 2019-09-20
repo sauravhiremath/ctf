@@ -36,7 +36,6 @@
     $(function () {
         $(".start_button").click(function () {
             if ($("#startMenu").hasClass("show")) {
-                console.log("ran");
                 return;
             }
             $.ajax({
@@ -44,7 +43,6 @@
                 url: "/home/startMenu",
                 success: data => {
                     $(".user-stats").html('');
-                    console.log(data);
                     $(".header-text").html(data.fname);
                     var userInfo = '<div class="participant p-1"><strong>Username:</strong> ' + data.username + '</div><div class="participant p-1"><strong>Points:</strong>' + data.points + '</div><div class="participant p-1"><strong>Solved:</strong>' + data.solved.length + '</div>'
                     $(".user-stats").html(userInfo);
@@ -63,7 +61,6 @@
         var m = today.getMinutes();
         m = checkTime(m);
         var time = h + ":" + m;
-        console.log(time)
         document.getElementById('clock').innerHTML = time;
         var t = setTimeout(startTime, 10000);
     }

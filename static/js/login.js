@@ -19,11 +19,9 @@ $(document).on("click", "#loginSubmitBtn", function(){
                 },
                 success: function(result) {
                     if(result["success"] == true){
-                        console.log("home");
                         window.location.href = '/home'
                     }
                     if(result["success"] == false){
-                        console.log(result);
                         var message = result["message"];
                         $(".message").html(message);
                         $("#errorModal").modal('show');
