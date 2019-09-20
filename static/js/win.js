@@ -100,3 +100,13 @@ $(document).on("click", ".logoff", function(){
         },
     })
 })
+
+$(document).on("click", ".poweroff", function(){
+    $.ajax({
+        method: "GET",
+        url: "/auth/logout",
+        success: function(){
+            window.location.href = 'auth/register'
+        },
+    })
+})
