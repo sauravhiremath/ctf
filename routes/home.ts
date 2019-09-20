@@ -125,7 +125,8 @@ router.get("/question", userCheck, async (req, res) => {
 			startPoints: quest.startPoints,
 			currentPoints: quest.currentPoints,
 			solvedBy: quest.solvedBy,
-			type: quest.type
+			type: quest.type,
+			username: req.session.user
 		}
 	});
 });

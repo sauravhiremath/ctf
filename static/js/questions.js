@@ -158,7 +158,21 @@ $(document).on("dblclick", ".question-icon", function () {
                 var questionName = data.qname;
                 var questionCatagory = '<div class="d-flex p-2"><strong>Catagory: '+ data.type +'</strong><div class="ml-auto"><strong>Current Points: '+ data.currentPoints +'</strong></div></div><div class="d-flex pr-2"><div class="ml-auto"><strong> Start Points: '+ data.startPoints +'</strong></div></div>'
                 var question_text = '<p class="selectable">'+ data.description +'</p>'
-                var text_field = '<form class="w-100 row no-gutters" onsubmit="return sendAns(event);" id="flagSubmitForm" data-qid="' + data.id + '"><div class="col-10"><input type="text" class="w-100 pl-1" name="flag-input" placeholder="CSICTF{The_flag_goes_here}"></div><div class="col-2"><button type="submit" class="ml-3 pl-3 pr-3 submit-button" id='+ data.id + ' data-toggle="modal">Submit</button></div></form>'
+                for(var i=0;i<data["solvedBy"].length;i++){
+                    if(data["solvedBy"][i].username.includes(data.username)){
+                        var solved = true;
+                    }
+                    else{
+                        var solved = false;
+                    }
+                    console.log(solved)
+                }
+                if(solved){
+                    var text_field = '<div class="ml-auto mr-auto"><strong>You have already solved this question</strong></div>'    
+                }
+                else{
+                    var text_field = '<form class="w-100 row no-gutters" onsubmit="return sendAns(event);" id="flagSubmitForm" data-qid="' + data.id + '"><div class="col-10"><input type="text" class="w-100 pl-1" name="flag-input" placeholder="CSICTF{The_flag_goes_here}"></div><div class="col-2"><button type="submit" class="ml-3 pl-3 pr-3 submit-button" id='+ data.id + ' data-toggle="modal">Submit</button></div></form>'
+                }
                 var people = data["solvedBy"];
                 $(".question-name").html(questionName);
                 $("#nav_content").html(question_text);
