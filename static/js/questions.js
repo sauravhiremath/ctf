@@ -24,7 +24,7 @@ $(document).on("dblclick", ".desktop-icon", function(){
                 for(var i=0; i<filtered.length; i++){
                     var image = filtered[i].name.toLowerCase().replace(" ", "-");
                     console.log(image);
-                    var question_data = '<button class="btn singlePopup question-icon col-4 d-inline-flex" value='+ filtered[i].name +' id='+ filtered[i]._id +'> <div class="icon-container"><img src="/static/images/'+ image +'.png" alt=""><span class="question-title">'+ filtered[i].name +'</span></div></button>'
+                    var question_data = '<button class="btn singlePopup question-icon col-4 d-inline-flex" value='+ filtered[i].name +' id='+ filtered[i]._id +'> <div class="icon-container"><img src="/static/images/'+ image +'.png" width="32px" height="32px" alt=""><span class="question-title">'+ filtered[i].name +'</span></div></button>'
                     data+=question_data;
                 }
             }
@@ -48,7 +48,7 @@ $(document).on("dblclick", ".desktop-icon", function(){
                     }
                 }
             }
-            
+
             document.getElementById("question-data").innerHTML = data;
             var cl = $(button).attr("class");
             cl = cl.split(" ");
@@ -114,7 +114,7 @@ $(document).on("dblclick", ".desktop-icon", function(){
 //                     data+=question_data;
 //                 }
 //             }
-            
+
 //             document.getElementById("question-data").innerHTML = data;
 //             var cl = $(button).attr("class");
 //             cl = cl.split(" ");
@@ -151,7 +151,7 @@ $(document).on("dblclick", ".question-icon", function(){
                 $("#nav_content").html(question_text);
                 $("#submit-div").html(text_field)
                 $("#question-catagory").html(questionCatagory);
-                
+
                 $(document).on("click", "#question_text", function(e){
                     e.preventDefault();
                     $("#nav_content").html(question_text);
@@ -160,7 +160,7 @@ $(document).on("dblclick", ".question-icon", function(){
                     e.preventDefault();
                     $("#nav_content").html("Trends here");
                 })
-                
+
                 $(document).on("click", "#no_of_people", function(e){
                     e.preventDefault();
                     if(people.length === 0){
@@ -175,7 +175,7 @@ $(document).on("dblclick", ".question-icon", function(){
                     }
                     $("#nav_content").html(statsHtml);
                 })
-                
+
                 console.log(result);
                 $("#singlePopupModal").modal({
                     show: true,
