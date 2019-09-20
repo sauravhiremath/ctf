@@ -49,6 +49,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // createQuestion();
+
 require("dotenv").config();
 app.use(
 	session({
@@ -71,7 +72,6 @@ app.use('*', (req, res) => {
 	res.render("bsod404.hbs");
 });
 
-createQuestion();
 // name();
 // const changeStream = Leaderboard.watch({ fullDocument: 'updateLookup'});
 
