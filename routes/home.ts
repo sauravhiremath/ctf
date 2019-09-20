@@ -256,7 +256,8 @@ router.post("/submit", userCheck, async (req, res) => {
 		// console.log(req.session.userID, newPoints);
 		//Changes in leaderboard Model--> change username and points
 		console.log(req.session.userID);
-		const updateOrder = await Leaderboard.update({},
+		const updateOrder = await Leaderboard.updateOne(
+			{ username: req.session.user },
 			{ $inc: { points: newPoints } },
 		);
 		
@@ -301,7 +302,10 @@ router.post("/submit", userCheck, async (req, res) => {
 
 router.get("/leaderboard", async (req, res) => {
 	let currStandings = await Leaderboard.find({}).sort( { points: 1 } )
-	if(!currStandings) {
+
+	let standings = await User.find({}, {username: 1, points: 1}).sort({points: 1});
+
+	if(!standings) {
 		res.status(400).json({
 			success: false,
 			message: "Cannot find leaderboard this moment"
@@ -310,7 +314,7 @@ router.get("/leaderboard", async (req, res) => {
 	}
 	// console.log(currStandings);
 	// console.log(currStandings);
-	res.json(currStandings);
+	res.json(standings);
 });
 
 function userCheck(req, res, next) {
