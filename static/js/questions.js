@@ -144,7 +144,7 @@ $(document).on("dblclick", ".question-icon", function () {
                 var questionName = data.qname;
                 var questionCatagory = '<div class="d-flex p-2"><strong>Catagory: '+ data.type +'</strong><div class="ml-auto"><strong>Current Points: '+ data.currentPoints +'</strong></div></div><div class="d-flex pr-2"><div class="ml-auto"><strong> Start Points: '+ data.startPoints +'</strong></div></div>'
                 var question_text = '<p class="selectable">'+ data.description +'</p>'
-                var text_field = '<form class="w-100 row no-gutters" onsubmit="return sendAns(event);"><div class="col-10"><input type="text" class="w-100 pl-1" name="flag-input" placeholder="CSICTF{The_flag_goes_here}"></div><div class="col-2"><button type="submit" class="ml-3 pl-3 pr-3 submit-button" id='+ data.id + ' data-toggle="modal">Submit</button></div></form>'
+                var text_field = '<form class="w-100 row no-gutters" onsubmit="return sendAns(event);" id="flagSubmitForm" data-qid="' + data.id + '"><div class="col-10"><input type="text" class="w-100 pl-1" name="flag-input" placeholder="CSICTF{The_flag_goes_here}"></div><div class="col-2"><button type="submit" class="ml-3 pl-3 pr-3 submit-button" id='+ data.id + ' data-toggle="modal">Submit</button></div></form>'
                 var people = data["solvedBy"];
                 $(".question-name").html(questionName);
                 $("#nav_content").html(question_text);
@@ -194,7 +194,8 @@ function sendAns(e) {
     e.preventDefault();
     const inputFlag = $("input[name='flag-input']")
     var flag = $(inputFlag).val();
-    const id = $(this).attr("id");
+    const id = $('#flagSubmitForm').attr("data-qid");
+    console.log(id);
     const time = new Date;
     console.log(time);
     submitData = {
