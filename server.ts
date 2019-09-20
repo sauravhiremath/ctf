@@ -48,14 +48,6 @@ app.use(logger("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-createQuestion(5);
-createQuestion(4)
-createQuestion(3)
-createQuestion(2)
-createQuestion(1)
-createQuestion(0)
-createQuestion(6)
-
 app.use(
 	session({
 		secret: process.env.SECRET_KEY,
