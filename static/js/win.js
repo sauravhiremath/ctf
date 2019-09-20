@@ -16,11 +16,16 @@ console.log("hello")
 $(document).on("click", "#leaderBtn", function(){
     $.ajax({
         type: "GET",
-        url: "/leaderboard",
-        data: "data",
-        dataType: "dataType",
+        url: "home/leaderboard",
         success: function (data) {
-            
+            console.log(data);
+            data.username
+            var leaderboard = ''
+            for(var i=0; i<data.length; i++){
+                var singleDiv = '<div class="d-flex">'+ (i+1)+". " + data[i].username +'<div class="ml-auto">'+ data[i].points +'</div></div><hr>'
+                leaderboard += singleDiv;
+            }
+            $("#leaderboard-content").html(leaderboard);
         }
     });
 })
@@ -34,8 +39,31 @@ $(document).on("dblclick",".desktop-icon-2", function(){
     });
 })
 
-$(document).on("click", "#leaderBtn", function (e) {
+$(document).on("dblclick",".desktop-icon-3", function(){
+    $.ajax({
+        type: "GET",
+        url: "home/leaderboard",
+        success: function (data) {
+            console.log(data);
+            data.username
+            var leaderboard = ''
+            for(var i=0; i<data.length; i++){
+                var singleDiv = '<div class="d-flex">'+ (i+1)+". " + data[i].username +'<div class="ml-auto">'+ data[i].points +'</div></div><hr>'
+                leaderboard += singleDiv;
+            }
+            $("#leaderboard-content").html(leaderboard);
+            $("#leaderBoardPopup").modal({
+                show: true,
+                backdrop: false
+            }).draggable({
+                handle: ".app_header"
+            });
+        }
+    });
+})
 
+$(document).on("click", "#leaderBtn", function (e) {
+    
     $("#leaderBoardPopup").modal({
         show: true,
         backdrop: false

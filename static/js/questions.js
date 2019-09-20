@@ -172,12 +172,9 @@ $(document).on("dblclick", ".question-icon", function(){
                 })
                 
                 console.log(result);
-                var cl = $(button).attr("class");
-                cl = cl.split(" ");
-                var id = cl[1];
-                $('#' + id + 'Modal').modal({
+                $("#singlePopupModal").modal({
                     show: true,
-                    backdrop: false,
+                    backdrop: false
                 }).draggable({
                     handle: ".app_header"
                 })

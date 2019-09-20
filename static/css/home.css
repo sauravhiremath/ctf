@@ -224,25 +224,25 @@ a:hover{
 .question-icon:focus .question-title {
     color: white;
 }
-.desktop-icon:focus , .question-icon:focus, .desktop-icon-2:focus{
+.desktop-icon:focus , .question-icon:focus, .desktop-icon-2:focus, .desktop-icon-3:focus{
     box-shadow: none;
 }
 
-.desktop-icon span, .question-icon span, .desktop-icon-2 span{
+.desktop-icon span, .question-icon span, .desktop-icon-2 span, .desktop-icon-3 span{
     padding-left: 0.1rem;
     padding-right: 0.1rem;
 }
 
-.desktop-icon:focus span, .question-icon:focus span, .desktop-icon-2:focus span{
+.desktop-icon:focus span, .question-icon:focus span, .desktop-icon-2:focus span, .desktop-icon-3:focus span{
     background-color: rgb(11, 97, 255);
 }
 
 
-.desktop-icon:focus, .question-icon:focus, .desktop-icon-2:focus{
+.desktop-icon:focus, .question-icon:focus, .desktop-icon-2:focus, .desktop-icon-3:focus{
     filter: drop-shadow(blue 0px 0px);
 }
 
-.desktop-icon:focus .icon-container img, .question-icon:focus .icon-container img, .desktop-icon-2 .question-icon:focus img{
+.desktop-icon:focus .icon-container img, .question-icon:focus .icon-container img, .desktop-icon-2 .question-icon:focus img, .desktop-icon-3:focus .question-icon:focus img{
     opacity: 0.5;
 }
 
