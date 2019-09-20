@@ -73,7 +73,7 @@ var baby = [{
 		{
 			name: "Paint",
 			description: "A detective doesn't miss anything in his surrounding.<br><br>Server: nc ctf-xp.csivit.com 2009",
-			difficulty: "Easy",
+			difficulty: "easy",
 			type: "Forensics",
 			hint: null,
 			answer: "CSICTF{XIAO-m3_h0W_Y0u_d0_1t}",
