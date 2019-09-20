@@ -29,8 +29,8 @@ var baby = [{
 		type: "Reverse Engineering",
 		hint: null,
 		answer: "CSICTF{NOWYOUKNOWNODEJSBOI}",
-		startPoints: 100,
-		currentPoints: 100,
+		startPoints: 200,
+		currentPoints: 200,
 		solvedBy: [],
 		hidden: false
 	},
@@ -41,8 +41,8 @@ var baby = [{
 		type: "Jail",
 		hint: null,
 		answer: "CSICTF{Y0u_c4N_J41l_4_rev0luT10nary_buT_N0T_th3_r3V0lUT10n}",
-		startPoints: 100,
-		currentPoints: 100,
+		startPoints: 200,
+		currentPoints: 200,
 		solvedBy: [],
 		hidden: false
 	}
