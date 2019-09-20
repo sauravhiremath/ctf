@@ -308,11 +308,11 @@ router.post("/updatePassword", async (req, res) => {
     })
 });
 
-// router.get("/logout", function(req, res, next) {
-// 	req.session.destroy(function() {
-// 		res.redirect("/");
-// 	});
-// });
+router.get("/logout", function(req, res, next) {
+	req.session.destroy(function() {
+		res.redirect("/");
+	});
+});
 
 async function sendInviteEmail(
 	name: string,
@@ -320,7 +320,7 @@ async function sendInviteEmail(
 	randomToken: string
 ) {
 	sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-	const vLink = `https://ctfdev.csivit.com/auth/verify?token=${randomToken}`;
+	const vLink = `https://ctf.csivit.com/auth/verify?token=${randomToken}`;
 	const msg = {
 		to: email,
 		from: {

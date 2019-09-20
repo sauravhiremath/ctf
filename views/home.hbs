@@ -20,14 +20,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.2.0/handlebars.js"></script>
     <link rel="stylesheet" href="static/css/home.css">
     <link rel="stylesheet" href="static/css/popup.css">
+    <link rel='shortcut icon' href='/static/images/favicon.ico' type='image/x-icon' />
     <script src="static/js/win.js"></script>
     <script src="static/js/questions.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>CSI-CTF</title>
 </head>
 <script>
     $(function () {
+        alert("CTF is going live soon. Stay tuned for further updates!");
         $(this).bind("contextmenu", function (e) {
             e.preventDefault();
         });
@@ -216,10 +218,10 @@
                             </div>
                         </section>
                         <footer class="d-flex flex-row">
-                            <div class="ml-auto p-1 power_buttons"><a href="/auth/register" style="color: white;"><img
+                            <div class="ml-auto p-1 power_buttons"><a href="/auth/logout" style="color: white;"><img
                                         src="/static/images/logoff.png" class="p-1" style="width:30px; height:30px"
                                         alt="">Log off</a></div>
-                            <div class="p-1 pr-2 power_buttons"><a href="https://google.com" style="color: white;"><img
+                            <div class="p-1 pr-2 power_buttons"><a href="/auth/logout" style="color: white;"><img
                                         src="/static/images/poweroff.png" class="p-1" style="width:30px; height:30px"
                                         alt="">Turn off computer</a></div>
                         </footer>
