@@ -48,12 +48,7 @@ app.use(logger("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-<<<<<<< HEAD
-// createQuestion(0);
-disp();
-=======
-createQuestion(3);
->>>>>>> 5d69efe48c0dd4e2331510eed995c55c3b422794
+//createQuestion(3);
 
 app.use(
 	session({
