@@ -188,7 +188,13 @@ router.post("/submit", userCheck, async (req, res) => {
 		req,
 		res
 	) {
-		var newPoints = Math.floor(question.currentPoints * (9 / 11));
+
+		const x = question.solvedBy.length;
+		const b = question.startPoints/2;
+		const a = question.startPoints;
+		const s = 15;
+
+		var newPoints = Math.max((((b - a)*x*x/(s*s)) + a),b);
 		// console.log(username);
 		// console.log(newPoints, question.currentPoints);
 		//Changes in the challenge Model--> change currentPoints and solvedBy
@@ -228,7 +234,7 @@ router.post("/submit", userCheck, async (req, res) => {
 				return false;
 			}
 
-		const updateLeaderboard: boolean = await UpdateLeaderboardModel(data, newPoints);
+		const updateLeaderboard: boolean = await UpdateLeaderboardModel(data, newPoints, req, res);
 		if(!updateLeaderboard) {
 			return false;
 		}
@@ -243,12 +249,12 @@ router.post("/submit", userCheck, async (req, res) => {
 
 	async function UpdateLeaderboardModel(
 		data: submissionData,
-		newPoints: number
+		newPoints: number, req, res
 	) {
 		// console.log(req.session.userID, newPoints);
 		//Changes in leaderboard Model--> change username and points
-		const updateOrder = await Leaderboard.updateOne(
-			{ _id: req.session.userID },
+		console.log(req.session.userID);
+		const updateOrder = await Leaderboard.update({},
 			{ $inc: { points: newPoints } },
 		);
 		

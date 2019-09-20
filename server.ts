@@ -12,7 +12,9 @@ import homeRoutes from "./routes/home";
 import authRoutes from "./routes/auth";
 import Leaderboard from "./models/leaderboard";
 import { createQuestion } from "./scripts/createNewQuestion";
+import name from "./scripts/lbMigrate";
 var MongoDBStore = require('connect-mongodb-session')(session);
+
 
 const app = express();
 
@@ -63,13 +65,14 @@ app.use(
 app.use("/home", homeRoutes);
 app.use("/auth", authRoutes);
 app.use("/", (req, res) => {
-	res.redirect("/auth/register");
+	res.redirect("/home");
 });
 app.use('*', (req, res) => {
 	res.render("bsod404.hbs");
 });
 
 // createQuestion();
+// name();
 // const changeStream = Leaderboard.watch({ fullDocument: 'updateLookup'});
 
 io.on("connection", socket => {
