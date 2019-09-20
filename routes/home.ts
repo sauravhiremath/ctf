@@ -54,7 +54,7 @@ router.get("/questionStatus", userCheck, async (req, res) => {
 
 	// console.log(user);
 	if (solved === "True") {
-		const allChallenges = await Challenge.find({}, (err, doc) => {
+		const allChallenges = await Challenge.find({}, {answer: 0, hint: 0}, (err, doc) => {
 			doc = doc.filter(challenge => {
 				return (
 					challenge.solvedBy
@@ -73,7 +73,7 @@ router.get("/questionStatus", userCheck, async (req, res) => {
 			res.json({ allChallenges: doc });
 		});
 	} else {
-		const allChallenges = await Challenge.find({}, (err, doc) => {
+		const allChallenges = await Challenge.find({}, {answer: 0, hint: 0}, (err, doc) => {
 			doc = doc.filter(challenge => {
 				return (
 					challenge.solvedBy
