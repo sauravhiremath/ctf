@@ -1,5 +1,4 @@
 export interface submissionData {
-  userid: string,
   qid: string,
   ctfFlag: string,
   timeStampUser: string,

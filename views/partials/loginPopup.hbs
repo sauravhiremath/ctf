@@ -1,0 +1,32 @@
+<div id="loginPopup" class="modal mt-2" role="dialog" aria-hidden="true" tabindex="-1">
+    <div class="m-auto popupContainer">
+
+        <div class="topBar p-2 d-flex justify-content-between align-items-center">
+            <div><strong>Sign Up for CTF</strong></div>
+            <div></div>
+            <button data-dismiss="modal" class="closeIcon"></button>
+        </div>
+
+        <div class="logoContainer p-5">
+            <img src="/static/images/logo.png">
+        </div>
+
+        <div>
+            <hr class="accent-popup orange-accent-popup">
+        </div>
+
+        <div class="formContainer pl-3 py-4">
+                <div class="align-items-center m-2">
+                    <div class="tags d-inline-block">Username: *</div>
+                    <input type="text" name="username-login">
+                </div>
+                <div class="align-items-center m-2">
+                    <div class="tags d-inline-block">Password: *</div>
+                    <input type="password" name="password-login">
+                </div>
+                <button class="ml-3" id="loginSubmitBtn" disabled>Submit</button>
+                <button data-dismiss="modal" aria-label="Close" class="ml-3">Cancel</button>
+                <a id="forgotPasswordBtn" class="ml-2" data-toggle="modal" data-target="#forgotPasswordPopup" href="#">Forgot Password</a>
+        </div>
+    </div>
+</div>

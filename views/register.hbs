@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="/static/css/regPopup.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
     <link rel='shortcut icon' href='/static/images/favicon.ico' type='image/x-icon' />
 
     <style>
@@ -65,7 +64,6 @@
                 window.scrollTo(0,1);
             }, 1200)
         }
-
     </script>
 </head>
 
@@ -97,7 +95,7 @@
                             </div>
                         </div>
                         <div class="right-section w-auto">
-                            <div class="d-flex mt-4 align-items-start justify-content-between flex-column h-100">
+                            <div class="d-flex mt-4 align-items-start justify-content-center flex-column h-100">
                                 <div class="main-logo mt-5 mb-5">
                                     <img src="/static/images/logo.png" class="ctfLogo d-md-none d-lg-none mr-2" alt=""
                                         srcset="">
@@ -107,6 +105,11 @@
                                         data-target="#registerPopup">
                                         <img src="/static/images/chess.jpg" alt="" class="user-profile-pic">
                                         <strong class="ml-3 xp-text signUpText">Sign Up</strong>
+                                    </div>
+                                    
+                                    <div class="windows-user-2 row align-items-top py-2 px-2 w-auto" id="login-btn" data-toggle="modal" data-target="#loginPopup">
+                                        <img src="/static/images/astronaut.jpg" alt="" class="user-profile-pic">
+                                        <strong class="ml-3 xp-text loginText">Login</strong>
                                     </div>
                                 </div>
                                 <div></div>
@@ -135,6 +138,9 @@
             </div>
         </div>
         {{> regPopup }}
+        {{> loginPopup}}
+        {{> errorModal }}
+        {{> forgotPassword }}
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
@@ -146,6 +152,8 @@
         </script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script src="/static/js/reg.js"></script>
+    <script src="/static/js/login.js"></script>
+    <script src="/static/js/resetpsw.js"></script>
 </body>
 
 </html>

@@ -10,6 +10,9 @@
 	transform: translateY(-50%);
 }
 
+.width{
+	width: 30%;
+}
 .topBar {
 	border-radius: 10px 10px 0 0;
 
@@ -25,6 +28,33 @@
 	font-size: 1.3rem;
 	color: white;
 	font-family: "Trebuchet MS", "Arial";
+}
+
+.message {
+	background-color: rgb(237,233,210);
+}
+.app_header{
+	font-weight: 700;
+	font-size: 15px;
+	height: 30px;
+    text-shadow: rgb(0, 0, 0) 1px 1px;
+    color: white;
+	background: linear-gradient(
+		rgb(0, 88, 238) 0%,
+		rgb(53, 147, 255) 4%, 
+		rgb(40, 142, 255) 6%,
+		rgb(18, 125, 255) 8%,
+		rgb(3, 111, 252) 10%,
+		rgb(2, 98, 238) 14%,
+		rgb(0, 87, 229) 20%,
+		rgb(0, 84, 227) 24%,
+		rgb(0, 85, 235) 56%,
+		rgb(0, 91, 245) 66%,
+		rgb(2, 106, 254) 76%,
+		rgb(0, 98, 239) 86%,
+		rgb(0, 82, 214) 92%,
+		rgb(0, 64, 171) 94%,
+		rgb(0, 48, 146) 100%);
 }
 
 .topBar > img {
@@ -117,7 +147,7 @@
 	display: none;
 }
 
-.closeIcon {
+.closeIcon, .close-error {
 	box-shadow: rgb(218, 70, 0) 0px -1px 2px 1px inset;
 	background-image: radial-gradient(
 		circle at 90% 90%,
@@ -138,7 +168,7 @@
 	border-radius: 3px;
 }
 
-.closeIcon::before {
+.closeIcon::before, .close-error::before {
 	content: "";
 	position: absolute;
 	left: 9px;
@@ -149,7 +179,7 @@
 	background-color: white;
 }
 
-.closeIcon::after {
+.closeIcon::after, .close-error::after {
 	content: "";
 	position: absolute;
 	left: 9px;

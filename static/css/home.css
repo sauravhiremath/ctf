@@ -1,0 +1,260 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: Noto Sans TC,sans-serif;
+    font-size: 14px;
+}
+
+body:hover{
+    cursor: default;
+}
+
+::selection{
+    background-color: none;
+}
+.container-fluid{
+    position: fixed;
+}
+
+.dropup .footer_start {
+    height: 100%;
+    position: relative;
+}
+.dropup .footer_start:hover {
+    filter: brightness(105%);
+}
+
+.dropup .footer_start:active {
+    filter: brightness(85%);
+}
+
+.start_button:focus {
+    box-shadow: none;
+    outline-width: 0px;
+}
+img.bg {
+    max-height: 100%;
+    max-width: 100%;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+.bottom {
+    height: 30px;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+    background: linear-gradient(rgb(31, 47, 134) 0px, rgb(49, 101, 196) 3%, rgb(54, 130, 229) 6%, rgb(68, 144, 230) 10%, rgb(56, 131, 229) 12%, rgb(43, 113, 224) 15%, rgb(38, 99, 218) 18%, rgb(35, 91, 214) 20%, rgb(34, 88, 213) 23%, rgb(33, 87, 214) 38%, rgb(36, 93, 219) 54%, rgb(37, 98, 223) 86%, rgb(36, 95, 220) 89%, rgb(33, 88, 212) 92%, rgb(29, 78, 192) 95%, rgb(25, 65, 165) 98%);
+}
+
+.start-icons {
+    height: 30px;
+    width: 30px;
+    margin-right: 4px;
+}
+
+.start-icon-text {
+    font-size: 14px;
+}
+
+.start_button{
+    background-color: transparent;
+    border-style: none;
+    height: 30px;
+}
+
+.dropup .footer_start_menu{
+    position: relative;
+    left: 0px;
+    padding: 0px;
+}
+
+.menu {
+    box-shadow: rgb(56, 93, 231) 0px 1px;
+    margin: 0;
+    border-top: 1px solid rgb(56, 93, 231);
+}
+.menu .menu_left {
+    background-color: rgb(255, 255, 255);
+    width: 190px;
+    padding: 6px 5px 0px;
+}
+
+.menu .menu_right {
+    background-color: rgb(203, 227, 255);
+    width: 190px;
+    color: rgb(0, 19, 107);
+    border-left: 1px solid rgba(58, 58, 255, 0.37);
+    padding: 6px 5px 5px;
+}
+
+footer {
+    color: rgb(255, 255, 255);
+    height: 36px;
+    width: 100%;
+    background: linear-gradient(rgb(66, 130, 214) 0%, rgb(59, 133, 224) 3%, rgb(65, 138, 227) 5%, rgb(65, 138, 227) 17%, rgb(60, 135, 226) 21%, rgb(55, 134, 228) 26%, rgb(52, 130, 227) 29%, rgb(46, 126, 225) 39%, rgb(35, 116, 223) 49%, rgb(32, 114, 219) 57%, rgb(25, 110, 219) 62%, rgb(23, 107, 216) 72%, rgb(20, 104, 213) 75%, rgb(17, 101, 210) 83%, rgb(15, 97, 203) 88%);
+}
+
+header::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 1px;
+    left: 0px;
+    width: 100%;
+    height: 3px;
+    box-shadow: rgb(14, 96, 203) 0px -1px 1px inset;
+    background: linear-gradient(to right, transparent 0px, rgba(255, 255, 255, 0.3) 1%, rgba(255, 255, 255, 0.5) 2%, rgba(255, 255, 255, 0.5) 95%, rgba(255, 255, 255, 0.3) 98%, rgba(255, 255, 255, 0.2) 99%, transparent 100%);
+}
+.header_img {
+    width: 42px;
+    height: 42px;
+    margin-right: 5px;
+    border-radius: 3px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: rgba(222, 222, 222, 0.8);
+    border-image: initial;
+}
+
+header {
+    align-items: center;
+    color: rgb(255, 255, 255);
+    height: 54px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    padding: 6px 5px 5px;
+    background: linear-gradient(rgb(24, 104, 206) 0%, rgb(14, 96, 203) 12%, rgb(14, 96, 203) 20%, rgb(17, 100, 207) 32%, rgb(22, 103, 207) 33%, rgb(27, 108, 211) 47%, rgb(30, 112, 217) 54%, rgb(36, 118, 220) 60%, rgb(41, 122, 224) 65%, rgb(52, 130, 227) 77%, rgb(55, 134, 229) 79%, rgb(66, 142, 233) 90%, rgb(71, 145, 235) 100%);
+    overflow: hidden;
+}
+
+.header_icon{
+    height: 16px;
+    width: 16px;
+}
+
+.toolbar{
+    background-color: rgb(237,233,210);
+    line-height: 100%;
+    flex-shrink: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+.menu_seperator{
+    height: 7.5px;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 0) 100%) content-box;
+    border-top: 3px solid transparent;
+    border-bottom: 3px solid transparent;
+}
+
+.left_panel{
+    background: linear-gradient(rgb(116, 138, 255) 0%, rgb(64, 87, 211) 100%);
+}
+
+.right_panel{
+    background-color: white;
+    height: 350px;
+}
+
+li{
+    background-color: #fdfcfe;
+    text-align: left;
+}
+
+a{
+    color: black;
+}
+
+.participant:hover{
+    color: white;
+    background-color: rgb(47, 113, 205);
+}
+
+.leaderbtn{
+    font-size: 100%;
+    border: 0;
+    padding: 0;
+    background-color: white;
+}
+.leaderbtn:hover{
+    background-color: rgb(47, 113, 205);
+}
+
+.winner{
+    font-weight: 700;
+}
+.csi_info:hover{
+    color: white;
+    background-color: rgb(47, 113, 205);
+}
+
+.csi_info:hover a{
+    color: white;
+    background-color: rgb(47, 113, 205);
+}
+
+a:hover{
+    text-decoration: none;
+}
+
+.power_buttons:hover{
+    background-color: rgba(60, 80, 210, 0.5);
+}
+
+.questionPopup:active img{
+    filter: drop-shadow(blue, 2px, 2px);
+}
+
+.desktop-text {
+    display: inline-block;
+    margin-top: 0.15em;
+    font-size: 0.8rem;
+    color: white;
+    text-shadow: 1px 1px 1px darkgrey;
+}
+.question-title {
+    font-size: 0.8rem;
+    color: black;
+}
+
+.question-icon:focus .question-title {
+    color: white;
+}
+.desktop-icon:focus , .question-icon:focus, .desktop-icon-2:focus, .desktop-icon-3:focus{
+    box-shadow: none;
+}
+
+.desktop-icon span, .question-icon span, .desktop-icon-2 span, .desktop-icon-3 span{
+    padding-left: 0.1rem;
+    padding-right: 0.1rem;
+}
+
+.desktop-icon:focus span, .question-icon:focus span, .desktop-icon-2:focus span, .desktop-icon-3:focus span{
+    background-color: rgb(11, 97, 255);
+}
+
+
+.desktop-icon:focus, .question-icon:focus, .desktop-icon-2:focus, .desktop-icon-3:focus{
+    filter: drop-shadow(blue 0px 0px);
+}
+
+.desktop-icon:focus .icon-container img, .question-icon:focus .icon-container img, .desktop-icon-2 .question-icon:focus img, .desktop-icon-3:focus .question-icon:focus img{
+    opacity: 0.5;
+}
+
+#clock{
+    background: linear-gradient(rgb(12, 89, 185) 1%, rgb(19, 158, 233) 6%, rgb(24, 181, 242) 10%, rgb(19, 155, 235) 14%, rgb(18, 144, 232) 19%, rgb(13, 141, 234) 63%, rgb(13, 159, 241) 81%, rgb(15, 158, 237) 88%, rgb(17, 155, 233) 91%, rgb(19, 146, 226) 94%, rgb(19, 126, 215) 97%, rgb(9, 91, 201) 100%);
+    border-left: 1px solid rgb(16, 66, 175);
+    color: white;
+    font-size: 11px;
+}
+
+@media only screen and (max-width: 768px){
+    .desktop-icon{
+        display: none;
+    }
+}
