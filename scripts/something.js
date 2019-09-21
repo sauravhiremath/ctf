@@ -1,5 +1,3 @@
-import { start } from "repl";
-
 function x(nameOfChallenge, username) {
     var found;
     var doc = db.challenges.findOne({
@@ -43,3 +41,5 @@ mongoAdd("MSN", "Control can sometimes be an illusion, but sometimes you need il
 mongoAdd("E-Mail", "The concept of waiting bewilders me. There are always deadlines. There are always ticking clocks.<br><br><a href='http://ctf-xp.csivit.com:2006'>http://ctf-xp.csivit.com:2006</a>", "Web", "easy", "CSICTF{454455454}", 110)
 
 mongoAdd("Key", "That's a made up name. What is your real name?<br />Ladis.<br />Ladis what?<br />Ladis Washirum.<br />So your name is like the sign, Ladies' Washroom.<br />Oh.<br />That is a made up name.<br /><br><a href='https://ctf.csivit.com/challenges/subs_cipher.zip'>https://ctf.csivit.com/challenges/subs_cipher.zip</a>", "Cryptography", "hard", "CSICTF{insovietrussiapikachucatchesyou}", 380)
+
+mongoAdd("Notepad", "I was in Oklahoma last week.<br><br><a href='http://ctf-xp.csivit.com:2007/'>http://ctf-xp.csivit.com:2007/</a>", "Web", "medium", "CSICTF{th3_t0rn4D0_BL3w_m3_4w4y}", 230)
