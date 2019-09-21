@@ -267,10 +267,13 @@ a:hover{
         display: none;
     }
     .modal {
-        left: 2rem !important;
-        right: 2rem !important;
+        left: 5% !important;
+        right: 5% !important;
         top: 1rem !important;
         width: 90% !important;
         height: 650px !important;
+    }
+    .leaderboard-container {
+        height: 480px !important;
     }
 }   
