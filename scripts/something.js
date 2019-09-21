@@ -16,5 +16,3 @@ function x(nameOfChallenge, username) {
     // }));
     db.challenges.save(doc);
 }
-
-
