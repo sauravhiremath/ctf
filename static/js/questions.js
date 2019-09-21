@@ -161,6 +161,7 @@ $(document).on("dblclick", ".question-icon", function () {
                 for(var i=0;i<data["solvedBy"].length;i++){
                     if(data["solvedBy"][i].username.includes(data.username)){
                         var solved = true;
+                        break;
                     }
                     else{
                         var solved = false;
