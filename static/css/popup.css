@@ -494,5 +494,4 @@ input[type="number"]::-webkit-outer-spin-button {
 	background-color: white;
 	cursor: text;
 	padding: 10px;
-	overflow-y: scroll;
 }

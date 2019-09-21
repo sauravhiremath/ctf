@@ -161,6 +161,7 @@ $(document).on("dblclick", ".question-icon", function () {
                 for(var i=0;i<data["solvedBy"].length;i++){
                     if(data["solvedBy"][i].username.includes(data.username)){
                         var solved = true;
+                        break;
                     }
                     else{
                         var solved = false;
@@ -196,7 +197,19 @@ $(document).on("dblclick", ".question-icon", function () {
                 else {
                     var statsHtml = '';
                     for (var i = 0; i < people.length; i++) {
-                        singleDiv = '<div class="d-flex">' + (i + 1) + ". " + people[i].username + '<div class="ml-auto">' + people[i].usertime + '</div></div><hr>'
+                        var time = people[i].usertime;
+                        var date = Date.parse(time);
+                        date = date + (5.5*60*60*1000);
+                        var newTime = new Date(date);
+                        newTime = newTime.toString();
+                        newTime = newTime.split(' ').slice(0,5).join(' ')
+                        
+                        // console.log(d);
+                        // var datet = time.split(" ");
+                        // console.log(datet);
+                        // var hour = datet[1].split(":")
+                        // console.log(hour[0]+5, hour[1]+30);
+                        singleDiv = '<div class="d-flex">' + (i + 1) + ". " + people[i].username + '<div class="ml-auto">' + newTime + '</div></div><hr>'
                         statsHtml += singleDiv;
                     }
                 }
