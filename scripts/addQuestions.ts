@@ -82,6 +82,20 @@ var baby = [{
 			solvedBy: [],
 			hidden: false
 		},
+
+		{
+			name: "MS Powerpoint",
+			description: "",
+			difficulty: "medium",
+			type: "Jail",
+			hint: "",
+			answer: "",
+			startPoints: "",
+			currentPoints: "",
+			solvedBy: "",
+			hidden: "",
+		}
+
 		]
 		import {
 			Challenge
