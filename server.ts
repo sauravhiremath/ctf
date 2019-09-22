@@ -10,7 +10,7 @@ import { submissionData } from "./models/socketInterfaces";
 // import { handleSubmission } from "./routes/handleSubmission";
 import homeRoutes from "./routes/home";
 import authRoutes from "./routes/auth";
-import feedback from "./models/feedback";
+import Feedback from "./models/feedback";
 import Leaderboard from "./models/leaderboard";
 import { createQuestion } from "./scripts/addQuestions";
 import disp from "./scripts/lbMigrate";
@@ -83,7 +83,7 @@ app.post("/feedback", async (req, res) => {
 		return;
 	};
 
-	const user = new feedback({
+	const user = new Feedback({
 		username: username,
 		feedback: feedback,
 		againCTF: againCTF,
@@ -91,8 +91,11 @@ app.post("/feedback", async (req, res) => {
 	});
 
 	await user.save();
-
-	res.render("thankYou.hbs");
+	res.json({
+		success: true,
+		message: "thenks"
+	});
+	// res.render("thankYou.hbs");
 });
 
 // app.use("/home", homeRoutes);
