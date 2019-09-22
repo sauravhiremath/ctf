@@ -13,20 +13,20 @@ document.getElementsByTagName("img").draggable = false;
 //     // }
 // });
 
-$(document).on("click", "#leaderBtn", function(){
-    $.ajax({
-        type: "GET",
-        url: "home/leaderboard",
-        success: function (data) {
-            var leaderboard = ''
-            for(var i=0; i<data.length; i++){
-                var singleDiv = '<div class="d-flex">'+ (i+1)+". " + data[i].username +'<div class="ml-auto">'+ data[i].points +'</div></div><hr>'
-                leaderboard += singleDiv;
-            }
-            $("#leaderboard-content").html(leaderboard);
-        }
-    });
-})
+// $(document).on("click", "#leaderBtn", function(){
+//     $.ajax({
+//         type: "GET",
+//         url: "home/leaderboard",
+//         success: function (data) {
+//             var leaderboard = ''
+//             for(var i=0; i<data.length; i++){
+//                 var singleDiv = '<div class="d-flex">'+ (i+1)+". " + data[i].username +'<div class="ml-auto">'+ data[i].points +'</div></div><hr>'
+//                 leaderboard += singleDiv;
+//             }
+//             $("#leaderboard-content").html(leaderboard);
+//         }
+//     });
+// })
 
 $(document).on("dblclick",".desktop-icon-2", function(){
     $("#rulesPopup").modal({
@@ -38,35 +38,39 @@ $(document).on("dblclick",".desktop-icon-2", function(){
 })
 
 $(document).on("dblclick",".desktop-icon-3", function(){
-    $.ajax({
-        type: "GET",
-        url: "home/leaderboard",
-        success: function (data) {
-            data.username
-            var leaderboard = ''
-            for(var i=0; i<data.length; i++){
-                var singleDiv = '<div class="d-flex">'+ (i+1)+". " + data[i].username +'<div class="ml-auto">'+ data[i].points +'</div></div><hr>'
-                leaderboard += singleDiv;
-            }
-            $("#leaderboard-content").html(leaderboard);
-            $("#leaderBoardPopup").modal({
+    // $.ajax({
+    //     type: "GET",
+    //     url: "home/leaderboard",
+    //     success: function (data) {
+            $(".header-text").html("CSI-CTF")
+            // for(var i=0; i<data.length; i++){
+            //     var singleDiv = '<div class="d-flex">'+ (i+1)+". " + data[i].username +'<div class="ml-auto">'+ data[i].points +'</div></div><hr>'
+            //     leaderboard += singleDiv;
+            // }
+            // $("#leaderboard-content").html(leaderboard);
+            // $("#leaderBoardPopup").modal({
+            //     show: true,
+            //     backdrop: false
+            // }).draggable({
+            //     handle: ".app_header"
+            // });
+            var leaderboard = '<img src="/static/images/info.png" style="width: 30px; height:30px" class="start-icons" alt=""><div class="pl-2 pb-2">The CTF ends at 00:37<br>Leaderboard will be hidden for the last hour<br>Results will be out on our social media soon</div><br>'
+            $(".message").html(leaderboard);
+            $("#errorModal").modal({
                 show: true,
                 backdrop: false
-            }).draggable({
-                handle: ".app_header"
-            });
-        }
-    });
+            })
 })
 
 $(document).on("click", "#leaderBtn", function (e) {
-    
-    $("#leaderBoardPopup").modal({
-        show: true,
-        backdrop: false
-    }).draggable({
-        handle: ".app_header"
-    });
+    $(".header-text").html("CSI-CTF")
+    var leaderboard = '<img src="/static/images/info.png" style="width: 30px; height:30px" class="start-icons" alt=""><div class="pl-2 pb-2">The CTF ends at 00:37<br>Leaderboard will be hidden for the last hour<br>Results will be out on our social media soon</div><br>'
+            $(".message").html(leaderboard);
+            $("#errorModal").modal({
+                show: true,
+                backdrop: false
+            })
+
 })
 
 

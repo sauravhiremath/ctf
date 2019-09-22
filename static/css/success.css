@@ -12,6 +12,14 @@ body, html {
     background-repeat: none;
     background-size: cover;
 }
+#endPopup {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: url("/static/images/desktop.jpeg");
+    background-repeat: none;
+    background-size: cover;
+}
 
 .popupContainer {
     position: absolute;
