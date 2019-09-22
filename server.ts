@@ -63,11 +63,21 @@ app.use(
 );
 
 app.post("/feedback", async (req, res) => {
-	const username = req.body.username;
-	const feedback = req.body.feedback;
-	const againCTF = req.body.againCTF;
+	const username = req.body.username.toString().trim();
+	const feedback = req.body.feedback.toString().trim();
+	const againCTF: boolean = req.body.againCTF;
 
-	if (await checkUserExists2(username)) {
+	if(!username && !feedback && !againCTF){
+		res.json({
+			success: false,
+			message: "Kindly enter all values. :D"
+		});
+		return;
+	};
+
+	const chk = await checkUserExists2(username);
+	// console.log(chk)
+	if ( chk === null) {
 		res.json({
 			success: false,
 			message: "Already filled, or not registered"

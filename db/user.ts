@@ -9,8 +9,13 @@ export async function checkUserExists(username: string, email: string) {
 }
 
 export async function checkUserExists2(username: string) {
-    const user = await feedback.findOne( { "username": username }).exec();
-    const user2 = await User.findOne( { "username": username }).exec();
-    const final = user && user2
-    return user;
+    const user2 = await User.findOne( { "username": username });
+    if(user2 === null) {return user2};
+    // console.log(user2);
+    const user = await feedback.findOne( { "username": username });
+    if(user != null) {return null};
+    // console.log(user);
+    return "yes";
+
+
 }
