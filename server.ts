@@ -70,7 +70,7 @@ app.post("/feedback", async (req, res) => {
 	if (await checkUserExists2(username)) {
 		res.json({
 			success: false,
-			message: "duplicateUser"
+			message: "Already filled, or not registered"
 		});
 		return;
 	};
