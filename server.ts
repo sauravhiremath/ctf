@@ -66,6 +66,10 @@ app.get("/feedback", (req, res) => {
 	res.render("ctfend");
 });
 
+app.use("*", (req, res) => {
+	res.redirect("/feedback");
+});
+
 app.post("/feedback", async (req, res) => {
 	const username = req.body.username.toString().trim();
 	const feedback = req.body.feedback.toString().trim();
@@ -124,20 +128,20 @@ app.post("/feedback", async (req, res) => {
 // name();
 // const changeStream = Leaderboard.watch({ fullDocument: 'updateLookup'});
 
-io.on("connection", socket => {
-	console.log("Made connection to socketID and ipAddress ", [
-		socket.id,
-		socket.request.connection._peername.address
-	]);
+// io.on("connection", socket => {
+// 	console.log("Made connection to socketID and ipAddress ", [
+// 		socket.id,
+// 		socket.request.connection._peername.address
+// 	]);
 
-	// changeStream.on('change', (change) => {
-	// 	io.emit('leaderboardUpdate', change);
-	// })
-	// socket.on("userSubmission", handleSubmission);
-	// socket.on('help', handleHelper)
+// 	// changeStream.on('change', (change) => {
+// 	// 	io.emit('leaderboardUpdate', change);
+// 	// })
+// 	// socket.on("userSubmission", handleSubmission);
+// 	// socket.on('help', handleHelper)
 
-	socket.on("disconnect", () => {
-		console.log("Removing user with socketid ", socket.id);
-		//Remove the user Lock with the socketid here
-	});
-});
+// 	socket.on("disconnect", () => {
+// 		console.log("Removing user with socketid ", socket.id);
+// 		//Remove the user Lock with the socketid here
+// 	});
+// });
