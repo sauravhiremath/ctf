@@ -116,3 +116,27 @@ $(document).on("click", ".poweroff", function(){
         },
     })
 })
+
+$(document).on("click", ".end-submit", function(){
+    var name = $("input[name='username']").val();
+    var feedback = $("input[name='feedback']").val();
+    if(name==null && feedback == null){
+        alert("Fields with * cannot be empty");
+    }
+    $.ajax({
+        method: "POST",
+        url: "/feedback",
+        data: {
+            username: name,
+            feedback: feedback
+        },
+        success: data=>{
+            if(data.success == false){
+                alert(data.message);
+            }
+            else{
+                alert("Thank You");
+            }
+        },
+    })
+})

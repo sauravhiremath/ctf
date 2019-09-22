@@ -62,12 +62,16 @@ app.use(
 	})
 );
 
+app.get("/feedback", (req, res) => {
+	res.render("ctfend");
+});
+
 app.post("/feedback", async (req, res) => {
 	const username = req.body.username.toString().trim();
 	const feedback = req.body.feedback.toString().trim();
-	const againCTF: boolean = req.body.againCTF;
+	// const againCTF: boolean = req.body.againCTF;
 
-	if(!username && !feedback && !againCTF){
+	if(!username || !feedback){
 		res.json({
 			success: false,
 			message: "Kindly enter all values. :D"
@@ -96,7 +100,7 @@ app.post("/feedback", async (req, res) => {
 	const user = new Feedback({
 		username: username,
 		feedback: feedback,
-		againCTF: againCTF,
+		// againCTF: againCTF,
 		finished: true,
 	});
 
@@ -113,9 +117,9 @@ app.post("/feedback", async (req, res) => {
 // app.use("/", (req, res) => {
 // 	res.redirect("/home");
 // });
-app.use("*", (req, res) => {
-	res.render("bsod404.hbs");
-});
+// app.use("*", (req, res) => {
+// 	res.render("bsod404.hbs");
+// });
 
 // name();
 // const changeStream = Leaderboard.watch({ fullDocument: 'updateLookup'});
