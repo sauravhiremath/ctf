@@ -67,7 +67,7 @@ app.get("/feedback", (req, res) => {
 });
 
 app.use("*", (req, res) => {
-	res.redirect("/feedback");
+	res.render("ctfend");
 });
 
 app.post("/feedback", async (req, res) => {
