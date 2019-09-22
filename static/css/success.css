@@ -28,7 +28,7 @@ body, html {
     top: 50vh;
     transform: translateY(-50%);
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 1.3rem;
+    font-size: 1rem;
 }
 
 .success-message {
