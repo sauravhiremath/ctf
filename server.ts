@@ -10,9 +10,11 @@ import { submissionData } from "./models/socketInterfaces";
 // import { handleSubmission } from "./routes/handleSubmission";
 import homeRoutes from "./routes/home";
 import authRoutes from "./routes/auth";
+import feedback from "./models/feedback";
 import Leaderboard from "./models/leaderboard";
 import { createQuestion } from "./scripts/addQuestions";
 import disp from "./scripts/lbMigrate";
+import { checkUserExists } from "./db/user";
 import { create } from "domain";
 var MongoDBStore = require("connect-mongodb-session")(session);
 require("dotenv").config();
@@ -60,11 +62,42 @@ app.use(
 	})
 );
 
-app.use("/home", homeRoutes);
-app.use("/auth", authRoutes);
-app.use("/", (req, res) => {
-	res.redirect("/home");
-});
+// app.post("/feedback", async (req, res) => {
+// 	const username = req.body.username;
+// 	const feedback = req.body.feedback;
+// 	const againCTF = req.body.againCTF;
+
+// 	if (await checkUserExists(username)) {
+// 		res.json({
+// 			success: false,
+// 			message: "duplicateUser"
+// 		});
+// 		return;
+// 	};
+
+// 	if(feedback > 2000) {
+// 		res.json({
+// 			success: false,
+// 			message: "Too large message"
+// 		});
+// 		return;
+// 	};
+
+// 	const user = new feedback({
+// 		username: username,
+// 		feedback: feedback,
+// 		againCTF: againCTF,
+// 		finished: true,
+// 	});
+
+// 	await user.save();
+// });
+
+// app.use("/home", homeRoutes);
+// app.use("/auth", authRoutes);
+// app.use("/", (req, res) => {
+// 	res.redirect("/home");
+// });
 app.use("*", (req, res) => {
 	res.render("bsod404.hbs");
 });
