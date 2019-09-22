@@ -120,9 +120,8 @@ $(document).on("click", ".poweroff", function(){
 $(document).on("click", ".end-submit", function(){
     var name = $("input[name='username']").val();
     var feedback = $("input[name='feedback']").val();
-    if($('input:text').is(':empty')){
-        alert("Please enter all the values");
-        return
+    if(!name || !feedback){
+        alert("Fields with * cannot be empty");
     }
     $.ajax({
         method: "POST",
