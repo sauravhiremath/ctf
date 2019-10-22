@@ -3,7 +3,6 @@ $(document).on("dblclick", ".desktop-icon", function () {
     var difficulty = $(this).attr("id");
     diff = difficulty.toLowerCase();
     var solved = $(this).attr("name");
-    console.log(solved);
     $.ajax({
         type: "GET",
         url: "home/questionStatus",
@@ -13,7 +12,6 @@ $(document).on("dblclick", ".desktop-icon", function () {
         },
         success: function (result) {
             var arr = result["allChallenges"]
-            console.log(arr);
             //unsolved question
             if (solved == "False") {
                 $(".question-type").html(difficulty);
@@ -82,7 +80,6 @@ $(document).on("click", ".start-icon-modal", function(){
     var difficulty = $(this).attr("id");
     diff = difficulty.toLowerCase();
     var solved = $(this).attr("name");
-    console.log(solved);
     $.ajax({
         type: "GET",
         url: "home/questionStatus",
@@ -92,17 +89,14 @@ $(document).on("click", ".start-icon-modal", function(){
         },
         success: function(result){
             var arr=result["allChallenges"]
-            console.log(arr);
             //unsolved question
             if(solved=="False"){
                 $(".question-type").html(difficulty);
                 var filtered = arr.filter(question=>question.difficulty==diff)
                 if(filtered.length === 0) return;
-                console.log(filtered);
                 var data = '';
                 for(var i=0; i<filtered.length; i++){
                     var image = filtered[i].name.toLowerCase().replace(" ", "-");
-                    console.log(image);
                     var question_data = '<button class="btn singlePopup question-icon d-inline-flex" id='+ filtered[i]._id + ' value='+ filtered[i].name +' id='+ filtered[i]._id +'> <div class="icon-container"><img src="/static/images/'+ image +'.png" style="width: 32px; height: 32px" alt=""><span class="question-title ml-1">'+ filtered[i].name +'</span></div></button>'
                     data+=question_data;
                 }
@@ -120,7 +114,6 @@ $(document).on("click", ".start-icon-modal", function(){
                 };
                 var data='';
                 $(".question-type").html(difficulty)
-                console.log(difficulty);
                 for(var i=0; i<arr.length; i++){
                     var image = arr[i].name.toLowerCase().replace(" ", "-");
                     var question_data = '<button class="btn singlePopup question-icon d-inline-flex" id='+ filtered[i]._id + ' value='+ arr[i].name +' id='+ arr[i]._id +' disabled> <div class="icon-container"><img src="/static/images/'+ image +'.png" style="width:32px; height:32px" alt=""><span class="question-title ml-1">'+ arr[i].name +'</span></div></button>'
@@ -154,7 +147,6 @@ $(document).on("dblclick", ".question-icon", function () {
         },
         success: function(result){
                 var data = result["message"]
-                console.log(data.qname);
                 var questionName = data.qname;
                 var questionCatagory = '<div class="d-flex p-2"><strong>Catagory: '+ data.type +'</strong><div class="ml-auto"><strong>Current Points: '+ data.currentPoints +'</strong></div></div><div class="d-flex pr-2"><div class="ml-auto"><strong> Start Points: '+ data.startPoints +'</strong></div></div>'
                 var question_text = '<p class="selectable">'+ data.description +'</p>'
@@ -166,7 +158,6 @@ $(document).on("dblclick", ".question-icon", function () {
                     else{
                         var solved = false;
                     }
-                    console.log(solved)
                 }
                 if(solved){
                     var text_field = '<div class="ml-auto mr-auto"><strong>You have already solved this question</strong></div>'    
@@ -203,20 +194,12 @@ $(document).on("dblclick", ".question-icon", function () {
                         var newTime = new Date(date);
                         newTime = newTime.toString();
                         newTime = newTime.split(' ').slice(0,5).join(' ')
-                        
-                        // console.log(d);
-                        // var datet = time.split(" ");
-                        // console.log(datet);
-                        // var hour = datet[1].split(":")
-                        // console.log(hour[0]+5, hour[1]+30);
                         singleDiv = '<div class="d-flex">' + (i + 1) + ". " + people[i].username + '<div class="ml-auto">' + newTime + '</div></div><hr>'
                         statsHtml += singleDiv;
                     }
                 }
                 $("#nav_content").html(statsHtml);
             })
-
-            console.log(result);
             $("#singlePopupModal").modal({
                 show: true,
                 backdrop: false
@@ -236,15 +219,12 @@ function sendAns(e) {
     const inputFlag = $("input[name='flag-input']")
     var flag = $(inputFlag).val();
     const id = $('#flagSubmitForm').attr("data-qid");
-    console.log(id);
     const time = new Date;
-    console.log(time);
     submitData = {
         "qid": id,
         "ctfFlag": flag,
         "timeStampUser": time,
     }
-    console.log(flag);
     $.ajax({
         method: "POST",
         url: "/home/submit",
@@ -264,9 +244,7 @@ function sendAns(e) {
                     backdrop: false
                 })
                 var parentDiv = '#'+id +'div';
-                console.log(parentDiv);
                 $(parentDiv).hide();
-                console.log("hidden");
             }
             else{
                 var text = data.message;

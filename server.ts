@@ -62,60 +62,61 @@ app.use(
 	})
 );
 
-// app.get("/feedback", (req, res) => {
-// 	res.render("ctfend");
-// });
+app.get("/feedback", (req, res) => {
+	res.render("ctfend");
+});
 
-// app.post("/feedback", async (req, res) => {
-// 	const username = req.body.username.toString().trim();
-// 	const feedback = req.body.feedback.toString().trim();
-// 	// const againCTF: boolean = req.body.againCTF;
 
-// 	if(!username || !feedback){
-// 		res.json({
-// 			success: false,
-// 			message: "Kindly enter all values. :D"
-// 		});
-// 		return;
-// 	};
 
-// 	const chk = await checkUserExists2(username);
-// 	// console.log(chk);
-// 	if ( chk === null) {
-// 		res.json({
-// 			success: false,
-// 			message: "Already filled, or not registered"
-// 		});
-// 		return;
-// 	};
+app.post("/feedback", async (req, res) => {
+	const username = req.body.username.toString().trim();
+	const feedback = req.body.feedback.toString().trim();
+	// const againCTF: boolean = req.body.againCTF;
+	if(!username || !feedback){
+		res.json({
+			success: false,
+			message: "Kindly enter all values. :D"
+		});
+		return;
+	};
 
-// 	if(feedback > 2000) {
-// 		res.json({
-// 			success: false,
-// 			message: "Too large message"
-// 		});
-// 		return;
-// 	};
+	const chk = await checkUserExists2(username);
+	console.log(chk)
+	if ( chk === null) {
+		res.json({
+			success: false,
+			message: "Already filled, or not registered"
+		});
+		return;
+	};
 
-// 	const user = new Feedback({
-// 		username: username,
-// 		feedback: feedback,
-// 		// againCTF: againCTF,
-// 		finished: true,
-// 	});
+	if(feedback > 2000) {
+		res.json({
+			success: false,
+			message: "Too large message"
+		});
+		return;
+	};
 
-// 	await user.save();
-// 	res.json({
-// 		success: true,
-// 		message: "thenks"
-// 	});
-// 	// res.render("thankYou.hbs");
-// });
+	const user = new Feedback({
+		username: username,
+		feedback: feedback,
+		// againCTF: againCTF,
+		finished: true,
+	});
+
+	await user.save();
+	res.json({
+		success: true,
+		message: "thenks"
+	});
+	// res.render("thankYou.hbs");
+});
+
 
 // app.use("*", (req, res) => {
-// 	res.redirect("/feedback");
+// 	res.redirect("feedback");
 // });
-
 app.use("/home", homeRoutes);
 app.use("/auth", authRoutes);
 app.use("/", (req, res) => {
@@ -125,23 +126,22 @@ app.use("*", (req, res) => {
 	res.render("bsod404.hbs");
 });
 
-// name();
 // const changeStream = Leaderboard.watch({ fullDocument: 'updateLookup'});
 
-// io.on("connection", socket => {
-// 	console.log("Made connection to socketID and ipAddress ", [
-// 		socket.id,
-// 		socket.request.connection._peername.address
-// 	]);
+io.on("connection", socket => {
+	console.log("Made connection to socketID and ipAddress ", [
+		socket.id,
+		socket.request.connection._peername.address
+	]);
 
-// 	// changeStream.on('change', (change) => {
-// 	// 	io.emit('leaderboardUpdate', change);
-// 	// })
-// 	// socket.on("userSubmission", handleSubmission);
-// 	// socket.on('help', handleHelper)
+	// changeStream.on('change', (change) => {
+	// 	io.emit('leaderboardUpdate', change);
+	// })
+	// socket.on("userSubmission", handleSubmission);
+	// socket.on('help', handleHelper)
 
-// 	socket.on("disconnect", () => {
-// 		console.log("Removing user with socketid ", socket.id);
-// 		//Remove the user Lock with the socketid here
-// 	});
-// });
+	socket.on("disconnect", () => {
+		console.log("Removing user with socketid ", socket.id);
+		//Remove the user Lock with the socketid here
+	});
+});
