@@ -14,7 +14,7 @@ export async function checkUserExists2(username: string) {
     // console.log(user2);
     const user = await feedback.findOne( { "username": username });
     if(user != null) {return null};
-    // console.log(user);
+    // console.log(user );
     return "yes";
 
 

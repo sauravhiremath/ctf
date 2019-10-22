@@ -62,68 +62,68 @@ app.use(
 	})
 );
 
-app.get("/feedback", (req, res) => {
-	res.render("ctfend");
-});
-
-app.use("*", (req, res) => {
-	res.redirect("/feedback");
-});
-
-app.post("/feedback", async (req, res) => {
-	const username = req.body.username.toString().trim();
-	const feedback = req.body.feedback.toString().trim();
-	// const againCTF: boolean = req.body.againCTF;
-
-	if(!username || !feedback){
-		res.json({
-			success: false,
-			message: "Kindly enter all values. :D"
-		});
-		return;
-	};
-
-	const chk = await checkUserExists2(username);
-	// console.log(chk)
-	if ( chk === null) {
-		res.json({
-			success: false,
-			message: "Already filled, or not registered"
-		});
-		return;
-	};
-
-	if(feedback > 2000) {
-		res.json({
-			success: false,
-			message: "Too large message"
-		});
-		return;
-	};
-
-	const user = new Feedback({
-		username: username,
-		feedback: feedback,
-		// againCTF: againCTF,
-		finished: true,
-	});
-
-	await user.save();
-	res.json({
-		success: true,
-		message: "thenks"
-	});
-	// res.render("thankYou.hbs");
-});
-
-// app.use("/home", homeRoutes);
-// app.use("/auth", authRoutes);
-// app.use("/", (req, res) => {
-// 	res.redirect("/home");
+// app.get("/feedback", (req, res) => {
+// 	res.render("ctfend");
 // });
+
+// app.post("/feedback", async (req, res) => {
+// 	const username = req.body.username.toString().trim();
+// 	const feedback = req.body.feedback.toString().trim();
+// 	// const againCTF: boolean = req.body.againCTF;
+
+// 	if(!username || !feedback){
+// 		res.json({
+// 			success: false,
+// 			message: "Kindly enter all values. :D"
+// 		});
+// 		return;
+// 	};
+
+// 	const chk = await checkUserExists2(username);
+// 	// console.log(chk);
+// 	if ( chk === null) {
+// 		res.json({
+// 			success: false,
+// 			message: "Already filled, or not registered"
+// 		});
+// 		return;
+// 	};
+
+// 	if(feedback > 2000) {
+// 		res.json({
+// 			success: false,
+// 			message: "Too large message"
+// 		});
+// 		return;
+// 	};
+
+// 	const user = new Feedback({
+// 		username: username,
+// 		feedback: feedback,
+// 		// againCTF: againCTF,
+// 		finished: true,
+// 	});
+
+// 	await user.save();
+// 	res.json({
+// 		success: true,
+// 		message: "thenks"
+// 	});
+// 	// res.render("thankYou.hbs");
+// });
+
 // app.use("*", (req, res) => {
-// 	res.render("bsod404.hbs");
+// 	res.redirect("/feedback");
 // });
+
+app.use("/home", homeRoutes);
+app.use("/auth", authRoutes);
+app.use("/", (req, res) => {
+	res.redirect("/home");
+});
+app.use("*", (req, res) => {
+	res.render("bsod404.hbs");
+});
 
 // name();
 // const changeStream = Leaderboard.watch({ fullDocument: 'updateLookup'});
