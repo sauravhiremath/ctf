@@ -126,6 +126,7 @@ $(document).on("click", ".logoff", function () {
             window.location.href = 'auth/register'
         },
     })
+})
 
 $(document).on("click", ".poweroff", function () {
     $.ajax({
@@ -135,6 +136,8 @@ $(document).on("click", ".poweroff", function () {
             window.location.href = 'auth/register'
         },
     })
+})
+
 
 $(document).on("click", ".end-submit", function () {
     var name = $("input[name='username']").val();
