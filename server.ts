@@ -66,15 +66,12 @@ app.get("/feedback", (req, res) => {
 	res.render("ctfend");
 });
 
-app.use("*", (req, res) => {
-	res.render("ctfend");
-});
+
 
 app.post("/feedback", async (req, res) => {
 	const username = req.body.username.toString().trim();
 	const feedback = req.body.feedback.toString().trim();
 	// const againCTF: boolean = req.body.againCTF;
-
 	if(!username || !feedback){
 		res.json({
 			success: false,
@@ -84,7 +81,7 @@ app.post("/feedback", async (req, res) => {
 	};
 
 	const chk = await checkUserExists2(username);
-	// console.log(chk)
+	console.log(chk)
 	if ( chk === null) {
 		res.json({
 			success: false,
@@ -116,32 +113,35 @@ app.post("/feedback", async (req, res) => {
 	// res.render("thankYou.hbs");
 });
 
-// app.use("/home", homeRoutes);
-// app.use("/auth", authRoutes);
-// app.use("/", (req, res) => {
-// 	res.redirect("/home");
-// });
-// app.use("*", (req, res) => {
-// 	res.render("bsod404.hbs");
-// });
 
-// name();
+// app.use("*", (req, res) => {
+// 	res.redirect("feedback");
+// });
+app.use("/home", homeRoutes);
+app.use("/auth", authRoutes);
+app.use("/", (req, res) => {
+	res.redirect("/home");
+});
+app.use("*", (req, res) => {
+	res.render("bsod404.hbs");
+});
+
 // const changeStream = Leaderboard.watch({ fullDocument: 'updateLookup'});
 
-// io.on("connection", socket => {
-// 	console.log("Made connection to socketID and ipAddress ", [
-// 		socket.id,
-// 		socket.request.connection._peername.address
-// 	]);
+io.on("connection", socket => {
+	console.log("Made connection to socketID and ipAddress ", [
+		socket.id,
+		socket.request.connection._peername.address
+	]);
 
-// 	// changeStream.on('change', (change) => {
-// 	// 	io.emit('leaderboardUpdate', change);
-// 	// })
-// 	// socket.on("userSubmission", handleSubmission);
-// 	// socket.on('help', handleHelper)
+	// changeStream.on('change', (change) => {
+	// 	io.emit('leaderboardUpdate', change);
+	// })
+	// socket.on("userSubmission", handleSubmission);
+	// socket.on('help', handleHelper)
 
-// 	socket.on("disconnect", () => {
-// 		console.log("Removing user with socketid ", socket.id);
-// 		//Remove the user Lock with the socketid here
-// 	});
-// });
+	socket.on("disconnect", () => {
+		console.log("Removing user with socketid ", socket.id);
+		//Remove the user Lock with the socketid here
+	});
+});
