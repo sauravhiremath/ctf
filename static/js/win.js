@@ -29,7 +29,6 @@ $(function () {
 // })
 
 $(document).on("dblclick", ".desktop-icon-2", function () {
-    console.log("winjus");
     $("#rulesPopup").modal({
         show: true,
         backdrop: false
@@ -43,7 +42,6 @@ $(document).on("dblclick", ".desktop-icon-3", function () {
         type: "GET",
         url: "home/leaderboard",
         success: function (data) {
-            console.log(data);
             var leaderboard = '';
             for (var i = 0; i < data.length; i++) {
                 var singleDiv = '<div class="d-flex">' + (i + 1) + ". " + data[i].username + '<div class="ml-auto">' + data[i].points + '</div></div><hr>'
@@ -154,7 +152,6 @@ $(document).on("click", ".end-submit", function () {
             feedback: feedback
         },
         success: data => {
-            console.log(data.success);
             if (data.success === false) {
                 alert(data.message);
                 return;
