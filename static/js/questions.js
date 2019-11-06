@@ -163,7 +163,7 @@ $(document).on("dblclick", ".question-icon", function () {
                     var text_field = '<div class="ml-auto mr-auto"><strong>You have already solved this question</strong></div>'    
                 }
                 else{
-                    var text_field = '<form class="w-100 row no-gutters" onsubmit="return sendAns(event);" id="flagSubmitForm" data-qid="' + data.id + '"><div class="col-10"><input type="text" class="w-100 pl-1" name="flag-input" placeholder="CSICTF{The_flag_goes_here}"></div><div class="col-2"><button type="submit" class="ml-3 pl-3 pr-3 submit-button" id='+ data.id + ' data-toggle="modal">Submit</button></div></form>'
+                    var text_field = '<form class="w-100 row no-gutters" onsubmit="return sendAns(event);" id="flagSubmitForm" data-qid="' + data.id + '"><div class="col-10"><input type="text" class="w-100 pl-1" name="flag-input" placeholder="ctfCTF{The_flag_goes_here}"></div><div class="col-2"><button type="submit" class="ml-3 pl-3 pr-3 submit-button" id='+ data.id + ' data-toggle="modal">Submit</button></div></form>'
                 }
                 var people = data["solvedBy"];
                 $(".question-name").html(questionName);

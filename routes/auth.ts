@@ -306,7 +306,7 @@ router.post("/updatePassword", async (req, res) => {
 
 	res.json({
 		success: true,
-		message: `Password updated successfully. Your username is ${username}. Click <a href='ctf.csivit.com'>here</a> to login`
+		message: `Password updated successfully. Your username is ${username}. Click <a href='ctf.ctfvit.com'>here</a> to login`
 	});
 });
 
@@ -322,19 +322,19 @@ async function sendInviteEmail(
 	randomToken: string
 ) {
 	sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-	const vLink = `https://ctf.csivit.com/auth/verify?token=${randomToken}`;
+	const vLink = `http://localhost:4000/auth/verify?token=${randomToken}`;
 	const msg = {
 		to: email,
 		from: {
-			name: "CSI-CTF",
-			email: "ctf@csivit.com"
+			name: "ctf-CTF",
+			email: "ctf@ctfvit.com"
 		},
-		subject: "Verify your CSI-CTF Account",
+		subject: "Verify your ctf-CTF Account",
 		text: `Verification Link: ${vLink}`,
 		html: await hbs.render("views/verificationMail.hbs", { name, vLink }),
 		replyTo: {
-			email: "askcsivit@gmail.com",
-			name: "CSI-VIT"
+			email: "askctfvit@gmail.com",
+			name: "ctf"
 		}
 	};
 	sgMail.send(msg);
@@ -347,19 +347,19 @@ async function sendPasswordEmail(
 	randomToken: string
 ) {
 	sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-	const vLink = `https://ctf.csivit.com/auth/updatePassword?token=${randomToken}`;
+	const vLink = `https://ctf.ctfvit.com/auth/updatePassword?token=${randomToken}`;
 	const msg = {
 		to: email,
 		from: {
-			name: "CSI-CTF",
-			email: "ctf@csivit.com"
+			name: "ctf-CTF",
+			email: "ctf@ctfvit.com"
 		},
-		subject: "Password Reset for CSI-CTF",
+		subject: "Password Reset for ctf-CTF",
 		text: `Password Reset Link: ${vLink}`,
 		html: await hbs.render("views/passResetMail.hbs", { name, vLink }),
 		replyTo: {
-			email: "askcsivit@gmail.com",
-			name: "CSI-VIT"
+			email: "askctfvit@gmail.com",
+			name: "ctf"
 		}
 	};
 	sgMail.send(msg);

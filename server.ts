@@ -6,8 +6,6 @@ import mongoose from "mongoose";
 import session from "express-session";
 import socketio from "socket.io";
 import http from "http";
-import { submissionData } from "./models/socketInterfaces";
-// import { handleSubmission } from "./routes/handleSubmission";
 import homeRoutes from "./routes/home";
 import authRoutes from "./routes/auth";
 import Feedback from "./models/feedback";
@@ -15,7 +13,6 @@ import Leaderboard from "./models/leaderboard";
 import { createQuestion } from "./scripts/addQuestions";
 import disp from "./scripts/lbMigrate";
 import { checkUserExists2 } from "./db/user";
-import { create } from "domain";
 var MongoDBStore = require("connect-mongodb-session")(session);
 require("dotenv").config();
 
@@ -62,6 +59,7 @@ app.use(
 	})
 );
 
+
 app.get("/feedback", (req, res) => {
 	res.render("ctfend");
 });
@@ -71,7 +69,6 @@ app.get("/feedback", (req, res) => {
 app.post("/feedback", async (req, res) => {
 	const username = req.body.username.toString().trim();
 	const feedback = req.body.feedback.toString().trim();
-	// const againCTF: boolean = req.body.againCTF;
 	if(!username || !feedback){
 		res.json({
 			success: false,
@@ -101,7 +98,6 @@ app.post("/feedback", async (req, res) => {
 	const user = new Feedback({
 		username: username,
 		feedback: feedback,
-		// againCTF: againCTF,
 		finished: true,
 	});
 
@@ -124,24 +120,4 @@ app.use("/", (req, res) => {
 });
 app.use("*", (req, res) => {
 	res.render("bsod404.hbs");
-});
-
-// const changeStream = Leaderboard.watch({ fullDocument: 'updateLookup'});
-
-io.on("connection", socket => {
-	console.log("Made connection to socketID and ipAddress ", [
-		socket.id,
-		socket.request.connection._peername.address
-	]);
-
-	// changeStream.on('change', (change) => {
-	// 	io.emit('leaderboardUpdate', change);
-	// })
-	// socket.on("userSubmission", handleSubmission);
-	// socket.on('help', handleHelper)
-
-	socket.on("disconnect", () => {
-		console.log("Removing user with socketid ", socket.id);
-		//Remove the user Lock with the socketid here
-	});
 });

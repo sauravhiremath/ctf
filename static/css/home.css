@@ -192,12 +192,12 @@ a{
 .winner{
     font-weight: 700;
 }
-.csi_info:hover{
+.ctf_info:hover{
     color: white;
     background-color: rgb(47, 113, 205);
 }
 
-.csi_info:hover a{
+.ctf_info:hover a{
     color: white;
     background-color: rgb(47, 113, 205);
 }
