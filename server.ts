@@ -118,7 +118,7 @@ app.post("/feedback", async (req, res) => {
 // 	res.redirect("feedback");
 // });
 app.use("/home", homeRoutes);
-app.use("/auth", authRoutes);
+// app.use("/auth", authRoutes);
 app.use("/", (req, res) => {
 	res.redirect("/home");
 });
