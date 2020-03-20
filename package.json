@@ -37,7 +37,7 @@
     "express-session": "^1.8.2",
     "http": "0.0.0",
     "method-override": "^2.2.0",
-    "mongoose": "^4.0.2",
+    "mongoose": "^5.7.5",
     "morgan": "^1.5.2",
     "passport": "^0.2.1",
     "passport-local": "^1.0.0",
